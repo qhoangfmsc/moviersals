@@ -76,13 +76,13 @@ export default function RootLayout({
                     <Image
                       width={200}
                       height={70}
-                      alt="MoviersalsLogo"
+                      alt="chplay"
                       src="/downloadChplay.png"
                     />
                     <Image
-                      width={240}
-                      height={20}
-                      alt="MoviersalsLogo"
+                      width={200}
+                      height={30}
+                      alt="ios"
                       src="/downloadIos.png"
                     />
                   </div>
