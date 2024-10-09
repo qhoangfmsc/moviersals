@@ -31,7 +31,7 @@ export default function Home() {
           {
             trendingVideos.map(function (item) {
               return (
-                <div className="relative snap-center shrink-0 lg:w-1/4 w-full">
+                <div key={item.id} className="relative snap-center shrink-0 lg:w-1/4 w-full">
                   <div
                     className="absolute text-black"
                     style={{
