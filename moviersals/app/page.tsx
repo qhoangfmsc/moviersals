@@ -50,7 +50,6 @@ export default function Home() {
                     }}>{item.id}</span>
                   </div>
                   <Card
-                    key={item.id}
                     isFooterBlurred
                     radius="lg"
                     className="border-none lg:m-8"
