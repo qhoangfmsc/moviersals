@@ -3,7 +3,7 @@ export const videosMockup = [
         "id": 1,
         "name": "Valorant",
         "publisher": "Riot",
-        "category": ["action", "science fiction"],
+        "categories": ["action", "science fiction"],
         "description": "",
         "thumbnail": "/thumbnail-valorant.jpg"
     },
@@ -11,7 +11,7 @@ export const videosMockup = [
         "id": 2,
         "name": "League of Legends",
         "publisher": "Riot",
-        "category": ["adventure", "science fiction"],
+        "categories": ["action", "adventure", "science fiction"],
         "description": "",
         "thumbnail": "/thumbnail-lol.webp"
     },
@@ -19,7 +19,7 @@ export const videosMockup = [
         "id": 3,
         "name": "Teamfight Tactics",
         "publisher": "Riot",
-        "category": ["drama", "comedy"],
+        "categories": ["action", "drama", "comedy"],
         "description": "",
         "thumbnail": "/thumbnail-tft.jpg"
     },
@@ -27,7 +27,7 @@ export const videosMockup = [
         "id": 4,
         "name": "Genshin Impact",
         "publisher": "HoYoverse",
-        "category": ["adventure", "documentary", "romance"],
+        "categories": ["action", "adventure", "documentary", "romance"],
         "description": "",
         "thumbnail": "/thumbnail-genshin.jpg"
     },
@@ -35,7 +35,7 @@ export const videosMockup = [
         "id": 5,
         "name": "Home Sweet Home",
         "publisher": "Yggdrazil Group Co., Ltd",
-        "category": ["horror", "adventure"],
+        "categories": ["action", "horror", "adventure"],
         "description": "",
         "thumbnail": "/thumbnail-homesweethome.jpg"
     },
@@ -43,7 +43,7 @@ export const videosMockup = [
         "id": 6,
         "name": "Resident Evil",
         "publisher": "Capcom",
-        "category": ["horror", "drama", "documentary"],
+        "categories": ["action", "horror", "drama", "documentary", "adventure"],
         "description": "",
         "thumbnail": "/thumbnail-residentevil.avif"
     },
@@ -51,7 +51,7 @@ export const videosMockup = [
         "id": 7,
         "name": "Paper Bride",
         "publisher": "HeartBeat Plus",
-        "category": ["horror", "documentary", "romance"],
+        "categories": ["horror", "documentary", "romance", "adventure"],
         "description": "",
         "thumbnail": "/thumbnail-paperbride.jpg"
     },

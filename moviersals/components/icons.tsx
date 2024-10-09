@@ -231,3 +231,11 @@ export const ArrowDown: React.FC<IconSvgProps> = ({
 }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="m12 13.171l4.95-4.95l1.414 1.415L12 16L5.636 9.636L7.05 8.222z" /></svg>
 );
+
+export function AkarIconsInfo(props: React.SVGProps<SVGSVGElement>) {
+	return (<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}><g fill="none" stroke="currentColor" strokeWidth={2}><circle cx={12} cy={12} r={10}></circle><path strokeLinecap="round" d="M12 7h.01"></path><path strokeLinecap="round" strokeLinejoin="round" d="M10 11h2v5m-2 0h4"></path></g></svg>);
+}
+
+export function LineMdPlayFilled(props: React.SVGProps<SVGSVGElement>) {
+	return (<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}><path fill="currentColor" fillOpacity={0} stroke="currentColor" strokeDasharray={40} strokeDashoffset={40} strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 6l10 6l-10 6Z"><animate fill="freeze" attributeName="fill-opacity" begin="0.5s" dur="0.5s" values="0;1"></animate><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="40;0"></animate></path></svg>);
+}
