@@ -67,9 +67,14 @@ export default function Home() {
                       rounded-large bottom-1 shadow-small ml-1 z-10">
                       <div className="text-white/80">
                         <div>{item.name}</div>
-                        <div className="text-tiny">{item.category
-                          .map(cat => categoriesSubtitles[cat as keyof typeof categoriesSubtitles])
-                          .join(', ')}</div>
+                        <div className="text-tiny">
+                          {item.category.map((cat, index) => (
+                            <span key={index}>
+                              {categoriesSubtitles[cat as keyof typeof categoriesSubtitles]}
+                              {index !== item.category.length - 1 && ', '}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                       <Button className="text-tiny text-white bg-black/50" variant="flat" color="default" radius="lg" size="sm">
                         Xem ngay
