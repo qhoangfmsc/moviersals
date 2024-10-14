@@ -16,8 +16,10 @@ import {
 } from "@/components/icons";
 import Image from "next/image";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, User } from "@nextui-org/react";
+import { guestAvatars } from "@/config/guestAvatars";
 
 export const Navbar = () => {
+  const authentication = Boolean(Math.round(Math.random()));
   const searchInput = (
     <Button variant="light" startContent={<SearchIcon />} />
   );
@@ -26,12 +28,14 @@ export const Navbar = () => {
     <NextUINavbar className="bg-transparent px-4" maxWidth="full" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
-          <Image
-            width={40}
-            height={40}
-            alt="MoviersalsLogo"
-            src="/MoviersalsLogo.jpg"
-          />
+          <Link href="/">
+            <Image
+              width={40}
+              height={40}
+              alt="MoviersalsLogo"
+              src="/MoviersalsLogo.jpg"
+            />
+          </Link>
         </NavbarBrand>
       </NavbarContent>
 
@@ -40,29 +44,51 @@ export const Navbar = () => {
         justify="end"
       >
         <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
-        <NavbarItem className="hidden md:flex">
-          <Dropdown>
-            <DropdownTrigger>
-              <Button
-                variant="light"
-              >
-                <User
-                  name="Stitch"
-                  avatarProps={{
-                    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLs9_sqgpyfZetKlY2la20L_seJ95C9ZJhCg&s"
-                  }}
-                />
-                <ArrowDown />
-              </Button>
-            </DropdownTrigger>
-            <DropdownMenu aria-label="My account">
-              <DropdownItem key="copy">Thông tin của tôi</DropdownItem>
-              <DropdownItem key="new">Phim của tôi</DropdownItem>
-              <DropdownItem key="delete" className="text-danger" color="danger">
-                Đăng xuất
-              </DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
+        <NavbarItem className="hidden lg:flex">
+          {
+            authentication
+              ? <Dropdown>
+                <DropdownTrigger>
+                  <Button
+                    variant="light"
+                  >
+                    <User
+                      name="Stitch"
+                      avatarProps={{
+                        src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLs9_sqgpyfZetKlY2la20L_seJ95C9ZJhCg&s"
+                      }}
+                    />
+                    <ArrowDown />
+                  </Button>
+                </DropdownTrigger>
+                <DropdownMenu aria-label="My account">
+                  <DropdownItem key="copy">Thông tin của tôi</DropdownItem>
+                  <DropdownItem key="new">Phim của tôi</DropdownItem>
+                  <DropdownItem key="delete" className="text-danger" color="danger">
+                    Đăng xuất
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+              : <Dropdown>
+                <DropdownTrigger>
+                  <Button
+                    variant="light"
+                  >
+                    <User
+                      name="Moviegoer"
+                      avatarProps={{
+                        src: guestAvatars[Math.floor(Math.random() * guestAvatars.length)]
+                      }}
+                    />
+                    <ArrowDown />
+                  </Button>
+                </DropdownTrigger>
+                <DropdownMenu aria-label="My account">
+                  <DropdownItem key="copy" className="text-success" color="success">Đăng nhập</DropdownItem>
+                  <DropdownItem key="new">Đăng ký</DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+          }
         </NavbarItem>
       </NavbarContent>
 
