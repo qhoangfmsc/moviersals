@@ -84,7 +84,7 @@ export const Navbar = () => {
                   </Button>
                 </DropdownTrigger>
                 <DropdownMenu aria-label="My account">
-                  <DropdownItem key="copy" className="text-success" color="success">Đăng nhập</DropdownItem>
+                  <DropdownItem key="copy" className="text-success" color="success" href="/login">Đăng nhập</DropdownItem>
                   <DropdownItem key="new">Đăng ký</DropdownItem>
                 </DropdownMenu>
               </Dropdown>

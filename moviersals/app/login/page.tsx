@@ -1,5 +1,6 @@
 "use client"
 
+import GoogleLoginButton from "@/components/Button/GoogleLoginButton";
 import { title } from "@/components/primitives";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
@@ -42,12 +43,14 @@ export default function LoginPage() {
     <div>
       <h1 className={title()}>Chào mừng đến với <b>Moviersals</b></h1>
       {error && <div style={{ color: 'red' }}>{error}</div>}
-      <form onSubmit={onSubmit}>
-        <Input type="text" name="username" variant="underlined" label="Tài khoản" />
-        <Input type="password" name="password" variant="underlined" label="Mật khẩu" />
-        <Button type="submit" disabled={isLoading}>
+      <form className="flex flex-col my-8 items-center" onSubmit={onSubmit}>
+        <Input size="lg" className="max-w-[350px]" type="text" name="username" variant="underlined" label="Tài khoản" />
+        <Input size="lg" className="max-w-[350px]" type="password" name="password" variant="underlined" label="Mật khẩu" />
+        <Button size="lg" className="mt-12 w-[350px]" type="submit" disabled={isLoading} variant="shadow" color="success">
           {isLoading ? 'Loading...' : 'Vào rạp phim'}
         </Button>
+        <h1 className="my-4 text-neutral-500">hoặc</h1>
+        <GoogleLoginButton text="Tham gia bằng Google" variant="shadow" size="lg" color={undefined} />
       </form>
     </div>
   );
