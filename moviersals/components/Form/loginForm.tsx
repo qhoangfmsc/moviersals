@@ -1,10 +1,10 @@
 "use client"
 
-import GoogleLoginButton from "@/components/Button/googleLoginButton";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import { Link } from "@nextui-org/link";
 import { FormEvent, useState } from "react";
+import GoogleLoginButton from "@/components/Button/googleLoginButton";
 
 export default function LoginForm() {
     const [isLoading, setIsLoading] = useState<boolean>(false)
