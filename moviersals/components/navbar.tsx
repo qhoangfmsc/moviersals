@@ -39,59 +39,64 @@ export const Navbar = () => {
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent
-        className="hidden sm:flex basis-1/5 sm:basis-full"
-        justify="end"
-      >
-        <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
-        <NavbarItem className="hidden lg:flex">
-          {
-            authentication
-              ? <Dropdown>
-                <DropdownTrigger>
-                  <Button
-                    variant="light"
-                  >
-                    <User
-                      name="Stitch"
-                      avatarProps={{
-                        src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLs9_sqgpyfZetKlY2la20L_seJ95C9ZJhCg&s"
-                      }}
-                    />
-                    <ArrowDown />
-                  </Button>
-                </DropdownTrigger>
-                <DropdownMenu aria-label="My account">
-                  <DropdownItem key="copy">Thông tin của tôi</DropdownItem>
-                  <DropdownItem key="new">Phim của tôi</DropdownItem>
-                  <DropdownItem key="delete" className="text-danger" color="danger">
-                    Đăng xuất
-                  </DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
-              : <Dropdown>
-                <DropdownTrigger>
-                  <Button
-                    variant="light"
-                  >
-                    <User
-                      name="Moviegoer"
-                      avatarProps={{
-                        src: guestAvatars[Math.floor(Math.random() * guestAvatars.length)]
-                      }}
-                    />
-                    <ArrowDown />
-                  </Button>
-                </DropdownTrigger>
-                <DropdownMenu aria-label="My account">
-                  <DropdownItem key="copy" className="text-success" color="success" href="/login">Đăng nhập</DropdownItem>
-                  <DropdownItem key="new">Đăng ký</DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
-          }
-        </NavbarItem>
-      </NavbarContent>
-
+      {authentication
+        ? <NavbarContent
+          className="hidden sm:flex basis-1/5 sm:basis-full"
+          justify="end"
+        >
+          <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
+          <NavbarItem className="hidden lg:flex">
+            <Dropdown>
+              <DropdownTrigger>
+                <Button
+                  variant="light"
+                >
+                  <User
+                    name="Stitch"
+                    avatarProps={{
+                      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLs9_sqgpyfZetKlY2la20L_seJ95C9ZJhCg&s"
+                    }}
+                  />
+                  <ArrowDown />
+                </Button>
+              </DropdownTrigger>
+              <DropdownMenu aria-label="My account">
+                <DropdownItem key="copy">Thông tin của tôi</DropdownItem>
+                <DropdownItem key="new">Phim của tôi</DropdownItem>
+                <DropdownItem key="delete" className="text-danger" color="danger">
+                  Đăng xuất
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </NavbarItem>
+        </NavbarContent>
+        : <NavbarContent
+          className="hidden sm:flex basis-1/5 sm:basis-full"
+          justify="end"
+        >
+          <NavbarItem className="hidden lg:flex">
+            <Dropdown>
+              <DropdownTrigger>
+                <Button
+                  variant="light"
+                >
+                  <User
+                    name="Moviegoer"
+                    avatarProps={{
+                      src: guestAvatars[Math.floor(Math.random() * guestAvatars.length)]
+                    }}
+                  />
+                  <ArrowDown />
+                </Button>
+              </DropdownTrigger>
+              <DropdownMenu aria-label="My account">
+                <DropdownItem key="copy" className="text-success" color="success" href="/login">Đăng nhập</DropdownItem>
+                <DropdownItem key="new">Đăng ký</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </NavbarItem>
+        </NavbarContent>
+      }
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
         <NavbarMenuToggle />
       </NavbarContent>
