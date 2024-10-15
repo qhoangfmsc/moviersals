@@ -30,7 +30,7 @@ export default function ValorantIntroduction(): JSX.Element {
             <div className="hidden lg:flex absolute left-20 justify-between w-11/12 z-10"
                 style={{
                     fontSize: "3rem",
-                    textShadow: "2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff, 1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;",
+                    textShadow: "2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff, 1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff",
                     top: "50%",
                     transform: "translateY(-50%)",
                 }}>
