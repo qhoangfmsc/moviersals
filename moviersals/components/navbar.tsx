@@ -16,10 +16,9 @@ import {
 } from "@/components/icons";
 import Image from "next/image";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, User } from "@nextui-org/react";
-import { guestAvatars } from "@/config/guestAvatars";
 
 export const Navbar = () => {
-  const authentication = Boolean(Math.round(Math.random()));
+  const authentication = false;
   const searchInput = (
     <Button variant="light" startContent={<SearchIcon />} />
   );
@@ -83,7 +82,7 @@ export const Navbar = () => {
                   <User
                     name="Moviegoer"
                     avatarProps={{
-                      src: guestAvatars[Math.floor(Math.random() * guestAvatars.length)]
+                      src: "/user1.bmp"
                     }}
                   />
                   <ArrowDown />

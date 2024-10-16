@@ -1,7 +1,6 @@
 "use client"
 
 import { Button } from "@nextui-org/button";
-import { signIn } from "next-auth/react";
 import { FlatColorIconsGoogle } from "../icons";
 
 interface GoogleLoginButtonUIProps {
@@ -18,15 +17,7 @@ export default function GoogleLoginButton({
     size
 }: Readonly<GoogleLoginButtonUIProps>): JSX.Element {
     const loginWithGoogle = async () => {
-        try {
-            console.log("logged in");
-            signIn("google", { callbackUrl: "/" })
-        } catch (error) {
-            console.error(error);
-        } finally {
-            console.error("loginWithGoogle");
-        }
-
+        console.log("logged in");
     };
 
     return (

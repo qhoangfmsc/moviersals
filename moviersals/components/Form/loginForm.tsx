@@ -5,6 +5,7 @@ import { Input } from "@nextui-org/input";
 import { Link } from "@nextui-org/link";
 import { FormEvent, useState } from "react";
 import GoogleLoginButton from "@/components/Button/googleLoginButton";
+import login from "@/api/login";
 
 export default function LoginForm() {
     const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -17,32 +18,31 @@ export default function LoginForm() {
 
         try {
             const formData = new FormData(event.currentTarget)
-            console.log(formData);
-            // const response = await fetch('/api/submit', {
-            //   method: 'POST',
-            //   body: formData,
-            // })
+            const username = formData.get("username")?.toString();
+            const password = formData.get("password")?.toString();
 
-            // if (!response.ok) {
-            //   throw new Error('Failed to submit the data. Please try again.')
-            // }
-
-            // const data = await response.json();
+            if (username && password) {
+                login(username, password);
+            } else {
+                setIsLoading(false)
+                setError("Vui lòng nhập thẻ hội viên và mật khẩu để sử dụng!");
+            }
 
         } catch (error: unknown) {
             if (error instanceof Error) {
+                setIsLoading(false)
                 setError(error.message)
             }
-            console.error(error)
         } finally {
             setIsLoading(false)
+            setError("Yêu cầu hết hạn, vui lòng thử lại sau!");
         }
     }
 
     return (
         <form className="flex flex-col my-8 items-center" onSubmit={onSubmit}>
             {error && <div style={{ color: 'red' }}>{error}</div>}
-            <Input size="lg" className="max-w-[350px]" type="text" name="username" variant="underlined" label="Tài khoản" />
+            <Input size="lg" className="max-w-[350px]" type="text" name="username" variant="underlined" label="Thẻ hội viên" />
             <Input size="lg" className="max-w-[350px]" type="password" name="password" variant="underlined" label="Mật khẩu" />
             <Button size="lg" className="mt-8 mb-4 w-[350px]" type="submit" disabled={isLoading} variant="shadow" color="success">
                 {isLoading ? 'Loading...' : 'Vào rạp phim'}
