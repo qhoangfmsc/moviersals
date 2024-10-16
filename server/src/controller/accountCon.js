@@ -17,15 +17,18 @@ export async function createAccount(req, res) {
     const userid = generateRandomString(8);
     const role = "customer";
     const hashedPassword = await bcrypt.hash(password, 10);
-
-    const result = await client.query(
+    await client.query("BEGIN");
+    await client.query(
       "INSERT INTO tbuserinfo (userid, username, password, displayname, email, phonenumber, role) VALUES ($1, $2, $3, $4, $5, $6, $7)",
       [userid, username, hashedPassword, displayname, email, phonenumber, role]
     );
-    if (result.rowCount > 0) {
-      return sendResponse(res, 200, "success", "Account created successfully");
-    }
+    await client.query("INSERT INTO tbloginhistory (username) VALUES ($1)", [userid]);
+    await client.query("INSERT INTO tbusersubscription (username) VALUES ($1)", [userid]);
+    await client.query("COMMIT");
+    return sendResponse(res, 200, "success", "Account created successfully");
   } catch (err) {
+    await client.query("ROLLBACK");
+    console.log("[Create account] ", err);
     sendResponse(res, 500, "fail", "Internal Server Error");
   } finally {
     client.release();

@@ -5,6 +5,7 @@ import privateRoutes from "./routes/private.js";
 import { authenticateJWT } from "./middleware/jwtverify.js";
 import { sendResponse } from "./global/index.js";
 import cookieParser from "cookie-parser";
+import { dbPool } from "./services/database.js";
 
 const app = express();
 const PORT = Number(process.env.PORT) || 5432;
@@ -35,6 +36,16 @@ app.use("/test", (req, res) => {
 // Invalid API path middleware
 app.use((req, res) => {
   sendResponse(res, 404, "fail", "Invalid API path");
+});
+
+dbPool.connect((err) => {
+  if (err) {
+    console.log(err);
+  } else {
+    if (process.env.DB_ONLINE_MODE != "true") {
+      console.log("Local database connected");
+    } else console.log("Supabase database connected");
+  }
 });
 
 app.listen(PORT, HOST, () => {
