@@ -10,7 +10,7 @@ interface GoogleLoginButtonUIProps {
     size: "sm" | "md" | "lg" | undefined;
 }
 
-export default function GoogleLoginButton({
+export default function GoogleSignInButton({
     text,
     variant,
     color,

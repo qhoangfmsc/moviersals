@@ -4,7 +4,7 @@ import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import { Link } from "@nextui-org/link";
 import { FormEvent, useState } from "react";
-import GoogleLoginButton from "@/components/Button/googleLoginButton";
+import GoogleSignInButton from "@/components/Button/googleSignInButton";
 import login from "@/api/login";
 
 export default function LoginForm() {
@@ -22,7 +22,8 @@ export default function LoginForm() {
             const password = formData.get("password")?.toString();
 
             if (username && password) {
-                login(username, password);
+                const response = login(username, password);
+                console.log("response", response);
             } else {
                 setIsLoading(false)
                 setError("Vui lòng nhập thẻ hội viên và mật khẩu để sử dụng!");
@@ -47,7 +48,7 @@ export default function LoginForm() {
             <Button size="lg" className="mt-8 mb-4 w-[350px]" type="submit" disabled={isLoading} variant="shadow" color="success">
                 {isLoading ? 'Loading...' : 'Vào rạp phim'}
             </Button>
-            <GoogleLoginButton text="Tham gia bằng Google" variant="shadow" size="lg" color={undefined} />
+            <GoogleSignInButton text="Tham gia bằng Google" variant="shadow" size="lg" color={undefined} />
             <p className="mt-8">Chưa có tài khoản? -
                 <span className="text-gray-100"><Link href="/register">&nbsp;Đăng ký ngay</Link></span>
             </p>
