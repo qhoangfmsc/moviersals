@@ -70,7 +70,7 @@ export default function RegisterFlipCard() {
                         </p>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="danger" variant="light" as={Link} href="/login">
+                        <Button color="danger" variant="light" href="/login">
                             Đồng ý
                         </Button>
                     </ModalFooter>

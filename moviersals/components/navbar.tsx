@@ -62,7 +62,7 @@ export const Navbar = () => {
               <DropdownMenu aria-label="My account">
                 <DropdownItem key="copy">Thông tin của tôi</DropdownItem>
                 <DropdownItem key="new">Phim của tôi</DropdownItem>
-                <DropdownItem key="delete" className="text-danger" color="danger">
+                <DropdownItem key="delete" className="text-danger" color="danger" href="/login">
                   Đăng xuất
                 </DropdownItem>
               </DropdownMenu>
@@ -90,7 +90,7 @@ export const Navbar = () => {
               </DropdownTrigger>
               <DropdownMenu aria-label="My account">
                 <DropdownItem key="copy" className="text-success" color="success" href="/login">Đăng nhập</DropdownItem>
-                <DropdownItem key="new">Đăng ký</DropdownItem>
+                <DropdownItem key="new" href="/login">Đăng ký</DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </NavbarItem>

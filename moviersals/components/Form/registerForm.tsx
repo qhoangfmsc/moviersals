@@ -1,10 +1,11 @@
 "use client"
 
 import register from "@/api/register";
-import { Button, Card, Checkbox, Input, Link } from "@nextui-org/react";
+import { Button, Card, Checkbox, Input, Link, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@nextui-org/react";
 import { FormEvent, useState } from "react";
 
 export default function RegisterForm() {
+    const [isOpen, setIsOpen] = useState<boolean>(false);
     const [isSelected, setIsSelected] = useState(false);
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [errorAccount, setErrorAccount] = useState<string | null>(null)
@@ -33,7 +34,11 @@ export default function RegisterForm() {
                     if (password == repassword) {
                         if (isSelected) {
                             const response = await register(username, password, displayname, email, phonenumber);
-                            console.log("response", response);
+                            if (response.result == "success") {
+                                setIsOpen(true);
+                            } else {
+                                setErrorAccount(response.content);
+                            }
                         } else {
                             setErrorAccount("Vui lòng chấp nhận điều khoản trước khi đăng ký!");
                         }
@@ -57,25 +62,42 @@ export default function RegisterForm() {
     }
 
     return (
-        <form className="lg:hidden flex flex-col items-center" onSubmit={onSubmit}>
-            <Card className="p-4 lg:w-[500px] bg-transparent shadow-none">
-                {errorAccount && <div style={{ color: 'red' }}>{errorAccount}</div>}
-                {errorUser && <div style={{ color: 'red' }}>{errorUser}</div>}
-                <Input size="lg" type="text" name="displayname" variant="underlined" label="Họ và tên" />
-                <Input size="lg" type="tel" name="phonenumber" variant="underlined" label="Số điện thoại" />
-                <Input size="lg" type="email" name="email" variant="underlined" label="Email" />
-                <Input size="lg" type="text" name="username" variant="underlined" label="Tên thẻ hội viên" />
-                <Input size="lg" type="password" name="password" variant="underlined" label="Mật khẩu" />
-                <Input size="lg" type="password" name="repassword" variant="underlined" label="Nhập lại mật khẩu" />
-                <Checkbox className="my-2" isSelected={isSelected} onValueChange={setIsSelected}>
-                    Tôi đồng ý với <Link href="/about" target="__blank">Hợp đồng và Chính sách</Link> của Moviersals
-                </Checkbox>
-                <div>
-                    <Button size="lg" className="my-4 w-[350px]" type="submit" disabled={isLoading} variant="shadow" color="success">
-                        {isLoading ? 'Loading...' : 'Tham gia hội viên'}
-                    </Button>
-                </div>
-            </Card>
-        </form>
+        <>
+            <Modal isOpen={isOpen}>
+                <ModalContent>
+                    <ModalHeader className="flex flex-col gap-1">Thông báo</ModalHeader>
+                    <ModalBody>
+                        <p>
+                            Đăng ký thẻ hội viên thành công! Chuyển đến trang đăng nhập?
+                        </p>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color="danger" variant="light" href="/login">
+                            Đồng ý
+                        </Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
+            <form className="lg:hidden flex flex-col items-center" onSubmit={onSubmit}>
+                <Card className="p-4 lg:w-[500px] bg-transparent shadow-none">
+                    {errorAccount && <div style={{ color: 'red' }}>{errorAccount}</div>}
+                    {errorUser && <div style={{ color: 'red' }}>{errorUser}</div>}
+                    <Input size="lg" type="text" name="displayname" variant="underlined" label="Họ và tên" />
+                    <Input size="lg" type="tel" name="phonenumber" variant="underlined" label="Số điện thoại" />
+                    <Input size="lg" type="email" name="email" variant="underlined" label="Email" />
+                    <Input size="lg" type="text" name="username" variant="underlined" label="Tên thẻ hội viên" />
+                    <Input size="lg" type="password" name="password" variant="underlined" label="Mật khẩu" />
+                    <Input size="lg" type="password" name="repassword" variant="underlined" label="Nhập lại mật khẩu" />
+                    <Checkbox className="my-2" isSelected={isSelected} onValueChange={setIsSelected}>
+                        Tôi đồng ý với <Link href="/about" target="__blank">Hợp đồng và Chính sách</Link> của Moviersals
+                    </Checkbox>
+                    <div>
+                        <Button size="lg" className="my-4 w-[350px]" type="submit" disabled={isLoading} variant="shadow" color="success">
+                            {isLoading ? 'Loading...' : 'Tham gia hội viên'}
+                        </Button>
+                    </div>
+                </Card>
+            </form>
+        </>
     );
 }

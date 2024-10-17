@@ -1,7 +1,7 @@
 import requestApi from "@/lib/requestApi";
 
 export default async function register(username: string, password: string, displayname: string, email: string, phonenumber: string) {
-    const url = "https://moviersals.onrender.com/api/create";
+    const url = "/api/create";
     const param = {
         username: username,
         password: password,
