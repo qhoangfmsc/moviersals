@@ -1,11 +1,11 @@
 "use client"
 
 import register from "@/api/register";
-import { Button, Card, Checkbox, Input, Link, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@nextui-org/react";
+import { Button, Card, Checkbox, Input, Link, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@nextui-org/react";
 import { FormEvent, useState } from "react";
 
 export default function RegisterForm() {
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [isSelected, setIsSelected] = useState(false);
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [errorAccount, setErrorAccount] = useState<string | null>(null)
@@ -35,7 +35,7 @@ export default function RegisterForm() {
                         if (isSelected) {
                             const response = await register(username, password, displayname, email, phonenumber);
                             if (response.result == "success") {
-                                setIsOpen(true);
+                                onOpen();
                             } else {
                                 setErrorAccount(response.content);
                             }
@@ -63,19 +63,21 @@ export default function RegisterForm() {
 
     return (
         <>
-            <Modal isOpen={isOpen}>
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
                 <ModalContent>
-                    <ModalHeader className="flex flex-col gap-1">Thông báo</ModalHeader>
-                    <ModalBody>
-                        <p>
-                            Đăng ký thẻ hội viên thành công! Chuyển đến trang đăng nhập?
-                        </p>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button color="danger" variant="light" href="/login">
-                            Đồng ý
-                        </Button>
-                    </ModalFooter>
+                    {(onClose) => (
+                        <>
+                            <ModalHeader className="flex flex-col gap-1">Thông báo</ModalHeader>
+                            <ModalBody>
+                                <p>Đăng ký thẻ hội viên thành công! Chuyển đến trang đăng nhập?</p>
+                            </ModalBody>
+                            <ModalFooter>
+                                <Button color="danger" variant="light" as={Link} href="/login">
+                                    Đồng ý
+                                </Button>
+                            </ModalFooter>
+                        </>
+                    )}
                 </ModalContent>
             </Modal>
             <form className="lg:hidden flex flex-col items-center" onSubmit={onSubmit}>

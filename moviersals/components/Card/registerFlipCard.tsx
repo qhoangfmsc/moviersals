@@ -3,7 +3,7 @@ import { Button, Card, Checkbox, Image, Input, Link, Modal, ModalBody, ModalCont
 import { FormEvent, useState } from "react";
 
 export default function RegisterFlipCard() {
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [isSelected, setIsSelected] = useState(false);
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [errorAccount, setErrorAccount] = useState<string | null>(null)
@@ -33,7 +33,7 @@ export default function RegisterFlipCard() {
                         if (isSelected) {
                             const response = await register(username, password, displayname, email, phonenumber);
                             if (response.result == "success") {
-                                setIsOpen(true);
+                                onOpen();
                             } else {
                                 setErrorAccount(response.content);
                             }
@@ -61,19 +61,21 @@ export default function RegisterFlipCard() {
 
     return (
         <>
-            <Modal isOpen={isOpen}>
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
                 <ModalContent>
-                    <ModalHeader className="flex flex-col gap-1">Thông báo</ModalHeader>
-                    <ModalBody>
-                        <p>
-                            Đăng ký thẻ hội viên thành công! Chuyển đến trang đăng nhập?
-                        </p>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button color="danger" variant="light" href="/login">
-                            Đồng ý
-                        </Button>
-                    </ModalFooter>
+                    {(onClose) => (
+                        <>
+                            <ModalHeader className="flex flex-col gap-1">Thông báo</ModalHeader>
+                            <ModalBody>
+                                <p>Đăng ký thẻ hội viên thành công! Chuyển đến trang đăng nhập?</p>
+                            </ModalBody>
+                            <ModalFooter>
+                                <Button color="danger" variant="light" as={Link} href="/login">
+                                    Đồng ý
+                                </Button>
+                            </ModalFooter>
+                        </>
+                    )}
                 </ModalContent>
             </Modal>
             <Card className="hidden lg:flex relative h-[675px] w-[500px] bg-transparent shadow-none">
