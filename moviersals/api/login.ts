@@ -13,19 +13,12 @@ export default async function login(username: string, password: string) {
         }),
     })
         .then((response) => {
-            if (response.ok) {
-                console.log("1");
-                return response.json();
-            }
-            console.log("2");
-            return Promise.reject(response);
+            console.log("1");
+            return response.json();
         })
         .catch((response) => {
-            console.log("3");
+            console.log("2");
             console.log(response.status, response.statusText);
-            response.json().then((json: any) => {
-                console.log(json);
-                return json;
-            })
+            return response.json();
         });
 }
