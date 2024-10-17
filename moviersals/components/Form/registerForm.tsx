@@ -58,7 +58,7 @@ export default function RegisterForm() {
 
     return (
         <form className="lg:hidden flex flex-col items-center" onSubmit={onSubmit}>
-            <Card className="p-4 lg:w-[500px] bg-transparent">
+            <Card className="p-4 lg:w-[500px] bg-transparent shadow-none">
                 {errorAccount && <div style={{ color: 'red' }}>{errorAccount}</div>}
                 {errorUser && <div style={{ color: 'red' }}>{errorUser}</div>}
                 <Input size="lg" type="text" name="displayname" variant="underlined" label="Họ và tên" />

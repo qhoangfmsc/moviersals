@@ -55,7 +55,7 @@ export default function RegisterFlipCard() {
     }
 
     return (
-        <Card className="hidden lg:flex relative h-[670px] w-[500px] bg-transparent">
+        <Card className="hidden lg:flex relative h-[670px] w-[500px] bg-transparent shadow-none">
             <div className="absolute w-full h-full transition-all duration-500 [transform-style:preserve-3d] hover:[transform:rotateY(-180deg)] border-0">
                 {/* FRONT */}
                 <div className="absolute w-full h-full [backface-visibility:hidden]">

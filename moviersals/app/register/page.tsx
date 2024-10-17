@@ -6,12 +6,14 @@ import { title } from "@/components/primitives";
 
 export default function LoginPage() {
   return (
-    <div>
-      <h1 className={title()}>Đăng ký thẻ hội viên <b>Moviersals</b></h1>
-      <div className="my-4">
+    <>
+      <div className="lg:mb-10">
+        <h1 className={title()}>Đăng ký thẻ hội viên <b>Moviersals</b></h1>
+      </div>
+      <div className="my-2">
         <RegisterFlipCard />
         <RegisterForm />
       </div>
-    </div>
+    </>
   );
 }
