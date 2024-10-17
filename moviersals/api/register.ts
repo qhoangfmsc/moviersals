@@ -1,5 +1,5 @@
-export default async function login(username: string, password: string) {
-    const url = "https://moviersals.onrender.com/api/login";
+export default async function register(username: string, password: string, displayname: string, email: string, phonenumber: string) {
+    const url = "https://moviersals.onrender.com/api/create";
     const headers = {
         "Accept": "application/json",
         "Content-Type": "application/json",
@@ -11,6 +11,9 @@ export default async function login(username: string, password: string) {
         body: JSON.stringify({
             username: username,
             password: password,
+            displayname: displayname,
+            email: email,
+            phonenumber: phonenumber,
         }),
     })
         .then((response) => {

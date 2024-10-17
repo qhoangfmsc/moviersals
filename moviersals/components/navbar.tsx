@@ -82,7 +82,7 @@ export const Navbar = () => {
                   <User
                     name="Moviegoer"
                     avatarProps={{
-                      src: "/user1.bmp"
+                      src: "/user.bmp"
                     }}
                   />
                   <ArrowDown />

@@ -4,7 +4,7 @@ import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import { Link } from "@nextui-org/link";
 import { FormEvent, useState } from "react";
-import GoogleLoginButton from "@/components/Button/googleLoginButton";
+import GoogleSignInButton from "@/components/Button/googleSignInButton";
 import login from "@/api/login";
 
 export default function LoginForm() {
@@ -22,10 +22,12 @@ export default function LoginForm() {
             const password = formData.get("password")?.toString();
 
             if (username && password) {
-                login(username, password);
+                const response = await login(username, password);
+                console.log("response", response);
+                setIsLoading(false)
             } else {
                 setIsLoading(false)
-                setError("Vui lòng nhập thẻ hội viên và mật khẩu để sử dụng!");
+                setError("Vui lòng nhập đầy đủ thông tin!");
             }
 
         } catch (error: unknown) {
@@ -33,21 +35,18 @@ export default function LoginForm() {
                 setIsLoading(false)
                 setError(error.message)
             }
-        } finally {
-            setIsLoading(false)
-            setError("Yêu cầu hết hạn, vui lòng thử lại sau!");
         }
     }
 
     return (
         <form className="flex flex-col my-8 items-center" onSubmit={onSubmit}>
             {error && <div style={{ color: 'red' }}>{error}</div>}
-            <Input size="lg" className="max-w-[350px]" type="text" name="username" variant="underlined" label="Thẻ hội viên" />
+            <Input size="lg" className="max-w-[350px]" type="text" name="username" variant="underlined" label="Tên thẻ hội viên" />
             <Input size="lg" className="max-w-[350px]" type="password" name="password" variant="underlined" label="Mật khẩu" />
             <Button size="lg" className="mt-8 mb-4 w-[350px]" type="submit" disabled={isLoading} variant="shadow" color="success">
                 {isLoading ? 'Loading...' : 'Vào rạp phim'}
             </Button>
-            <GoogleLoginButton text="Tham gia bằng Google" variant="shadow" size="lg" color={undefined} />
+            <GoogleSignInButton text="Tham gia bằng Google" variant="shadow" size="lg" color={undefined} />
             <p className="mt-8">Chưa có tài khoản? -
                 <span className="text-gray-100"><Link href="/register">&nbsp;Đăng ký ngay</Link></span>
             </p>
