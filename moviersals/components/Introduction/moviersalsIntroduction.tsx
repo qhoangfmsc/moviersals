@@ -1,6 +1,6 @@
 "use client"
 
-import { Avatar, Button, Card, CardBody, CardFooter, CardHeader, Divider, Image } from "@nextui-org/react";
+import { Avatar, Button, Card, CardBody, CardFooter, CardHeader, Divider, Image, Link } from "@nextui-org/react";
 import React from "react";
 
 export default function MoviersalsIntroduction() {
@@ -95,7 +95,7 @@ export default function MoviersalsIntroduction() {
                     </CardBody>
                     <Divider />
                     <CardFooter className="justify-center">
-                        <Button className="uppercase" color="success"> Tham gia ngay hôm nay! </Button>
+                        <Button className="uppercase" color="success" as={Link} href="/login"> Tham gia ngay hôm nay! </Button>
                     </CardFooter>
                 </Card>
                 <Card className="relative hidden lg:flex m-2 lg:left-1/3 lg:top-5 text-left max-w-[340px]">
