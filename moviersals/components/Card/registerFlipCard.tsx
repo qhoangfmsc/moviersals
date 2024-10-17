@@ -33,14 +33,18 @@ export default function RegisterFlipCard() {
                         if (isSelected) {
                             const response = await register(username, password, displayname, email, phonenumber);
                             if (response.result == "success") {
+                                setIsLoading(false);
                                 onOpen();
                             } else {
+                                setIsLoading(false);
                                 setErrorAccount(response.content);
                             }
                         } else {
+                            setIsLoading(false);
                             setErrorAccount("Vui lòng chấp nhận điều khoản trước khi đăng ký!");
                         }
                     } else {
+                        setIsLoading(false);
                         setErrorAccount("Mật khẩu không trùng khớp!");
                     }
                 } else {
