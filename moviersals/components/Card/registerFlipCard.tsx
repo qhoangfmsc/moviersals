@@ -29,8 +29,12 @@ export default function RegisterFlipCard() {
                 if (username && password) {
                     setIsLoading(false);
                     if (password == repassword) {
-                        const response = await register(username, password, displayname, email, phonenumber);
-                        console.log("response", response);
+                        if (isSelected) {
+                            const response = await register(username, password, displayname, email, phonenumber);
+                            console.log("response", response);
+                        } else {
+                            setErrorAccount("Vui lòng chấp nhận điều khoản trước khi đăng ký!");
+                        }
                     } else {
                         setErrorAccount("Mật khẩu không trùng khớp!");
                     }
