@@ -34,9 +34,6 @@ export default function LoginForm() {
                 setIsLoading(false)
                 setError(error.message)
             }
-        } finally {
-            setIsLoading(false)
-            setError("Yêu cầu hết hạn, vui lòng thử lại sau!");
         }
     }
 

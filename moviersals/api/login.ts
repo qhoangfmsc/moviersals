@@ -14,14 +14,18 @@ export default async function login(username: string, password: string) {
     })
         .then((response) => {
             if (response.ok) {
+                console.log("1");
                 return response.json();
             }
+            console.log("2");
             return Promise.reject(response);
         })
         .catch((response) => {
+            console.log("3");
             console.log(response.status, response.statusText);
             response.json().then((json: any) => {
                 console.log(json);
+                return json;
             })
         });
 }
