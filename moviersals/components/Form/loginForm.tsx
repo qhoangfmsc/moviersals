@@ -22,7 +22,7 @@ export default function LoginForm() {
             const password = formData.get("password")?.toString();
 
             if (username && password) {
-                const response = login(username, password);
+                const response = await login(username, password);
                 console.log("response", response);
             } else {
                 setIsLoading(false)
