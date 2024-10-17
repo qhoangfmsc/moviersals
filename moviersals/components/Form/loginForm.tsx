@@ -39,7 +39,7 @@ export default function LoginForm() {
     }
 
     return (
-        <form className="flex flex-col my-8 items-center" onSubmit={async () => onSubmit}>
+        <form className="flex flex-col my-8 items-center" onSubmit={onSubmit}>
             {error && <div style={{ color: 'red' }}>{error}</div>}
             <Input size="lg" className="max-w-[350px]" type="text" name="username" variant="underlined" label="Tên thẻ hội viên" />
             <Input size="lg" className="max-w-[350px]" type="password" name="password" variant="underlined" label="Mật khẩu" />
