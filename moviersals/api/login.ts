@@ -4,7 +4,8 @@ export default async function login(username: string, password: string) {
         "Accept": "application/json",
         "Content-Type": "application/json",
     };
-    fetch(url, {
+    
+    return fetch(url, {
         method: "POST",
         headers,
         body: JSON.stringify({
@@ -13,11 +14,9 @@ export default async function login(username: string, password: string) {
         }),
     })
         .then((response) => {
-            console.log("1");
             return response.json();
         })
         .catch((response) => {
-            console.log("2");
             console.log(response.status, response.statusText);
             return response.json();
         });

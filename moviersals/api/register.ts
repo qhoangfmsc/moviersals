@@ -4,7 +4,8 @@ export default async function register(username: string, password: string, displ
         "Accept": "application/json",
         "Content-Type": "application/json",
     };
-    fetch(url, {
+    
+    return fetch(url, {
         method: "POST",
         headers,
         body: JSON.stringify({
@@ -16,11 +17,9 @@ export default async function register(username: string, password: string, displ
         }),
     })
         .then((response) => {
-            console.log("1");
             return response.json();
         })
         .catch((response) => {
-            console.log("2");
             console.log(response.status, response.statusText);
             return response.json();
         });
