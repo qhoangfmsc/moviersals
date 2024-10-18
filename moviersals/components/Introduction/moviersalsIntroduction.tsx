@@ -66,7 +66,7 @@ export default function MoviersalsIntroduction() {
                     </CardBody>
                     <Divider />
                     <CardFooter className="justify-center">
-                        <Button className="uppercase" color="success"> Tham gia ngay hôm nay! </Button>
+                        <Button className="uppercase" color="success" as={Link} href="/login"> Tham gia ngay hôm nay! </Button>
                     </CardFooter>
                 </Card>
                 <Card className="relative flex lg:hidden m-2 lg:bottom-5 max-w-[400px]">

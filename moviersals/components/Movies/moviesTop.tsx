@@ -2,7 +2,7 @@
 
 import { categoriesSubtitles } from "@/config/categoriesSubtitles";
 import { videosMockup } from "@/config/videosMockup";
-import { Button, Card, CardFooter, Image } from "@nextui-org/react";
+import { Button, Card, CardFooter, Image, Link } from "@nextui-org/react";
 import React from "react";
 
 const trendingVideos = videosMockup;
@@ -69,7 +69,7 @@ export default function MoviesTop({ title }: Readonly<MovieTopUIProps>): JSX.Ele
                                                 ))}
                                             </div>
                                         </div>
-                                        <Button className="text-tiny text-white bg-black/50" variant="flat" color="default" radius="lg" size="sm">
+                                        <Button className="text-tiny text-white bg-black/50" variant="flat" color="default" radius="lg" size="sm" as={Link} href={`/detail/${item.id}`}>
                                             Xem ngay
                                         </Button>
                                     </CardFooter>
