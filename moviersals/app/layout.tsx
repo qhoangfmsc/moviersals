@@ -1,6 +1,8 @@
 "use client"
 
+import "@/styles/custom.css";
 import "@/styles/globals.css";
+import "@/styles/emblaCarousel.css";
 import clsx from "clsx";
 
 import { Providers } from "./providers";

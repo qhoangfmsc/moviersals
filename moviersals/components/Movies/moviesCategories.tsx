@@ -59,7 +59,7 @@ export default function MoviesCategories() {
                                                     />
                                                     <CardFooter className="justify-between">
                                                         <div className="text-white/80">
-                                                            <div>{item.name}</div>
+                                                            <div className="font-black">{item.name}</div>
                                                             <div className="text-tiny">
                                                                 {item.categories.map((cat, index) => (
                                                                     <span key={index}>

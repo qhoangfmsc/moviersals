@@ -1,6 +1,6 @@
 "use client"
 
-export default function BlogLayout({
+export default function DetailLayout({
   children,
 }: {
   children: React.ReactNode;
