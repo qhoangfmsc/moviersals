@@ -24,7 +24,7 @@ export default function MoviesTop({ title }: Readonly<MovieTopUIProps>): JSX.Ele
                     {
                         trendingVideos.map(function (item) {
                             return (
-                                <div className="embla__slide">
+                                <div className="embla__slide" key={item.id}>
                                     <div key={item.id} className="relative snap-center shrink-0 lg:w-1/4 w-full">
                                         <div
                                             className="absolute text-black"

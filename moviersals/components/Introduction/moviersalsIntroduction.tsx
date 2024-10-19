@@ -146,12 +146,6 @@ export default function MoviersalsIntroduction() {
                     <h1 className="text-center text-tiny lg:text-3xl my-16"><b>Moviersals</b> luôn đồng hành <br className="lg:hidden" /> mọi hành trình của bạn yêu 😘</h1>
                     <video className="self-center" width="80%" height="300" autoPlay loop muted preload="auto">
                         <source src="/multideviceesports.mp4" type="video/mp4" />
-                        <track
-                            src="/path/to/captions.vtt"
-                            kind="subtitles"
-                            srcLang="en"
-                            label="English"
-                        />
                     </video>
                 </Card>
             </div>

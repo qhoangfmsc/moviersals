@@ -9,12 +9,6 @@ export default function ValorantIntroduction(): JSX.Element {
         <div className="relative">
             <video className="blur-xl" width="100%" height="300" autoPlay loop muted preload="auto">
                 <source src="/VALORANTChampions2021.mp4" type="video/mp4" />
-                <track
-                    src="/path/to/captions.vtt"
-                    kind="subtitles"
-                    srcLang="en"
-                    label="English"
-                />
             </video>
             <div className="flex lg:hidden absolute justify-center"
                 style={{
@@ -56,12 +50,6 @@ export default function ValorantIntroduction(): JSX.Element {
             }}>
                 <video width="100%" height="300" autoPlay loop muted preload="auto">
                     <source src="/VALORANTChampions2021.mp4" type="video/mp4" />
-                    <track
-                        src="/path/to/captions.vtt"
-                        kind="subtitles"
-                        srcLang="en"
-                        label="English"
-                    />
                 </video>
             </Card>
         </div>
