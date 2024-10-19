@@ -1,7 +1,7 @@
-export default async function requestApi(url: string, param: Object) {
+export default async function requestApi(url: string, param: Object | null) {
     return fetch(process.env.NEXT_PUBLIC_API_DOMAIN + url,
         {
-            method: "POST",
+            method: param ? "POST" : "GET",
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",

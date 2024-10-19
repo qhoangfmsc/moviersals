@@ -1,6 +1,6 @@
 "use client"
 
-import register from "@/api/register";
+import register from "@/api/account/register";
 import { Button, Card, Checkbox, Input, Link, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@nextui-org/react";
 import { FormEvent, useState } from "react";
 
@@ -76,7 +76,7 @@ export default function RegisterForm() {
                                 <p>Đăng ký thẻ hội viên thành công! Chuyển đến trang đăng nhập?</p>
                             </ModalBody>
                             <ModalFooter>
-                                <Button color="danger" variant="light" as={Link} href="/login">
+                                <Button color="danger" variant="light" as={Link} href="/login" onPress={onClose}>
                                     Đồng ý
                                 </Button>
                             </ModalFooter>
@@ -94,7 +94,7 @@ export default function RegisterForm() {
                     <Input size="lg" type="text" name="username" variant="underlined" label="Tên thẻ hội viên" />
                     <Input size="lg" type="password" name="password" variant="underlined" label="Mật khẩu" />
                     <Input size="lg" type="password" name="repassword" variant="underlined" label="Nhập lại mật khẩu" />
-                    <Checkbox className="my-2" isSelected={isSelected} onValueChange={setIsSelected}>
+                    <Checkbox className="my-4 text-left" isSelected={isSelected} onValueChange={setIsSelected}>
                         Tôi đồng ý với <Link href="/about" target="__blank">Hợp đồng và Chính sách</Link> của Moviersals
                     </Checkbox>
                     <div>

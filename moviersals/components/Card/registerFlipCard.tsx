@@ -1,4 +1,4 @@
-import register from "@/api/register";
+import register from "@/api/account/register";
 import { Button, Card, Checkbox, Image, Input, Link, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@nextui-org/react";
 import { FormEvent, useState } from "react";
 
@@ -74,7 +74,7 @@ export default function RegisterFlipCard() {
                                 <p>Đăng ký thẻ hội viên thành công! Chuyển đến trang đăng nhập?</p>
                             </ModalBody>
                             <ModalFooter>
-                                <Button color="danger" variant="light" as={Link} href="/login">
+                                <Button color="danger" variant="light" as={Link} href="/login" onPress={onClose}>
                                     Đồng ý
                                 </Button>
                             </ModalFooter>

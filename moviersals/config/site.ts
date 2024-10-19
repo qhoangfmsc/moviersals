@@ -3,67 +3,53 @@ export type SiteConfig = typeof siteConfig;
 export const siteConfig = {
   name: "Moviersals",
   description: "Trang web xem phim trực tuyến",
-  navItems: [
+  navMobileItems: [
     {
-      label: "Home",
+      label: "Trang chủ",
+      color: undefined,
       href: "/",
     },
     {
-      label: "Docs",
-      href: "/docs",
+      label: "Tìm kiếm",
+      color: undefined,
+      href: "/search",
     },
     {
-      label: "Pricing",
-      href: "/pricing",
+      label: "Đăng nhập",
+      color: undefined,
+      href: "/login",
     },
     {
-      label: "Blog",
-      href: "/blog",
-    },
-    {
-      label: "About",
-      href: "/about",
+      label: "Đăng ký",
+      color: undefined,
+      href: "/register",
     },
   ],
-  navMenuItems: [
+  navLoggedInMobileItems: [
     {
-      label: "Profile",
+      label: "Trang chủ",
+      color: undefined,
+      href: "/",
+    },
+    {
+      label: "Tìm kiếm",
+      color: undefined,
+      href: "/search",
+    },
+    {
+      label: "Thông tin của tôi",
+      color: undefined,
       href: "/profile",
     },
     {
-      label: "Dashboard",
-      href: "/dashboard",
-    },
-    {
-      label: "Projects",
-      href: "/projects",
-    },
-    {
-      label: "Team",
-      href: "/team",
-    },
-    {
-      label: "Calendar",
-      href: "/calendar",
-    },
-    {
-      label: "Settings",
-      href: "/settings",
-    },
-    {
-      label: "Help & Feedback",
-      href: "/help-feedback",
+      label: "Phim của tôi",
+      color: undefined,
+      href: "/mymovie",
     },
     {
       label: "Logout",
+      color: "danger",
       href: "/logout",
     },
-  ],
-  links: {
-    github: "https://github.com/nextui-org/nextui",
-    twitter: "https://twitter.com/getnextui",
-    docs: "https://nextui.org",
-    discord: "https://discord.gg/9b6yyZKmH4",
-    sponsor: "https://patreon.com/jrgarciadev",
-  },
+  ]
 };

@@ -8,30 +8,23 @@ html {
 
 html::-webkit-scrollbar {
     width: 8px;
-    /* Change this value to match the 'w-2' width in Tailwind */
 }
 
 html::-webkit-scrollbar-track {
     border-radius: 9999px;
-    /* rounded-full in Tailwind */
     background-color: #f3f4f6;
-    /* bg-gray-100 in Tailwind */
 }
 
 html::-webkit-scrollbar-thumb {
     border-radius: 9999px;
-    /* rounded-full in Tailwind */
     background-color: #d1d5db;
-    /* bg-gray-300 in Tailwind */
 }
 
 /* Dark mode */
 html.dark::-webkit-scrollbar-track {
     background-color: #374151;
-    /* bg-neutral-700 in Tailwind */
 }
 
 html.dark::-webkit-scrollbar-thumb {
     background-color: #6b7280;
-    /* bg-neutral-500 in Tailwind */
 }

@@ -37,7 +37,7 @@ export default function MoviesCategories() {
                                         {category.icon}
                                     </div>
                                 </>
-                            } className="flex justify-center flex-wrap">
+                            } className="flex justify-center flex-wrap p-2">
                                 {
                                     trendingVideos.filter((video) =>
                                         video.categories.includes(category.name)

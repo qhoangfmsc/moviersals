@@ -5,7 +5,7 @@ import { Input } from "@nextui-org/input";
 import { Link } from "@nextui-org/link";
 import { FormEvent, useState } from "react";
 import GoogleSignInButton from "@/components/Button/googleSignInButton";
-import login from "@/api/login";
+import login from "@/api/account/login";
 import { useRouter } from "next/navigation";
 
 export default function LoginForm() {

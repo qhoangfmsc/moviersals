@@ -29,8 +29,8 @@ export default function MoviesTop({ title }: Readonly<MovieTopUIProps>): JSX.Ele
                                         <div
                                             className="absolute text-black"
                                             style={{
-                                                top: "-1rem",
-                                                left: "1rem",
+                                                top: "-2rem",
+                                                left: "0rem",
                                                 zIndex: "15"
                                             }}
                                         >
