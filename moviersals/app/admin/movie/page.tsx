@@ -1,5 +1,6 @@
 "use client"
 
+import uploadMovie from "@/api/movies/uploadMovie";
 import AdminForm, { AdminFormCofig } from "@/components/Form/adminForm";
 import { title } from "@/components/primitives";
 import TableNextUI from "@/components/Table/tableNextUI";
@@ -22,7 +23,7 @@ export default function MovieAdminPage() {
       { colname: "description", colsub: "Mô tả", coltype: "inputtext", colvalues: null },
       { colname: "publisher", colsub: "Nhà sản xuất", coltype: "inputtext", colvalues: null },
       { colname: "publishyear", colsub: "Năm sản xuất", coltype: "inputnumber", colvalues: null },
-      { colname: "thumbnail", colsub: "Ảnh bìa (đường dẫn)", coltype: "inputtext", colvalues: null },
+      { colname: "thumbnail", colsub: "Ảnh bìa (đường dẫn)", coltype: "inputfile", colvalues: null },
       {
         colname: "categories", colsub: "Thể loại", coltype: "checkbox", colvalues: [
           { key: "action", value: "Hành động", },
@@ -49,8 +50,19 @@ export default function MovieAdminPage() {
       },
     ],
     buttonText: "Tạo mới",
-    handler: (request: any) => {
-      console.log("request", request);
+    handler: async (request: { [key: string]: any }) => {
+      const keyValues = Object.entries(request);
+      keyValues.forEach(([key, value]) => {
+        if (Array.isArray(value)) {
+          // CONVERT ARRAY OBJECT TO STRING ARRAY
+          request[key] = JSON.stringify(value);
+        } else if (typeof value === "string" && (value === "true" || value === "false")) {
+          // CONVERT STRING TO BOOLEAN
+          request[key] = value === "true";
+        }
+      });
+      console.log(request);
+      const response = await uploadMovie(request);
     },
   }
 
@@ -68,7 +80,7 @@ export default function MovieAdminPage() {
         <BreadcrumbItem href="/admin/movie">Phim ảnh</BreadcrumbItem>
       </Breadcrumbs>
       <div className="flex lg:flex-row flex-col-reverse">
-        <div className="lg:w-4/5 lg:mr-10">
+        <div className="lg:w-4/5 lg:mr-8">
           <TableNextUI tableData={tableData} />
         </div>
         <div className="lg:w-1/5 mb-4">

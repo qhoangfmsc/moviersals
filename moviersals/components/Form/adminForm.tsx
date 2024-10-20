@@ -9,7 +9,7 @@ export interface AdminFormCofig {
     colList: {
         colname: string,
         colsub: string,
-        coltype: "inputtext" | "inputnumber" | "radio" | "checkbox",
+        coltype: "inputtext" | "inputnumber" | "inputfile" | "radio" | "checkbox",
         colvalues: {
             key: any,
             value: any,
@@ -25,17 +25,24 @@ export default function AdminForm({
     adminFormCofig: AdminFormCofig
 }) {
     const [isLoading, setIsLoading] = useState<boolean>(false)
-    const [checkboxState, setCheckboxState] = useState<Record<string, string[]>>({}); // This will hold colname and selected values
+    const [checkboxState, setCheckboxState] = useState<Record<string, string[]>>({}); // State for checkbox values
+    const [fileState, setFileState] = useState<Record<string, File | null>>({}); // State for file inputs
 
     // DETECT HOW MANY CHECKBOX HAVE
     useEffect(() => {
-        const initialState: Record<string, string[]> = {};
+        const initialCheckboxState: Record<string, string[]> = {};
+        const initialFileState: Record<string, File | null> = {};
+
         adminFormCofig.colList.forEach((col) => {
             if (col.coltype === "checkbox") {
-                initialState[col.colname] = [];
+                initialCheckboxState[col.colname] = [];
+            }
+            if (col.coltype === "inputfile") {
+                initialFileState[col.colname] = null;
             }
         });
-        setCheckboxState(initialState);
+        setCheckboxState(initialCheckboxState);
+        setFileState(initialFileState);
     }, [adminFormCofig.colList]);
 
     // CHECKBOX EVENT
@@ -48,9 +55,17 @@ export default function AdminForm({
 
             return {
                 ...prevState,
-                [colname]: newValues,  // Update state for this checkbox group
+                [colname]: newValues,
             };
         });
+    };
+
+    // INPUT FILE EVENT
+    const handleFileChange = (colname: string, file: File | null) => {
+        setFileState(prevState => ({
+            ...prevState,
+            [colname]: file,
+        }));
     };
 
     async function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -63,9 +78,11 @@ export default function AdminForm({
             adminFormCofig.colList.forEach(col => {
                 if (col.coltype === "checkbox") {
                     request[col.colname] = checkboxState[col.colname];
+                } else if (col.coltype === "inputfile") {
+                    request[col.colname] = fileState[col.colname];
                 } else {
                     const formData = new FormData(event.currentTarget);
-                    request[col.colname] = formData.get(col.colname)?.toString();
+                    request[col.colname] = formData.get(col.colname);
                 }
             });
             adminFormCofig.handler(request)
@@ -114,6 +131,19 @@ export default function AdminForm({
                                     label={col.colsub}
                                 />
                             );
+                        case "inputfile":
+                            return (
+                                <div key={index}>
+                                    <h1 className="text-sm text-zinc-400 pl-1 pt-3">{col.colsub}</h1>
+                                    <Input
+                                        id={`fileupload${index}`}
+                                        className="w-full pt-2"
+                                        type="file"
+                                        name={col.colname}
+                                        onChange={(e) => handleFileChange(col.colname, e.target.files?.[0] || null)}
+                                    />
+                                </div>
+                            )
                         case "radio":
                             return (
                                 <RadioGroup
@@ -121,7 +151,7 @@ export default function AdminForm({
                                     label={col.colsub}
                                     orientation="horizontal"
                                     name={col.colname}
-                                    className="mt-6"
+                                    className="mt-2"
                                 >
                                     {col.colvalues?.map((object) => (
                                         <Radio
@@ -142,7 +172,7 @@ export default function AdminForm({
                                     label={col.colsub}
                                     orientation="horizontal"
                                     name={col.colname}
-                                    className="mt-6"
+                                    className="mt-2"
                                 >
                                     {col.colvalues?.map((object) => (
                                         <Checkbox

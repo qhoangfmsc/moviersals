@@ -40,14 +40,14 @@ export default function TableNextUI({
                         <TableColumn key={index}>{header.colsub}</TableColumn>
                     ))}
                 </TableHeader>
-                <TableBody>
-                    {dataByPage[pageNum - 1].map((rowData: Record<string, any>, index: number) => (
+                <TableBody emptyContent={"Chưa có dữ liệu"}>
+                    {(dataByPage.length) ? dataByPage[pageNum - 1].map((rowData: Record<string, any>, index: number) => (
                         <TableRow key={index}>
                             {tableData.headerData.map((header) => (
                                 <TableCell key={header.colname}>{String(rowData[header.colname])}</TableCell>
                             ))}
                         </TableRow>
-                    ))}
+                    )) : []}
                 </TableBody>
             </Table>
             <div className="flex justify-end my-4">
