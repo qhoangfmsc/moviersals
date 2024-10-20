@@ -34,14 +34,16 @@ export default function WatchPage({
                         </div>
                     </div>
                 </div>
-                <div className="flex h-5 font-black mt-8 space-x-4">
+                <div className="flex flex-wrap h-5 font-black mt-8 space-x-4">
+                    <Divider orientation="vertical" />
                     <h1 className="text-sm">2024</h1>
                     <Divider orientation="vertical" />
                     <h1 className="text-sm">Khoa học viễn tưởng</h1>
                     <Divider orientation="vertical" />
                     <h1 className="text-sm">Phiêu lưu</h1>
+                    <Divider orientation="vertical" />
                 </div>
-                <p className="my-4 text-sm leading-6 w-1/2">
+                <p className="my-8 text-sm leading-6 lg:w-1/2">
                     Chiến thắng rất xứng đáng dành cho Dương Quốc Hoàng, Aloysius Yapp, Johann Chua, Carlo Biado, Ko Pin Yi và đội trưởng Efren Reyes. Aloysius Yapp là tay cơ xuất sắc nhất giải, Hoàng Sao đóng góp lớn vào chức vô địch của tuyển châu Á. Mỗi tay cơ dự Reyes Cup nhận 15.000 USD.
                 </p>
                 <div className="mt-12 w-full">
@@ -52,7 +54,7 @@ export default function WatchPage({
                     <h1 className="text-2xl my-4">Đề xuất cho bạn</h1>
                     <MovieSuggestion />
                 </div>
-                <div className="mt-12 w-1/2">
+                <div className="mt-12 lg:w-1/2">
                     <h1 className="text-2xl my-4">Bình luận</h1>
                     <MyMoviesComments />
                     <MoviesComments movieid={params.episodeid} />
