@@ -67,11 +67,11 @@ export default function MovieAdminPage() {
         <BreadcrumbItem href="/admin">Moviersals</BreadcrumbItem>
         <BreadcrumbItem href="/admin/movie">Phim ảnh</BreadcrumbItem>
       </Breadcrumbs>
-      <div className="flex flex-row">
-        <div className="w-4/5 mr-10">
+      <div className="flex lg:flex-row flex-col-reverse">
+        <div className="lg:w-4/5 lg:mr-10">
           <TableNextUI tableData={tableData} />
         </div>
-        <div className="w-1/5">
+        <div className="lg:w-1/5 mb-4">
           <AdminForm adminFormCofig={adminFormCofig} />
         </div>
       </div>
