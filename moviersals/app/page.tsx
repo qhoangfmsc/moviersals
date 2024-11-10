@@ -1,5 +1,4 @@
-"use client"
-
+"use client";
 import MoviersalsIntroduction from "@/components/Introduction/moviersalsIntroduction";
 import ValorantIntroduction from "@/components/Introduction/valorantIntroduction";
 import MoviesCategories from "@/components/Movies/moviesCategories";
