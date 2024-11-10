@@ -18,7 +18,7 @@ export default function WatchPage({
 }) {
     return (
         <>
-            <video width="100%" height="300" preload="auto" controls controlsList="nodownload noremoteplayback noplaybackrate">
+            <video width="100%" height="300" preload="auto" playsInline autoPlay controls controlsList="nodownload noremoteplayback noplaybackrate">
                 <source src="/VALORANTChampions2021.mp4" type="video/mp4" />
             </video>
             <div className="p-8">

@@ -144,7 +144,7 @@ export default function MoviersalsIntroduction() {
             <div className="w-full flex justify-center my-24">
                 <Card className="bg-black border-none shadow-none rounded-3xl max-w-[1300px] max-h-[800px]">
                     <h1 className="text-center text-tiny lg:text-3xl my-16"><b>Moviersals</b> luôn đồng hành <br className="lg:hidden" /> mọi hành trình của bạn yêu 😘</h1>
-                    <video className="self-center" width="80%" height="300" autoPlay loop muted preload="auto">
+                    <video className="self-center" width="80%" height="300" playsInline autoPlay loop muted preload="auto">
                         <source src="/multideviceesports.mp4" type="video/mp4" />
                     </video>
                 </Card>

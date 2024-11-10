@@ -7,7 +7,7 @@ import React from "react";
 export default function ValorantIntroduction(): JSX.Element {
     return (
         <div className="relative">
-            <video className="blur-xl" width="100%" height="300" autoPlay loop muted preload="auto">
+            <video className="blur-xl" width="100%" height="300" playsInline autoPlay loop muted preload="auto">
                 <source src="/VALORANTChampions2021.mp4" type="video/mp4" />
             </video>
             <div className="flex lg:hidden absolute justify-center"
@@ -48,7 +48,7 @@ export default function ValorantIntroduction(): JSX.Element {
                 transform: "translate(-50%, -50%)",
                 boxShadow: "10px 15px 25px 1px #000000",
             }}>
-                <video width="100%" height="300" autoPlay loop muted preload="auto">
+                <video width="100%" height="300" playsInline autoPlay loop muted preload="auto">
                     <source src="/VALORANTChampions2021.mp4" type="video/mp4" />
                 </video>
             </Card>
