@@ -1,13 +1,25 @@
 "use client"
 
+import getAllMovie from "@/api/movies/getAllMovie";
 import uploadMovie from "@/api/movies/uploadMovie";
 import AdminForm, { AdminFormCofig } from "@/components/Form/adminForm";
 import { title } from "@/components/primitives";
 import TableNextUI from "@/components/Table/tableNextUI";
 import { videosMockup } from "@/config/videosMockup";
 import { BreadcrumbItem, Breadcrumbs } from "@nextui-org/react";
+import { useEffect, useState } from "react";
 
 export default function MovieAdminPage() {
+  const [data, setData] = useState(null)
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getAllMovie();
+      setData(response);
+    };
+
+    fetchData();
+  }, []);
+
   const tableData = {
     headerData: [
       { colname: "name", colsub: "Tên phim" },
@@ -68,6 +80,7 @@ export default function MovieAdminPage() {
 
   return (
     <div>
+      <>{data}</>
       <h1 className={title()}>Quản lý phim ảnh</h1>
       <Breadcrumbs
         className="my-4"
