@@ -19,11 +19,20 @@ import {
 import Image from "next/image";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, User } from "@nextui-org/react";
 import checkAuthen from "@/api/account/checkAuthen";
+import { useEffect, useState } from "react";
 
-export const Navbar = async () => {
-  const authentication = await checkAuthen();
-  console.log(authentication);
-  
+export const Navbar = () => {
+  const [authentication, setAuthentication] = useState(null);
+
+  useEffect(() => {
+    async function fetchAuth() {
+      const auth = await checkAuthen();
+      setAuthentication(auth);
+    }
+
+    fetchAuth();
+  }, []);
+
   const searchInput = (
     <Button variant="light" startContent={<SearchIcon />} />
   );
