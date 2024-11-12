@@ -25,6 +25,7 @@ export default function MovieAdminPage() {
       { colname: "name", colsub: "Tên phim" },
       { colname: "publisher", colsub: "Nhà sản xuất" },
       { colname: "thumbnail", colsub: "Ảnh bìa" },
+      { colname: "description", colsub: "Mô tả" },
     ],
     bodyData: videosMockup
   }

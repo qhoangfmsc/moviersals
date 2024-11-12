@@ -66,23 +66,23 @@ export default function StreamList(): JSX.Element {
     return (
         <>
             {streamList.map((item) => (
-                <Card className="w-1/2 m-4" key={item.id} as={Link} href={`/stream/${item.id}`}>
-                    <div className="flex flex-row p-6 gap-6">
+                <Card className="lg:w-1/2 m-4" key={item.id} as={Link} href={`/stream/${item.id}`}>
+                    <div className="lg:flex flex-row p-2 lg:p-6 lg:gap-6">
                         <Image src="/streaming-thumbnail.gif" alt="background" />
                         <div className="basis-2/5">
                             {
                                 item.isstreaming
                                     ?
-                                    <Button variant="solid" color="danger" className="uppercase w-fit px-8" disabled size="sm">{
+                                    <Button variant="solid" color="danger" className="uppercase w-full lg:w-fit px-8" disabled size="sm">{
                                         "Đang diễn ra"
                                     }</Button>
                                     :
-                                    <Button variant="solid" color="default" className="uppercase w-fit px-8" disabled size="sm">{
+                                    <Button variant="solid" color="default" className="uppercase w-full lg:w-fit px-8" disabled size="sm">{
                                         `${calculateTimeDifference(item.createddate).value} ${calculateTimeDifference(item.createddate).type} trước`
                                     }</Button>
                             }
                             <div className="my-4">
-                                <h1 className="text-4xl font-black">{item.name}</h1>
+                                <h1 className="text-xl lg:text-3xl font-black">{item.name}</h1>
                                 <h1 className="text-sm text-gray-400">@{item.creator}</h1>
                                 <div className="flex text-tiny text-gray-300 font-black">
                                     <div className="self-center">
@@ -92,7 +92,7 @@ export default function StreamList(): JSX.Element {
                                         &nbsp; {item.views} lượt xem
                                     </div>
                                 </div>
-                                <p className="my-4 text-tiny text-gray-400">
+                                <p className="my-4 text-tiny text-gray-400 hidden lg:block">
                                     {item.description}
                                 </p>
                             </div>

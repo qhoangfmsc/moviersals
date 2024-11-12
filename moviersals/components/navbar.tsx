@@ -1,3 +1,5 @@
+"use client"
+
 import {
   Navbar as NextUINavbar,
   NavbarContent,
@@ -16,9 +18,12 @@ import {
 } from "@/components/icons";
 import Image from "next/image";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, User } from "@nextui-org/react";
+import checkAuthen from "@/api/account/checkAuthen";
 
-export const Navbar = () => {
-  const authentication = false;
+export const Navbar = async () => {
+  const authentication = await checkAuthen();
+  console.log(authentication);
+  
   const searchInput = (
     <Button variant="light" startContent={<SearchIcon />} />
   );

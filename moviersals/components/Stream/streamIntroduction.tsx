@@ -13,8 +13,8 @@ export default function StreamIntroduction({ title, subtitle }: Readonly<StreamI
     return (
         <>
             <div className="flex flex-row justify-center mb-12">
-                <Button variant="bordered" color="danger" className="uppercase w-fit self-center mr-2" size="sm" disabled>{subtitle}</Button>
-                <h3 className="text-4xl">{title}</h3>
+                <Button variant="bordered" color="danger" className="uppercase w-fit self-center mr-2 hidden lg:block" size="sm" disabled>{subtitle}</Button>
+                <h3 className="lg:text-4xl text-center">{title}</h3>
             </div>
             <div className="justify-items-center">
                 <StreamList />
