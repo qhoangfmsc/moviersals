@@ -27,7 +27,7 @@ export default function ValorantIntroduction(): JSX.Element {
                     transform: "translateY(-50%)",
                 }}>
                 <div className="content-center" style={{
-                    textShadow: "2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff, 1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff",
+                    textShadow: "2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff, 1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff"
                 }}>
                     <h1
                     >Xem mọi lúc, <br /> trút phiền lo!</h1>

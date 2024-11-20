@@ -1,4 +1,4 @@
-export default async function requestApi(url: string, param: Object | null) {
+export async function requestApi(url: string, param: Object | null | FormData) {
     function getHostname(): string {
         const hostname = window.location.hostname;
         return (hostname === 'localhost')
@@ -8,11 +8,12 @@ export default async function requestApi(url: string, param: Object | null) {
 
     return fetch(getHostname() + url, {
         method: param ? "POST" : "GET",
+        credentials: "include",
         headers: {
             "Accept": "application/json",
-            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
         },
-        body: JSON.stringify(param),
+        body: param instanceof FormData ? param : param ? JSON.stringify(param) : undefined,
     }).then((response) => {
         return response.json();
     }).catch((response) => {

@@ -5,16 +5,17 @@ import uploadMovie from "@/api/movies/uploadMovie";
 import AdminForm, { AdminFormCofig } from "@/components/Form/adminForm";
 import { title } from "@/components/primitives";
 import TableNextUI from "@/components/Table/tableNextUI";
-import { videosMockup } from "@/config/videosMockup";
 import { BreadcrumbItem, Breadcrumbs } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 
 export default function MovieAdminPage() {
-  const [data, setData] = useState(null)
+  const [data, setData] = useState([])
   useEffect(() => {
     const fetchData = async () => {
       const response = await getAllMovie();
-      setData(response);
+      const content = response.content;
+      console.log(content);
+      setData(content);
     };
 
     fetchData();
@@ -23,11 +24,11 @@ export default function MovieAdminPage() {
   const tableData = {
     headerData: [
       { colname: "name", colsub: "Tên phim" },
-      { colname: "publisher", colsub: "Nhà sản xuất" },
-      { colname: "thumbnail", colsub: "Ảnh bìa" },
-      { colname: "description", colsub: "Mô tả" },
+      { colname: "publishyear", colsub: "Năm sản xuất" },
+      { colname: "type", colsub: "Loại phim" },
+      { colname: "ispremium", colsub: "Hạng vé VIP" },
     ],
-    bodyData: videosMockup
+    bodyData: data
   }
 
   const adminFormCofig: AdminFormCofig = {
@@ -52,7 +53,7 @@ export default function MovieAdminPage() {
       {
         colname: "type", colsub: "Loại phim", coltype: "radio", colvalues: [
           { key: "movie", value: "Phim lẻ", },
-          { key: "series", value: "Phim bộ", },
+          { key: "tseries", value: "Phim bộ", },
         ]
       },
       {
@@ -64,16 +65,6 @@ export default function MovieAdminPage() {
     ],
     buttonText: "Tạo mới",
     handler: async (request: { [key: string]: any }) => {
-      const keyValues = Object.entries(request);
-      keyValues.forEach(([key, value]) => {
-        if (Array.isArray(value)) {
-          // CONVERT ARRAY OBJECT TO STRING ARRAY
-          request[key] = JSON.stringify(value);
-        } else if (typeof value === "string" && (value === "true" || value === "false")) {
-          // CONVERT STRING TO BOOLEAN
-          request[key] = value === "true";
-        }
-      });
       console.log(request);
       const response = await uploadMovie(request);
     },
@@ -81,7 +72,6 @@ export default function MovieAdminPage() {
 
   return (
     <div>
-      <>{data}</>
       <h1 className={title()}>Quản lý phim ảnh</h1>
       <Breadcrumbs
         className="my-4"

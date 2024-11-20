@@ -36,11 +36,11 @@ export default function MoviesTop({ title }: Readonly<MovieTopUIProps>): JSX.Ele
                                         >
                                             <span style={{
                                                 fontSize: "3rem",
-                                                textShadow: "2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff, 1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;",
+                                                textShadow: "2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff, 1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff"
                                             }}>#</span>
                                             <span style={{
                                                 fontSize: "5rem",
-                                                textShadow: "2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff, 1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;",
+                                                textShadow: "2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff, 1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff"
                                             }}>{item.id}</span>
                                         </div>
                                         <Card

@@ -1,4 +1,4 @@
-import requestApi from "@/lib/requestApi";
+import { requestApi } from "@/lib/requestApi";
 
 export default async function RequestPasswordRecovery(email: string) {
   const url = "/api/createResetPasswordToken";

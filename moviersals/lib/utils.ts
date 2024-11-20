@@ -35,3 +35,45 @@ export function calculateTimeDifference(targetDate: string): {
 
     return result;
 }
+
+export function preexecuteRequest(request: Object) {
+    const keyValues = Object.entries(request);
+    keyValues.forEach(([key, value]) => {
+        if (Array.isArray(value)) {
+            // CONVERT ARRAY OBJECT TO STRING ARRAY
+            request[key] = JSON.stringify(value);
+        } else if (typeof value === "string" && (value === "true" || value === "false")) {
+            // CONVERT STRING TO BOOLEAN
+            request[key] = value === "true";
+        }
+    });
+
+    return request
+}
+
+export function convertRequestToFormData(request: Object) {
+    const formData = new FormData();
+
+    Object.entries(request).forEach(([key, value]) => {
+        if (Array.isArray(value)) {
+            // Handle arrays (append each item with the same key)
+            value.forEach((item) => {
+                formData.append(key, item);
+            });
+        } else if (value instanceof File) {
+            // Handle file inputs
+            formData.append(key, value);
+        } else if (typeof value === "object" && value !== null) {
+            // Handle nested objects (convert to JSON string)
+            formData.append(key, JSON.stringify(value));
+        } else if (typeof value === "boolean") {
+            // Convert boolean values to strings
+            formData.append(key, value.toString());
+        } else if (value !== null && value !== undefined) {
+            // Handle strings, numbers, and other primitive types
+            formData.append(key, value);
+        }
+    });
+
+    return formData;
+}

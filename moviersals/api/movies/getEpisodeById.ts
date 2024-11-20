@@ -1,4 +1,4 @@
-import requestApi from "@/lib/requestApi";
+import { requestApi } from "@/lib/requestApi";
 
 export default async function getMovieById(movieid: string, episodeid: string) {
     const url = `/api/movie/detail/${movieid}/${episodeid}`;

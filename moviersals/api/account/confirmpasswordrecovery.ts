@@ -1,4 +1,4 @@
-import requestApi from "@/lib/requestApi";
+import { requestApi } from "@/lib/requestApi";
 
 export default async function ConfirmPasswordRecovery(newpassword: string, passwordtoken: string) {
   const url = "/api/confirmResetPassword";

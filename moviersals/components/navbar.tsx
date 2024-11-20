@@ -20,22 +20,35 @@ import Image from "next/image";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, User } from "@nextui-org/react";
 import checkAuthen from "@/api/account/checkAuthen";
 import { useEffect, useState } from "react";
+import logout from "@/api/account/logout";
+import { usePathname } from "next/navigation";
 
 export const Navbar = () => {
   const [authentication, setAuthentication] = useState(null);
+  const pathname = usePathname();
 
   useEffect(() => {
-    async function fetchAuth() {
-      const auth = await checkAuthen();
-      setAuthentication(auth);
-    }
+    const handleRouteChange = () => {
+      fetchAuth();
+    };
 
-    fetchAuth();
-  }, []);
+    handleRouteChange();
+  }, [pathname]);
+
+  const fetchAuth = async () => {
+    const auth = await checkAuthen();
+    setAuthentication(auth);
+    console.log(auth);
+  }
 
   const searchInput = (
     <Button variant="light" startContent={<SearchIcon />} />
   );
+
+  async function logoutHandle() {
+    const res = await logout();
+    console.log(res);
+  };
 
   return (
     <NextUINavbar className="bg-transparent px-4" maxWidth="full" position="sticky">
@@ -65,9 +78,9 @@ export const Navbar = () => {
                   variant="light"
                 >
                   <User
-                    name="Stitch"
+                    name={authentication.displayname}
                     avatarProps={{
-                      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLs9_sqgpyfZetKlY2la20L_seJ95C9ZJhCg&s"
+                      src: authentication.avatar
                     }}
                   />
                   <ArrowDown />
@@ -76,7 +89,7 @@ export const Navbar = () => {
               <DropdownMenu aria-label="My account">
                 <DropdownItem>Thông tin của tôi</DropdownItem>
                 <DropdownItem>Phim của tôi</DropdownItem>
-                <DropdownItem className="text-danger" color="danger" href="/login">
+                <DropdownItem className="text-danger" color="danger" onClick={logoutHandle}>
                   Đăng xuất
                 </DropdownItem>
               </DropdownMenu>

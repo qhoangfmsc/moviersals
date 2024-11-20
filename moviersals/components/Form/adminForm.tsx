@@ -1,5 +1,6 @@
 "use client"
 
+import { convertRequestToFormData, preexecuteRequest } from "@/lib/utils";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import { Card, Checkbox, CheckboxGroup, Radio, RadioGroup } from "@nextui-org/react";
@@ -73,7 +74,7 @@ export default function AdminForm({
         setIsLoading(true)
 
         try {
-            const formData = new FormData(event.currentTarget)
+            const formData = new FormData(event.currentTarget);
             const request: Record<string, any> = {}
             adminFormCofig.colList.forEach(col => {
                 if (col.coltype === "checkbox") {
@@ -81,11 +82,12 @@ export default function AdminForm({
                 } else if (col.coltype === "inputfile") {
                     request[col.colname] = fileState[col.colname];
                 } else {
-                    const formData = new FormData(event.currentTarget);
                     request[col.colname] = formData.get(col.colname);
                 }
             });
-            adminFormCofig.handler(request)
+
+            const payloadFormData = convertRequestToFormData(preexecuteRequest(request));
+            adminFormCofig.handler(payloadFormData);
         } catch (error: unknown) {
             if (error instanceof Error) {
                 console.error(error);
@@ -98,7 +100,7 @@ export default function AdminForm({
     return (
         <Card className="p-4">
             <h1 className="text-xl">Tạo mới</h1>
-            <form className="flex flex-col" onSubmit={onSubmit}>
+            <form className="flex flex-col" onSubmit={onSubmit} encType="multipart/form-data">
                 <Input
                     className="w-full"
                     type="text"
