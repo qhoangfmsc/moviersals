@@ -16,7 +16,7 @@ export async function requestApi(url: string, param: Object | null | FormData) {
         body: param instanceof FormData ? param : param ? JSON.stringify(param) : undefined,
     }).then((response) => {
         return response.json();
-    }).catch((response) => {
-        return response.json();
+    }).catch((error) => {
+        console.error("API Request Error:", error);
     });
 }

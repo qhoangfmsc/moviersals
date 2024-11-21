@@ -12,10 +12,10 @@ export default function Home() {
       <div>
         <CloudinaryVideoPlayer publicId="5second_1_smw5cw" />
       </div>
-      <ValorantIntroduction />
+      {/* <ValorantIntroduction />
       <MoviesIntroduction />
-      <MoviersalsIntroduction />
-      {/* <PaypalButon totalAmount={100} /> */}
+      <MoviersalsIntroduction /> */}
+      <PaypalButon totalAmount={100} />
     </>
   );
 }

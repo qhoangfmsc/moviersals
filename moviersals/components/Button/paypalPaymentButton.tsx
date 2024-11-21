@@ -10,11 +10,18 @@ export default function PaypalButon({ totalAmount }: PaypalProps) {
   //Paypal button
   // const [{ options }, dispatch] = usePayPalScriptReducer();
   // const [{ isPending }] = usePayPalScriptReducer();
-  const [orderId, setOrderId] = useState<string>("");
-  const router = useRouter();
-  function createOrder() {
-    console.log("create amount: ", totalAmount);
-    return null;
+  async function createOrder(data, actions) {
+    return actions.order.create({
+      intent: "CAPTURE",
+      purchase_units: [
+        {
+          amount: {
+            value: "14.99",
+            currency_code: "USD",
+          },
+        },
+      ],
+    });
   }
   function onApprove(data) {
     console.log("on approve: ", data);
@@ -22,7 +29,7 @@ export default function PaypalButon({ totalAmount }: PaypalProps) {
   }
 
   return (
-    <PayPalScriptProvider options={{ clientId: "test", currency: "VND", intent: "capture" }}>
+    <PayPalScriptProvider options={{ clientId: process.env.NEXT_PUBLIC_CLIENT_ID, currency: "USD", intent: "capture" }}>
       <PayPalButtons
         createOrder={createOrder}
         onApprove={onApprove}
