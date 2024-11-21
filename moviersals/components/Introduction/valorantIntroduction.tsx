@@ -16,7 +16,6 @@ export default function ValorantIntroduction(): JSX.Element {
         loop
         muted
         preload="auto"
-        controls
         controlsList="nodownload">
         <source
           src="/VALORANTChampions2021.mp4"
@@ -97,7 +96,6 @@ export default function ValorantIntroduction(): JSX.Element {
           loop
           muted
           preload="auto"
-          controls
           controlsList="nodownload">
           <source
             src="/VALORANTChampions2021.mp4"

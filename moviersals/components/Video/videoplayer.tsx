@@ -2,14 +2,21 @@ import React from "react";
 import { CldVideoPlayer } from "next-cloudinary";
 import "next-cloudinary/dist/cld-video-player.css";
 
-const CloudinaryVideoPlayer = ({ publicId }) => {
+export interface CloudinaryVideoPlayerUI {
+  publicIdVP: string,
+  widthVP: string,
+  heightVP: string,
+}
+
+const CloudinaryVideoPlayer = ({ publicIdVP, widthVP, heightVP }: CloudinaryVideoPlayerUI) => {
   return (
-    <div style={{ width: "800px", height: "600px" }}>
+    <div style={{
+      width: widthVP ? widthVP : "800px", 
+      height: heightVP ? heightVP : "600px",
+    }}>
       <CldVideoPlayer
         id="adaptive-bitrate-streaming"
-        // width="800"
-        // height="600"
-        src={publicId}
+        src={publicIdVP}
         transformation={{
           streaming_profile: "hd",
         }}

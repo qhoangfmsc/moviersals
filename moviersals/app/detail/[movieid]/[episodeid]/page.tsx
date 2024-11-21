@@ -6,6 +6,7 @@ import MoviesComments from "@/components/Movies/moviesComments";
 import MyMoviesComments from "@/components/Movies/moviesMyComments";
 import MovieSuggestion from "@/components/Movies/moviesSuggestion";
 import { title } from "@/components/primitives";
+import CloudinaryVideoPlayer from "@/components/Video/videoplayer";
 import { videosMockup } from "@/config/videosMockup";
 import { Divider } from "@nextui-org/react";
 
@@ -18,9 +19,7 @@ export default function WatchPage({
 }) {
     return (
         <>
-            <video width="100%" height="300" preload="auto" playsInline autoPlay controls controlsList="nodownload noremoteplayback noplaybackrate">
-                <source src="/VALORANTChampions2021.mp4" type="video/mp4" />
-            </video>
+            <CloudinaryVideoPlayer publicIdVP="5second_1_smw5cw" widthVP="100%" heightVP="300" />
             <div className="p-8">
                 <div className="leading-10">
                     <h1 className={title()}>Detail movie</h1>

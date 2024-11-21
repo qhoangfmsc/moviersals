@@ -205,7 +205,6 @@ export default function MoviersalsIntroduction() {
             loop
             muted
             preload="auto"
-            controls
             controlsList="nodownload">
             <source
               src="/multideviceesports.mp4"
