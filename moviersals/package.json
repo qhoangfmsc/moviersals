@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@limeplay/core": "^1.1.1",
+    "@mux/mux-player": "^3.1.0",
     "@mux/mux-player-react": "^3.1.0",
     "@nextui-org/button": "^2.0.38",
     "@nextui-org/code": "2.0.33",
@@ -23,11 +24,8 @@
     "@nextui-org/switch": "2.0.34",
     "@nextui-org/system": "2.2.6",
     "@nextui-org/theme": "2.2.11",
-<<<<<<< Updated upstream
     "@paypal/react-paypal-js": "^8.7.0",
-=======
     "@radix-ui/react-slider": "^1.2.1",
->>>>>>> Stashed changes
     "@react-aria/ssr": "3.9.4",
     "@react-aria/visually-hidden": "3.8.12",
     "@tabler/icons-react": "^3.22.0",
@@ -40,13 +38,14 @@
     "intl-messageformat": "^10.5.0",
     "next": "^14.2.13",
     "next-auth": "^4.24.8",
+    "next-cloudinary": "^6.16.0",
     "next-themes": "^0.2.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "rimraf": "^6.0.1",
-    "shaka-player": "^4.12.2"
+    "rimraf": "^6.0.1"
   },
   "devDependencies": {
+    "@tsconfig/recommended": "^1.0.8",
     "@types/canvas-confetti": "^1.6.4",
     "@types/json-schema": "^7.0.15",
     "@types/node": "20.5.7",

@@ -2,16 +2,14 @@ import { useEffect, useState } from "react";
 import { PayPalScriptProvider, PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import { useRouter } from "next/router";
 
-const Cookies = require("js-cookie");
-
 interface PaypalProps {
   totalAmount?: number;
 }
 
 export default function PaypalButon({ totalAmount }: PaypalProps) {
   //Paypal button
-  const [{ options }, dispatch] = usePayPalScriptReducer();
-  const [{ isPending }] = usePayPalScriptReducer();
+  // const [{ options }, dispatch] = usePayPalScriptReducer();
+  // const [{ isPending }] = usePayPalScriptReducer();
   const [orderId, setOrderId] = useState<string>("");
   const router = useRouter();
   function createOrder() {
