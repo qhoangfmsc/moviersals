@@ -11,7 +11,10 @@ export async function requestApi(url: string, param: Object | null | FormData) {
         credentials: "include",
         headers: {
             "Accept": "application/json",
-            "Access-Control-Allow-Origin": "*"
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": "true",
+            ...(param instanceof FormData ? {} : { "Content-Type": "application/json" }), 
+
         },
         body: param instanceof FormData ? param : param ? JSON.stringify(param) : undefined,
     }).then((response) => {
