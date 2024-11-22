@@ -7,10 +7,7 @@ import MyMoviesComments from "@/components/Movies/moviesMyComments";
 import MovieSuggestion from "@/components/Movies/moviesSuggestion";
 import { title } from "@/components/primitives";
 import CloudinaryVideoPlayer from "@/components/Video/videoplayer";
-import { videosMockup } from "@/config/videosMockup";
 import { Divider } from "@nextui-org/react";
-
-const trendingVideos = videosMockup;
 
 export default function WatchPage({
     params

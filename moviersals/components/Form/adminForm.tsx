@@ -7,6 +7,7 @@ import { Card, Checkbox, CheckboxGroup, Radio, RadioGroup } from "@nextui-org/re
 import { FormEvent, useEffect, useState } from "react";
 
 export interface AdminFormCofig {
+    label: string,
     colList: {
         colname: string,
         colsub: string,
@@ -99,7 +100,7 @@ export default function AdminForm({
 
     return (
         <Card className="p-4">
-            <h1 className="text-xl">Tạo mới</h1>
+            <h1 className="text-xl">{adminFormCofig.label}</h1>
             <form className="flex flex-col" onSubmit={onSubmit} encType="multipart/form-data">
                 <Input
                     className="w-full"
