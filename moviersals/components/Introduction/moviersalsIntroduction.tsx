@@ -202,7 +202,7 @@ export default function MoviersalsIntroduction() {
             height="300"
             playsInline
             autoPlay
-            loop
+            // loop
             muted
             preload="auto"
             controlsList="nodownload">

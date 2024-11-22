@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   Navbar as NextUINavbar,
@@ -12,10 +12,7 @@ import {
 import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
 import { siteConfig } from "@/config/site";
-import {
-  ArrowDown,
-  SearchIcon,
-} from "@/components/icons";
+import { ArrowDown, SearchIcon } from "@/components/icons";
 import Image from "next/image";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, User } from "@nextui-org/react";
 import checkAuthen from "@/api/account/checkAuthen";
@@ -32,28 +29,40 @@ export const Navbar = () => {
       fetchAuth();
     };
 
-    handleRouteChange();
+    return () => {
+      handleRouteChange();
+    };
   }, [pathname]);
 
   const fetchAuth = async () => {
     const auth = await checkAuthen();
     setAuthentication(auth);
     console.log(auth);
-  }
+  };
 
   const searchInput = (
-    <Button variant="light" startContent={<SearchIcon />} />
+    <Button
+      variant="light"
+      startContent={<SearchIcon />}
+    />
   );
 
   async function logoutHandle() {
     const res = await logout();
     console.log(res);
-  };
+  }
 
   return (
-    <NextUINavbar className="bg-transparent px-4" maxWidth="full" position="sticky">
-      <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
-        <NavbarBrand as="li" className="gap-3 max-w-fit">
+    <NextUINavbar
+      className="bg-transparent px-4"
+      maxWidth="full"
+      position="sticky">
+      <NavbarContent
+        className="basis-1/5 sm:basis-full"
+        justify="start">
+        <NavbarBrand
+          as="li"
+          className="gap-3 max-w-fit">
           <Link href="/">
             <Image
               width={40}
@@ -65,22 +74,19 @@ export const Navbar = () => {
         </NavbarBrand>
       </NavbarContent>
 
-      {authentication
-        ? <NavbarContent
+      {authentication ? (
+        <NavbarContent
           className="hidden sm:flex basis-1/5 sm:basis-full"
-          justify="end"
-        >
+          justify="end">
           <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
           <NavbarItem className="hidden lg:flex">
             <Dropdown>
               <DropdownTrigger>
-                <Button
-                  variant="light"
-                >
+                <Button variant="light">
                   <User
                     name={authentication.displayname}
                     avatarProps={{
-                      src: authentication.avatar
+                      src: authentication.avatar,
                     }}
                   />
                   <ArrowDown />
@@ -89,41 +95,49 @@ export const Navbar = () => {
               <DropdownMenu aria-label="My account">
                 <DropdownItem>Thông tin của tôi</DropdownItem>
                 <DropdownItem>Phim của tôi</DropdownItem>
-                <DropdownItem className="text-danger" color="danger" onClick={logoutHandle}>
+                <DropdownItem
+                  className="text-danger"
+                  color="danger"
+                  onClick={logoutHandle}>
                   Đăng xuất
                 </DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </NavbarItem>
         </NavbarContent>
-        : <NavbarContent
+      ) : (
+        <NavbarContent
           className="hidden sm:flex basis-1/5 sm:basis-full"
-          justify="end"
-        >
+          justify="end">
           <NavbarItem className="hidden lg:flex">
             <Dropdown>
               <DropdownTrigger>
-                <Button
-                  variant="light"
-                >
+                <Button variant="light">
                   <User
                     name="Moviegoer"
                     avatarProps={{
-                      src: "/user.bmp"
+                      src: "/user.bmp",
                     }}
                   />
                   <ArrowDown />
                 </Button>
               </DropdownTrigger>
               <DropdownMenu aria-label="My account">
-                <DropdownItem className="text-success" color="success" href="/login">Đăng nhập</DropdownItem>
+                <DropdownItem
+                  className="text-success"
+                  color="success"
+                  href="/login">
+                  Đăng nhập
+                </DropdownItem>
                 <DropdownItem href="/register">Đăng ký</DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </NavbarItem>
         </NavbarContent>
-      }
-      <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
+      )}
+      <NavbarContent
+        className="sm:hidden basis-1 pl-4"
+        justify="end">
         <NavbarMenuToggle />
       </NavbarContent>
 
@@ -132,10 +146,9 @@ export const Navbar = () => {
           {siteConfig.navMobileItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
               <Link
-                color={(item.color) ? item.color : "foreground"}
+                color={item.color ? item.color : "foreground"}
                 href={item.href}
-                size="lg"
-              >
+                size="lg">
                 {item.label}
               </Link>
             </NavbarMenuItem>
