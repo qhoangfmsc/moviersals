@@ -1,43 +1,46 @@
-"use client"
+"use client";
 
-import { convertRequestToFormData, preexecuteRequest } from "@/lib/utils";
+import { convertArrayToLowercaseArray, convertRequestToFormData, preexecuteRequest } from "@/lib/utils";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import { Card, Checkbox, CheckboxGroup, Radio, RadioGroup } from "@nextui-org/react";
 import { FormEvent, useEffect, useState } from "react";
 
 export interface AdminFormCofig {
-    label: string,
+    label: string;
     colList: {
-        colname: string,
-        colsub: string,
-        coltype: "inputtext" | "inputnumber" | "inputfile" | "radio" | "checkbox",
+        colname: string;
+        colsub: string;
+        coltype: "inputtext" | "inputnumber" | "inputfile" | "radio" | "checkbox";
         colvalues: {
-            key: any,
-            value: any,
+            key: any;
+            value: any;
         }[] | null;
-    }[],
-    buttonText: string,
-    handler: (request: Record<string, any>) => void,
+    }[];
+    buttonText: string;
+    handler: (request: Record<string, any>) => void;
 }
 
 export default function AdminForm({
-    adminFormCofig
+    adminFormCofig,
+    rerenderData,
 }: {
-    adminFormCofig: AdminFormCofig
+    adminFormCofig: AdminFormCofig;
+    rerenderData: Object | null;
 }) {
-    const [isLoading, setIsLoading] = useState<boolean>(false)
-    const [checkboxState, setCheckboxState] = useState<Record<string, string[]>>({}); // State for checkbox values
-    const [fileState, setFileState] = useState<Record<string, File | null>>({}); // State for file inputs
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [checkboxState, setCheckboxState] = useState<Record<string, string[]>>({});
+    const [fileState, setFileState] = useState<Record<string, File | null>>({});
 
-    // DETECT HOW MANY CHECKBOX HAVE
     useEffect(() => {
         const initialCheckboxState: Record<string, string[]> = {};
         const initialFileState: Record<string, File | null> = {};
 
         adminFormCofig.colList.forEach((col) => {
             if (col.coltype === "checkbox") {
-                initialCheckboxState[col.colname] = [];
+                initialCheckboxState[col.colname] = rerenderData?.[col.colname]
+                    ? JSON.parse(rerenderData[col.colname] as string)
+                    : [];
             }
             if (col.coltype === "inputfile") {
                 initialFileState[col.colname] = null;
@@ -47,37 +50,29 @@ export default function AdminForm({
         setFileState(initialFileState);
     }, [adminFormCofig.colList]);
 
-    // CHECKBOX EVENT
     const handleCheckboxChange = (colname: string, value: string) => {
-        setCheckboxState(prevState => {
+        setCheckboxState((prevState) => {
             const currentValues = prevState[colname];
             const newValues = currentValues.includes(value)
-                ? currentValues.filter(v => v !== value)  // Uncheck
-                : [...currentValues, value];              // Check
-
-            return {
-                ...prevState,
-                [colname]: newValues,
-            };
+                ? currentValues.filter((v) => v !== value)
+                : [...currentValues, value];
+            return { ...prevState, [colname]: newValues };
         });
     };
 
-    // INPUT FILE EVENT
     const handleFileChange = (colname: string, file: File | null) => {
-        setFileState(prevState => ({
-            ...prevState,
-            [colname]: file,
-        }));
+        setFileState((prevState) => ({ ...prevState, [colname]: file }));
     };
 
     async function onSubmit(event: FormEvent<HTMLFormElement>) {
-        event.preventDefault()
-        setIsLoading(true)
+        event.preventDefault();
+        setIsLoading(true);
 
         try {
             const formData = new FormData(event.currentTarget);
-            const request: Record<string, any> = {}
-            adminFormCofig.colList.forEach(col => {
+            const request: Record<string, any> = {};
+
+            adminFormCofig.colList.forEach((col) => {
                 if (col.coltype === "checkbox") {
                     request[col.colname] = checkboxState[col.colname];
                 } else if (col.coltype === "inputfile") {
@@ -109,6 +104,7 @@ export default function AdminForm({
                     variant="underlined"
                     isDisabled
                     label="ID (không thể chỉnh sửa)"
+                    value={(rerenderData as any)?.id}
                 />
                 {adminFormCofig.colList.map((col, index) => {
                     switch (col.coltype) {
@@ -121,6 +117,7 @@ export default function AdminForm({
                                     name={col.colname}
                                     variant="underlined"
                                     label={col.colsub}
+                                    value={(rerenderData as any)?.[col.colname]}
                                 />
                             );
                         case "inputnumber":
@@ -132,6 +129,7 @@ export default function AdminForm({
                                     name={col.colname}
                                     variant="underlined"
                                     label={col.colsub}
+                                    value={(rerenderData as any)?.[col.colname]}
                                 />
                             );
                         case "inputfile":
@@ -143,10 +141,12 @@ export default function AdminForm({
                                         className="w-full pt-2"
                                         type="file"
                                         name={col.colname}
-                                        onChange={(e) => handleFileChange(col.colname, e.target.files?.[0] || null)}
+                                        onChange={(e) =>
+                                            handleFileChange(col.colname, e.target.files?.[0] || null)
+                                        }
                                     />
                                 </div>
-                            )
+                            );
                         case "radio":
                             return (
                                 <RadioGroup
@@ -155,20 +155,27 @@ export default function AdminForm({
                                     orientation="horizontal"
                                     name={col.colname}
                                     className="mt-2"
+                                    value={(rerenderData as any)?.[col.colname]}
+                                    onChange={(value) => {
+                                        (rerenderData as any)[col.colname] = value;
+                                    }}
                                 >
                                     {col.colvalues?.map((object) => (
-                                        <Radio
-                                            key={object.key}
-                                            value={object.key}
-                                        >
-                                            <span className="text-sm">
-                                                {object.value}
-                                            </span>
+                                        <Radio key={object.key} value={object.key}>
+                                            <span className="text-sm">{object.value}</span>
                                         </Radio>
                                     ))}
                                 </RadioGroup>
                             );
                         case "checkbox":
+                            let setupDefaultValue = (rerenderData)
+                                ? (typeof rerenderData?.[col.colname] == "string")
+                                    ? JSON.parse(rerenderData?.[col.colname] as any)
+                                    : rerenderData?.[col.colname] as any
+                                : []
+
+                            setupDefaultValue = convertArrayToLowercaseArray(setupDefaultValue);
+                            console.log(setupDefaultValue);
                             return (
                                 <CheckboxGroup
                                     key={index}
@@ -176,27 +183,32 @@ export default function AdminForm({
                                     orientation="horizontal"
                                     name={col.colname}
                                     className="mt-2"
+                                    defaultValue={setupDefaultValue}
                                 >
                                     {col.colvalues?.map((object) => (
                                         <Checkbox
                                             key={object.key}
                                             value={object.key}
-                                            isSelected={checkboxState[col.colname]?.includes(object.key)}
                                             onChange={() => handleCheckboxChange(col.colname, object.key)}
                                         >
-                                            <span className="text-sm">
-                                                {object.value}
-                                            </span>
+                                            <span className="text-sm">{object.value}</span>
                                         </Checkbox>
                                     ))}
                                 </CheckboxGroup>
-                            )
+                            );
                         default:
                             return null;
                     }
                 })}
-                <Button size="md" className="mt-8 w-full" type="submit" disabled={isLoading} variant="shadow" color="primary">
-                    {isLoading ? 'Loading...' : adminFormCofig.buttonText}
+                <Button
+                    size="md"
+                    className="mt-8 w-full"
+                    type="submit"
+                    disabled={isLoading}
+                    variant="shadow"
+                    color="primary"
+                >
+                    {isLoading ? "Loading..." : adminFormCofig.buttonText}
                 </Button>
             </form>
         </Card>

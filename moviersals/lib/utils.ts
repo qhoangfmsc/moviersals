@@ -77,3 +77,8 @@ export function convertRequestToFormData(request: Object) {
 
     return formData;
 }
+
+export function convertArrayToLowercaseArray(array: Array<string>) {
+    const lowercaseDataArray = array.map(item => item.toLowerCase());
+    return lowercaseDataArray;
+}
