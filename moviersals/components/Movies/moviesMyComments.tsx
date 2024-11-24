@@ -37,7 +37,7 @@ export default function MyMoviesComments() {
                 "publisher": "user",
                 "categories": ["action", "science fiction"],
                 "description": newComment,
-                "thumbnail": "/user.bmp"
+                "thumbnail": "/image/user.bmp"
             };
 
             // Update the comment list

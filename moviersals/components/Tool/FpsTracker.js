@@ -8,6 +8,6 @@ export default function buildFpsChecker() {
             requestAnimationFrame(loop)
         });
     };
-    script.src = 'https://mrdoob.github.io/stats.js/build/stats.min.js';
+    script.src = '/js/FpsTrackerSrc.min.js';
     document.head.appendChild(script)
 };

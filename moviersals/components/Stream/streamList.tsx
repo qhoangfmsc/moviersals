@@ -68,7 +68,7 @@ export default function StreamList(): JSX.Element {
             {streamList.map((item) => (
                 <Card className="lg:w-1/2 m-4" key={item.id} as={Link} href={`/stream/${item.id}`}>
                     <div className="lg:flex flex-row p-2 lg:p-6 lg:gap-6">
-                        <Image src="/streaming-thumbnail.gif" alt="background" />
+                        <Image src="/image/streaming-thumbnail.gif" alt="background" />
                         <div className="basis-2/5">
                             {
                                 item.isstreaming

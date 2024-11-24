@@ -68,7 +68,7 @@ export const Navbar = () => {
               width={40}
               height={40}
               alt="MoviersalsLogo"
-              src="/MoviersalsLogo.jpg"
+              src="/image/MoviersalsLogo.jpg"
             />
           </Link>
         </NavbarBrand>
@@ -116,7 +116,7 @@ export const Navbar = () => {
                   <User
                     name="Moviegoer"
                     avatarProps={{
-                      src: "/user.bmp",
+                      src: "/image/user.bmp",
                     }}
                   />
                   <ArrowDown />

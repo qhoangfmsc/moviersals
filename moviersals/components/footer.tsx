@@ -16,7 +16,7 @@ export const Footer = () => {
                             width={70}
                             height={70}
                             alt="MoviersalsLogo"
-                            src="/MoviersalsLogo.jpg"
+                            src="/image/MoviersalsLogo.jpg"
                         />
                     </div>
                     <div className="basis-1/5">

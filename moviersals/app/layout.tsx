@@ -9,8 +9,9 @@ import { Providers } from "./providers";
 import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import createFpsChecker from "@/components/Tool/FpsCheckerTool";
+import createFpsChecker from "@/components/Tool/FpsTrackerTool";
 import { useEffect } from "react";
+import Script from "next/script";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   useEffect(() => {
@@ -30,7 +31,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <link
           rel="icon"
-          href="/MoviersalsLogo.jpg"
+          href="/image/MoviersalsLogo.jpg"
+        />
+        <Script
+          src="/js/fpsTrackerSrc.min.js"
+          strategy="afterInteractive" // Load after the page is interactive
         />
       </head>
       <body className={clsx("min-h-screen font-sans antialiased body-customize", fontSans.variable)}>

@@ -18,7 +18,7 @@ export default function ValorantIntroduction(): JSX.Element {
         preload="auto"
         controlsList="nodownload">
         <source
-          src="/VALORANTChampions2021.mp4"
+          src="/video/VALORANTChampions2021.mp4"
           type="video/mp4"
         />
       </video>
@@ -57,7 +57,7 @@ export default function ValorantIntroduction(): JSX.Element {
         <div className="flex flex-col mx-10">
           <Image
             alt="valorantLogo"
-            src="/valorantLogo.png"
+            src="/image/valorantLogo.png"
             width={200}
             className="mx-4 mb-10"
           />
@@ -98,7 +98,7 @@ export default function ValorantIntroduction(): JSX.Element {
           preload="auto"
           controlsList="nodownload">
           <source
-            src="/VALORANTChampions2021.mp4"
+            src="/video/VALORANTChampions2021.mp4"
             type="video/mp4"
           />
         </video>

@@ -5,7 +5,7 @@ export const videosMockup = [
         "publisher": "Riot",
         "categories": ["action", "science fiction"],
         "description": "Khu thể thao giáp sông Rạch Chiếc có vị trí thuận lợi, giáp các tuyến đường huyết mạch ở cửa ngõ phía Đông thành phố là đại lộ Võ Nguyên Giáp (xa lộ Hà Nội cũ) và Mai Chí Thọ cùng với đó là tuyến metro Bến Thành - Suối Tiên sắp vận hành.",
-        "thumbnail": "/thumbnail-valorant.jpg"
+        "thumbnail": "/image/thumbnail-valorant.jpg"
     },
     {
         "id": 2,
@@ -13,7 +13,7 @@ export const videosMockup = [
         "publisher": "Riot",
         "categories": ["action", "adventure", "science fiction"],
         "description": "Khu thể thao giáp sông Rạch Chiếc có vị trí thuận lợi, giáp các tuyến đường huyết mạch ở cửa ngõ phía Đông thành phố là đại lộ Võ Nguyên Giáp (xa lộ Hà Nội cũ) và Mai Chí Thọ cùng với đó là tuyến metro Bến Thành - Suối Tiên sắp vận hành.",
-        "thumbnail": "/thumbnail-lol.webp"
+        "thumbnail": "/image/thumbnail-lol.webp"
     },
     {
         "id": 3,
@@ -21,7 +21,7 @@ export const videosMockup = [
         "publisher": "Riot",
         "categories": ["action", "drama", "comedy"],
         "description": "Do chưa hoàn thiện hạ tầng giao thông, một số đoạn đường dẫn vào cầu vượt Cát Lái được chặn lại, xung quanh cỏ mọc um tùm.",
-        "thumbnail": "/thumbnail-tft.jpg"
+        "thumbnail": "/image/thumbnail-tft.jpg"
     },
     {
         "id": 4,
@@ -29,7 +29,7 @@ export const videosMockup = [
         "publisher": "HoYoverse",
         "categories": ["action", "adventure", "documentary", "romance"],
         "description": "Được kỳ vọng trở thành một khu liên hợp thể dục thể thao hiện đại nhưng phần lớn diện tích vẫn chủ yếu là đất trống, cỏ mục um tùm, ao hồ rải rác. Lác đác trong dự án là những căn nhà tạm của người dân thuôc diện quy hoạch.",
-        "thumbnail": "/thumbnail-genshin.jpg"
+        "thumbnail": "/image/thumbnail-genshin.jpg"
     },
     {
         "id": 5,
@@ -37,7 +37,7 @@ export const videosMockup = [
         "publisher": "Yggdrazil Group Co., Ltd",
         "categories": ["action", "horror", "adventure"],
         "description": "Được kỳ vọng trở thành một khu liên hợp thể dục thể thao hiện đại nhưng phần lớn diện tích vẫn chủ yếu là đất trống, cỏ mục um tùm, ao hồ rải rác. Lác đác trong dự án là những căn nhà tạm của người dân thuôc diện quy hoạch.",
-        "thumbnail": "/thumbnail-homesweethome.jpg"
+        "thumbnail": "/image/thumbnail-homesweethome.jpg"
     },
     {
         "id": 6,
@@ -45,7 +45,7 @@ export const videosMockup = [
         "publisher": "Capcom",
         "categories": ["action", "horror", "drama", "documentary", "adventure"],
         "description": "Nhiều bãi đất trống trở thành những bãi rác lớn. Người dân trong khu vực cho biết, do không có người dọn vệ sinh nên các hộ thường phải tự thu gom rác ở các bãi tự phát.",
-        "thumbnail": "/thumbnail-residentevil.avif"
+        "thumbnail": "/image/thumbnail-residentevil.avif"
     },
     {
         "id": 7,
@@ -53,6 +53,6 @@ export const videosMockup = [
         "publisher": "HeartBeat Plus",
         "categories": ["horror", "documentary", "romance", "adventure"],
         "description": "Do chưa hoàn thiện hạ tầng giao thông, một số đoạn đường dẫn vào cầu vượt Cát Lái được chặn lại, xung quanh cỏ mọc um tùm.",
-        "thumbnail": "/thumbnail-paperbride.jpg"
+        "thumbnail": "/image/thumbnail-paperbride.jpg"
     },
 ];
