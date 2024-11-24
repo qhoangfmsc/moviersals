@@ -1,7 +1,6 @@
 "use client";
 
 import { CldUploadWidget } from "next-cloudinary";
-import { useState } from "react";
 
 interface VideoUploaderProps {
   folderName: string;
@@ -19,6 +18,8 @@ export default function VideoUploader({ videoName, folderName, onVideoUpload }: 
     }
   };
 
+  console.log("Here: ", videoName, folderName);
+
   return (
     <div style={{ textAlign: "center", padding: "20px" }}>
       <CldUploadWidget
@@ -27,7 +28,7 @@ export default function VideoUploader({ videoName, folderName, onVideoUpload }: 
           cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
           publicId: videoName,
           folder: folderName,
-          uploadPreset: "default-preset",
+          uploadPreset: "ml_default",
         }}
         onSuccess={handleUploadResult}>
         {({ open }) => (
