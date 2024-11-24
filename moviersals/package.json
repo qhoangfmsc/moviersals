@@ -9,9 +9,6 @@
     "lint": "eslint . --ext .ts,.tsx -c .eslintrc.json --fix"
   },
   "dependencies": {
-    "@limeplay/core": "^1.1.1",
-    "@mux/mux-player": "^3.1.0",
-    "@mux/mux-player-react": "^3.1.0",
     "@nextui-org/button": "^2.0.38",
     "@nextui-org/code": "2.0.33",
     "@nextui-org/input": "2.2.5",

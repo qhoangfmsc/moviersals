@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import getAllMovie from "@/api/movies/getAllMovie";
 import uploadMovie from "@/api/movies/uploadMovie";
@@ -11,8 +11,8 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function MovieAdminPage() {
-  const router = useRouter()
-  const [data, setData] = useState([])
+  const router = useRouter();
+  const [data, setData] = useState([]);
   const pathname = usePathname();
   useEffect(() => {
     fetchData();
@@ -33,12 +33,16 @@ export default function MovieAdminPage() {
       { colname: "ispremium", colsub: "Hạng vé VIP" },
     ],
     bodyData: data,
-    optionsButtonContent: <div className="flex place-items-center">Xem chi tiết &nbsp; <LetsIconsExpandRight /></div>,
+    optionsButtonContent: (
+      <div className="flex place-items-center">
+        Xem chi tiết &nbsp; <LetsIconsExpandRight />
+      </div>
+    ),
     optionsHandler: function (id) {
       const href = `/admin/movie/${id}`;
-      router.push(href)
-    }
-  }
+      router.push(href);
+    },
+  };
 
   const adminFormCofig: AdminFormCofig = {
     label: "Tạo mới",
@@ -49,28 +53,37 @@ export default function MovieAdminPage() {
       { colname: "publishyear", colsub: "Năm sản xuất", coltype: "inputnumber", colvalues: null },
       { colname: "thumbnail", colsub: "Ảnh bìa (đường dẫn)", coltype: "inputfile", colvalues: null },
       {
-        colname: "categories", colsub: "Thể loại", coltype: "checkbox", colvalues: [
-          { key: "action", value: "Hành động", },
-          { key: "science fiction", value: "Khoa học viễn tưởng", },
-          { key: "adventure", value: "Phiêu lưu", },
-          { key: "comedy", value: "Hài hước", },
-          { key: "documentary", value: "Tài liệu", },
-          { key: "drama", value: "Kịch tính", },
-          { key: "romance", value: "Lãng mạn", },
-          { key: "horror", value: "Kinh dị", },
-        ]
+        colname: "categories",
+        colsub: "Thể loại",
+        coltype: "checkbox",
+        colvalues: [
+          { key: "action", value: "Hành động" },
+          { key: "science fiction", value: "Khoa học viễn tưởng" },
+          { key: "adventure", value: "Phiêu lưu" },
+          { key: "comedy", value: "Hài hước" },
+          { key: "documentary", value: "Tài liệu" },
+          { key: "drama", value: "Kịch tính" },
+          { key: "romance", value: "Lãng mạn" },
+          { key: "horror", value: "Kinh dị" },
+        ],
       },
       {
-        colname: "type", colsub: "Loại phim", coltype: "radio", colvalues: [
-          { key: "movie", value: "Phim lẻ", },
-          { key: "tseries", value: "Phim bộ", },
-        ]
+        colname: "type",
+        colsub: "Loại phim",
+        coltype: "radio",
+        colvalues: [
+          { key: "movie", value: "Phim lẻ" },
+          { key: "tseries", value: "Phim bộ" },
+        ],
       },
       {
-        colname: "ispremium", colsub: "Hạng vé", coltype: "radio", colvalues: [
-          { key: true, value: "VIP", },
-          { key: false, value: "Phổ thông", },
-        ]
+        colname: "ispremium",
+        colsub: "Hạng vé",
+        coltype: "radio",
+        colvalues: [
+          { key: true, value: "VIP" },
+          { key: false, value: "Phổ thông" },
+        ],
       },
     ],
     buttonText: "Tạo mới",
@@ -78,7 +91,7 @@ export default function MovieAdminPage() {
       console.log(request);
       const response = await uploadMovie(request);
     },
-  }
+  };
 
   return (
     <div>
@@ -88,8 +101,7 @@ export default function MovieAdminPage() {
         itemClasses={{
           item: "px-2",
           separator: "px-0",
-        }}
-      >
+        }}>
         <BreadcrumbItem href="/admin">Moviersals</BreadcrumbItem>
         <BreadcrumbItem href="/admin/movie">Phim ảnh</BreadcrumbItem>
       </Breadcrumbs>

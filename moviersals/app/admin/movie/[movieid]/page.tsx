@@ -1,94 +1,123 @@
-"use client"
+"use client";
 
-import getMovieById from "@/api/movies/getMovieById";
-import AddNewEpisodeAdminForm from "@/components/Episode/episodeAdminForm";
-import AdminForm, { AdminFormCofig } from "@/components/Form/adminForm";
+import { Button } from "@nextui-org/button";
+import { Input } from "@nextui-org/input";
+import { Link } from "@nextui-org/link";
+import { FormEvent, useEffect, useState } from "react";
+import uploadEpisode from "@/api/episode/uploadEpisode";
+import getMovieDetailById from "@/api/movies/getMovieById";
+import { BreadcrumbItem, Breadcrumbs } from "@nextui-org/react";
 import { title } from "@/components/primitives";
-import { BreadcrumbItem, Breadcrumbs, Button } from "@nextui-org/react";
-import { useEffect, useState } from "react";
+import EpisodeCard from "@/components/Card/episodeCard";
 
-export default function MovieDetailAdminPage({
-  params
-}: {
-  params: {
-    movieid: string,
-  }
-}) {
-  const [detailData, setData] = useState(null)
+export default function episodeEpisodesListForm({ params }) {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [data, setData] = useState<any>({});
+
+  const fetchData = async () => {
+    const response = await getMovieDetailById(params.movieid);
+    const content = await response.content;
+    console.log(content);
+    setData(content);
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await getMovieById(params.movieid);
-      const content = response.content;
-      console.log(content);
-      setData(content);
-    };
-
     fetchData();
   }, []);
 
-  const adminFormCofig: AdminFormCofig = {
-    label: "Chỉnh sửa",
-    colList: [
-      { colname: "name", colsub: "Tên phim", coltype: "inputtext", colvalues: null },
-      { colname: "description", colsub: "Mô tả", coltype: "inputtext", colvalues: null },
-      { colname: "publisher", colsub: "Nhà sản xuất", coltype: "inputtext", colvalues: null },
-      { colname: "publishyear", colsub: "Năm sản xuất", coltype: "inputnumber", colvalues: null },
-      { colname: "thumbnail", colsub: "Ảnh bìa (đường dẫn)", coltype: "inputfile", colvalues: null },
-      {
-        colname: "categories", colsub: "Thể loại", coltype: "checkbox", colvalues: [
-          { key: "action", value: "Hành động", },
-          { key: "science fiction", value: "Khoa học viễn tưởng", },
-          { key: "adventure", value: "Phiêu lưu", },
-          { key: "comedy", value: "Hài hước", },
-          { key: "documentary", value: "Tài liệu", },
-          { key: "drama", value: "Kịch tính", },
-          { key: "romance", value: "Lãng mạn", },
-          { key: "horror", value: "Kinh dị", },
-        ]
-      },
-      {
-        colname: "type", colsub: "Loại phim", coltype: "radio", colvalues: [
-          { key: "movie", value: "Phim lẻ", },
-          { key: "tseries", value: "Phim bộ", },
-        ]
-      },
-      {
-        colname: "ispremium", colsub: "Hạng vé", coltype: "radio", colvalues: [
-          { key: true, value: "VIP", },
-          { key: false, value: "Phổ thông", },
-        ]
-      },
-    ],
-    buttonText: "Xác nhận",
-    handler: async (request: { [key: string]: any }) => {
-      console.log(request);
-    },
+  const handleWheel = (e: React.WheelEvent<HTMLInputElement>) => {
+    (e.target as HTMLInputElement).blur();
+  };
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setError(null);
+
+    try {
+      const formData = new FormData(event.currentTarget);
+      const episodename = formData.get("name")?.toString();
+      const episodepath = formData.get("episodepath")?.toString();
+      const episodenumber = formData.get("episodenumber")?.toString();
+      const movieid = params?.movieid as string;
+
+      console.log(episodename, episodepath, episodenumber, movieid);
+
+      if (episodename && episodepath && episodenumber && movieid) {
+        const response = await uploadEpisode(movieid, episodename, episodepath, episodenumber);
+        setIsLoading(false);
+        if (response.result == "success") {
+        } else {
+          setError(response.content);
+        }
+      } else {
+        setError("Vui lòng nhập đầy đủ thông tin!");
+      }
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError(error.message);
+      }
+    }
   }
 
   return (
     <div>
-      <h1 className={title()}>Quản lý phim {detailData?.name} (#{detailData?.movieid})</h1>
+      <h1 className={title()}>
+        Quản lý phim {data?.movieDetail?.name}
+        <span className={"text-4xl ml-4 text-gray-400"}>(#{data?.movieDetail?.movieid})</span>
+      </h1>
       <Breadcrumbs
         className="my-4"
         itemClasses={{
           item: "px-2",
           separator: "px-0",
-        }}
-      >
+        }}>
         <BreadcrumbItem href="/admin">Moviersals</BreadcrumbItem>
         <BreadcrumbItem href="/admin/movie">Phim ảnh</BreadcrumbItem>
-        <BreadcrumbItem href={`/admin/movie/${detailData?.movieid}`}>{detailData?.name}</BreadcrumbItem>
+        <BreadcrumbItem href={`/admin/movie/${data?.movieDetail?.movieid}`}>{data?.movieDetail?.name}</BreadcrumbItem>
       </Breadcrumbs>
-      <div className="flex lg:flex-row flex-col-reverse">
-        <div className="lg:w-4/5 lg:mr-8">
-          <div className="flex flexrow">
-            <AddNewEpisodeAdminForm />
-          </div>
-        </div>
-        <div className="lg:w-1/5 mb-4">
-          <AdminForm adminFormCofig={adminFormCofig} />
-        </div>
-      </div>
-    </div >
+
+      <form
+        className="flex flex-col my-8 items-left border border-gray-300 p-8 rounded-lg w-fit"
+        onSubmit={onSubmit}>
+        {error && <div style={{ color: "red" }}>{error}</div>}
+        <Input
+          size="lg"
+          className="max-w-[200px]"
+          type="text"
+          name="name"
+          variant="underlined"
+          label="Tên tập phim"
+        />
+        <Input
+          size="lg"
+          className="max-w-[200px]"
+          type="text"
+          name="episodepath"
+          variant="underlined"
+          label="Đường dẫn tập phim"
+        />
+        <Input
+          size="lg"
+          className="max-w-[200px]"
+          type="number"
+          onWheel={(e) => handleWheel(e)}
+          name="episodenumber"
+          variant="underlined"
+          label="Tập phim thứ"
+        />
+        <Button
+          size="lg"
+          className="mt-8 mb-4 w-[200px]"
+          type="submit"
+          disabled={isLoading}
+          variant="shadow"
+          color="success">
+          {isLoading ? "Loading..." : "Thêm tập phim"}
+        </Button>
+      </form>
+
+      {data?.list?.length > 0 && <EpisodeCard cardData={data?.list?.[0]} />}
+    </div>
   );
 }

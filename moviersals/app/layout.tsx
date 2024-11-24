@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import "@/styles/custom.css";
 import "@/styles/globals.css";
@@ -10,31 +10,28 @@ import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html suppressHydrationWarning lang="en">
+    <html
+      suppressHydrationWarning
+      lang="en">
       <head>
         <title>Moviersals | Vũ trụ điện ảnh</title>
-        <meta name="description" content="Vũ trụ điện ảnh" />
-        <link rel="icon" href="/MoviersalsLogo.jpg" />
+        <meta
+          name="description"
+          content="Vũ trụ điện ảnh"
+        />
+        <link
+          rel="icon"
+          href="/MoviersalsLogo.jpg"
+        />
       </head>
-      <body
-        className={clsx(
-          "min-h-screen font-sans antialiased body-customize",
-          fontSans.variable,
-        )}
-      >
+      <body className={clsx("min-h-screen font-sans antialiased body-customize", fontSans.variable)}>
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div className="relative flex flex-col h-screen">
             <Navbar />
             {/* MAIN PAGE */}
-            <main className="flex-grow">
-              {children}
-            </main>
+            <main className="flex-grow">{children}</main>
             {/*  */}
             <Footer />
           </div>
