@@ -9,8 +9,15 @@ import { Providers } from "./providers";
 import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import createFpsChecker from "@/components/Tool/FpsCheckerTool";
+import { useEffect } from "react";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  useEffect(() => {
+    // FPS Checker
+    createFpsChecker();
+  }, []);
+
   return (
     <html
       suppressHydrationWarning

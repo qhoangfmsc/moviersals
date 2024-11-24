@@ -82,3 +82,10 @@ export function convertArrayToLowercaseArray(array: Array<string>) {
     const lowercaseDataArray = array.map(item => item.toLowerCase());
     return lowercaseDataArray;
 }
+
+export function isHostnameLocal() {
+    const hostname = window.location.hostname;
+    return (hostname === 'localhost')
+        ? true
+        : false
+}
