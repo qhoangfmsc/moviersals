@@ -89,7 +89,7 @@ export default function RegisterFlipCard() {
                         <Image
                             alt="cardBackground"
                             className="object-cover z-0"
-                            src="/cardBackground.png"
+                            src="/image/cardBackground.png"
                             height="670"
                             width="500"
                         />

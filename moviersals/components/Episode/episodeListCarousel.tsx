@@ -39,7 +39,7 @@ export default function EpisodeListCarousel({
                                 <Image
                                     alt="Episode"
                                     className="object-cover"
-                                    src="/thumbnail-residentevil.avif"
+                                    src="/image/thumbnail-residentevil.avif"
                                     height={200}
                                     width={2000}
                                 />

@@ -29,7 +29,7 @@ export const Footer = () => {
                                             width={200}
                                             height={70}
                                             alt="QRCode"
-                                            src="/sacombankPay.jpg"
+                                            src="/image/sacombankPay.jpg"
                                         />
                                     </div>
                                     <p>Cảm ơn vì trải nghiệm của bạn. Ủng hộ chúng tôi thông qua Sacombank Pay.</p>
@@ -56,7 +56,7 @@ export const Footer = () => {
                                 width={150}
                                 height={1}
                                 alt="chplay"
-                                src="/downloadChplay.png"
+                                src="/image/downloadChplay.png"
                             />
                         </div>
                         <div className="cursor-pointer">
@@ -64,7 +64,7 @@ export const Footer = () => {
                                 width={135}
                                 height={1}
                                 alt="ios"
-                                src="/downloadIos.png"
+                                src="/image/downloadIos.png"
                             />
                         </div>
                     </div>

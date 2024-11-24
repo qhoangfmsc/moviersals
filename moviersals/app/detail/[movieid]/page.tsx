@@ -29,7 +29,7 @@ export default function DetailPage({
                     height={1000}
                     className="object-cover z-0"
                     alt="Thumbnail"
-                    src="/thumbnail-residentevil.avif"
+                    src="/image/thumbnail-residentevil.avif"
                 />
             </div>
             <div className="absolute left-0 top-0 flex flex-row w-full h-[1000px]">

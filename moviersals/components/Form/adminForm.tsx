@@ -175,7 +175,6 @@ export default function AdminForm({
                                 : []
 
                             setupDefaultValue = convertArrayToLowercaseArray(setupDefaultValue);
-                            console.log(setupDefaultValue);
                             return (
                                 <CheckboxGroup
                                     key={index}
