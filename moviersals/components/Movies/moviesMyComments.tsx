@@ -9,6 +9,7 @@ const trendingVideos = videosMockup;
 
 interface Comment {
     id: number;
+    movieid: string;
     name: string;
     publisher: string;
     categories: string[];
@@ -33,6 +34,7 @@ export default function MyMoviesComments() {
         if (newComment) {
             const newCommentObj = {
                 "id": trendingVideos.length + comments.length,
+                "movieid": "movieid",
                 "name": "User",
                 "publisher": "user",
                 "categories": ["action", "science fiction"],

@@ -5,6 +5,7 @@ import React, { Key } from "react";
 // Video interface with dynamic keys
 interface Video {
     id: number;
+    movieid: string;
     name: string;
     publisher: string;
     categories: string;

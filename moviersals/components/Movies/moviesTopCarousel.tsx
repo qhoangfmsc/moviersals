@@ -10,6 +10,7 @@ import { Button, Card, CardFooter, Image, Link } from "@nextui-org/react";
 
 interface Video {
     id: number;
+    movieid: string;
     name: string;
     publisher: string;
     categories: string[];
