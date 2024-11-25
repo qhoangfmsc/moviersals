@@ -1,6 +1,6 @@
 "use client";
 
-import RequestPasswordRecovery from "@/api/account/requestpasswordrecovery";
+import RequestPasswordRecovery from "@/app/api/account/requestpasswordrecovery";
 import {
   Button,
   Card,

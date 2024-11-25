@@ -1,5 +1,4 @@
 "use client";
-
 import { CldUploadWidget } from "next-cloudinary";
 
 interface VideoUploaderProps {
@@ -9,32 +8,34 @@ interface VideoUploaderProps {
 }
 
 export default function VideoUploader({ videoName, folderName, onVideoUpload }: VideoUploaderProps) {
-  const handleUploadResult = (error, result) => {
-    if (result?.event === "success") {
+  const handleUploadResult = (result) => {
+    console.log("result is: ", result);
+    if (result.event == "success") {
       onVideoUpload(result.info.secure_url);
-    } else if (error) {
-      onVideoUpload("error");
-      console.error("Upload failed:", error);
+    } else {
+      console.error("Upload failed");
     }
   };
 
-  console.log("Here: ", videoName, folderName);
-
   return (
-    <div style={{ textAlign: "center", padding: "20px" }}>
+    <div className="text-center mt-4 mb-4">
       <CldUploadWidget
-        // uploadPreset="your_upload_preset"
+        signatureEndpoint={"/api/cloudinary"}
         options={{
           cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
           publicId: videoName,
           folder: folderName,
           uploadPreset: "ml_default",
+          apiKey: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY,
+          uploadSignatureTimestamp: Math.floor(Date.now() / 1000),
         }}
         onSuccess={handleUploadResult}>
         {({ open }) => (
           <button
             type="button"
-            onClick={() => open()}
+            onClick={() => {
+              open();
+            }}
             style={{
               backgroundColor: "#4CAF50",
               color: "white",
@@ -43,7 +44,7 @@ export default function VideoUploader({ videoName, folderName, onVideoUpload }: 
               borderRadius: "5px",
               cursor: "pointer",
             }}>
-            Upload video
+            Upload
           </button>
         )}
       </CldUploadWidget>

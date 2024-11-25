@@ -15,9 +15,9 @@ import { siteConfig } from "@/config/site";
 import { ArrowDown, SearchIcon } from "@/components/icons";
 import Image from "next/image";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, User } from "@nextui-org/react";
-import checkAuthen from "@/api/account/checkAuthen";
+import checkAuthen from "@/app/api/account/checkAuthen";
 import { useEffect, useState } from "react";
-import logout from "@/api/account/logout";
+import logout from "@/app/api/account/logout";
 import { usePathname } from "next/navigation";
 
 export const Navbar = () => {

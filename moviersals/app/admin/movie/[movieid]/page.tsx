@@ -1,13 +1,13 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import uploadEpisode from "@/api/episode/uploadEpisode";
-import getMovieDetailById from "@/api/movies/getMovieById";
+import uploadEpisode from "@/app/api/episode/uploadEpisode";
+import getMovieDetailById from "@/app/api/movies/getMovieById";
 import { BreadcrumbItem, Breadcrumbs, Button, Input } from "@nextui-org/react";
 import { title } from "@/components/primitives";
 import EpisodeCard from "@/components/Card/episodeCard";
 import VideoUploader from "@/components/Cloudinary/uploadvideo";
-import editMovie from "@/api/movies/editMovie";
+import editMovie from "@/app/api/movies/editMovie";
 import AddNewEpisodeAdminForm from "@/components/Episode/episodeAdminForm";
 import AdminForm, { AdminFormCofig } from "@/components/Form/adminForm";
 

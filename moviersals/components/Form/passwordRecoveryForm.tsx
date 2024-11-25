@@ -1,7 +1,7 @@
 "use client";
 
-import CheckPasswordRecovery from "@/api/account/checkpasswordrecovery";
-import ConfirmPasswordRecovery from "@/api/account/confirmpasswordrecovery";
+import CheckPasswordRecovery from "@/app/api/account/checkpasswordrecovery";
+import ConfirmPasswordRecovery from "@/app/api/account/confirmpasswordrecovery";
 import {
   Button,
   Card,

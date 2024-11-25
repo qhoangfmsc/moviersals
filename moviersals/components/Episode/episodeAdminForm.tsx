@@ -4,10 +4,10 @@ import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import { FormEvent, useState } from "react";
 import { useParams } from "next/navigation";
-import uploadEpisode from "@/api/episode/uploadEpisode";
+import uploadEpisode from "@/app/api/episode/uploadEpisode";
 import VideoUploader from "../Cloudinary/uploadvideo";
 
-export default function AddNewEpisodeAdminForm(movieid: any) {
+export default function AddNewEpisodeAdminForm({ movieid }: { movieid: string }) {
   const params = useParams();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -102,6 +102,7 @@ export default function AddNewEpisodeAdminForm(movieid: any) {
         type="text"
         name="episodepath"
         variant="underlined"
+        value={uploadedVideoUrl}
         label="Đường dẫn tập phim"
       />
 
