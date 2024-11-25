@@ -1,15 +1,15 @@
 "use client"
 
+import getAllMovie from "@/app/api/movies/getAllMovie";
 import { NextButton, PrevButton, usePrevNextButtons } from "@/components/EmblaCarousel/controls/EmblaCarouselArrowButtons";
 import { DotButton, useDotButton } from "@/components/EmblaCarousel/controls/EmblaCarouselDotButtons";
 import { categoriesSubtitles } from "@/config/categoriesSubtitles";
-import { videosMockup } from "@/config/videosMockup";
 import { Button, Card, CardFooter, Image, Link } from "@nextui-org/react";
 import useEmblaCarousel from "embla-carousel-react";
-
-const trendingVideos = videosMockup;
+import { useEffect, useState } from "react";
 
 export default function MovieSuggestion() {
+    const [dataVideos, setDataVideos] = useState([]);
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, dragFree: true })
     const { selectedIndex, scrollSnaps, onDotButtonClick } =
         useDotButton(emblaApi)
@@ -21,12 +21,23 @@ export default function MovieSuggestion() {
         onNextButtonClick
     } = usePrevNextButtons(emblaApi)
 
+
+    useEffect(() => {
+        getAllMovieData();
+    }, []);
+
+    async function getAllMovieData() {
+        const response = await getAllMovie();
+        const content = response.content;
+        setDataVideos(content);
+    };
+
     return (
 
         <section className="embla">
             <div className="embla__viewport" ref={emblaRef}>
                 <div className="embla__container">
-                    {trendingVideos.map((item) => (
+                    {dataVideos.map((item) => (
                         <div className="embla__slide" key={item.id}>
                             <Card
                                 isFooterBlurred

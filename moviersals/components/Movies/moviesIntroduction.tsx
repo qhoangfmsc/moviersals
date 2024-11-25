@@ -19,7 +19,6 @@ export default function MoviesIntroduction() {
         const response = await getAllMovie();
         const content = response.content;
         setDataVideos(content);
-        console.log("test", content);
     };
 
     return (

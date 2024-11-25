@@ -11,6 +11,7 @@ import React from "react";
 interface Video {
     id: number;
     name: string;
+    movieid: string;
     publisher: string;
     categories: string[];
     description: string;
