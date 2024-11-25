@@ -3,7 +3,18 @@
 import { FormEvent, useEffect, useState } from "react";
 import uploadEpisode from "@/app/api/episode/uploadEpisode";
 import getMovieDetailById from "@/app/api/movies/getMovieById";
-import { BreadcrumbItem, Breadcrumbs, Button, Input } from "@nextui-org/react";
+import {
+  BreadcrumbItem,
+  Breadcrumbs,
+  Button,
+  Input,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  useDisclosure,
+} from "@nextui-org/react";
 import { title } from "@/components/primitives";
 import EpisodeCard from "@/components/Card/episodeCard";
 import VideoUploader from "@/components/Cloudinary/uploadvideo";
@@ -12,9 +23,7 @@ import AddNewEpisodeAdminForm from "@/components/Episode/episodeAdminForm";
 import AdminForm, { AdminFormCofig } from "@/components/Form/adminForm";
 
 export default function episodeEpisodesListForm({ params }: { params: { movieid: string } }) {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [data, setData] = useState<any>({});
 
   useEffect(() => {
@@ -27,6 +36,10 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
 
     fetchData();
   }, []);
+
+  const handleCreateClick = () => {
+    onOpen();
+  };
 
   const adminFormCofig: AdminFormCofig = {
     label: "Chỉnh sửa",
@@ -91,10 +104,28 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
       </Breadcrumbs>
 
       <div className="flex lg:flex-row flex-col-reverse">
-        <div className="lg:w-4/5 lg:mr-8">
+        {/* <div className="lg:w-4/5 lg:mr-8">
           <div className="flex flex-row">
-            <AddNewEpisodeAdminForm movieid={params.movieid} />
+          
           </div>
+        </div> */}
+        <div className="flex flex-row flex-wrap gap-6">
+          {data?.list?.length > 0 ? (
+            data?.list?.map((item: any) => (
+              <EpisodeCard
+                key={item.episodeid}
+                cardData={item}
+                onCardClick={null}
+              />
+            ))
+          ) : (
+            <></>
+          )}
+          <EpisodeCard
+            key={"null"}
+            cardData={null}
+            onCardClick={handleCreateClick}
+          />
         </div>
         <div className="lg:w-1/5 mb-4">
           <AdminForm
@@ -103,19 +134,28 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
           />
         </div>
       </div>
-
-      <div className="flex flex-row flex-wrap gap-6">
-        {data?.list?.length > 0 ? (
-          data?.list?.map((item: any) => (
-            <EpisodeCard
-              key={item.episodeid}
-              cardData={item}
-            />
-          ))
-        ) : (
-          <></>
-        )}
-      </div>
+      <Modal
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">{"Thêm tập phim"}</ModalHeader>
+              <ModalBody>
+                <AddNewEpisodeAdminForm movieid={params.movieid} />
+              </ModalBody>
+              <ModalFooter>
+                <Button
+                  color="danger"
+                  variant="light"
+                  onPress={onClose}>
+                  Hủy
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
     </div>
   );
 }
