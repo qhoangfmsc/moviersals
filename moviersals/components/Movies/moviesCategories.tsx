@@ -1,15 +1,27 @@
-"use client"
-
 import { categoriesSubtitles } from "@/config/categoriesSubtitles";
-import { videosMockup } from "@/config/videosMockup";
 import { Button, Card, CardFooter, Image, Link, Tab, Tabs } from "@nextui-org/react";
 import React, { Key } from "react";
 
-const trendingVideos = videosMockup;
+// Video interface with dynamic keys
+interface Video {
+    id: number;
+    name: string;
+    publisher: string;
+    categories: string;
+    description: string;
+    thumbnail: string;
+    [key: string]: any; // Allows any additional dynamic properties
+}
 
-export default function MoviesCategories() {
+// Define the type for the props that the component will receive
+interface MoviesCategoriesProps {
+    dataVideos: Video[]; // An array of Video objects
+}
+
+export default function MoviesCategories({ dataVideos }: MoviesCategoriesProps) {
     // CATEGORIES TABS
     const [selected, setSelected] = React.useState("action");
+
     const handleSelectionChange = (key: Key) => {
         setSelected(String(key));
     };
@@ -39,44 +51,60 @@ export default function MoviesCategories() {
                                 </>
                             } className="flex justify-center flex-wrap p-2">
                                 {
-                                    trendingVideos.filter((video) =>
+                                    dataVideos?.filter((video) =>
                                         video.categories.includes(category.name)
-                                    ).map(function (item) {
-                                        return (
-                                            <div key={item.id}
-                                                className="w-fit">
-                                                <Card
-                                                    isFooterBlurred
-                                                    radius="lg"
-                                                    className="border-none m-1 lg:m-8"
-                                                >
-                                                    <Image
-                                                        alt={item.name}
-                                                        className="object-cover"
-                                                        height={150}
-                                                        src={item.thumbnail}
-                                                        width={400}
-                                                    />
-                                                    <CardFooter className="justify-between">
-                                                        <div className="text-white/80">
-                                                            <div className="font-black">{item.name}</div>
-                                                            <div className="text-tiny">
-                                                                {item.categories.map((cat, index) => (
-                                                                    <span key={index}>
-                                                                        {categoriesSubtitles[cat as keyof typeof categoriesSubtitles].vietsub}
-                                                                        {index !== item.categories.length - 1 && ', '}
-                                                                    </span>
-                                                                ))}
+                                    ).length > 0 ?
+                                        dataVideos?.filter((video) =>
+                                            video.categories.includes(category.name)
+                                        )?.map(function (item) {
+                                            return (
+                                                <div key={item.id} className="w-fit">
+                                                    <Card
+                                                        isFooterBlurred
+                                                        radius="lg"
+                                                        className="border-none m-1 lg:m-8"
+                                                    >
+                                                        <Image
+                                                            alt={item.name}
+                                                            className="object-cover"
+                                                            height={150}
+                                                            src={item.thumbnail}
+                                                            width={400}
+                                                        />
+                                                        <CardFooter className="justify-between">
+                                                            <div className="text-white/80">
+                                                                <div className="font-black">{item.name}</div>
+                                                                <div className="text-tiny">
+                                                                    {Array.isArray(item.categories) ? (
+                                                                        item.categories.map((cat, index) => (
+                                                                            <span key={index}>
+                                                                                {categoriesSubtitles[cat as keyof typeof categoriesSubtitles]?.vietsub}
+                                                                                {index !== item.categories.length - 1 && ', '}
+                                                                            </span>
+                                                                        ))
+                                                                    ) : (
+                                                                        JSON.parse(item.categories || "[]").length > 0 ? (
+                                                                            JSON.parse(item.categories || "[]").map((cat: string, index: number) => (
+                                                                                <span key={index}>
+                                                                                    {categoriesSubtitles[cat as keyof typeof categoriesSubtitles]?.vietsub}
+                                                                                    {index !== JSON.parse(item.categories || "[]").length - 1 && ', '}
+                                                                                </span>
+                                                                            ))
+                                                                        ) : (
+                                                                            <h1>Chưa có bộ phim nào!</h1>
+                                                                        )
+                                                                    )}
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <Button className="text-tiny text-white bg-black/50" variant="flat" color="default" radius="lg" size="sm" as={Link} href={`/detail/${item.id}`}>
-                                                            Xem ngay
-                                                        </Button>
-                                                    </CardFooter>
-                                                </Card>
-                                            </div>
-                                        )
-                                    })
+                                                            <Button className="text-tiny text-white bg-black/50" variant="flat" color="default" radius="lg" size="sm" as={Link} href={`/detail/${item.movieid}`}>
+                                                                Xem ngay
+                                                            </Button>
+                                                        </CardFooter>
+                                                    </Card>
+                                                </div>
+                                            )
+                                        })
+                                        : <h1 className="my-10 text-xl">Chưa có bộ phim nào!</h1>
                                 }
                             </Tab>
                         )

@@ -48,7 +48,7 @@ export default function EpisodeListCarousel({
                                         <div>Detail movie: Tập {item.id}</div>
                                     </div>
                                     <Button className="text-tiny text-white bg-black/50" variant="flat" color="default" radius="lg" size="sm"
-                                        as={Link} href={`/detail/${item.id}`}>
+                                        as={Link} href={`/detail/${movieid}/${item.id}`}>
                                         Xem ngay
                                     </Button>
                                 </CardFooter>

@@ -1,7 +1,6 @@
 "use client"
 
 import { categoriesSubtitles } from "@/config/categoriesSubtitles";
-import { videosMockup } from "@/config/videosMockup";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from 'embla-carousel-autoplay';
 import React from "react";
@@ -9,13 +8,22 @@ import { DotButton, useDotButton } from "../EmblaCarousel/controls/EmblaCarousel
 import { NextButton, PrevButton, usePrevNextButtons } from "../EmblaCarousel/controls/EmblaCarouselArrowButtons";
 import { Button, Card, CardFooter, Image, Link } from "@nextui-org/react";
 
-const trendingVideos = videosMockup;
+interface Video {
+    id: number;
+    name: string;
+    publisher: string;
+    categories: string[];
+    description: string;
+    thumbnail: string;
+    [key: string]: any; // Allows any additional dynamic properties
+}
 
 interface MovieTopUIProps {
     title: string;
+    dataVideos: Video[]; // An array of Video objects
 }
 
-export default function MoviesTopCarousel({ title }: Readonly<MovieTopUIProps>): JSX.Element {
+export default function MoviesTopCarousel({ title, dataVideos }: Readonly<MovieTopUIProps>): JSX.Element {
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, dragFree: true }, [Autoplay()])
     const { selectedIndex, scrollSnaps, onDotButtonClick } =
         useDotButton(emblaApi)
@@ -33,7 +41,7 @@ export default function MoviesTopCarousel({ title }: Readonly<MovieTopUIProps>):
             <section className="embla">
                 <div className="embla__viewport" ref={emblaRef}>
                     <div className="embla__container">
-                        {trendingVideos.map((item) => (
+                        {dataVideos?.map((item) => (
                             <div className="embla__slide" key={item.id}>
                                 <div className="relative snap-center shrink-0 w-full">
                                     <div
@@ -70,16 +78,22 @@ export default function MoviesTopCarousel({ title }: Readonly<MovieTopUIProps>):
                                             <div className="text-white/80">
                                                 <div>{item.name}</div>
                                                 <div className="text-tiny">
-                                                    {item.categories.map((cat, index) => (
-                                                        <span key={index}>
-                                                            {categoriesSubtitles[cat as keyof typeof categoriesSubtitles].vietsub}
-                                                            {index !== item.categories.length - 1 && ', '}
-                                                        </span>
-                                                    ))}
+                                                    {(Array.isArray(item.categories)
+                                                        ? item.categories
+                                                        :
+                                                        JSON.parse(item.categories || "[]").length > 0 ? (
+                                                            JSON.parse(item.categories || "[]")).map((cat: string, index: number) => (
+                                                                <span key={index}>
+                                                                    {categoriesSubtitles[cat as keyof typeof categoriesSubtitles]?.vietsub}
+                                                                    {index !== ((Array.isArray(item.categories) ? item.categories : JSON.parse(item.categories || "[]"))).length - 1 && ', '}
+                                                                </span>
+                                                            )) : (
+                                                            <h1>Chưa có bộ phim nào!</h1>
+                                                        ))}
                                                 </div>
                                             </div>
                                             <Button className="text-tiny text-white bg-black/50" variant="flat" color="default" radius="lg" size="sm"
-                                                as={Link} href={`/detail/${item.id}`}>
+                                                as={Link} href={`/detail/${item.movieid}`}>
                                                 Xem ngay
                                             </Button>
                                         </CardFooter>
