@@ -93,6 +93,11 @@ export default function AdminForm({
         }
     }
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        rerenderData[name] = value;
+    };
+
     return (
         <Card className="p-4">
             <h1 className="text-xl">{adminFormCofig.label}</h1>
@@ -118,6 +123,7 @@ export default function AdminForm({
                                     variant="underlined"
                                     label={col.colsub}
                                     value={(rerenderData as any)?.[col.colname]}
+                                    onChange={handleChange}
                                 />
                             );
                         case "inputnumber":
@@ -130,6 +136,7 @@ export default function AdminForm({
                                     variant="underlined"
                                     label={col.colsub}
                                     value={(rerenderData as any)?.[col.colname]}
+                                    onChange={handleChange}
                                 />
                             );
                         case "inputfile":

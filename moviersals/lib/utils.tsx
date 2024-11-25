@@ -1,3 +1,5 @@
+import MyToast from "@/components/Toast/MyToast";
+
 export function calculateTimeDifference(targetDate: string): {
     value: number;
     type: string;
@@ -88,4 +90,8 @@ export function isHostnameLocal() {
     return (hostname === 'localhost')
         ? true
         : false
+}
+
+export function showToast(content, type?) {
+    return <MyToast content={content} type={type} />
 }

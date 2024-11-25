@@ -4,7 +4,7 @@ import { HeartFilledIcon } from "./icons";
 
 export const Footer = () => {
     return (
-        <footer className="w-full flex flex-col items-center justify-center p-4 border-t-1 bg-black z-50"
+        <footer className="w-full flex flex-col items-center justify-center p-4 border-t-1 bg-black z-10"
             style={{
                 borderTopLeftRadius: "50px",
                 borderTopRightRadius: "50px",

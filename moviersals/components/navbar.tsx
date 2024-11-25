@@ -37,7 +37,7 @@ export const Navbar = () => {
   const fetchAuth = async () => {
     const auth = await checkAuthen();
     setAuthentication(auth);
-    console.log(auth);
+    localStorage.setItem("userinfo", JSON.stringify(auth));
   };
 
   const searchInput = (
@@ -86,14 +86,14 @@ export const Navbar = () => {
                   <User
                     name={authentication.displayname}
                     avatarProps={{
-                      src: authentication.avatar,
+                      src: (authentication.avatar) ? authentication.avatar : "/image/user.bmp",
                     }}
                   />
                   <ArrowDown />
                 </Button>
               </DropdownTrigger>
               <DropdownMenu aria-label="My account">
-                <DropdownItem>Thông tin của tôi</DropdownItem>
+                <DropdownItem href="/profile">Thông tin của tôi</DropdownItem>
                 <DropdownItem>Phim của tôi</DropdownItem>
                 <DropdownItem
                   className="text-danger"
