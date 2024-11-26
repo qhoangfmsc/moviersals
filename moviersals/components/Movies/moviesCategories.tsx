@@ -84,16 +84,12 @@ export default function MoviesCategories({ dataVideos }: MoviesCategoriesProps) 
                                                                             </span>
                                                                         ))
                                                                     ) : (
-                                                                        JSON.parse(item.categories || "[]").length > 0 ? (
-                                                                            JSON.parse(item.categories || "[]").map((cat: string, index: number) => (
-                                                                                <span key={index}>
-                                                                                    {categoriesSubtitles[cat as keyof typeof categoriesSubtitles]?.vietsub}
-                                                                                    {index !== JSON.parse(item.categories || "[]").length - 1 && ', '}
-                                                                                </span>
-                                                                            ))
-                                                                        ) : (
-                                                                            <h1>Chưa có bộ phim nào!</h1>
-                                                                        )
+                                                                        JSON.parse(item.categories || "[]").map((cat: string, index: number) => (
+                                                                            <span key={index}>
+                                                                                {categoriesSubtitles[cat as keyof typeof categoriesSubtitles]?.vietsub}
+                                                                                {index !== JSON.parse(item.categories || "[]").length - 1 && ', '}
+                                                                            </span>
+                                                                        ))
                                                                     )}
                                                                 </div>
                                                             </div>

@@ -82,14 +82,11 @@ export default function MoviesTopCarousel({ title, dataVideos }: Readonly<MovieT
                                                     {(Array.isArray(item.categories)
                                                         ? item.categories
                                                         :
-                                                        JSON.parse(item.categories || "[]").length > 0 ? (
-                                                            JSON.parse(item.categories || "[]")).map((cat: string, index: number) => (
-                                                                <span key={index}>
-                                                                    {categoriesSubtitles[cat as keyof typeof categoriesSubtitles]?.vietsub}
-                                                                    {index !== ((Array.isArray(item.categories) ? item.categories : JSON.parse(item.categories || "[]"))).length - 1 && ', '}
-                                                                </span>
-                                                            )) : (
-                                                            <h1>Chưa có bộ phim nào!</h1>
+                                                        JSON.parse(item.categories || "[]")).map((cat: string, index: number) => (
+                                                            <span key={index}>
+                                                                {categoriesSubtitles[cat as keyof typeof categoriesSubtitles]?.vietsub}
+                                                                {index !== ((Array.isArray(item.categories) ? item.categories : JSON.parse(item.categories || "[]"))).length - 1 && ', '}
+                                                            </span>
                                                         ))}
                                                 </div>
                                             </div>

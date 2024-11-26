@@ -57,14 +57,11 @@ export default function MovieSuggestion() {
                                         <div className="text-sm">
                                             {(Array.isArray(item.categories)
                                                 ? item.categories
-                                                : JSON.parse(item.categories || "[]").length > 0 ? (
-                                                    JSON.parse(item.categories || "[]"))?.map((cat: string, index: number) => (
-                                                        <span key={index}>
-                                                            {categoriesSubtitles[cat as keyof typeof categoriesSubtitles]?.vietsub}
-                                                            {index !== (Array.isArray(item.categories) ? item.categories : JSON.parse(item.categories || "[]")).length - 1 && ', '}
-                                                        </span>
-                                                    )) : (
-                                                    <h1>Chưa có bộ phim nào!</h1>
+                                                : JSON.parse(item.categories || "[]"))?.map((cat: string, index: number) => (
+                                                    <span key={index}>
+                                                        {categoriesSubtitles[cat as keyof typeof categoriesSubtitles]?.vietsub}
+                                                        {index !== (Array.isArray(item.categories) ? item.categories : JSON.parse(item.categories || "[]")).length - 1 && ', '}
+                                                    </span>
                                                 ))}
                                         </div>
                                         <div className="text-tiny text-gray-500 webkit-line-2 mt-2">{item.description}</div>
