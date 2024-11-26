@@ -2,16 +2,14 @@
 
 import { NextButton, PrevButton, usePrevNextButtons } from "@/components/EmblaCarousel/controls/EmblaCarouselArrowButtons";
 import { DotButton, useDotButton } from "@/components/EmblaCarousel/controls/EmblaCarouselDotButtons";
-import { videosMockup } from "@/config/videosMockup";
 import { Button, Card, CardFooter, Image, Link } from "@nextui-org/react";
 import useEmblaCarousel from "embla-carousel-react";
-
-const trendingVideos = videosMockup;
+import { useParams } from "next/navigation";
 
 export default function EpisodeListCarousel({
-    movieid
+    movieData
 }: {
-    movieid: string
+    movieData: Record<string, any>
 }) {
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, dragFree: true })
     const { selectedIndex, scrollSnaps, onDotButtonClick } =
@@ -25,12 +23,11 @@ export default function EpisodeListCarousel({
     } = usePrevNextButtons(emblaApi)
 
     return (
-
         <section className="embla">
             <div className="embla__viewport" ref={emblaRef}>
                 <div className="embla__container">
-                    {trendingVideos.map((item) => (
-                        <div className="embla__slide" key={item.id}>
+                    {movieData?.list?.map((item) => (
+                        <div className="embla__slide" key={item.episodeid}>
                             <Card
                                 isFooterBlurred
                                 radius="lg"
@@ -39,16 +36,17 @@ export default function EpisodeListCarousel({
                                 <Image
                                     alt="Episode"
                                     className="object-cover"
-                                    src="/image/thumbnail-residentevil.avif"
+                                    src={movieData?.movieDetail?.thumbnail}
                                     height={200}
                                     width={2000}
                                 />
                                 <CardFooter className="justify-between">
                                     <div className="text-white/80 text-sm">
-                                        <div>Detail movie: Tập {item.id}</div>
+                                        <div>Tập {item.episodenumber}: {item.name}</div>
                                     </div>
                                     <Button className="text-tiny text-white bg-black/50" variant="flat" color="default" radius="lg" size="sm"
-                                        as={Link} href={`/detail/${movieid}/${item.id}`}>
+                                        as={Link}
+                                        href={`/detail/${movieData?.movieDetail?.movieid}/${item.episodeid}`}>
                                         Xem ngay
                                     </Button>
                                 </CardFooter>
