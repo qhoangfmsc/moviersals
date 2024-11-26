@@ -11,9 +11,11 @@ export interface CloudinaryVideoPlayerUI {
 
 const CloudinaryVideoPlayer = ({ episode, widthVP, heightVP }: CloudinaryVideoPlayerUI) => {
   const [episodeSrc, setEpisodeSrc] = useState<string>(null);
+  const [idVideo, setIdVideo] = useState<string>(null);
 
   useEffect(() => {
     getSrcEpisode();
+    setIdVideo(String(new Date().getTime()));
   }, []);
 
   function getSrcEpisode() {
@@ -35,9 +37,9 @@ const CloudinaryVideoPlayer = ({ episode, widthVP, heightVP }: CloudinaryVideoPl
       width: widthVP ? widthVP : "800px",
       height: heightVP ? heightVP : "600px",
     }}>
-      {episodeSrc && (
+      {episodeSrc && idVideo && (
         <CldVideoPlayer
-          id="adaptive-bitrate-streaming"
+          id={idVideo}
           src={episodeSrc}
           transformation={{ streaming_profile: "hd" }}
           sourceTypes={["hls"]}
