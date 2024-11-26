@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 export function calculateTimeDifference(targetDate: string): {
     value: number;
     type: string;
@@ -88,4 +90,12 @@ export function isHostnameLocal() {
     return (hostname === 'localhost')
         ? true
         : false
+}
+
+export function showResponseToast(response: Record<string, any>) {
+    if (response.status == "error") {
+        toast.error(response.content);
+      } else {
+        toast.success(response.content);
+      }
 }

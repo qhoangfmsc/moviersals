@@ -5,9 +5,11 @@ import { FormEvent, useEffect, useState } from "react";
 import { toast } from 'react-toastify';
 import checkAuthen from "../api/account/checkAuthen";
 import editProfile from "../api/account/editProfile";
+import { convertRequestToFormData, preexecuteRequest, showResponseToast } from "@/lib/utils";
 
 export default function TemplatePage() {
-  const [fileState, setFileState] = useState<File | undefined>(undefined);
+  const [fileState, setFileState] = useState<File>(null);
+  const [imageSrc, setImageSrc] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {
@@ -21,18 +23,33 @@ export default function TemplatePage() {
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    // PROCESS GET DATA
     const formData = new FormData(event.currentTarget);
-    const response = await editProfile(formData);
-    const content = response.content
-    if (content.toLowerCase().includes("error")) {
-      toast.error(content);
-    } else {
-      toast.success(content);
-    }
+    const request = {};
+    formData.forEach((value, key) => {
+      request[key] = value;
+    });
+    request["thumbnail"] = fileState;
+
+    // PROCESS API
+    const payloadFormData = convertRequestToFormData(preexecuteRequest(request));
+    const response = await editProfile(payloadFormData);
+
+    // PROCESS NOTIFY
+    showResponseToast(response);
   }
 
   function handleFileChange(file: File | undefined) {
     setFileState(file);
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImageSrc(reader.result); // Set the image source to the file's data URL
+      };
+      reader.readAsDataURL(file); // Read the file as a data URL
+    }
   };
 
   const handleChange = (e) => {
@@ -69,7 +86,7 @@ export default function TemplatePage() {
           <Image
             isBlurred
             width={240}
-            src={(userInfo?.thumbnail) ? userInfo?.thumbnail : "/image/user.bmp"}
+            src={userInfo?.thumbnail ?? (imageSrc ?? "/image/user.bmp")}
             alt="NextUI Album Cover"
             className="my-5 rounded-full p-3"
           />

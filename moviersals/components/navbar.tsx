@@ -18,9 +18,10 @@ import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, User } from "@ne
 import checkAuthen from "@/app/api/account/checkAuthen";
 import { useEffect, useState } from "react";
 import logout from "@/app/api/account/logout";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export const Navbar = () => {
+  const router = useRouter();
   const [authentication, setAuthentication] = useState(null);
   const pathname = usePathname();
 
@@ -49,7 +50,7 @@ export const Navbar = () => {
 
   async function logoutHandle() {
     const res = await logout();
-    console.log(res);
+    router.push("/login");
   }
 
   return (
@@ -86,7 +87,7 @@ export const Navbar = () => {
                   <User
                     name={authentication.displayname}
                     avatarProps={{
-                      src: (authentication.avatar) ? authentication.avatar : "/image/user.bmp",
+                      src: (authentication.thumbnail) ? authentication.thumbnail : "/image/user.bmp",
                     }}
                   />
                   <ArrowDown />
