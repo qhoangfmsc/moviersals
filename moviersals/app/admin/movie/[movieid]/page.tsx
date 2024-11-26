@@ -27,15 +27,15 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
   const [data, setData] = useState<any>({});
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await getMovieDetailById(params.movieid);
-      const content = response.content;
-      console.log(content);
-      setData(content);
-    };
-
     fetchData();
   }, []);
+
+  const fetchData = async () => {
+    const response = await getMovieDetailById(params.movieid);
+    const content = response.content;
+    console.log(content);
+    setData(content);
+  };
 
   const handleCreateClick = () => {
     onOpen();

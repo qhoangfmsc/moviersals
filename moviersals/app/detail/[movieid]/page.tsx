@@ -1,16 +1,34 @@
 "use client"
 
-import { LineMdArrowSmallLeft, LineMdPlayFilled, MdiEyeOutline } from "@/components/icons";
+import getMovieDetailById from "@/app/api/movies/getMovieById";
+import { LineMdArrowSmallLeft, LineMdPlayFilled, MdiEyeOutline, SvgSpinners3DotsFade, SvgSpinnersClock } from "@/components/icons";
 import { title } from "@/components/primitives";
+import MyToast from "@/components/Toast/MyToast";
+import { categoriesSubtitles } from "@/config/categoriesSubtitles";
+import { showToast } from "@/lib/utils";
 import { Button, Image } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function DetailPage({
     params
 }: {
     params: { movieid: string }
 }) {
-    const router = useRouter()
+    const [data, setData] = useState<any>({});
+    const router = useRouter();
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
+        const response = await getMovieDetailById(params.movieid);
+        const content = response.content;
+        console.log(content);
+        setData(content);
+    };
+
     const directWatchPage = (episodeid: string) => {
         console.log("watch", episodeid);
 
@@ -29,51 +47,67 @@ export default function DetailPage({
                     height={1000}
                     className="object-cover z-0"
                     alt="Thumbnail"
-                    src="/image/thumbnail-residentevil.avif"
+                    src={data?.movieDetail?.thumbnail}
                 />
             </div>
             <div className="absolute left-0 top-0 flex flex-row w-full h-[1000px]">
-                <div className="relative p-10 lg:p-16 flex flex-col lg:basis-1/3 bg-black/70" style={{ backdropFilter: "blur(7px)" }}>
+                <div className="relative p-10 lg:p-16 flex flex-col lg:basis-1/3 bg-black/80" style={{ backdropFilter: "blur(7px)" }}>
                     <div className="mb-16">
-                        <Button className="rounded-full p-0" size="lg" variant="light" startContent={<LineMdArrowSmallLeft />} onClick={() => router.back()}>Quay lại</Button>
+                        <Button className="rounded-full" size="lg" variant="light" startContent={<LineMdArrowSmallLeft />} onClick={() => router.back()}>Quay lại</Button>
                     </div>
                     <div >
-                        <h1 className={title()}>Detail movie {params.movieid}</h1>
-                        <h1 className="text-sm text-gray-400">Nhà sản xuất: <span>Hello World</span></h1>
-                        <div className="flex text-tiny text-gray-400">
+                        <h1 className={title()}>{data?.movieDetail?.name}</h1>
+                        <h1 className="text-sm text-gray-400 mt-2">Nhà sản xuất: <span>{data?.movieDetail?.publisher}</span></h1>
+                        <div className="flex text-tiny text-gray-400 mt-8">
                             <div className="self-center">
                                 <MdiEyeOutline />
                             </div>
                             <div className="self-center">
-                                &nbsp; {params.movieid} lượt xem
+                                &nbsp; {(data?.movieDetail?.views) ?? "Chưa có"} lượt xem
                             </div>
                         </div>
-                        <div className="flex justify-between text-gray-300 font-black mt-8">
-                            <h1 className="text-sm">Khoa học viễn tưởng, Phiêu lưu</h1>
-                            <h1 className="text-sm">2024</h1>
+                        <div className="flex justify-between text-gray-300 font-black mt-2">
+                            <h1 className="text-sm">
+                                {Array.isArray(data?.movieDetail?.categories) ? (
+                                    data?.movieDetail?.categories.map((cat, index) => (
+                                        <span key={index}>
+                                            {categoriesSubtitles[cat as keyof typeof categoriesSubtitles]?.vietsub}
+                                            {index !== data?.movieDetail?.categories.length - 1 && ', '}
+                                        </span>
+                                    ))
+                                ) : (
+                                    JSON.parse(data?.movieDetail?.categories || "[]").map((cat: string, index: number) => (
+                                        <span key={index}>
+                                            {categoriesSubtitles[cat as keyof typeof categoriesSubtitles]?.vietsub}
+                                            {index !== JSON.parse(data?.movieDetail?.categories || "[]").length - 1 && ', '}
+                                        </span>
+                                    ))
+                                )}
+                            </h1>
+                            <h1 className="text-sm">{data?.movieDetail?.publishyear}</h1>
                         </div>
                         <p className="my-4 text-gray-400">
-                            Chiến thắng rất xứng đáng dành cho Dương Quốc Hoàng, Aloysius Yapp, Johann Chua, Carlo Biado, Ko Pin Yi và đội trưởng Efren Reyes. Aloysius Yapp là tay cơ xuất sắc nhất giải, Hoàng Sao đóng góp lớn vào chức vô địch của tuyển châu Á. Mỗi tay cơ dự Reyes Cup nhận 15.000 USD.
+                            {data?.movieDetail?.description}
                         </p>
                         <div className="mt-12">
-                            {(Number(params.movieid) % 2)
-                                ? <Button className="uppercase" size="lg" variant="shadow" color="danger"
-                                    startContent={<LineMdPlayFilled />}
-                                    onClick={() => directWatchPage(params.movieid)}>Xem ngay</Button>
+                            {(data?.list?.length > 0) ?
+                                (data?.movieDetail?.type == "movie")
+                                    ? <Button className="uppercase" size="lg" variant="shadow" color="danger"
+                                        startContent={<LineMdPlayFilled />}
+                                        onClick={() => directWatchPage(data?.list[0]?.episodeid)}>Xem ngay</Button>
+                                    :
+                                    <>
+                                        <h1 className="text-sm">Chọn tập phim:</h1>
+                                        <div className="flex flex-row flex-wrap lg:my-2">
+                                            {data?.list?.map((item) => (
+                                                <Button variant="flat" className="m-1" key={item.episodeid} onClick={() => directWatchPage(item.episodeid)}>Tập {item.episodenumber}</Button>
+                                            ))}
+                                        </div>
+                                    </>
                                 :
-                                <>
-                                    <h1 className="text-sm">Chọn tập phim (8/8):</h1>
-                                    <div className="flex flex-row flex-wrap lg:my-2">
-                                        <Button variant="flat" className="m-1" onClick={() => directWatchPage(params.movieid)}>Tập 1</Button>
-                                        <Button variant="flat" className="m-1" onClick={() => directWatchPage(params.movieid)}>Tập 2</Button>
-                                        <Button variant="flat" className="m-1" onClick={() => directWatchPage(params.movieid)}>Tập 3</Button>
-                                        <Button variant="flat" className="m-1" onClick={() => directWatchPage(params.movieid)}>Tập 4</Button>
-                                        <Button variant="flat" className="m-1" onClick={() => directWatchPage(params.movieid)}>Tập 5</Button>
-                                        <Button variant="flat" className="m-1" onClick={() => directWatchPage(params.movieid)}>Tập 6</Button>
-                                        <Button variant="flat" className="m-1" onClick={() => directWatchPage(params.movieid)}>Tập 7</Button>
-                                        <Button variant="flat" className="m-1" onClick={() => directWatchPage(params.movieid)}>Tập 8</Button>
-                                    </div>
-                                </>
+                                <Button className="uppercase" size="lg" variant="shadow" color="danger"
+                                    startContent={<SvgSpinnersClock />}
+                                >Sắp ra mắt</Button>
                             }
                         </div>
                     </div>

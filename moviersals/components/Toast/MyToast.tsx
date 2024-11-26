@@ -35,9 +35,10 @@ export default function MyToast({ content, duration = 10000, type = 'success' }:
 
   return (
     <div
-      className={`toast ${visible ? 'toast-show' : 'toast-hide'} z-50`}
+      className={`toast ${visible ? 'toast-show' : 'toast-hide'}`}
       style={{
         position: 'fixed',
+        zIndex: 9999,
         top: '80px',
         right: '20px',
         padding: '10px 20px',
