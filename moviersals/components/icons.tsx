@@ -271,3 +271,15 @@ export function SvgSpinnersClock(props: React.SVGProps<SVGSVGElement>) {
 export function SvgSpinners3DotsFade(props: React.SVGProps<SVGSVGElement>) {
 	return (<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}><circle cx={4} cy={12} r={3} fill="currentColor"><animate id="svgSpinners3DotsFade0" fill="freeze" attributeName="opacity" begin="0;svgSpinners3DotsFade1.end-0.25s" dur="0.75s" values="1;0.2"></animate></circle><circle cx={12} cy={12} r={3} fill="currentColor" opacity={0.4}><animate fill="freeze" attributeName="opacity" begin="svgSpinners3DotsFade0.begin+0.15s" dur="0.75s" values="1;0.2"></animate></circle><circle cx={20} cy={12} r={3} fill="currentColor" opacity={0.3}><animate id="svgSpinners3DotsFade1" fill="freeze" attributeName="opacity" begin="svgSpinners3DotsFade0.begin+0.3s" dur="0.75s" values="1;0.2"></animate></circle></svg>);
 }
+
+export function MingcuteVip2Fill(props: React.SVGProps<SVGSVGElement>) {
+	return (<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}><g fill="none"><path d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"></path><path fill="currentColor" d="M12.987 5.74a2 2 0 1 0-1.97.002l-.01.018c-.655 1.367-1.565 3.325-2.97 4.06c-1.154.603-2.81.3-4.04.074a1.5 1.5 0 1 0-1.772 1.58l2.948 7.61A3 3 0 0 0 7.97 21h8.06a3 3 0 0 0 2.797-1.916l2.947-7.61a1.5 1.5 0 1 0-1.767-1.624c-1.259.163-2.882.371-4.044-.236c-1.377-.72-2.3-2.543-2.976-3.874"></path></g></svg>);
+}
+
+export function FluentPremium24Filled(props: React.SVGProps<SVGSVGElement>) {
+	return (<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M18 3a1 1 0 0 1 .832.445l.062.108l3 6a1 1 0 0 1-.067 1.01l-.084.106l-8.973 9.973a.99.99 0 0 1-.886.351l-.113-.019a.98.98 0 0 1-.532-.322L2.257 10.67a1 1 0 0 1-.204-.991l.053-.125l3-6a1 1 0 0 1 .77-.545L6 3zm-3.424 8H9.423L12 17.342zm4.177 0h-2.018l-1.661 4.088zM7.264 11H5.246l3.678 4.087zm1.358-6H6.618l-2 4h2.704zm4.651 0h-2.547L9.427 9h5.145zm4.108 0h-2.004l1.3 4h2.704z"></path></svg>);
+}
+
+export function QuillVip(props: React.SVGProps<SVGSVGElement>) {
+	return (<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32" {...props}><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m7 13l3 6.5l3-6.5m3.5 0v6.5m4-2.225h1.48c.651 0 1.277-.275 1.721-.75a2.34 2.34 0 0 0 .215-2.932a1.4 1.4 0 0 0-1.14-.593H20.5zm0 0V19.5M5 7h22a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2"></path></svg>);
+}

@@ -64,7 +64,7 @@ export default function TemplatePage() {
     <>
       <div className="flex flex-col lg:flex-row justify-center">
         <Card className="relative p-8 lg:mr-12 text-center overflow-hidden w-[300px] justify-between">
-          {(userInfo?.membership == "PREMIUM") ?
+          {(userInfo?.ispremium) ?
             <div
               className="absolute 
               w-full text-2xl shadow-2xl 

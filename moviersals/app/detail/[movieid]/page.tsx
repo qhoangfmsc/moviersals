@@ -21,6 +21,7 @@ export default function DetailPage({
         fetchData();
     }, []);
 
+
     const fetchData = async () => {
         const response = await getMovieDetailById(params.movieid);
         const content = response.content;

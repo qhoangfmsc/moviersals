@@ -12,9 +12,9 @@ import {
 import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
 import { siteConfig } from "@/config/site";
-import { ArrowDown, SearchIcon } from "@/components/icons";
+import { ArrowDown, MingcuteVip2Fill, SearchIcon } from "@/components/icons";
 import Image from "next/image";
-import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, User } from "@nextui-org/react";
+import { Avatar, Badge, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, User } from "@nextui-org/react";
 import checkAuthen from "@/app/api/account/checkAuthen";
 import { useEffect, useState } from "react";
 import logout from "@/app/api/account/logout";
@@ -55,7 +55,7 @@ export const Navbar = () => {
 
   return (
     <NextUINavbar
-      className="bg-transparent px-4"
+      className="bg-transparent px-6"
       maxWidth="full"
       position="sticky">
       <NavbarContent
@@ -83,13 +83,15 @@ export const Navbar = () => {
           <NavbarItem className="hidden lg:flex">
             <Dropdown>
               <DropdownTrigger>
-                <Button variant="light">
-                  <User
-                    name={authentication.displayname}
-                    avatarProps={{
-                      src: (authentication.thumbnail) ? authentication.thumbnail : "/image/user.bmp",
-                    }}
-                  />
+                <Button className="h-12" variant="light">
+                  {
+                    (authentication.ispremium)
+                      ? <Badge className="text-warning" content={<MingcuteVip2Fill />} color="danger" shape="circle" placement="top-right" size="sm">
+                        <Avatar isBordered color="default" src={(authentication.thumbnail) ? authentication.thumbnail : "/image/user.bmp"} />
+                      </Badge>
+                      : <Avatar isBordered color="default" src={(authentication.thumbnail) ? authentication.thumbnail : "/image/user.bmp"} />
+                  }
+                  <div>{authentication.displayname}</div>
                   <ArrowDown />
                 </Button>
               </DropdownTrigger>
