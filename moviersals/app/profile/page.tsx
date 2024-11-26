@@ -2,14 +2,11 @@
 
 import { Button, Card, Image, Input } from "@nextui-org/react";
 import { FormEvent, useEffect, useState } from "react";
+import { toast } from 'react-toastify';
 import checkAuthen from "../api/account/checkAuthen";
 import editProfile from "../api/account/editProfile";
-import { showToast } from "@/lib/utils";
-import { useRouter } from "next/navigation";
 
 export default function TemplatePage() {
-  const router = useRouter();
-  const [toast, setToast] = useState(<></>);
   const [fileState, setFileState] = useState<File | undefined>(undefined);
   const [userInfo, setUserInfo] = useState(null);
 
@@ -28,9 +25,9 @@ export default function TemplatePage() {
     const response = await editProfile(formData);
     const content = response.content
     if (content.toLowerCase().includes("error")) {
-      setToast(showToast(content, "error"))
+      toast.error(content);
     } else {
-      setToast(showToast(content))
+      toast.success(content);
     }
   }
 
@@ -48,7 +45,6 @@ export default function TemplatePage() {
 
   return (
     <>
-      {toast}
       <div className="flex flex-col lg:flex-row justify-center">
         <Card className="relative p-8 lg:mr-12 text-center overflow-hidden w-[300px] justify-between">
           {(userInfo?.membership == "PREMIUM") ?

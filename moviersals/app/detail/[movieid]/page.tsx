@@ -3,9 +3,8 @@
 import getMovieDetailById from "@/app/api/movies/getMovieById";
 import { LineMdArrowSmallLeft, LineMdPlayFilled, MdiEyeOutline, SvgSpinners3DotsFade, SvgSpinnersClock } from "@/components/icons";
 import { title } from "@/components/primitives";
-import MyToast from "@/components/Toast/MyToast";
+import { toast } from 'react-toastify';
 import { categoriesSubtitles } from "@/config/categoriesSubtitles";
-import { showToast } from "@/lib/utils";
 import { Button, Image } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -107,6 +106,7 @@ export default function DetailPage({
                                 :
                                 <Button className="uppercase" size="lg" variant="shadow" color="danger"
                                     startContent={<SvgSpinnersClock />}
+                                    onClick={() => {toast("Chương trình sắp ra mắt!")}}
                                 >Sắp ra mắt</Button>
                             }
                         </div>
