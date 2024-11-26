@@ -35,19 +35,15 @@ const CloudinaryVideoPlayer = ({ episode, widthVP, heightVP }: CloudinaryVideoPl
       width: widthVP ? widthVP : "800px",
       height: heightVP ? heightVP : "600px",
     }}>
-      {episodeSrc
-        ? <CldVideoPlayer
+      {episodeSrc && (
+        <CldVideoPlayer
           id="adaptive-bitrate-streaming"
           src={episodeSrc}
-          transformation={{
-            streaming_profile: "hd",
-          }}
+          transformation={{ streaming_profile: "hd" }}
           sourceTypes={["hls"]}
           onPlay={increaseView}
         />
-        : <></>
-      }
-
+      )}
     </div>
   );
 };
