@@ -20,6 +20,7 @@ export default function WatchPage({
 }) {
     const { movieid, episodeid } = useParams();
     const [data, setData] = useState<any>({});
+    const [currentEpisodeObject, setDataCurrentEpisodeObject] = useState<any>(null);
 
     useEffect(() => {
         fetchData();
@@ -28,13 +29,30 @@ export default function WatchPage({
     const fetchData = async () => {
         const response = await getMovieDetailById(movieid as string);
         const content = response.content;
-        console.log(content);
+        console.log("Content:", content);  // Ensure content is what you expect
         setData(content);
+
+        // Assuming the episodes are in content.list (adjust accordingly if your structure is different)
+        const episodeObject = getEpisodeById(episodeid, content.list);
+        setDataCurrentEpisodeObject(episodeObject);
+    };
+
+    // Function to find episode by ID
+    const getEpisodeById = (episodeid, episodesList) => {
+        return episodesList.find(episode => episode.episodeid === episodeid);
     };
 
     return (
         <>
-            <CloudinaryVideoPlayer srcVP={`${movieid}/${episodeid}`} widthVP="100%" heightVP="300" />
+            {currentEpisodeObject ? (
+                <CloudinaryVideoPlayer
+                    episode={currentEpisodeObject}
+                    widthVP="100%"
+                    heightVP="300"
+                />
+            ) : (
+                <h1 className="text-2xl">Loading video...</h1> // Show loading message if episode data is not available
+            )}
             <div className="p-8">
                 <div className="leading-10">
                     <h1 className={title()}>{data?.movieDetail?.name}</h1>
@@ -58,18 +76,20 @@ export default function WatchPage({
                                 <h1 className="text-sm">
                                     <span key={index}>
                                         {categoriesSubtitles[cat as keyof typeof categoriesSubtitles]?.vietsub}
-                                    </span></h1>
+                                    </span>
+                                </h1>
                             </div>
                         ))
                     ) : (
                         JSON.parse(data?.movieDetail?.categories || "[]").map((cat: string, index: number) => (
-                            <>
+                            <div key={index}>
                                 <Divider orientation="vertical" />
                                 <h1 className="text-sm">
                                     <span key={index}>
                                         {categoriesSubtitles[cat as keyof typeof categoriesSubtitles]?.vietsub}
-                                    </span></h1>
-                            </>
+                                    </span>
+                                </h1>
+                            </div>
                         ))
                     )}
                 </div>
