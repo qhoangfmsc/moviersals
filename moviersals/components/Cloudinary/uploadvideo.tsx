@@ -18,7 +18,7 @@ export default function VideoUploader({ videoName, folderName, onVideoUpload }: 
   };
 
   return (
-    <div className="text-center mt-4 mb-4">
+    <div className="text-center flex justify-end pt-5 pl-1">
       <CldUploadWidget
         signatureEndpoint={"/api/cloudinary"}
         options={{
@@ -32,19 +32,20 @@ export default function VideoUploader({ videoName, folderName, onVideoUpload }: 
         onSuccess={handleUploadResult}>
         {({ open }) => (
           <button
+            className="w-max"
             type="button"
             onClick={() => {
               open();
             }}
             style={{
-              backgroundColor: "#4CAF50",
+              backgroundColor: "#6586ff",
               color: "white",
               padding: "10px 20px",
               border: "none",
               borderRadius: "5px",
               cursor: "pointer",
             }}>
-            Upload
+            Tải video lên
           </button>
         )}
       </CldUploadWidget>

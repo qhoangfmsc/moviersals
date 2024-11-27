@@ -104,28 +104,25 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
       </Breadcrumbs>
 
       <div className="flex lg:flex-row flex-col-reverse">
-        {/* <div className="lg:w-4/5 lg:mr-8">
-          <div className="flex flex-row">
-          
+        <div className="lg:w-4/5 lg:mr-8">
+          <div className="flex flex-row flex-wrap gap-3">
+            {data?.list?.length > 0 ? (
+              data?.list?.map((item: any) => (
+                <EpisodeCard
+                  key={item.episodeid}
+                  cardData={item}
+                  onCardClick={null}
+                />
+              ))
+            ) : (
+              <></>
+            )}
+            <EpisodeCard
+              key={"null"}
+              cardData={null}
+              onCardClick={handleCreateClick}
+            />
           </div>
-        </div> */}
-        <div className="flex flex-row flex-wrap gap-6">
-          {data?.list?.length > 0 ? (
-            data?.list?.map((item: any) => (
-              <EpisodeCard
-                key={item.episodeid}
-                cardData={item}
-                onCardClick={null}
-              />
-            ))
-          ) : (
-            <></>
-          )}
-          <EpisodeCard
-            key={"null"}
-            cardData={null}
-            onCardClick={handleCreateClick}
-          />
         </div>
         <div className="lg:w-1/5 mb-4">
           <AdminForm
@@ -138,20 +135,12 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
         isOpen={isOpen}
         onOpenChange={onOpenChange}>
         <ModalContent>
-          {(onClose) => (
+          {() => (
             <>
               <ModalHeader className="flex flex-col gap-1">{"Thêm tập phim"}</ModalHeader>
               <ModalBody>
                 <AddNewEpisodeAdminForm movieid={params.movieid} />
               </ModalBody>
-              <ModalFooter>
-                <Button
-                  color="danger"
-                  variant="light"
-                  onPress={onClose}>
-                  Hủy
-                </Button>
-              </ModalFooter>
             </>
           )}
         </ModalContent>
