@@ -93,7 +93,7 @@ export function isHostnameLocal() {
 }
 
 export function showResponseToast(response: Record<string, any>) {
-    if (response.status == "error") {
+    if (response.status == "fail") {
         toast.error(response.content);
       } else {
         toast.success(response.content);

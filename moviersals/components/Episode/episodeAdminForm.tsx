@@ -66,12 +66,12 @@ export default function AddNewEpisodeAdminForm({ movieid }: { movieid: string })
 
   return (
     <form
-      className="flex flex-col my-8 items-left border border-gray-300 p-8 rounded-lg w-fit"
+      className="flex flex-col items-left border-none rounded-lg w-full"
       onSubmit={onSubmit}>
       {error && <div style={{ color: "red" }}>{error}</div>}
       <Input
         size="lg"
-        className="max-w-[200px]"
+        className="w-full"
         type="text"
         name="name"
         variant="underlined"
@@ -79,7 +79,7 @@ export default function AddNewEpisodeAdminForm({ movieid }: { movieid: string })
       />
       <Input
         size="lg"
-        className="max-w-[200px]"
+        className="w-full"
         type="number"
         onChange={(e) => hangleValueChange(e)}
         onWheel={(e) => handleWheel(e)}
@@ -87,28 +87,27 @@ export default function AddNewEpisodeAdminForm({ movieid }: { movieid: string })
         variant="underlined"
         label="Tập phim thứ"
       />
-      {videoName.length > 0 && (
+      <div className="flex flex-row">
+        <Input
+          isReadOnly
+          defaultValue="null"
+          size="lg"
+          className="w-full"
+          type="text"
+          name="episodepath"
+          variant="underlined"
+          value={uploadedVideoUrl}
+          label="Đường dẫn tập phim"
+        />
         <VideoUploader
           videoName={videoName}
           folderName={movieid}
           onVideoUpload={handleVideoUpload}
         />
-      )}
-      <Input
-        isReadOnly
-        defaultValue="null"
-        size="lg"
-        className="max-w-[200px]"
-        type="text"
-        name="episodepath"
-        variant="underlined"
-        value={uploadedVideoUrl}
-        label="Đường dẫn tập phim"
-      />
-
+      </div>
       <Button
         size="lg"
-        className="mt-8 mb-4 w-[200px]"
+        className="mt-8 mb-4 w-full"
         type="submit"
         disabled={isLoading}
         variant="shadow"
