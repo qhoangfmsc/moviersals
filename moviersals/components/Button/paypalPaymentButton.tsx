@@ -42,7 +42,7 @@ export default function PaypalButon({ subplanid, totalAmount }: PaypalDataProps)
 
   return (
     <div
-      className="w-5 h-2"
+      className="w-fit h-fit"
       style={{ colorScheme: "none" }}>
       <PayPalScriptProvider options={{ clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID, currency: "USD", intent: "capture" }}>
         <PayPalButtons
