@@ -1,3 +1,5 @@
+
+
 export async function requestApi(url: string, param: Object | null | FormData) {
     const hostname =  process.env.NEXT_PUBLIC_API_DOMAIN;
 

@@ -2,6 +2,7 @@
 
 import CheckPasswordRecovery from "@/app/api/account/checkpasswordrecovery";
 import ConfirmPasswordRecovery from "@/app/api/account/confirmpasswordrecovery";
+import { showResponseToast } from "@/lib/utils";
 import {
   Button,
   Card,
@@ -22,10 +23,7 @@ export default function PasswordRecoveryForm() {
   const urlParams = useSearchParams();
   const passwordToken = urlParams.get("token");
   const [isTokenValid, setIsTokenValid] = useState<boolean>();
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [requestMessage, setRequestMessage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  // const [isCheckDone, setIsCheckingDone] = useState<boolean>(false);
   const [errorAccount, setErrorAccount] = useState<string | null>(null);
   const [errorUser, setErrorUser] = useState<string | null>(null);
 
@@ -33,7 +31,7 @@ export default function PasswordRecoveryForm() {
     async function checkPasswordToken() {
       if (passwordToken) {
         const res = await CheckPasswordRecovery(passwordToken);
-        if (res.result == "fail") setIsTokenValid(false);
+        if (res.result == "error") setIsTokenValid(false);
         else setIsTokenValid(true);
       }
     }
@@ -52,20 +50,20 @@ export default function PasswordRecoveryForm() {
     try {
       const formData = new FormData(event.currentTarget);
       const newpassword = formData.get("newpassword")?.toString();
+      const confirmnewpassword = formData.get("confirmnewpassword")?.toString();
 
-      if (newpassword) {
+      if (newpassword == confirmnewpassword) {
         const response = await ConfirmPasswordRecovery(newpassword, passwordToken);
         if (response.result == "success") {
           setIsLoading(false);
-          setRequestMessage(response.content);
-          onOpen();
+          showResponseToast(response);
         } else {
           setIsLoading(false);
-          setErrorAccount(response.content);
+          showResponseToast(response);
         }
       } else {
         setIsLoading(false);
-        setErrorAccount("Vui lòng nhập password mới!");
+        setErrorAccount("Password không khớp nhau!");
       }
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -78,42 +76,25 @@ export default function PasswordRecoveryForm() {
   return isTokenValid != null ? (
     isTokenValid ? (
       <>
-        <Modal
-          isOpen={isOpen}
-          onOpenChange={onOpenChange}>
-          <ModalContent>
-            {(onClose) => (
-              <>
-                <ModalHeader className="flex flex-col gap-1">Thông báo</ModalHeader>
-                <ModalBody>
-                  <p>{requestMessage}</p>
-                </ModalBody>
-                <ModalFooter>
-                  <Button
-                    color="danger"
-                    variant="light"
-                    as={Link}
-                    href="/login"
-                    onPress={onClose}>
-                    Đồng ý
-                  </Button>
-                </ModalFooter>
-              </>
-            )}
-          </ModalContent>
-        </Modal>
         <form
           className="flex flex-col items-center"
           onSubmit={onSubmit}>
           <Card className="p-4 lg:w-[500px] bg-transparent shadow-none">
-            {errorAccount && <div style={{ color: "red" }}>{errorAccount}</div>}
             {errorUser && <div style={{ color: "red" }}>{errorUser}</div>}
+            {errorAccount && <div style={{ color: "red" }}>{errorAccount}</div>}
             <Input
               size="lg"
-              type="email"
-              name="email"
+              type="text"
+              name="newpassword"
               variant="underlined"
-              label="Email"
+              label="New password"
+            />
+            <Input
+              size="lg"
+              type="text"
+              name="confirmnewpassword"
+              variant="underlined"
+              label="Confirm new password"
             />
             <div>
               <Button
@@ -123,7 +104,7 @@ export default function PasswordRecoveryForm() {
                 disabled={isLoading}
                 variant="shadow"
                 color="success">
-                {isLoading ? "Loading..." : "Gửi yêu cầu tới email"}
+                {isLoading ? "Loading..." : "Đổi mật khẩu"}
               </Button>
             </div>
           </Card>
@@ -131,12 +112,24 @@ export default function PasswordRecoveryForm() {
       </>
     ) : (
       <>
-        <div>Token không hợp lệ</div>
+        <div className="flex flex-col items-center text-center h-screen">
+          <div className=" text-2xl ">Token không hợp lệ hoặc hết hạn</div>
+          <Button
+            size="lg"
+            className="my-4 w-[350px]"
+            href="request"
+            as={Link}
+            type="button"
+            variant="shadow"
+            color="success">
+            {"Request token mới"}
+          </Button>
+        </div>
       </>
     )
   ) : (
     <>
-      <div>Loading</div>
+      <div className="text-center text-2xl h-screen">Checking token...</div>
     </>
   );
 }

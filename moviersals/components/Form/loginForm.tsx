@@ -68,7 +68,7 @@ export default function LoginForm() {
       />
       <p className="mt-4 w-[350px] text-right">
         <span className="text-gray-100 font-bold">
-          <Link href="/requestpasswordrecovery">&nbsp;Quên mật khẩu?</Link>
+          <Link href="/passwordrecovery/request">&nbsp;Quên mật khẩu?</Link>
         </span>
       </p>
       <Button

@@ -1,6 +1,7 @@
 "use client";
 
 import RequestPasswordRecovery from "@/app/api/account/requestpasswordrecovery";
+import { showResponseToast } from "@/lib/utils";
 import {
   Button,
   Card,
@@ -41,7 +42,7 @@ export default function RequestPasswordRecoveryForm() {
           onOpen();
         } else {
           setIsLoading(false);
-          setErrorAccount(response.content);
+          showResponseToast(response);
         }
       } else {
         setIsLoading(false);
@@ -69,10 +70,8 @@ export default function RequestPasswordRecoveryForm() {
               </ModalBody>
               <ModalFooter>
                 <Button
-                  color="danger"
+                  color="success"
                   variant="light"
-                  as={Link}
-                  href="/login"
                   onPress={onClose}>
                   Đồng ý
                 </Button>
@@ -82,9 +81,9 @@ export default function RequestPasswordRecoveryForm() {
         </ModalContent>
       </Modal>
       <form
-        className="flex flex-col items-center"
+        className=""
         onSubmit={onSubmit}>
-        <Card className="p-4 lg:w-[500px] bg-transparent shadow-none">
+        <Card className="p-4 lg:w-[400px] bg-transparent shadow-none">
           {errorAccount && <div style={{ color: "red" }}>{errorAccount}</div>}
           {errorUser && <div style={{ color: "red" }}>{errorUser}</div>}
           <Input
@@ -97,7 +96,7 @@ export default function RequestPasswordRecoveryForm() {
           <div>
             <Button
               size="lg"
-              className="my-4 w-[350px]"
+              className="my-4 w-[200px]"
               type="submit"
               disabled={isLoading}
               variant="shadow"

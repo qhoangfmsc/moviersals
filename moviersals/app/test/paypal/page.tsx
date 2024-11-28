@@ -2,7 +2,7 @@
 import PaypalButon from "@/components/Button/paypalPaymentButton";
 import React from "react";
 
-export default function PaylPalTest() {
+export default function PaymentMethodsComponent() {
   const amountToPay = 9.84;
   const subplanid = "PREMIUM_M";
 
