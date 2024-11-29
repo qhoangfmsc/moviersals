@@ -1,6 +1,6 @@
 import { requestApi } from "@/lib/requestApi";
 
-export default async function createPaypalOrder(request: Object) {
+export default async function createVNPayOrder(request: Object) {
     const url = "/api/protected/order/create/vnpay";
     const param = request;
 

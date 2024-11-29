@@ -5,17 +5,17 @@ import React from "react";
 
 export default function PaymentMethodsComponent() {
   const amountToPay = 9.84;
-  const subplanid = "PREMIUM_M";
+  const subcriptionid = "PREMIUM_M";
 
   return (
     <div className="h-80 flex items-center flex-col">
       <PaypalButon
-        totalAmount={amountToPay}
-        subplanid={subplanid}
+        amount={amountToPay}
+        subcriptionid={subcriptionid}
       />
       <VNPayButon
-        totalAmount={amountToPay}
-        subplanid={subplanid}
+        amount={amountToPay}
+        subcriptionid={subcriptionid}
       />
     </div>
   );

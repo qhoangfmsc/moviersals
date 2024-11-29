@@ -3,11 +3,11 @@ import createPaypalOrder from "@/app/api/order/createPaypalOrder";
 import { PayPalScriptProvider, PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 
 interface PaypalDataProps {
-  subplanid: string;
-  totalAmount: number;
+  subcriptionid: string;
+  amount: number;
 }
 
-export default function PaypalButon({ subplanid, totalAmount }: PaypalDataProps) {
+export default function PaypalButon({ subcriptionid, amount }: PaypalDataProps) {
   //Paypal button
   // const [{ options }, dispatch] = usePayPalScriptReducer();
   // const [{ isPending }] = usePayPalScriptReducer();
@@ -17,7 +17,7 @@ export default function PaypalButon({ subplanid, totalAmount }: PaypalDataProps)
       purchase_units: [
         {
           amount: {
-            value: totalAmount,
+            value: amount,
             currency_code: "USD",
           },
         },
@@ -30,8 +30,8 @@ export default function PaypalButon({ subplanid, totalAmount }: PaypalDataProps)
       console.log("on approve: ", details);
       const request = {
         id: details.id,
-        subplanid: subplanid,
-        amount: totalAmount,
+        subcriptionid: subcriptionid,
+        amount: amount,
         payerid: details.payer.payer_id,
         email: details.payer.email_address,
       };
