@@ -83,20 +83,37 @@ export const Navbar = () => {
           <NavbarItem className="hidden lg:flex">
             <Dropdown>
               <DropdownTrigger>
-                <Button className="h-12" variant="light">
-                  {
-                    (authentication.ispremium)
-                      ? <Badge className="text-warning" content={<MingcuteVip2Fill />} color="danger" shape="circle" placement="top-right" size="sm">
-                        <Avatar isBordered color="default" src={(authentication.thumbnail) ? authentication.thumbnail : "/image/user.bmp"} />
-                      </Badge>
-                      : <Avatar isBordered color="default" src={(authentication.thumbnail) ? authentication.thumbnail : "/image/user.bmp"} />
-                  }
+                <Button
+                  className="h-12"
+                  variant="light">
+                  {authentication.ispremium ? (
+                    <Badge
+                      className="text-warning"
+                      content={<MingcuteVip2Fill />}
+                      color="danger"
+                      shape="circle"
+                      placement="top-right"
+                      size="sm">
+                      <Avatar
+                        isBordered
+                        color="default"
+                        src={authentication.thumbnail ? authentication.thumbnail : "/image/user.bmp"}
+                      />
+                    </Badge>
+                  ) : (
+                    <Avatar
+                      isBordered
+                      color="default"
+                      src={authentication.thumbnail ? authentication.thumbnail : "/image/user.bmp"}
+                    />
+                  )}
                   <div>{authentication.displayname}</div>
                   <ArrowDown />
                 </Button>
               </DropdownTrigger>
               <DropdownMenu aria-label="My account">
                 <DropdownItem href="/profile">Thông tin của tôi</DropdownItem>
+                <DropdownItem href="/order/history">Lịch sử mua hàng</DropdownItem>
                 <DropdownItem>Phim của tôi</DropdownItem>
                 <DropdownItem
                   className="text-danger"

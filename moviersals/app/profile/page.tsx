@@ -151,7 +151,7 @@ export default function TemplatePage() {
                     key="emailstatus"
                     ref={emailRef}
                     isDisabled
-                    className="w-2/3 my-2"
+                    className="w-full my-2"
                     type="text"
                     variant="underlined"
                     label="Trạng thái Email"
@@ -173,14 +173,14 @@ export default function TemplatePage() {
                       <>
                         {!isRequestClick ? (
                           <Button
-                            className="w-fit flex my-auto ml-2"
+                            className="w-fit flex my-auto ml-4"
                             color="default"
                             onClick={handleRequestEmailVerification}>
                             Gửi mã
                           </Button>
                         ) : (
                           <Button
-                            className="w-fit flex my-auto ml-2"
+                            className="w-fit flex my-auto ml-4"
                             color="success"
                             onClick={handleConfirmEmailVerification}>
                             Xác nhận
