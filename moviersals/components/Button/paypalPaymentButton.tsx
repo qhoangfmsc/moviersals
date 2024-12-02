@@ -4,17 +4,17 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 interface PaypalDataProps {
   subcriptionid: string;
-  amount: number;
+  price: string;
 }
 
-export default function PaypalButon({ subcriptionid, amount }: PaypalDataProps) {
+export default function PaypalButon({ subcriptionid, price }: PaypalDataProps) {
   async function createOrder(data, actions) {
     return actions.order.create({
       intent: "CAPTURE",
       purchase_units: [
         {
           amount: {
-            value: amount,
+            value: price,
             currency_code: "USD",
           },
         },
@@ -28,7 +28,7 @@ export default function PaypalButon({ subcriptionid, amount }: PaypalDataProps) 
       const request = {
         id: details.id,
         subcriptionid: subcriptionid,
-        amount: amount,
+        amount: price,
         payerid: details.payer.payer_id,
         email: details.payer.email_address,
       };
@@ -39,11 +39,11 @@ export default function PaypalButon({ subcriptionid, amount }: PaypalDataProps) 
 
   return (
     <div
-      className="w-fit h-fit"
+      className="w-[100%]"
       style={{ colorScheme: "none" }}>
       <PayPalScriptProvider options={{ clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID, currency: "USD", intent: "capture" }}>
         <PayPalButtons
-          style={{ height: 40, layout: "vertical", color: "gold" }}
+          style={{ height: 55, layout: "vertical", color: "gold" }}
           fundingSource="paypal"
           createOrder={createOrder}
           onApprove={onApprove}

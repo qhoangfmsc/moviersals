@@ -6,43 +6,18 @@ import { useState } from "react";
 
 interface PaypalDataProps {
   subcriptionid: string;
-  amount: number;
+  price: string;
 }
 
-export default function VNPayButon({ subcriptionid, amount }: PaypalDataProps) {
-  const [popup, setPopup] = useState(null);
-
+export default function VNPayButon({ subcriptionid, price }: PaypalDataProps) {
   async function handleVNPayClick() {
-    const body = { subcriptionid: subcriptionid, amount: amount };
+    const body = { subcriptionid: subcriptionid, price: price };
 
     const result = await createVNPayOrder(body);
     if (result.status == "success") {
       const url = result.content;
       if (url.startsWith("http://") || url.startsWith("https://")) {
-        const windowFeatures = "width=800,height=1200,left=600,top=200";
-        const newPopup = window.open(result.content, "_blank", windowFeatures);
-        setPopup(newPopup);
-
-        // Auto-close the pop-up after 5 seconds
-        const timeoutId = setTimeout(() => {
-          if (newPopup && !newPopup.closed) {
-            newPopup.close();
-          }
-        }, 5000); // Auto-close after 5 seconds
-
-        // Check the pop-up URL every second
-        const intervalId = setInterval(() => {
-          if (newPopup && !newPopup.closed) {
-            const currentUrl = newPopup.location.href;
-
-            // Replace 'https://example.com' with the URL you want to match
-            if (currentUrl.includes("/vnpay/return")) {
-              clearTimeout(timeoutId); // Stop auto-closing if condition is met
-              newPopup.close(); // Close the pop-up as the URL matches the condition
-              clearInterval(intervalId); // Stop checking the URL
-            }
-          }
-        }, 1000); // Check every second
+        window.open(url, "_blank");
       }
     } else {
       console.log("VNPay error!");
@@ -50,11 +25,8 @@ export default function VNPayButon({ subcriptionid, amount }: PaypalDataProps) {
   }
 
   return (
-    <div
-      className="w-fit h-fit"
-      style={{ colorScheme: "none" }}>
+    <div className="w-full">
       <Button
-        size="lg"
         startContent={
           <img
             alt="VNPay logo"
@@ -66,10 +38,13 @@ export default function VNPayButon({ subcriptionid, amount }: PaypalDataProps) {
         style={{
           backgroundColor: "#003366",
           color: "white",
+          fontSize: "18px",
           fontWeight: "bold",
           textTransform: "uppercase",
           padding: "2px 26px",
-          borderRadius: "8px",
+          borderRadius: "5px",
+          width: "100%",
+          height: "55px",
         }}
         onClick={handleVNPayClick}>
         VNPay

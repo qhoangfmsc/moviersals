@@ -651,3 +651,17 @@ export function IconDelete(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+export function UpsideDownTriangle(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="#7e22ce"
+      strokeWidth="5"
+      height="1.5em"
+      width="1.5em"
+      {...props}>
+      <path d="M6.38 6h11.25L12 16 6.38 6M3 4l9 16 9-16H3z" />
+    </svg>
+  );
+}

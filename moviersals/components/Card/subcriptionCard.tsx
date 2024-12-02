@@ -1,4 +1,5 @@
 import { Card, CardFooter, Image, Button, Link, CardHeader } from "@nextui-org/react";
+import { UpsideDownTriangle } from "../icons";
 
 interface SubcriptionProps {
   data: {
@@ -11,20 +12,26 @@ interface SubcriptionProps {
     baseprice: string;
     isads: boolean;
   };
-  onCardClick: () => void;
+  onCardClick: (data: SubcriptionProps["data"]) => void;
+  showButton: boolean;
 }
 
-export default function SubcriptionPlanCard({ data, onCardClick }: SubcriptionProps) {
+export default function SubcriptionPlanCard({ data, onCardClick, showButton }: SubcriptionProps) {
+  const handleSubcriptionClick = () => {
+    if (onCardClick) {
+      onCardClick(data);
+    }
+  };
+
   function getDiscountPercentage(baseprice, price) {
     return (((Number(baseprice) - Number(price)) / Number(baseprice)) * 100).toPrecision(3);
   }
 
   return (
     <Card
-      key={data.subcriptionid}
-      onPress={() => onCardClick()}
+      key={data?.subcriptionid}
       radius="lg"
-      className="border-none w-[300px] h-[500px] bg-gradient-to-b from-[#1c1c1c] to-[#333333] p-2 shadow-lg hover:shadow-2xl transition-all overflow-visible">
+      className="border-none w-[300px] h-screen bg-gradient-to-b from-[#1c1c1c] to-[#141414] p-2 shadow-lg hover:shadow-2xl transition-all overflow-visible">
       <CardHeader>
         {data?.baseprice != data?.price && (
           <p className="text-md text-white bg-orange-700 p-2 rounded-lg inline-block absolute left-[81%] top-[15px] ">
@@ -35,8 +42,8 @@ export default function SubcriptionPlanCard({ data, onCardClick }: SubcriptionPr
       <div className="flex flex-col text-center h-full">
         {data?.price != "0" ? (
           <div className="h-[150px] pt-6">
-            <p className="text-lg font-semibold text-white mb-2">{data?.name}</p>
-            <div className="flex flex-row items-center justify-center mt-8 mb-4">
+            <p className="text-lg text-white mb-2">{data?.name}</p>
+            <div className="flex flex-row items-center justify-center mt-6 mb-6">
               <p className="text-4xl text-white font-bold p-2 rounded-lg inline-block"> {data?.price}</p>
               <p>₫</p>
             </div>
@@ -46,13 +53,30 @@ export default function SubcriptionPlanCard({ data, onCardClick }: SubcriptionPr
             <p className="text-4xl font-semibold text-white mb-2">{data?.name}</p>
           </div>
         )}
-
-        <p className="text-sm text-white/70 mb-2 bg-purple-700 py-2 px-4 rounded-lg w-fit mx-auto">
-          {data?.daysduration != "0" ? `${Number(data?.daysduration) / 30} months` : "Pernament"}
+        <p className="text-sm text-white/70 mb-2 bg-purple-700 py-2 px-4 rounded-lg mx-4">
+          {data?.daysduration != "0" ? `${Number(data?.daysduration) / 30} tháng` : "Không thời hạn"}
         </p>
+        <div className="justify-items-start mt-4 mx-3">
+          <p className="flex flex-row text-sm text-white/80 mb-4">
+            <UpsideDownTriangle /> &nbsp; {`IP đăng nhập tối đa: ${data?.connection}`}
+          </p>
+          <p className="flex flex-row  text-sm text-white/80 mb-4">
+            <UpsideDownTriangle /> &nbsp; {`Chất lượng: ${data?.quality}`}
+          </p>
+          <p className="flex flex-row  text-sm text-white/80 mb-4">
+            <UpsideDownTriangle /> &nbsp; {`Quảng cáo:  ${data?.isads ? "Có" : "Không"}`}
+          </p>
+        </div>
         <CardFooter className="flex flex-col items-start mt-auto">
-          <p className="text-sm text-white/70 mb-2">{`Max connection(s): ${data?.connection}`}</p>
-          <p className="text-sm text-white/80 mb-4">{`Max quality: ${data?.quality}`}</p>
+          {showButton && (
+            <Button
+              isDisabled={data?.price == "0"}
+              onClick={handleSubcriptionClick}
+              className="w-full"
+              color="primary">
+              {data?.price == "0" ? "" : "Chọn"}
+            </Button>
+          )}
         </CardFooter>
       </div>
     </Card>
