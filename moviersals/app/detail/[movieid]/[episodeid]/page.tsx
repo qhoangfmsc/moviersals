@@ -60,9 +60,10 @@ export default function WatchPage({ params }: { params: { movieid: string; episo
   }, []);
 
   const fetchMovieInfo = async () => {
-    const response = await getMovieEpisodeById(params.movieid, params.episodeid);
+    const response = await getMovieDetailById(params.movieid);
     if (response.status == "success") {
-      const videoid = response.content[0]?.episodepath?.match(/\/upload\/v\d+\/(.+)/)[1];
+      const currentEpisode = response.content.list.find((episode) => episode.episodenumber == params.episodeid);
+      const videoid = currentEpisode?.episodepath?.match(/\/upload\/v\d+\/(.+)/)[1];
       setData((prevData) => ({
         ...prevData,
         ...response.content,
