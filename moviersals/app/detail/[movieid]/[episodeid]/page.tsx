@@ -5,8 +5,8 @@ import getMovieEpisodeById from "@/app/api/movies/getEpisodeById";
 import getMovieDetailById from "@/app/api/movies/getMovieById";
 import EpisodeListCarousel from "@/components/Episode/episodeListCarousel";
 import { MdiEyeOutline } from "@/components/icons";
-import MoviesComments from "@/components/Movies/moviesComments";
-import MyMoviesComments from "@/components/Movies/moviesMyComments";
+import MovieComments from "@/components/Movies/moviesComments";
+import MovieMyComment from "@/components/Movies/moviesMyComments";
 import MovieSuggestion from "@/components/Movies/moviesSuggestion";
 import { title } from "@/components/primitives";
 import CloudinaryVideoPlayer from "@/components/Video/videoplayer";
@@ -45,8 +45,10 @@ const emptyComment: Comment = {
 export default function WatchPage({ params }: { params: { movieid: string; episodeid: string } }) {
   //   const { movieid, episodeid } = useParams();
   const [data, setData] = useState<any>(null);
-  const [movieComment, setMovieComment] = useState<Array<any>>(null);
-  const [myComment, setMyComment] = useState<Comment>(null);
+  const [movieComment, setMovieComment] = useState({
+    myComment: emptyComment,
+    movieComments: [],
+  });
   let userinfo = null;
   if (typeof window !== "undefined") {
     userinfo = JSON.parse(localStorage.getItem("userinfo") || "{}");
@@ -74,10 +76,16 @@ export default function WatchPage({ params }: { params: { movieid: string; episo
   const fetchMovieComment = async () => {
     const response = await getMovieComment(params.movieid, userinfo?.id);
     if (response.status == "success") {
-      setMovieComment(response.content);
-      if (response.content[0]?.userid == userinfo?.id) {
-        setMyComment(response.content[0]);
-      } else setMyComment(emptyComment);
+      let myComment = emptyComment;
+      if (response.content[0].userid == userinfo?.id) {
+        // Reponse always put current userid in first index if exist
+        myComment = response.content[0];
+        response.content.shift();
+      }
+      setMovieComment({
+        myComment,
+        movieComments: response.content,
+      });
     } else {
       showResponseToast(response);
     }
@@ -146,11 +154,11 @@ export default function WatchPage({ params }: { params: { movieid: string; episo
         {movieComment && (
           <div className="mt-12 lg:w-1/2">
             <h1 className="text-2xl my-4">Bình luận</h1>
-            <MyMoviesComments
+            <MovieMyComment
               movieid={params.movieid}
-              mycomment={myComment}
+              mycomment={movieComment.myComment}
             />
-            <MoviesComments movieid={params.episodeid} />
+            <MovieComments commentList={movieComment.movieComments} />
           </div>
         )}
       </div>

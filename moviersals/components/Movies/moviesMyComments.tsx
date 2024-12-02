@@ -38,7 +38,7 @@ interface Comment {
   thumbnail: string;
 }
 
-export default function MyMoviesComments({ movieid, mycomment }: { movieid: string; mycomment: Comment }) {
+export default function MovieMyComment({ movieid, mycomment }: { movieid: string; mycomment: Comment }) {
   // NEW COMMENT
   const [comment, setComment] = useState<Comment>();
   const [newRating, setNewRating] = useState(null);
