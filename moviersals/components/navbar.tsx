@@ -49,7 +49,7 @@ export const Navbar = () => {
   );
 
   async function logoutHandle() {
-    const res = await logout();
+    await logout();
     router.push("/login");
   }
 

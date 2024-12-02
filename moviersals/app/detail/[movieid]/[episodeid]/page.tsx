@@ -1,5 +1,7 @@
-"use client"
+"use client";
 
+import getMovieComment from "@/app/api/comment/getMovieComment";
+import getMovieEpisodeById from "@/app/api/movies/getEpisodeById";
 import getMovieDetailById from "@/app/api/movies/getMovieById";
 import EpisodeListCarousel from "@/components/Episode/episodeListCarousel";
 import { MdiEyeOutline } from "@/components/icons";
@@ -9,113 +11,149 @@ import MovieSuggestion from "@/components/Movies/moviesSuggestion";
 import { title } from "@/components/primitives";
 import CloudinaryVideoPlayer from "@/components/Video/videoplayer";
 import { categoriesSubtitles } from "@/config/categoriesSubtitles";
+import { showResponseToast } from "@/lib/utils";
 import { Divider } from "@nextui-org/react";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function WatchPage({
-    params
-}: {
-    params: { episodeid: string }
-}) {
-    const { movieid, episodeid } = useParams();
-    const [data, setData] = useState<any>({});
-    const [currentEpisodeObject, setDataCurrentEpisodeObject] = useState<any>(null);
+interface Comment {
+  id: number;
+  userid: string;
+  movieid: string;
+  username: string;
+  displayname: string;
+  content: string;
+  rating: number;
+  createddate: string;
+  modifieddate: string;
+  thumbnail: string;
+}
 
-    useEffect(() => {
-        fetchData();
-    }, []);
+const emptyComment: Comment = {
+  id: null,
+  userid: null,
+  movieid: null,
+  username: null,
+  displayname: null,
+  content: null,
+  rating: 0,
+  createddate: null,
+  modifieddate: null,
+  thumbnail: null,
+};
 
-    const fetchData = async () => {
-        const response = await getMovieDetailById(movieid as string);
-        const content = response.content;
-        console.log("Content:", content);  // Ensure content is what you expect
-        setData(content);
+export default function WatchPage({ params }: { params: { movieid: string; episodeid: string } }) {
+  //   const { movieid, episodeid } = useParams();
+  const [data, setData] = useState<any>(null);
+  const [movieComment, setMovieComment] = useState<Array<any>>(null);
+  const [myComment, setMyComment] = useState<Comment>(null);
+  let userinfo = null;
+  if (typeof window !== "undefined") {
+    userinfo = JSON.parse(localStorage.getItem("userinfo") || "{}");
+  }
 
-        // Assuming the episodes are in content.list (adjust accordingly if your structure is different)
-        const episodeObject = getEpisodeById(episodeid, content.list);
-        setDataCurrentEpisodeObject(episodeObject);
-    };
+  useEffect(() => {
+    fetchMovieInfo();
+    fetchMovieComment();
+  }, []);
 
-    // Function to find episode by ID
-    const getEpisodeById = (episodeid, episodesList) => {
-        return episodesList.find(episode => episode.episodeid === episodeid);
-    };
+  const fetchMovieInfo = async () => {
+    const response = await getMovieEpisodeById(params.movieid, params.episodeid);
+    if (response.status == "success") {
+      const videoid = response.content[0]?.episodepath?.match(/\/upload\/v\d+\/(.+)/)[1];
+      setData((prevData) => ({
+        ...prevData,
+        ...response.content,
+        videoid,
+      }));
+    } else {
+      showResponseToast(response);
+    }
+  };
 
-    return (
-        <>
-            {currentEpisodeObject ? (
-                <CloudinaryVideoPlayer
-                    episode={currentEpisodeObject}
-                    widthVP="100%"
-                    heightVP="300"
-                />
-            ) : (
-                <h1 className="text-2xl">Loading video...</h1> // Show loading message if episode data is not available
-            )}
-            <div className="p-8">
-                <div className="leading-10">
-                    <h1 className={title()}>{data?.movieDetail?.name}</h1>
-                    <h1 className="text-sm">Nhà sản xuất: <span>{data?.movieDetail?.publisher}</span></h1>
-                    <div className="flex">
-                        <div className="self-center">
-                            <MdiEyeOutline />
-                        </div>
-                        <div className="self-center">
-                            &nbsp; {(data?.movieDetail?.views >= 0) ? data?.movieDetail?.views : "Chưa có"} lượt xem
-                        </div>
-                    </div>
-                </div>
-                <div className="flex flex-wrap h-5 font-black mt-8 space-x-4">
-                    <Divider orientation="vertical" />
-                    <h1 className="text-sm">{data?.movieDetail?.publishyear}</h1>
-                    {Array.isArray(data?.movieDetail?.categories) ? (
-                        data?.movieDetail?.categories.map((cat, index) => (
-                            <div key={index}>
-                                <Divider orientation="vertical" />
-                                <h1 className="text-sm">
-                                    <span key={index}>
-                                        {categoriesSubtitles[cat as keyof typeof categoriesSubtitles]?.vietsub}
-                                    </span>
-                                </h1>
-                            </div>
-                        ))
-                    ) : (
-                        JSON.parse(data?.movieDetail?.categories || "[]").map((cat: string, index: number) => (
-                            <div key={index}>
-                                <Divider orientation="vertical" />
-                                <h1 className="text-sm">
-                                    <span key={index}>
-                                        {categoriesSubtitles[cat as keyof typeof categoriesSubtitles]?.vietsub}
-                                    </span>
-                                </h1>
-                            </div>
-                        ))
-                    )}
-                </div>
-                <p className="my-8 text-sm leading-6 lg:w-1/2">
-                    {data?.movieDetail?.description}
-                </p>
-                {
-                    (data?.movieDetail?.type == "movie")
-                        ? <></>
-                        : (
-                            <div className="mt-12 w-full">
-                                <h1 className="text-2xl my-4">Danh sách tập</h1>
-                                <EpisodeListCarousel movieData={data} />
-                            </div>
-                        )
-                }
-                <div className="mt-12 w-full">
-                    <h1 className="text-2xl my-4">Có thể bạn cũng thích</h1>
-                    <MovieSuggestion />
-                </div>
-                <div className="mt-12 lg:w-1/2">
-                    <h1 className="text-2xl my-4">Bình luận</h1>
-                    <MyMoviesComments />
-                    <MoviesComments movieid={params.episodeid} />
-                </div>
+  const fetchMovieComment = async () => {
+    const response = await getMovieComment(params.movieid, userinfo?.id);
+    if (response.status == "success") {
+      setMovieComment(response.content);
+      if (response.content[0]?.userid == userinfo?.id) {
+        setMyComment(response.content[0]);
+      } else setMyComment(emptyComment);
+    } else {
+      showResponseToast(response);
+    }
+  };
+
+  return (
+    <>
+      {/* {data?.videoid ? (
+        <CloudinaryVideoPlayer
+          publicid={data.videoid}
+          movieid={params.movieid}
+          episodeid={params.episodeid}
+          widthVP="100%"
+          heightVP="300"
+        />
+      ) : (
+        <h1 className="text-2xl">Loading video...</h1> // Show loading message if episode data is not available
+      )} */}
+      <div className="p-8">
+        <div className="leading-10">
+          <h1 className={title()}>{data?.movieDetail?.name}</h1>
+          <h1 className="text-sm">
+            Nhà sản xuất: <span>{data?.movieDetail?.publisher}</span>
+          </h1>
+          <div className="flex">
+            <div className="self-center">
+              <MdiEyeOutline />
             </div>
-        </>
-    );
+            <div className="self-center">&nbsp; {data?.movieDetail?.views >= 0 ? data?.movieDetail?.views : "Chưa có"} lượt xem</div>
+          </div>
+        </div>
+        <div className="flex flex-wrap h-5 font-black mt-8 space-x-4">
+          <Divider orientation="vertical" />
+          <h1 className="text-sm">{data?.movieDetail?.publishyear}</h1>
+          {Array.isArray(data?.movieDetail?.categories)
+            ? data?.movieDetail?.categories.map((cat, index) => (
+                <div key={index}>
+                  <Divider orientation="vertical" />
+                  <h1 className="text-sm">
+                    <span key={index}>{categoriesSubtitles[cat as keyof typeof categoriesSubtitles]?.vietsub}</span>
+                  </h1>
+                </div>
+              ))
+            : JSON.parse(data?.movieDetail?.categories || "[]").map((cat: string, index: number) => (
+                <div key={index}>
+                  <Divider orientation="vertical" />
+                  <h1 className="text-sm">
+                    <span key={index}>{categoriesSubtitles[cat as keyof typeof categoriesSubtitles]?.vietsub}</span>
+                  </h1>
+                </div>
+              ))}
+        </div>
+        <p className="my-8 text-sm leading-6 lg:w-1/2">{data?.movieDetail?.description}</p>
+        {data?.movieDetail?.type == "movie" ? (
+          <></>
+        ) : (
+          <div className="mt-12 w-full">
+            <h1 className="text-2xl my-4">Danh sách tập</h1>
+            <EpisodeListCarousel movieData={data} />
+          </div>
+        )}
+        <div className="mt-12 w-full">
+          <h1 className="text-2xl my-4">Có thể bạn cũng thích</h1>
+          <MovieSuggestion />
+        </div>
+        {movieComment && (
+          <div className="mt-12 lg:w-1/2">
+            <h1 className="text-2xl my-4">Bình luận</h1>
+            <MyMoviesComments
+              movieid={params.movieid}
+              mycomment={myComment}
+            />
+            <MoviesComments movieid={params.episodeid} />
+          </div>
+        )}
+      </div>
+    </>
+  );
 }

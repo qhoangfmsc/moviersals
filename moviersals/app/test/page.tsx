@@ -1,22 +1,43 @@
 "use client";
-import PaypalButon from "@/components/Button/paypalPaymentButton";
-import VNPayButon from "@/components/Button/vnpayPaymentButton";
-import React from "react";
+
+import PaymentBoard from "@/components/PaymentBoard/paymentBoard";
+import React, { useEffect, useState } from "react";
+import getAllSubcriptionPlan from "../api/subcriptionplan/getOrderHistory";
+import { showResponseToast } from "@/lib/utils";
+import SubcriptionPlanCard from "@/components/Card/subcriptionCard";
 
 export default function PaymentMethodsComponent() {
-  const amountToPay = 9.84;
-  const subcriptionid = "PREMIUM_M";
+  const [data, setData] = useState<Array<any>>([]);
+
+  useEffect(() => {
+    async function getAllSubcriptionPlanData() {
+      const response = await getAllSubcriptionPlan();
+      if (response.status == "success") {
+        setData(response.content);
+      } else showResponseToast(response);
+    }
+
+    getAllSubcriptionPlanData();
+  }, []);
 
   return (
-    <div className="h-80 flex items-center flex-col">
-      <PaypalButon
-        amount={amountToPay}
-        subcriptionid={subcriptionid}
-      />
-      <VNPayButon
-        amount={amountToPay}
-        subcriptionid={subcriptionid}
-      />
+    <div>
+      <div className="mt-12 flex flex-row flex-wrap gap-12 justify-center">
+        {data.map((item, index) => (
+          <div key={index}>
+            <SubcriptionPlanCard
+              data={item}
+              onCardClick={() => {
+                console.log("click");
+              }}
+            />
+          </div>
+        ))}
+      </div>
+      {/* <PaymentBoard
+        subcriptionid=""
+        amount={0}
+      /> */}
     </div>
   );
 }

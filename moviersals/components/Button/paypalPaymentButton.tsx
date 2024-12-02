@@ -1,6 +1,6 @@
 "use client";
 import createPaypalOrder from "@/app/api/order/createPaypalOrder";
-import { PayPalScriptProvider, PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 interface PaypalDataProps {
   subcriptionid: string;
@@ -8,9 +8,6 @@ interface PaypalDataProps {
 }
 
 export default function PaypalButon({ subcriptionid, amount }: PaypalDataProps) {
-  //Paypal button
-  // const [{ options }, dispatch] = usePayPalScriptReducer();
-  // const [{ isPending }] = usePayPalScriptReducer();
   async function createOrder(data, actions) {
     return actions.order.create({
       intent: "CAPTURE",
@@ -36,7 +33,7 @@ export default function PaypalButon({ subcriptionid, amount }: PaypalDataProps) 
         email: details.payer.email_address,
       };
       const result = await createPaypalOrder(request);
-      if (result.status == "success" && result.status == "success") return null;
+      if (result.status === "success") return null;
     });
   }
 
@@ -51,9 +48,11 @@ export default function PaypalButon({ subcriptionid, amount }: PaypalDataProps) 
           createOrder={createOrder}
           onApprove={onApprove}
           onCancel={() => {
-            console.log("Canceled !");
+            console.log("Canceled!");
           }}
-          onError={(err) => {}}
+          onError={(err) => {
+            console.error("Error:", err);
+          }}
         />
       </PayPalScriptProvider>
     </div>

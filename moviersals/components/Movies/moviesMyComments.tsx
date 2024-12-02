@@ -1,88 +1,175 @@
-"use client"
-
+"use client";
+import { Rating } from "react-simple-star-rating";
 import { videosMockup } from "@/config/videosMockup";
-import { Avatar, Card, Divider, Textarea } from "@nextui-org/react";
-import { useState } from "react";
-import { MingcuteSendFill } from "../icons";
+import { Avatar, Card, Divider, Textarea, Tooltip } from "@nextui-org/react";
+import { useEffect, useState } from "react";
+import { EditIconWithSquare, MingcuteSendFill } from "../icons";
+import { showResponseToast } from "@/lib/utils";
+import moment from "moment";
+import createComment from "@/app/api/comment/createComment";
+import editComment from "@/app/api/comment/editComment";
 
 const trendingVideos = videosMockup;
 
 interface Comment {
-    id: number;
-    movieid: string;
-    name: string;
-    publisher: string;
-    categories: string[];
-    description: string;
-    thumbnail: string;
+  id: number;
+  userid: string;
+  movieid: string;
+  username: string;
+  displayname: string;
+  content: string;
+  rating: number;
+  createddate: string;
+  modifieddate: string;
+  thumbnail: string;
 }
 
-export default function MyMoviesComments() {
-    // NEW COMMENT
-    const [comments, setComments] = useState<Comment[]>([]);
-    const [newComment, setNewComment] = useState('');
-    const onChangeComment = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setNewComment(event.target.value);
-    };
-    const onKeyDownComment = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.ctrlKey && event.key === 'Enter') {
-            sendComment();
-        }
-    };
+export default function MyMoviesComments({ movieid, mycomment }: { movieid: string; mycomment: Comment }) {
+  // NEW COMMENT
+  const [comment, setComment] = useState<Comment>();
+  const [newRating, setNewRating] = useState(null);
+  const [newComment, setNewComment] = useState(comment?.content || "");
 
-    const sendComment = () => {
-        if (newComment) {
-            const newCommentObj = {
-                "id": trendingVideos.length + comments.length,
-                "movieid": "movieid",
-                "name": "User",
-                "publisher": "user",
-                "categories": ["action", "science fiction"],
-                "description": newComment,
-                "thumbnail": "/image/user.bmp"
-            };
+  let userinfo = null;
+  if (typeof window !== "undefined") {
+    userinfo = JSON.parse(localStorage.getItem("userinfo") || "{}");
+  }
 
-            // Update the comment list
-            setComments([newCommentObj, ...comments]); // Adds to the beginning
+  useEffect(() => {
+    setComment(mycomment);
+    setNewComment(mycomment?.content || "");
+    setNewRating(mycomment?.rating || null);
+  }, [mycomment]);
 
-            // Clear the textarea after submission
-            setNewComment('');
-        }
+  const onChangeComment = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNewComment(event.target.value);
+  };
+  const onKeyDownComment = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.ctrlKey && event.key === "Enter") {
+      sendComment();
     }
+  };
 
-    return (
-        <>
+  const handleRatingChanged = (newRating: number) => {
+    setNewRating(newRating);
+  };
 
-            <Textarea
-                variant="bordered"
-                placeholder="Nhập bình luận của bạn"
-                className="mb-4"
-                value={newComment}
-                onKeyDown={(event) => onKeyDownComment(event)}
-                onChange={(event) => onChangeComment(event)}
-                endContent={
-                    <button className="focus:outline-none" type="button" onClick={() => sendComment()} aria-label="toggle password visibility">
-                        <MingcuteSendFill />
-                    </button>
-                }
-            />
-            <Divider orientation="horizontal" />
-            {comments.map((item) => (
-                <div key={item.id}>
-                    <div className="mb-4">
-                        <div className="flex flex-row my-4 mx-2">
-                            <Avatar isBordered className="w-10 h-10 mr-1" src={item.thumbnail} />
-                            <div className="flex flex-col mx-4 self-center">
-                                <p>{item.name}</p>
-                                <p className="text-tiny">@{item.publisher}</p>
-                                <p className="text-tiny text-gray-500">Bây giờ</p>
-                            </div>
-                        </div>
-                        <Card className="text-sm p-3 w-fit text-gray-400">{item.description}</Card>
-                    </div>
-                    <Divider orientation="horizontal" />
-                </div>
-            ))}
-        </>
-    );
+  const sendComment = async () => {
+    if (newRating != null && newComment) {
+      const newCommentObj = {
+        id: comment?.id || 0.1,
+        userid: userinfo?.id,
+        movieid: movieid,
+        username: userinfo?.username,
+        displayname: userinfo?.displayname,
+        content: newComment,
+        rating: newRating,
+        createddate: moment().format("YYYY-MM-DD HH:mm:ss"),
+        thumbnail: userinfo?.thumbnail,
+        modifieddate: moment().format("YYYY-MM-DD HH:mm:ss"),
+      };
+      // Update the comment list
+
+      let commentObject = {
+        id: null,
+        movieid: movieid,
+        content: newComment,
+        rating: newRating,
+      };
+
+      if (!comment.id) {
+        const response = await createComment(commentObject);
+        showResponseToast(response);
+      } else {
+        commentObject.id = comment.id;
+        const response = await editComment(commentObject);
+        showResponseToast(response);
+      }
+      setComment(newCommentObj); // Adds to the beginning
+
+      // Clear the textarea after submission
+      // setNewComment("");
+    } else {
+      showResponseToast({ content: "Vui liệu đánh giá và nhập bình luận trước khi gửi", status: "fail" });
+    }
+  };
+
+  return (
+    <>
+      <div className="flex justify-end mb-2">
+        <Rating
+          size={20}
+          onClick={handleRatingChanged}
+          initialValue={comment?.rating}
+          allowFraction
+        />
+      </div>
+      <div className="mb-4">
+        <Textarea
+          variant="bordered"
+          placeholder="Nhập bình luận của bạn"
+          value={newComment || ""}
+          onKeyDown={(event) => onKeyDownComment(event)}
+          onChange={(event) => onChangeComment(event)}
+          endContent={
+            !comment?.id ? (
+              <button
+                className="focus:outline-none"
+                type="button"
+                onClick={() => sendComment()}
+                aria-label="add new comment">
+                <MingcuteSendFill />
+              </button>
+            ) : (
+              <button
+                className="focus:outline-none"
+                type="button"
+                onClick={() => sendComment()}
+                aria-label="edit comment">
+                <EditIconWithSquare />
+              </button>
+            )
+          }
+        />
+      </div>
+      {comment?.id && (
+        <div>
+          <Divider orientation="horizontal" />
+          <div className="my-4 p-2 bg-slate-700/[0.7] rounded-lg">
+            <div className="flex flex-row my-4 mx-2">
+              <Avatar
+                isBordered
+                className="w-10 h-10 mr-1"
+                src={comment?.thumbnail}
+              />
+              <div className="flex flex-col mx-4 self-center">
+                <p>{comment?.displayname}</p>
+                <p className="text-tiny">@{comment?.username}</p>
+                <Tooltip
+                  content={comment?.createddate}
+                  closeDelay={1}
+                  placement="bottom-end"
+                  color="primary">
+                  <p className="text-tiny text-gray-500">{moment().from(comment?.createddate)}</p>
+                </Tooltip>
+              </div>
+              <div className="flex flex-1 justify-end">
+                <Rating
+                  size={20}
+                  allowFraction
+                  readonly
+                  allowHover={false}
+                  disableFillHover
+                  initialValue={comment?.rating}
+                />
+              </div>
+            </div>
+
+            <Card className="text-sm p-3 w-fit text-gray-400">{comment?.content}</Card>
+          </div>
+          <Divider orientation="horizontal" />
+        </div>
+      )}
+    </>
+  );
 }

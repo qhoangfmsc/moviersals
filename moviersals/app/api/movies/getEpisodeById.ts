@@ -1,8 +1,7 @@
 import { requestApi } from "@/lib/requestApi";
 
 export default async function getMovieEpisodeById(movieid: string, episodeid: string) {
-    const url = `/api/movie/detail/${movieid}/${episodeid}`;
-    const param = null
+    const url = `/api/protected/movie/watch/${movieid}/${episodeid}`;
 
-    return await requestApi(url, param);
+    return await requestApi(url, null);
 }
