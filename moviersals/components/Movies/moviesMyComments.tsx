@@ -1,13 +1,27 @@
 "use client";
 import { Rating } from "react-simple-star-rating";
 import { videosMockup } from "@/config/videosMockup";
-import { Avatar, Card, Divider, Textarea, Tooltip } from "@nextui-org/react";
+import {
+  Avatar,
+  Button,
+  Card,
+  Divider,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  Textarea,
+  Tooltip,
+  useDisclosure,
+} from "@nextui-org/react";
 import { useEffect, useState } from "react";
-import { EditIconWithSquare, MingcuteSendFill } from "../icons";
+import { EditIconWithSquare, IconDelete, MingcuteSendFill } from "../icons";
 import { showResponseToast } from "@/lib/utils";
 import moment from "moment";
 import createComment from "@/app/api/comment/createComment";
 import editComment from "@/app/api/comment/editComment";
+import deleteComment from "@/app/api/comment/deleteComment";
 
 const trendingVideos = videosMockup;
 
@@ -29,6 +43,7 @@ export default function MyMoviesComments({ movieid, mycomment }: { movieid: stri
   const [comment, setComment] = useState<Comment>();
   const [newRating, setNewRating] = useState(null);
   const [newComment, setNewComment] = useState(comment?.content || "");
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   let userinfo = null;
   if (typeof window !== "undefined") {
@@ -52,6 +67,15 @@ export default function MyMoviesComments({ movieid, mycomment }: { movieid: stri
 
   const handleRatingChanged = (newRating: number) => {
     setNewRating(newRating);
+  };
+
+  const handleDeleteComment = async (onClose: () => void) => {
+    const response = await deleteComment({ id: comment?.id, movieid: movieid });
+    showResponseToast(response);
+    setComment(null);
+    setNewComment(null);
+    setNewRating(null);
+    onClose();
   };
 
   const sendComment = async () => {
@@ -162,6 +186,17 @@ export default function MyMoviesComments({ movieid, mycomment }: { movieid: stri
                   disableFillHover
                   initialValue={comment?.rating}
                 />
+                <div>
+                  <Button
+                    size="sm"
+                    className="ml-4"
+                    isIconOnly
+                    color="danger"
+                    onClick={() => onOpen()}
+                    aria-label="delete comment">
+                    <IconDelete />
+                  </Button>
+                </div>
               </div>
             </div>
 
@@ -170,6 +205,35 @@ export default function MyMoviesComments({ movieid, mycomment }: { movieid: stri
           <Divider orientation="horizontal" />
         </div>
       )}
+      <Modal
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        size="xl"
+        scrollBehavior="inside">
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">Xóa bình luận</ModalHeader>
+              <ModalBody>Hành động này sẽ xóa bình luận vĩnh viễn !</ModalBody>
+              <ModalFooter>
+                <Button
+                  color="primary"
+                  variant="light"
+                  onPress={onClose}>
+                  {"Hủy"}
+                </Button>
+                <Button
+                  color="danger"
+                  onPress={() => {
+                    handleDeleteComment(onClose);
+                  }}>
+                  {"Đồng ý"}
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
     </>
   );
 }
