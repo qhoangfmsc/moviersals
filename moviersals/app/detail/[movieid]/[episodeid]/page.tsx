@@ -94,7 +94,7 @@ export default function WatchPage({ params }: { params: { movieid: string; episo
 
   return (
     <>
-      {/* {data?.videoid ? (
+      {data?.videoid ? (
         <CloudinaryVideoPlayer
           publicid={data.videoid}
           movieid={params.movieid}
@@ -104,7 +104,7 @@ export default function WatchPage({ params }: { params: { movieid: string; episo
         />
       ) : (
         <h1 className="text-2xl">Loading video...</h1> // Show loading message if episode data is not available
-      )} */}
+      )}
       <div className="p-8">
         <div className="leading-10">
           <h1 className={title()}>{data?.movieDetail?.name}</h1>
