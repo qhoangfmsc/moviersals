@@ -76,7 +76,10 @@ export default function PaymentMethodsComponent() {
         style={{
           display: selectedSubcription ? "block" : "none",
         }}>
-        <Divider className="mb-12" />
+        <Divider className="mb-6" />
+        <div className="mb-6 flex justify-center">
+          <h1 className="text-2xl">Phương thức thanh toán</h1>
+        </div>
         <PaymentBoard
           paymentData={selectedSubcription}
           element={

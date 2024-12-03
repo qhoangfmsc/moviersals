@@ -1,6 +1,8 @@
 "use client";
 import createPaypalOrder from "@/app/api/order/createPaypalOrder";
+import { showResponseToast } from "@/lib/utils";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { useRouter } from "next/navigation";
 
 interface PaypalDataProps {
   subcriptionid: string;
@@ -8,6 +10,8 @@ interface PaypalDataProps {
 }
 
 export default function PaypalButon({ subcriptionid, price }: PaypalDataProps) {
+  const router = useRouter();
+
   async function createOrder(data, actions) {
     return actions.order.create({
       intent: "CAPTURE",
@@ -33,7 +37,10 @@ export default function PaypalButon({ subcriptionid, price }: PaypalDataProps) {
         email: details.payer.email_address,
       };
       const result = await createPaypalOrder(request);
-      if (result.status === "success") return null;
+      if (result.status === "success") {
+        showResponseToast({ status: "success", content: "Thanh toán thành công, xin cảm ơn quý khách" });
+        router.push("/order/history");
+      }
     });
   }
 

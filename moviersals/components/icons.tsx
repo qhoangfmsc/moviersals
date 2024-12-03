@@ -642,6 +642,7 @@ export function IconCircleFill(props: React.SVGProps<SVGSVGElement>) {
 export function IconDelete(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
+      xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 1024 1024"
       fill="currentColor"
       height="2em"
@@ -655,6 +656,7 @@ export function IconDelete(props: React.SVGProps<SVGSVGElement>) {
 export function UpsideDownTriangle(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
+      xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="#7e22ce"
       strokeWidth="5"
@@ -662,6 +664,47 @@ export function UpsideDownTriangle(props: React.SVGProps<SVGSVGElement>) {
       width="1.5em"
       {...props}>
       <path d="M6.38 6h11.25L12 16 6.38 6M3 4l9 16 9-16H3z" />
+    </svg>
+  );
+}
+
+export function IconInfoCircle(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 1024 1024"
+      fill="red"
+      height="1.6em"
+      width="1.6em"
+      {...props}>
+      <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z" />
+      <path d="M464 336a48 48 0 1096 0 48 48 0 10-96 0zm72 112h-48c-4.4 0-8 3.6-8 8v272c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V456c0-4.4-3.6-8-8-8z" />
+    </svg>
+  );
+}
+
+export function IconDongSign(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 384 512"
+      fill="currentColor"
+      height="1.2em"
+      width="1.2em"
+      {...props}>
+      <path d="M288 32c-17.7 0-32 14.3-32 32h-32c-17.7 0-32 14.3-32 32s14.3 32 32 32h32v49.1c-18.8-10.9-40.7-17.1-64-17.1-70.7 0-128 57.3-128 128s57.3 128 128 128c24.5 0 47.4-6.9 66.8-18.8 5 11.1 16.2 18.8 29.2 18.8 17.7 0 32-14.3 32-32V128c17.7 0 32-14.3 32-32s-14.3-32-32-32c0-17.7-14.3-32-32-32zm-32 256c0 35.3-28.7 64-64 64s-64-28.7-64-64 28.7-64 64-64 64 28.7 64 64zM32 448c-17.7 0-32 14.3-32 32s14.3 32 32 32h320c17.7 0 32-14.3 32-32s-14.3-32-32-32H32z" />
+    </svg>
+  );
+}
+
+export function IconCurrencyUsd(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      height="1.2em"
+      width="1.2em"
+      {...props}>
+      <path d="M7 15h2c0 1.08 1.37 2 3 2s3-.92 3-2c0-1.1-1.04-1.5-3.24-2.03C9.64 12.44 7 11.78 7 9c0-1.79 1.47-3.31 3.5-3.82V3h3v2.18C15.53 5.69 17 7.21 17 9h-2c0-1.08-1.37-2-3-2s-3 .92-3 2c0 1.1 1.04 1.5 3.24 2.03C14.36 11.56 17 12.22 17 15c0 1.79-1.47 3.31-3.5 3.82V21h-3v-2.18C8.47 18.31 7 16.79 7 15z" />
     </svg>
   );
 }

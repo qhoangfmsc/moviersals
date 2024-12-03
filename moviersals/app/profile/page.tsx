@@ -143,7 +143,7 @@ export default function TemplatePage() {
                 type="text"
                 variant="underlined"
                 label="Gói sử dụng"
-                value={userInfo?.membership}
+                value={userInfo?.subcriptionid}
               />
               <div className="flex justify-between">
                 {!isRequestClick ? (

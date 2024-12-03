@@ -11,7 +11,7 @@ interface PaypalDataProps {
 
 export default function VNPayButon({ subcriptionid, price }: PaypalDataProps) {
   async function handleVNPayClick() {
-    const body = { subcriptionid: subcriptionid, price: price };
+    const body = { subcriptionid: subcriptionid, amount: price };
 
     const result = await createVNPayOrder(body);
     if (result.status == "success") {

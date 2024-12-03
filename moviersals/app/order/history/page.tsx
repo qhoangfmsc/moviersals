@@ -23,18 +23,18 @@ export default function OrderHistoryPage() {
   const columns = [
     { name: "Mã Đơn Hàng", uid: "orderid" }, // Order ID
     { name: "Mã Gói Đăng Ký", uid: "subcriptionid" }, // Subscription ID
-    { name: "Phương Thức Thanh Toán", uid: "paymentmethod" }, // Payment Method
+    { name: "Phương Thức", uid: "paymentmethod" }, // Payment Method
     { name: "Mã Thanh Toán", uid: "paymentid" }, // Payment ID
-    { name: "Ngày Tạo", uid: "createddate" }, // Created Date
-    { name: "Trạng Thái", uid: "status" }, // Status
-    { name: "Ngày Thanh Toán", uid: "paymentdate" }, // Payment Date
     { name: "Số tiền (VND)", uid: "amount" }, // Amount
+    { name: "Ngày Tạo", uid: "createddate" }, // Created Date
+    { name: "Ngày Thanh Toán", uid: "paymentdate" }, // Payment Date
+    { name: "Trạng Thái", uid: "status" }, // Status
     { name: "Liên Kết Thanh Toán", uid: "paymenturl" }, // Payment URL
   ];
 
   return (
     <div className="p-[20px] h-screen">
-      <h2 className="text-2xl font-bold mb-4 mt-4">Order History</h2>
+      <h2 className="text-2xl font-bold mb-4 mt-4">Lịch sử thanh toán</h2>
       <Spacer y={2} />
       <Card>
         <Table
@@ -52,14 +52,14 @@ export default function OrderHistoryPage() {
                 <TableCell>{order.subcriptionid}</TableCell>
                 <TableCell>{order.paymentmethod}</TableCell>
                 <TableCell>{order.paymentid}</TableCell>
+                <TableCell className="text-green-500 font-semibold">{order.amount}</TableCell>
                 <TableCell>
                   {new Date(order.createddate).toLocaleDateString() + "  " + new Date(order.createddate).toLocaleTimeString()}
                 </TableCell>
-                <TableCell>{order.status == "PAID" ? "Đã thanh toán" : "Chưa thanh toán"}</TableCell>
                 <TableCell>
                   {new Date(order.paymentdate).toLocaleDateString() + "  " + new Date(order.paymentdate).toLocaleTimeString()}
                 </TableCell>
-                <TableCell className="text-green-500 font-semibold">{order.amount}</TableCell>
+                <TableCell>{order.status == "PAID" ? "Đã thanh toán" : "Chưa thanh toán"}</TableCell>
                 <TableCell>
                   {order.paymenturl ? (
                     <a

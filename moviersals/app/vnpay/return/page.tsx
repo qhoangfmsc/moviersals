@@ -1,11 +1,17 @@
 "use client";
 
+import { showResponseToast } from "@/lib/utils";
 import { Button, Card, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@nextui-org/react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation"; // useSearchParams is available in Next.js App Router
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 export default function InvoiceVNPayPage() {
   const searchParams = useSearchParams();
+
+  useEffect(() => {
+    showResponseToast({ status: "success", content: "Thanh toán thành công, xin cảm ơn quý khách" });
+  }, []);
 
   // Get data from URL params using useSearchParams
   const vnp_Amount = searchParams.get("vnp_Amount");
