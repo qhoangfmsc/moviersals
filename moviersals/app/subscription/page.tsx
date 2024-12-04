@@ -6,6 +6,8 @@ import getAllSubcriptionPlan from "../api/subcriptionplan/getOrderHistory";
 import { showResponseToast } from "@/lib/utils";
 import SubcriptionPlanCard from "@/components/Card/subcriptionCard";
 import Transition from "@/components/MotionFramer/transition";
+import { Button } from "@nextui-org/button";
+import { LineMdArrowSmallLeft } from "@/components/icons";
 
 interface selectedSubcriptionProps {
   subcriptionid: string;
@@ -67,13 +69,21 @@ export default function PaymentMethodsComponent() {
       {
         sectionState == 2 && (
           <Transition>
+            <Button
+              className="rounded-full"
+              size="lg"
+              variant="light"
+              startContent={<LineMdArrowSmallLeft />}
+              onClick={() => setSectionState(1)}>
+              Chọn lại gói
+            </Button>
             <div
               className="mb-24"
               style={{
                 display: selectedSubcription ? "block" : "none",
               }}>
               <div className="mb-6 flex justify-center">
-                <h1 className="text-2xl">Phương thức thanh toán</h1>
+                <h1 className="text-2xl">Xác nhận hoá đơn</h1>
               </div>
               <PaymentBoard
                 paymentData={selectedSubcription}

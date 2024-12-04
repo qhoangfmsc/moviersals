@@ -50,6 +50,7 @@ export default function PaypalButon({ subcriptionid, price }: PaypalDataProps) {
       style={{ colorScheme: "none" }}>
       <PayPalScriptProvider options={{ clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID, currency: "USD", intent: "capture" }}>
         <PayPalButtons
+          className="flex"
           style={{ height: 55, layout: "vertical", color: "gold" }}
           fundingSource="paypal"
           createOrder={createOrder}
