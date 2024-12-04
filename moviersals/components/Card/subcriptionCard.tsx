@@ -1,5 +1,5 @@
-import { Card, CardFooter, Image, Button, Link, CardHeader } from "@nextui-org/react";
-import { UpsideDownTriangle } from "../icons";
+import { Card, CardFooter, Button, CardHeader, Tooltip } from "@nextui-org/react";
+import { MageInformationSquareIsSmall, UpsideDownTriangle } from "../icons";
 
 interface SubcriptionProps {
   data: {
@@ -58,7 +58,10 @@ export default function SubcriptionPlanCard({ data, onCardClick, showButton }: S
         </p>
         <div className="justify-items-start mt-4 mx-3">
           <p className="flex flex-row text-sm text-white/80 mb-4">
-            <UpsideDownTriangle /> &nbsp; {`IP đăng nhập tối đa: ${data?.connection}`}
+            <UpsideDownTriangle /> &nbsp; {`Số lượng IP: ${data?.connection}`} &nbsp;
+            <Tooltip content="Số lượng IP tối đa mỗi tài khoản được sử dụng">
+              <span><MageInformationSquareIsSmall /></span>
+            </Tooltip>
           </p>
           <p className="flex flex-row  text-sm text-white/80 mb-4">
             <UpsideDownTriangle /> &nbsp; {`Chất lượng: ${data?.quality}`}
@@ -70,11 +73,10 @@ export default function SubcriptionPlanCard({ data, onCardClick, showButton }: S
         <CardFooter className="flex flex-col items-start mt-auto">
           {showButton && (
             <Button
-              isDisabled={data?.price == "0"}
               onClick={handleSubcriptionClick}
               className="w-full"
               color="primary">
-              {data?.price == "0" ? "" : "Chọn"}
+                Chọn
             </Button>
           )}
         </CardFooter>

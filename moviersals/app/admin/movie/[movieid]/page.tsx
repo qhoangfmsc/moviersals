@@ -21,6 +21,7 @@ import VideoUploader from "@/components/Cloudinary/uploadvideo";
 import editMovie from "@/app/api/movies/editMovie";
 import AddNewEpisodeAdminForm from "@/components/Episode/episodeAdminForm";
 import AdminForm, { AdminFormCofig } from "@/components/Form/adminForm";
+import Transition from "@/components/MotionFramer/transition";
 
 export default function episodeEpisodesListForm({ params }: { params: { movieid: string } }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -90,7 +91,7 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
   };
 
   return (
-    <div>
+    <Transition>
       <h1 className={title()}>Quản lý phim {data?.movieDetail?.name}</h1>
       <Breadcrumbs
         className="my-4"
@@ -145,6 +146,6 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
           )}
         </ModalContent>
       </Modal>
-    </div>
+    </Transition>
   );
 }

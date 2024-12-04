@@ -4,6 +4,7 @@ import getAllMovie from "@/app/api/movies/getAllMovie";
 import uploadMovie from "@/app/api/movies/uploadMovie";
 import AdminForm, { AdminFormCofig } from "@/components/Form/adminForm";
 import { LetsIconsExpandRight } from "@/components/icons";
+import Transition from "@/components/MotionFramer/transition";
 import { title } from "@/components/primitives";
 import TableNextUI from "@/components/Table/tableNextUI";
 import { BreadcrumbItem, Breadcrumbs } from "@nextui-org/react";
@@ -95,7 +96,7 @@ export default function MovieAdminPage() {
   };
 
   return (
-    <div>
+    <Transition>
       <h1 className={title()}>Quản lý phim ảnh</h1>
       <Breadcrumbs
         className="my-4"
@@ -117,6 +118,6 @@ export default function MovieAdminPage() {
           />
         </div>
       </div>
-    </div>
+    </Transition>
   );
 }

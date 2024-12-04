@@ -736,3 +736,11 @@ export function IconHeartNotYet(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+export function MageInformationSquare(props: React.SVGProps<SVGSVGElement>) {
+	return (<svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><g fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 17.139v-6.167"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.958 7.563h.008"></path><rect width={18.5} height={18.5} x={2.75} y={2.75} strokeWidth={1.5} rx={6}></rect></g></svg>);
+}
+
+export function MageInformationSquareIsSmall(props: React.SVGProps<SVGSVGElement>) {
+	return (<svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 24 24" {...props}><g fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 17.139v-6.167"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.958 7.563h.008"></path><rect width={18.5} height={18.5} x={2.75} y={2.75} strokeWidth={1.5} rx={6}></rect></g></svg>);
+}

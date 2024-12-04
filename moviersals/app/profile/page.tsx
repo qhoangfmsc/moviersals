@@ -7,6 +7,7 @@ import editProfile from "../api/account/editProfile";
 import { convertRequestToFormData, preexecuteRequest, showResponseToast } from "@/lib/utils";
 import RequestEmailVerification from "../api/account/requestemailverification";
 import ConfirmEmailVerification from "../api/account/confirmemailverification";
+import Transition from "@/components/MotionFramer/transition";
 
 export default function TemplatePage() {
   const [fileState, setFileState] = useState<File>(null);
@@ -85,7 +86,7 @@ export default function TemplatePage() {
   };
 
   return (
-    <>
+    <Transition>
       <div className="flex flex-col lg:flex-row justify-center">
         <Card className="relative p-8 lg:mr-12 text-center overflow-hidden w-[300px] justify-between">
           {userInfo?.ispremium ? (
@@ -228,6 +229,6 @@ export default function TemplatePage() {
           </Card>
         </div>
       </div>
-    </>
+    </Transition>
   );
 }

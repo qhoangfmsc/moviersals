@@ -14,6 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { useEffect } from "react";
 import Script from "next/script";
+import Transition from "../components/MotionFramer/transition";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   useEffect(() => {
@@ -46,7 +47,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="relative flex flex-col h-screen">
             <Navbar />
             {/* MAIN PAGE */}
-            <main className="flex-grow">{children}</main>
+            <Transition>
+              <main className="flex-grow">{children}</main>
+            </Transition>
             {/*  */}
             <Footer />
           </div>

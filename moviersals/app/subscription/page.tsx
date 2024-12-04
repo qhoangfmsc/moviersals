@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import getAllSubcriptionPlan from "../api/subcriptionplan/getOrderHistory";
 import { showResponseToast } from "@/lib/utils";
 import SubcriptionPlanCard from "@/components/Card/subcriptionCard";
-import { Divider } from "@nextui-org/react";
+import Transition from "@/components/MotionFramer/transition";
 
 interface selectedSubcriptionProps {
   subcriptionid: string;
@@ -21,6 +21,7 @@ interface selectedSubcriptionProps {
 export default function PaymentMethodsComponent() {
   const [subcriptionListData, setSubcriptionListData] = useState<Array<any>>([]);
   const [selectedSubcription, setSelectedSubcription] = useState<selectedSubcriptionProps>(null);
+  const [sectionState, setSectionState] = useState(1);
 
   useEffect(() => {
     async function getAllSubcriptionPlanData() {
@@ -35,62 +36,59 @@ export default function PaymentMethodsComponent() {
 
   const handleReceivePlanInfo = (data) => {
     setSelectedSubcription(data);
-    // create me delay function
-    setTimeout(() => {
-      const targetPosition = 600;
-      const step = 10; // Pixels to scroll in each step
-      const delay = 5; // Delay between each step in milliseconds
-      if (window.scrollY < targetPosition) {
-        let currentScroll = window.scrollY; // Get the current scroll position
-        const scrollAnimation = setInterval(() => {
-          if (currentScroll < targetPosition) {
-            currentScroll += step;
-            window.scrollTo({
-              top: currentScroll,
-              behavior: "instant", // No smooth behavior here, handled by steps
-            });
-          } else {
-            clearInterval(scrollAnimation); // Stop scrolling when target is reached
-          }
-        }, delay);
-      }
-    }, 200);
+    setSectionState(2);
     console.log("Here: ", data.subcriptionid, data.price);
   };
 
   return (
-    <div>
-      <div className="mt-12 mb-12 flex flex-row flex-wrap gap-12 justify-center">
-        {subcriptionListData.map((item, index) => (
-          <div key={index}>
-            <SubcriptionPlanCard
-              data={item}
-              onCardClick={handleReceivePlanInfo}
-              showButton={true}
-            />
-          </div>
-        ))}
-      </div>
-      <div
-        className="mb-24"
-        style={{
-          display: selectedSubcription ? "block" : "none",
-        }}>
-        <Divider className="mb-6" />
-        <div className="mb-6 flex justify-center">
-          <h1 className="text-2xl">Phương thức thanh toán</h1>
-        </div>
-        <PaymentBoard
-          paymentData={selectedSubcription}
-          element={
-            <SubcriptionPlanCard
-              data={selectedSubcription}
-              onCardClick={null}
-              showButton={false}
-            />
-          }
-        />
-      </div>
-    </div>
+    <Transition>
+      {
+        sectionState == 1 && (
+          <Transition>
+            <div>
+              <div className="mb-6 flex justify-center">
+                <h1 className="text-2xl">Chọn gói sử dụng</h1>
+              </div>
+              <div className="mt-12 mb-12 flex flex-row flex-wrap gap-12 justify-center">
+                {subcriptionListData.map((item, index) => (
+                  <div key={index}>
+                    <SubcriptionPlanCard
+                      data={item}
+                      onCardClick={handleReceivePlanInfo}
+                      showButton={true}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Transition>
+        )
+      }
+      {
+        sectionState == 2 && (
+          <Transition>
+            <div
+              className="mb-24"
+              style={{
+                display: selectedSubcription ? "block" : "none",
+              }}>
+              <div className="mb-6 flex justify-center">
+                <h1 className="text-2xl">Phương thức thanh toán</h1>
+              </div>
+              <PaymentBoard
+                paymentData={selectedSubcription}
+                element={
+                  <SubcriptionPlanCard
+                    data={selectedSubcription}
+                    onCardClick={null}
+                    showButton={false}
+                  />
+                }
+              />
+            </div>
+          </Transition>
+        )
+      }
+    </Transition>
   );
 }
