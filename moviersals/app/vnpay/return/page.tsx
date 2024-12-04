@@ -1,5 +1,6 @@
 "use client";
 
+import Transition from "@/components/MotionFramer/transition";
 import { showResponseToast } from "@/lib/utils";
 import { Button, Card, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@nextui-org/react";
 import Link from "next/link";
@@ -50,33 +51,35 @@ export default function InvoiceVNPayPage() {
   ];
 
   return (
-    <div className="flex justify-center mb-10">
-      <Card className="w-[800px] items-center p-8">
-        <h1 className="text-2xl py-4 color-blue">VNPay Transaction Details</h1>
-        <Table
-          hideHeader
-          removeWrapper
-          style={{ height: "auto" }}>
-          <TableHeader>
-            <TableColumn> </TableColumn>
-            <TableColumn> </TableColumn>
-          </TableHeader>
-          <TableBody>
-            {tableData.map((item, index) => (
-              <TableRow key={index}>
-                <TableCell className="pr-[100px] py-[20px]">{item.field}</TableCell>
-                <TableCell className={item.className + " max-w-[200px]"}>{item.value}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-        <Button
-          as={Link}
-          href="/"
-          variant="flat">
-          Back to Home
-        </Button>
-      </Card>
-    </div>
+    <Transition>
+      <div className="flex justify-center mb-10">
+        <Card className="w-[800px] items-center p-8">
+          <h1 className="text-2xl py-4 color-blue">VNPay Transaction Details</h1>
+          <Table
+            hideHeader
+            removeWrapper
+            style={{ height: "auto" }}>
+            <TableHeader>
+              <TableColumn> </TableColumn>
+              <TableColumn> </TableColumn>
+            </TableHeader>
+            <TableBody>
+              {tableData.map((item, index) => (
+                <TableRow key={index}>
+                  <TableCell className="pr-[100px] py-[20px]">{item.field}</TableCell>
+                  <TableCell className={item.className + " max-w-[200px]"}>{item.value}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+          <Button
+            as={Link}
+            href="/"
+            variant="flat">
+            Back to Home
+          </Button>
+        </Card>
+      </div>
+    </Transition>
   );
 }
