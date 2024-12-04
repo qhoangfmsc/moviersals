@@ -53,6 +53,8 @@ export const Navbar = () => {
     router.push("/login");
   }
 
+  if (!pathname) return null;
+
   return (
     <NextUINavbar
       className="bg-transparent px-6"
@@ -73,6 +75,27 @@ export const Navbar = () => {
             />
           </Link>
         </NavbarBrand>
+        <NavbarItem isActive={pathname == "/"}>
+          <Link
+            color={pathname == "/" ? "primary" : "foreground"}
+            href="/">
+            Trang chủ
+          </Link>
+        </NavbarItem>
+        <NavbarItem isActive={pathname == "/subscription"}>
+          <Link
+            href="/subscription"
+            color={pathname == "/subscription" ? "primary" : "foreground"}>
+            Gói
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link
+            color="foreground"
+            href="/about">
+            Giới thiệu
+          </Link>
+        </NavbarItem>
       </NavbarContent>
 
       {authentication ? (

@@ -713,7 +713,8 @@ export function IconHeartAlready(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       viewBox="0 0 1024 1024"
-      fill="currentColor"
+      fill="#f31260"
+      strokeWidth={2}
       height="2em"
       width="2em"
       {...props}>
@@ -726,7 +727,8 @@ export function IconHeartNotYet(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       viewBox="0 0 1024 1024"
-      fill="currentColor"
+      fill="#f31260"
+      strokeWidth={2}
       height="2em"
       width="2em"
       {...props}>
