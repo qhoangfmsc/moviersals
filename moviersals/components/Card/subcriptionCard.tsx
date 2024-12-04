@@ -50,7 +50,7 @@ export default function SubcriptionPlanCard({ data, onCardClick, showButton }: S
           </div>
         ) : (
           <div className="h-[140px] py-14">
-            <p className="text-4xl font-semibold text-white mb-2">{data?.name}</p>
+            <p className="text-4xl font-semibold text-white mb-2">MIỄN PHÍ</p>
           </div>
         )}
         <p className="text-md text-white/80 mb-2 bg-purple-700 py-2 px-4 rounded-lg mx-4">
