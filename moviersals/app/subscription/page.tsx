@@ -44,61 +44,57 @@ export default function PaymentMethodsComponent() {
 
   return (
     <Transition>
-      {
-        sectionState == 1 && (
-          <Transition>
-            <div>
-              <div className="mb-6 flex justify-center">
-                <h1 className="text-2xl">Chọn gói sử dụng</h1>
-              </div>
-              <div className="mt-12 mb-12 flex flex-row flex-wrap gap-12 justify-center">
-                {subcriptionListData.map((item, index) => (
-                  <div key={index}>
-                    <SubcriptionPlanCard
-                      data={item}
-                      onCardClick={handleReceivePlanInfo}
-                      showButton={true}
-                    />
-                  </div>
-                ))}
-              </div>
+      {sectionState == 1 && (
+        <Transition>
+          <div>
+            <div className="mb-6 flex justify-center">
+              <h1 className="text-2xl">Chọn gói sử dụng</h1>
             </div>
-          </Transition>
-        )
-      }
-      {
-        sectionState == 2 && (
-          <Transition>
-            <Button
-              className="rounded-full"
-              size="lg"
-              variant="light"
-              startContent={<LineMdArrowSmallLeft />}
-              onClick={() => setSectionState(1)}>
-              Chọn lại gói
-            </Button>
-            <div
-              className="mb-24"
-              style={{
-                display: selectedSubcription ? "block" : "none",
-              }}>
-              <div className="mb-6 flex justify-center">
-                <h1 className="text-2xl">Xác nhận hoá đơn</h1>
-              </div>
-              <PaymentBoard
-                paymentData={selectedSubcription}
-                element={
+            <div className="mt-12 mb-12 flex flex-row flex-wrap gap-12 justify-center">
+              {subcriptionListData.map((item, index) => (
+                <div key={index}>
                   <SubcriptionPlanCard
-                    data={selectedSubcription}
-                    onCardClick={null}
-                    showButton={false}
+                    data={item}
+                    onCardClick={handleReceivePlanInfo}
+                    showButton={item.price == "0" ? false : true}
                   />
-                }
-              />
+                </div>
+              ))}
             </div>
-          </Transition>
-        )
-      }
+          </div>
+        </Transition>
+      )}
+      {sectionState == 2 && (
+        <Transition>
+          <Button
+            className="rounded-full"
+            size="lg"
+            variant="light"
+            startContent={<LineMdArrowSmallLeft />}
+            onClick={() => setSectionState(1)}>
+            Chọn lại gói
+          </Button>
+          <div
+            className="mb-24"
+            style={{
+              display: selectedSubcription ? "block" : "none",
+            }}>
+            <div className="mb-6 flex justify-center">
+              <h1 className="text-2xl">Xác nhận hoá đơn</h1>
+            </div>
+            <PaymentBoard
+              paymentData={selectedSubcription}
+              element={
+                <SubcriptionPlanCard
+                  data={selectedSubcription}
+                  onCardClick={null}
+                  showButton={false}
+                />
+              }
+            />
+          </div>
+        </Transition>
+      )}
     </Transition>
   );
 }

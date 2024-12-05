@@ -38,17 +38,25 @@ interface Comment {
   thumbnail: string;
 }
 
-export default function MovieMyComment({ movieid, mycomment }: { movieid: string; mycomment: Comment }) {
+interface userinfo {
+  id: string;
+  username: string;
+  displayname: string;
+  email: string;
+  thumbnail: string;
+}
+
+export default function MovieMyComment({ userinfo, movieid, mycomment }: { userinfo: userinfo; movieid: string; mycomment: Comment }) {
   // NEW COMMENT
   const [comment, setComment] = useState<Comment>();
   const [newRating, setNewRating] = useState(null);
   const [newComment, setNewComment] = useState(comment?.content || "");
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-  let userinfo = null;
-  if (typeof window !== "undefined") {
-    userinfo = JSON.parse(localStorage.getItem("userinfo") || "{}");
-  }
+  // let userinfo = null;
+  // if (typeof window !== "undefined") {
+  //   userinfo = JSON.parse(localStorage.getItem("userinfo") || "{}");
+  // }
 
   useEffect(() => {
     setComment(mycomment);
@@ -119,7 +127,7 @@ export default function MovieMyComment({ movieid, mycomment }: { movieid: string
   };
 
   return (
-    <>
+    <div>
       <div className="flex justify-end mb-2">
         <Rating
           size={20}
@@ -234,6 +242,6 @@ export default function MovieMyComment({ movieid, mycomment }: { movieid: string
           )}
         </ModalContent>
       </Modal>
-    </>
+    </div>
   );
 }
