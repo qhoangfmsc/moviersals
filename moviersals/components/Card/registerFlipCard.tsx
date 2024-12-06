@@ -172,7 +172,7 @@ export default function RegisterFlipCard() {
                   onValueChange={setIsSelected}>
                   Tôi đồng ý với{" "}
                   <Link
-                    href="/about"
+                    href="//staticpage"
                     target="__blank">
                     Hợp đồng và Chính sách
                   </Link>{" "}

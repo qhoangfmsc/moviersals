@@ -90,7 +90,7 @@ export const Navbar = () => {
         <NavbarItem>
           <Link
             color="foreground"
-            href="/about">
+            href="/staticpage">
             Giới thiệu
           </Link>
         </NavbarItem>
