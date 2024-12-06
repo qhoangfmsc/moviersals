@@ -157,7 +157,7 @@ export default function RegisterForm() {
             onValueChange={setIsSelected}>
             Tôi đồng ý với{" "}
             <Link
-              href="//staticpage"
+              href="/staticpage"
               target="__blank">
               Hợp đồng và Chính sách
             </Link>{" "}

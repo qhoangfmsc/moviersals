@@ -11,7 +11,7 @@ export default function AboutPage() {
   return (
     <Transition>
       <div className="w-full text-center mb-10">
-        <h1 className={title()}>Trang tĩnh</h1>
+        <h1 className={title()}>Giới thiệu</h1>
       </div>
       <div className="flex flex-col px-4">
         <div className="flex w-full flex-col">
