@@ -41,7 +41,7 @@ export default function MovieComments({ commentList }: { commentList: Comment[] 
                   closeDelay={1}
                   placement="bottom-end"
                   color="primary">
-                  <p className="text-tiny text-gray-500">{moment().from(item?.createddate)}</p>
+                  <p className="text-tiny text-gray-500">{moment(item?.createddate).fromNow()}</p>
                 </Tooltip>
               </div>
               <div className="flex flex-1 justify-end mr-11">

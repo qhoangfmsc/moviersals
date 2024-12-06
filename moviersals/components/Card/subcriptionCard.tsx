@@ -31,7 +31,7 @@ export default function SubcriptionPlanCard({ data, onCardClick, showButton }: S
     <Card
       key={data?.subcriptionid}
       radius="lg"
-      className="border-none w-[300px] h-[600px] bg-gradient-to-b from-[#1c1c1c] to-[#141414] p-2 shadow-lg hover:shadow-2xl transition-all overflow-visible">
+      className="border-none w-[300px] h-[500px] bg-gradient-to-b from-[#1c1c1c] to-[#141414] p-2 shadow-lg hover:shadow-2xl transition-all overflow-visible">
       <CardHeader>
         {data?.baseprice != data?.price && (
           <p className="text-md text-white bg-orange-700 p-2 rounded-lg inline-block absolute left-[81%] top-[15px] ">
@@ -60,7 +60,9 @@ export default function SubcriptionPlanCard({ data, onCardClick, showButton }: S
           <p className="flex flex-row text-sm text-white/80 mb-4">
             <UpsideDownTriangle /> &nbsp; {`Số lượng IP: ${data?.connection}`} &nbsp;
             <Tooltip content="Số lượng IP tối đa mỗi tài khoản được sử dụng">
-              <span><MageInformationSquareIsSmall /></span>
+              <span>
+                <MageInformationSquareIsSmall />
+              </span>
             </Tooltip>
           </p>
           <p className="flex flex-row  text-sm text-white/80 mb-4">

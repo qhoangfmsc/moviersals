@@ -1,6 +1,6 @@
 import { requestApi } from "@/lib/requestApi";
 
-export default async function getOrderHistory(page: string) {
+export default async function getOrderHistory(page: number) {
 
     const url = "/api/protected/order/history?page=" + page;
 

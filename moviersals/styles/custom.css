@@ -9,10 +9,6 @@ svg.star-svg {
   display: inline;
 }
 
-.custom-video-player {
-  width: 80vw; /* 80% of the viewport width */
-  height: calc(80vw * 9 / 16); /* Maintain 16:9 aspect ratio */
-  max-width: 1280px; /* Optional: Cap maximum width */
-  max-height: 720px; /* Optional: Cap maximum height */
-  margin: 0 auto; /* Center the player */
+.bg-darken {
+  background-color: rgba(0, 0, 0, 0.3);
 }

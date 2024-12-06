@@ -32,7 +32,7 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
   }, []);
 
   const fetchData = async () => {
-    const response = await getMovieDetailById(params.movieid);
+    const response = await getMovieDetailById(params.movieid, null);
     const content = response.content;
     console.log(content);
     setData(content);

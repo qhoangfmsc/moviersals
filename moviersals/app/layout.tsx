@@ -10,13 +10,16 @@ import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import createFpsChecker from "@/components/Tool/FpsTrackerTool";
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 import { useEffect } from "react";
 import Script from "next/script";
 import Transition from "../components/MotionFramer/transition";
+import moment from "moment";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  moment.locale("vi");
+
   useEffect(() => {
     // FPS Checker
     createFpsChecker();
