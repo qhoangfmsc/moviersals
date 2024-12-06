@@ -100,3 +100,7 @@ export function showResponseToast(response: Record<string, any>) {
     toast.success(response.content, { autoClose: toastDuration, theme: toastTheme });
   }
 }
+
+export function getObjectById(list: Record<string, any>[], id: string) {
+  return list.find(item => item.id === id);
+}

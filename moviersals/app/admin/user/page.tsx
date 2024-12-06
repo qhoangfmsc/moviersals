@@ -6,14 +6,20 @@ import AdminForm, { AdminFormCofig } from "@/components/Form/adminForm";
 import Transition from "@/components/MotionFramer/transition";
 import { title } from "@/components/primitives";
 import TableNextUI from "@/components/Table/tableNextUI";
-import { BreadcrumbItem, Breadcrumbs } from "@nextui-org/react";
-import { usePathname, useRouter } from "next/navigation";
+import { getObjectById } from "@/lib/utils";
+import { BreadcrumbItem, Breadcrumbs, Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@nextui-org/react";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function MovieAdminPage() {
-  const router = useRouter();
+  // MODAL
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [dataModal, setDataModal] = useState(null);
+
+  // MAIN
   const [data, setData] = useState([]);
   const pathname = usePathname();
+
   useEffect(() => {
     fetchData();
   }, [pathname]);
@@ -31,9 +37,20 @@ export default function MovieAdminPage() {
       { colname: "displayname", colsub: "Tên hiển thị" },
       { colname: "email", colsub: "Email người dùng" },
       { colname: "role", colsub: "Loại tài khoản" },
-      { colname: "ispremium", colsub: "Loại vé sử dụng" },
+      { colname: "ispremium", colsub: "Hạng vé VIP" },
     ],
     bodyData: data,
+    optionsButtonContent: (
+      <div className="flex place-items-center">
+        Xem thông tin
+      </div>
+    ),
+    optionsButtonValue: "id",
+    optionsHandler: function (id) {
+      const idInformation = getObjectById(data, id);
+      setDataModal(idInformation);
+      onOpen();
+    },
   };
 
   const adminFormCofig: AdminFormCofig = {
@@ -83,6 +100,37 @@ export default function MovieAdminPage() {
           />
         </div>
       </div>
+
+      {/* MODAL DETAIL */}
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">Chi tiết tài khoản</ModalHeader>
+              <ModalBody className="font-thin">
+                <div>ID: <b>{dataModal?.id}</b></div>
+                <div>Tên hiển thị: <b>{dataModal?.displayname}</b></div>
+                <div>Số điện thoại: <b>{dataModal?.phonenumber}</b></div>
+                <div>Email: <b>{dataModal?.email}</b></div>
+                <br />
+                <div>Tên tài khoản: <b>{dataModal?.username}</b></div>
+                <div>Hạng vé: <b>{(dataModal?.ispremium) ? "VIP" : "Phổ thông"}</b></div>
+                <div>Xác thực email: <b>{(dataModal?.isverified) ? "Xác thực" : "Chưa xác thực"}</b></div>
+                <div>Trạng thái tài khoản: <b>{(dataModal?.isactive) ? "Đang hoạt động" : "Tắt hoạt động"}</b></div>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="danger" variant="light" onPress={onClose}>
+                  Đóng
+                </Button>
+                <Button
+                  color={(dataModal?.isactive) ? "danger" : "success"}>
+                  {(dataModal?.isactive) ? "Tắt hoạt động" : "Bật hoạt động"}
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
     </Transition>
   );
 }

@@ -11,6 +11,10 @@ export interface TableData {
     bodyData: Record<string, any>[];
     optionsButtonContent?: JSX.Element; // Options button JSX or null
     optionsButtonValue?: string,
+    optionsButtonCustom?: {
+        size?: "sm" | "md" | "lg"
+        color?: "default" | "primary" | "secondary" | "success" | "warning" | "danger"
+    }
     optionsHandler?: (id: any) => void; // Optional function to handle the edit button click
 }
 
@@ -39,9 +43,9 @@ export default function TableNextUI({
             ? {
                 options: (
                     <Button
-                        size="sm"
+                        size={tableData?.optionsButtonCustom?.size || "sm"}
                         onPress={() => tableData.optionsHandler?.(row[tableData.optionsButtonValue])}
-                        color="primary"
+                        color={tableData?.optionsButtonCustom?.color || "primary"}
                     >
                         {tableData.optionsButtonContent}
                     </Button>
