@@ -9,8 +9,8 @@ interface HeaderDataItem {
 export interface TableData {
     headerData: HeaderDataItem[];
     bodyData: Record<string, any>[];
-    optionsButtonContent?: JSX.Element | null; // Options button JSX or null
-    optionsButtonValue: string,
+    optionsButtonContent?: JSX.Element; // Options button JSX or null
+    optionsButtonValue?: string,
     optionsHandler?: (id: any) => void; // Optional function to handle the edit button click
 }
 

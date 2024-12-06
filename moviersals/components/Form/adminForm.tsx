@@ -11,7 +11,7 @@ export interface AdminFormCofig {
     colList: {
         colname: string;
         colsub: string;
-        coltype: "inputtext" | "inputnumber" | "inputfile" | "radio" | "checkbox";
+        coltype: "inputtext" | "inputpassword" | "inputnumber" | "inputfile" | "radio" | "checkbox";
         colvalues: {
             key: any;
             value: any;
@@ -119,6 +119,19 @@ export default function AdminForm({
                                     key={index}
                                     className="w-full"
                                     type="text"
+                                    name={col.colname}
+                                    variant="underlined"
+                                    label={col.colsub}
+                                    value={(rerenderData as any)?.[col.colname]}
+                                    onChange={handleChange}
+                                />
+                            );
+                        case "inputpassword":
+                            return (
+                                <Input
+                                    key={index}
+                                    className="w-full"
+                                    type="password"
                                     name={col.colname}
                                     variant="underlined"
                                     label={col.colsub}
