@@ -11,7 +11,7 @@ export default function OrderHistoryPage() {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await getOrderHistory("1"); // replace with your actual API endpoint
+        const response = await getOrderHistory(1);
         setOrders(response.content);
       } catch (error) {
         console.error("Error fetching order history:", error);

@@ -3,7 +3,7 @@
 import getMovieComment from "@/app/api/comment/getMovieComment";
 import getMovieDetailById from "@/app/api/movies/getMovieById";
 import EpisodeListCarousel from "@/components/Episode/episodeListCarousel";
-import IsFavouriteSwitch from "@/components/Episode/isFavouriteSwitch";
+import IsFavouriteSwitch from "@/components/Button/isFavouriteSwitchButton";
 import { MdiEyeOutline } from "@/components/icons";
 import Transition from "@/components/MotionFramer/transition";
 import MovieComments from "@/components/Movies/moviesComments";
@@ -102,7 +102,7 @@ export default function WatchPage({ params }: { params: { movieid: string; episo
 
   return (
     <Transition>
-      <div className="h-[540px] w-[100%] flex items-center justify-center align-middle px-8">
+      <div className="h-[540px] w-[100%] flex items-center justify-center align-middle px-8 mt-12">
         {data && data?.movieDetail?.ispremium == true && userinfo?.ispremium != true ? (
           <div className="h-[540px] w-[100%] border rounded-lg border-[#262626] flex items-center justify-center">
             <div className="flex w-fit h-fit flex-col items-center justify-center gap-4 ">

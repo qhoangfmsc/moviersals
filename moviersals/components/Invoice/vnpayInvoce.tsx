@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
-export default function InvoiceVNPayPage() {
+export default function VNPayInvoice() {
   const searchParams = useSearchParams();
 
   useEffect(() => {

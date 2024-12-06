@@ -30,9 +30,7 @@ export const Navbar = () => {
       fetchAuth();
     };
 
-    return () => {
-      handleRouteChange();
-    };
+    handleRouteChange();
   }, [pathname]);
 
   const fetchAuth = async () => {

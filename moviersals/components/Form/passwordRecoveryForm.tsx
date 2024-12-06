@@ -36,9 +36,7 @@ export default function PasswordRecoveryForm() {
       }
     }
 
-    return () => {
-      checkPasswordToken();
-    };
+    checkPasswordToken();
   }, []);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -75,7 +73,7 @@ export default function PasswordRecoveryForm() {
 
   return isTokenValid != null ? (
     isTokenValid ? (
-      <>
+      <div className="my-2">
         <form
           className="flex flex-col items-center"
           onSubmit={onSubmit}>
@@ -109,9 +107,9 @@ export default function PasswordRecoveryForm() {
             </div>
           </Card>
         </form>
-      </>
+      </div>
     ) : (
-      <>
+      <div>
         <div className="flex flex-col items-center text-center h-screen">
           <div className=" text-2xl ">Token không hợp lệ hoặc hết hạn</div>
           <Button
@@ -125,11 +123,9 @@ export default function PasswordRecoveryForm() {
             {"Request token mới"}
           </Button>
         </div>
-      </>
+      </div>
     )
   ) : (
-    <>
-      <div className="text-center text-2xl h-screen">Checking token...</div>
-    </>
+    <div className="text-center text-2xl h-screen">Checking token...</div>
   );
 }
