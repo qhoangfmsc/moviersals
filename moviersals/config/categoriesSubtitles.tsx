@@ -1,4 +1,4 @@
-import { BookmarkTabs, ClownFace, CrossedSwords, Fire, Ghost, HeartSuit, Rocket, WorldMap } from "@/components/iconsMovieCategories";
+import { BookmarkTabs, ClownFace, CrossedSwords, Fire, Ghost, HeartSuit, LineMdList, Rocket, WorldMap } from "@/components/iconsMovieCategories";
 
 export const categoriesSubtitles = {
     "action": {

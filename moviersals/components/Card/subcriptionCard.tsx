@@ -44,7 +44,7 @@ export default function SubcriptionPlanCard({ data, onCardClick, showButton }: S
           <div className="h-[140px] pt-6">
             <p className="text-lg text-white">{data?.name}</p>
             <div className="flex flex-row items-center justify-center mt-3 mb-6">
-              <p className="text-4xl text-white font-bold p-2 rounded-lg inline-block"> {data?.price}</p>
+              <p className="text-4xl text-white font-bold p-2 rounded-lg inline-block"> {Number(data?.price).toLocaleString()}</p>
               <p>₫</p>
             </div>
           </div>

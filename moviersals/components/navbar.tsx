@@ -59,7 +59,7 @@ export const Navbar = () => {
       maxWidth="full"
       position="sticky">
       <NavbarContent
-        className="basis-1/5 sm:basis-full"
+        className="basis-1/5 sm:basis-full gap-8"
         justify="start">
         <NavbarBrand
           as="li"
@@ -75,23 +75,16 @@ export const Navbar = () => {
         </NavbarBrand>
         <NavbarItem isActive={pathname == "/"}>
           <Link
-            color={pathname == "/" ? "primary" : "foreground"}
+            color={pathname == "/" ? "success" : "foreground"}
             href="/">
             Trang chủ
           </Link>
         </NavbarItem>
-        <NavbarItem isActive={pathname == "/subscription"}>
-          <Link
-            href="/subscription"
-            color={pathname == "/subscription" ? "primary" : "foreground"}>
-            Gói
-          </Link>
-        </NavbarItem>
         <NavbarItem>
           <Link
-            color="foreground"
+            color={pathname == "/staticpage" ? "success" : "foreground"}
             href="/staticpage">
-            Giới thiệu
+            Về chúng tôi
           </Link>
         </NavbarItem>
       </NavbarContent>
@@ -134,6 +127,7 @@ export const Navbar = () => {
               </DropdownTrigger>
               <DropdownMenu aria-label="My account">
                 <DropdownItem href="/profile">Thông tin của tôi</DropdownItem>
+                <DropdownItem className="text-secondary-600" href="/subscription">Mua gói thành viên</DropdownItem>
                 <DropdownItem href="/order/history">Lịch sử mua hàng</DropdownItem>
                 <DropdownItem>Phim của tôi</DropdownItem>
                 <DropdownItem

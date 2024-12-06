@@ -20,7 +20,7 @@ export default function PaymentTotalPrice({ payment }: PaymentTotalPriceUIProps)
                 <div className="w-full flex flex-row justify-between mb-4">
                     <div className="w-fit">Giá nội địa</div>
                     <div className="flex flex-row gap-2 justify-end items-center">
-                        <h1 className="text-xl font-bold">{payment.vndPrice}</h1>
+                        <h1 className="text-xl font-bold">{Number(payment.vndPrice).toLocaleString()}</h1>
                         <IconDongSign />
                     </div>
                 </div>
@@ -29,7 +29,7 @@ export default function PaymentTotalPrice({ payment }: PaymentTotalPriceUIProps)
                         <div className="w-fit">Giá quốc tế</div>
                         <div className="flex flex-row gap-2 justify-end items-center">
                             <IconCurrencyUsd />
-                            <h1 className="text-xl font-bold">{payment.usdPrice}</h1>
+                            <h1 className="text-xl font-bold">{Number(payment.usdPrice).toLocaleString()}</h1>
                         </div>
                     </div>
                 )}
