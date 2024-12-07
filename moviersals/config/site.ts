@@ -44,7 +44,7 @@ export const siteConfig = {
     {
       label: "Phim của tôi",
       color: undefined,
-      href: "/mymovie",
+      href: "/favourite",
     },
     {
       label: "Logout",

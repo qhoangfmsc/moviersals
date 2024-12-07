@@ -87,6 +87,13 @@ export const Navbar = () => {
             Về chúng tôi
           </Link>
         </NavbarItem>
+        <NavbarItem>
+          <Link
+            color={pathname == "/staticpage" ? "success" : "foreground"}
+            href="/list">
+            Mục lục
+          </Link>
+        </NavbarItem>
       </NavbarContent>
 
       {authentication ? (
@@ -127,9 +134,13 @@ export const Navbar = () => {
               </DropdownTrigger>
               <DropdownMenu aria-label="My account">
                 <DropdownItem href="/profile">Thông tin của tôi</DropdownItem>
-                <DropdownItem className="text-secondary-600" href="/subscription">Mua gói thành viên</DropdownItem>
+                <DropdownItem
+                  className="text-secondary-600"
+                  href="/subscription">
+                  Mua gói thành viên
+                </DropdownItem>
                 <DropdownItem href="/order/history">Lịch sử mua hàng</DropdownItem>
-                <DropdownItem>Phim của tôi</DropdownItem>
+                <DropdownItem href="/favourite">Phim của tôi</DropdownItem>
                 <DropdownItem
                   className="text-danger"
                   color="danger"
