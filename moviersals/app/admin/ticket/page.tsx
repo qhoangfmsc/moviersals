@@ -1,6 +1,7 @@
 "use client"
 
 import createSubscriptionPlan from "@/app/api/subcriptionplan/createSubscription";
+import editSubscriptionPlan from "@/app/api/subcriptionplan/editSubscription";
 import getAllSubcriptionPlan from "@/app/api/subcriptionplan/getAllSubcription";
 import AdminForm, { AdminFormCofig } from "@/components/Form/adminForm";
 import Transition from "@/components/MotionFramer/transition";
@@ -9,7 +10,7 @@ import TableNextUI from "@/components/Table/tableNextUI";
 import { getObjectById } from "@/lib/utils";
 import { BreadcrumbItem, Breadcrumbs, Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@nextui-org/react";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 export default function MovieAdminPage() {
   // MODAL
@@ -49,9 +50,10 @@ export default function MovieAdminPage() {
         Xem thông tin
       </div>
     ),
-    optionsButtonValue: "subcriptionid",
+    optionsButtonValue: "id",
     optionsHandler: function (id) {
       const idInformation = getObjectById(data, id);
+      console.log(idInformation);
       setDataModal(idInformation);
       onOpen();
     },
@@ -73,6 +75,19 @@ export default function MovieAdminPage() {
       const response = await createSubscriptionPlan(formData);
     },
   };
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    try {
+      const formData = new FormData(event.currentTarget);
+      const response = await editSubscriptionPlan(formData);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      }
+    }
+  }
 
   return (
     <Transition>
@@ -101,38 +116,62 @@ export default function MovieAdminPage() {
 
       {/* MODAL DETAIL */}
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">Chi tiết hạng vé</ModalHeader>
-              <ModalBody className="font-thin">
-                <div>Độ ưu tiên: <b></b></div>
-                <Input key={dataModal?.priority} />
-                <div>ID gói: <b></b></div>
-                <Input key={dataModal?.subcriptionid} />
-                <div>Tên gói: <b></b></div>
-                <Input key={dataModal?.name} />
-                <div>Giá gốc: <b></b></div>
-                <Input key={dataModal?.baseprice} />
-                <div>Giá bán: <b></b></div>
-                <Input key={dataModal?.price} />
-                <div>Thời hạn sử dụng: <b></b></div>
-                <Input key={dataModal?.daysduration} />
-                <div>Chất lượng tối đa: <b></b></div>
-                <Input key={dataModal?.quality} />
-              </ModalBody>
-              <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
-                  Đóng
-                </Button>
-                <Button
-                  color="success">
-                  Xác nhận thay đổi
-                </Button>
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
+        {dataModal && (
+          <ModalContent>
+            {(onClose) => (
+              <form onSubmit={onSubmit}>
+                <ModalHeader className="flex flex-col gap-1">Chi tiết hạng vé</ModalHeader>
+                <ModalBody className="font-thin">
+                  <Input
+                    key={dataModal.priority}
+                    label="Độ ưu tiên"
+                    defaultValue={dataModal.priority}
+                  />
+                  <Input
+                    key={dataModal.subcriptionid}
+                    label="ID gói"
+                    defaultValue={dataModal.subcriptionid}
+                  />
+                  <Input
+                    key={dataModal.name}
+                    label="Tên gói"
+                    defaultValue={dataModal.name}
+                  />
+                  <Input
+                    key={dataModal.baseprice}
+                    label="Giá gốc"
+                    defaultValue={dataModal.baseprice}
+                  />
+                  <Input
+                    key={dataModal.price}
+                    label="Giá bán"
+                    defaultValue={dataModal.price}
+                  />
+                  <Input
+                    key={dataModal.daysduration}
+                    label="Thời hạn sử dụng"
+                    defaultValue={dataModal.daysduration}
+                  />
+                  <Input
+                    key={dataModal.quality}
+                    label="Chất lượng tối đa"
+                    defaultValue={dataModal.quality}
+                  />
+                </ModalBody>
+                <ModalFooter>
+                  <Button color="danger" variant="light" onPress={onClose}>
+                    Đóng
+                  </Button>
+                  <Button
+                    type="submit"
+                    color="success">
+                    Xác nhận thay đổi
+                  </Button>
+                </ModalFooter>
+              </form>
+            )}
+          </ModalContent>
+        )}
       </Modal>
     </Transition>
   );

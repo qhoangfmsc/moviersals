@@ -93,143 +93,261 @@ export default function AdminForm({
         }
     }
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        rerenderData[name] = value;
-    };
-
     return (
         <Card className="p-4">
             <h1 className="text-xl">{adminFormCofig.label}</h1>
-            <form className="flex flex-col" onSubmit={onSubmit} encType="multipart/form-data">
-                <Input
-                    className="w-full"
-                    type="text"
-                    name="id"
-                    variant="underlined"
-                    isDisabled
-                    label="ID (không thể chỉnh sửa)"
-                    value={(rerenderData as any)?.id}
-                />
-                {adminFormCofig.colList.map((col, index) => {
-                    switch (col.coltype) {
-                        case "inputtext":
-                            return (
-                                <Input
-                                    key={index}
-                                    className="w-full"
-                                    type="text"
-                                    name={col.colname}
-                                    variant="underlined"
-                                    label={col.colsub}
-                                    value={(rerenderData as any)?.[col.colname]}
-                                    onChange={handleChange}
-                                />
-                            );
-                        case "inputpassword":
-                            return (
-                                <Input
-                                    key={index}
-                                    className="w-full"
-                                    type="password"
-                                    name={col.colname}
-                                    variant="underlined"
-                                    label={col.colsub}
-                                    value={(rerenderData as any)?.[col.colname]}
-                                    onChange={handleChange}
-                                />
-                            );
-                        case "inputnumber":
-                            return (
-                                <Input
-                                    key={index}
-                                    className="w-full"
-                                    type="number"
-                                    name={col.colname}
-                                    variant="underlined"
-                                    label={col.colsub}
-                                    value={(rerenderData as any)?.[col.colname]}
-                                    onChange={handleChange}
-                                />
-                            );
-                        case "inputfile":
-                            return (
-                                <div key={index}>
-                                    <h1 className="text-sm text-zinc-400 pl-1 pt-3">{col.colsub}</h1>
+            {rerenderData && (
+                <form className="flex flex-col" onSubmit={onSubmit} encType="multipart/form-data">
+                    <Input
+                        className="w-full"
+                        type="text"
+                        name="id"
+                        variant="underlined"
+                        isDisabled
+                        label="ID (không thể chỉnh sửa)"
+                        defaultValue={(rerenderData as any)?.id}
+                    />
+                    {adminFormCofig.colList.map((col, index) => {
+                        switch (col.coltype) {
+                            case "inputtext":
+                                return (
                                     <Input
-                                        id={`fileupload${index}`}
-                                        className="w-full pt-2"
-                                        type="file"
+                                        key={index}
+                                        className="w-full"
+                                        type="text"
                                         name={col.colname}
-                                        onChange={(e) =>
-                                            handleFileChange(col.colname, e.target.files?.[0] || null)
-                                        }
+                                        variant="underlined"
+                                        label={col.colsub}
+                                        defaultValue={(rerenderData as any)[col.colname]}
                                     />
-                                </div>
-                            );
-                        case "radio":
-                            return (
-                                <RadioGroup
-                                    key={index}
-                                    label={col.colsub}
-                                    orientation="horizontal"
-                                    name={col.colname}
-                                    className="mt-2"
-                                    value={(rerenderData as any)?.[col.colname]}
-                                    onChange={(value) => {
-                                        (rerenderData as any)[col.colname] = value;
-                                    }}
-                                >
-                                    {col.colvalues?.map((object) => (
-                                        <Radio key={object.key} value={object.key}>
-                                            <span className="text-sm">{object.value}</span>
-                                        </Radio>
-                                    ))}
-                                </RadioGroup>
-                            );
-                        case "checkbox":
-                            let setupDefaultValue = (rerenderData)
-                                ? (typeof rerenderData?.[col.colname] == "string")
-                                    ? JSON.parse(rerenderData?.[col.colname] as any)
-                                    : rerenderData?.[col.colname] as any
-                                : []
+                                );
+                            case "inputpassword":
+                                return (
+                                    <Input
+                                        key={index}
+                                        className="w-full"
+                                        type="password"
+                                        name={col.colname}
+                                        variant="underlined"
+                                        label={col.colsub}
+                                        defaultValue={(rerenderData as any)[col.colname]}
+                                    />
+                                );
+                            case "inputnumber":
+                                return (
+                                    <Input
+                                        key={index}
+                                        className="w-full"
+                                        type="number"
+                                        name={col.colname}
+                                        variant="underlined"
+                                        label={col.colsub}
+                                        defaultValue={(rerenderData as any)[col.colname]}
+                                    />
+                                );
+                            case "inputfile":
+                                return (
+                                    <div key={index}>
+                                        <h1 className="text-sm text-zinc-400 pl-1 pt-3">{col.colsub}</h1>
+                                        <Input
+                                            id={`fileupload${index}`}
+                                            className="w-full pt-2"
+                                            type="file"
+                                            name={col.colname}
+                                            onChange={(e) =>
+                                                handleFileChange(col.colname, e.target.files?.[0] || null)
+                                            }
+                                        />
+                                    </div>
+                                );
+                            case "radio":
+                                return (
+                                    <RadioGroup
+                                        key={index}
+                                        label={col.colsub}
+                                        orientation="horizontal"
+                                        name={col.colname}
+                                        className="mt-2"
+                                        defaultValue={(rerenderData as any)[col.colname]}
+                                        onChange={(value) => {
+                                            (rerenderData as any)[col.colname] = value;
+                                        }}
+                                    >
+                                        {col.colvalues?.map((object) => (
+                                            <Radio key={object.key} value={object.key}>
+                                                <span className="text-sm">{object.value}</span>
+                                            </Radio>
+                                        ))}
+                                    </RadioGroup>
+                                );
+                            case "checkbox":
+                                let setupDefaultValue = (rerenderData)
+                                    ? (typeof rerenderData?.[col.colname] == "string")
+                                        ? JSON.parse(rerenderData?.[col.colname] as any)
+                                        : rerenderData?.[col.colname] as any
+                                    : []
 
-                            setupDefaultValue = convertArrayToLowercaseArray(setupDefaultValue);
-                            return (
-                                <CheckboxGroup
-                                    key={index}
-                                    label={col.colsub}
-                                    orientation="horizontal"
-                                    name={col.colname}
-                                    className="mt-2"
-                                    defaultValue={setupDefaultValue}
-                                >
-                                    {col.colvalues?.map((object) => (
-                                        <Checkbox
-                                            key={object.key}
-                                            value={object.key}
-                                            onChange={() => handleCheckboxChange(col.colname, object.key)}
-                                        >
-                                            <span className="text-sm">{object.value}</span>
-                                        </Checkbox>
-                                    ))}
-                                </CheckboxGroup>
-                            );
-                        default:
-                            return null;
-                    }
-                })}
-                <Button
-                    size="md"
-                    className="mt-8 w-full"
-                    type="submit"
-                    disabled={isLoading}
-                    variant="shadow"
-                    color="primary"
-                >
-                    {isLoading ? "Loading..." : adminFormCofig.buttonText}
-                </Button>
-            </form>
+                                setupDefaultValue = convertArrayToLowercaseArray(setupDefaultValue);
+                                return (
+                                    <CheckboxGroup
+                                        key={index}
+                                        label={col.colsub}
+                                        orientation="horizontal"
+                                        name={col.colname}
+                                        className="mt-2"
+                                        defaultValue={setupDefaultValue}
+                                    >
+                                        {col.colvalues?.map((object) => (
+                                            <Checkbox
+                                                key={object.key}
+                                                value={object.key}
+                                                onChange={() => handleCheckboxChange(col.colname, object.key)}
+                                            >
+                                                <span className="text-sm">{object.value}</span>
+                                            </Checkbox>
+                                        ))}
+                                    </CheckboxGroup>
+                                );
+                            default:
+                                return null;
+                        }
+                    })}
+                    <Button
+                        size="md"
+                        className="mt-8 w-full"
+                        type="submit"
+                        disabled={isLoading}
+                        variant="shadow"
+                        color="primary"
+                    >
+                        {isLoading ? "Loading..." : adminFormCofig.buttonText}
+                    </Button>
+                </form>
+            )}
+            {!rerenderData && (
+                <form className="flex flex-col" onSubmit={onSubmit} encType="multipart/form-data">
+                    <Input
+                        className="w-full"
+                        type="text"
+                        name="id"
+                        variant="underlined"
+                        isDisabled
+                        label="ID (không thể chỉnh sửa)"
+                    />
+                    {adminFormCofig.colList.map((col, index) => {
+                        switch (col.coltype) {
+                            case "inputtext":
+                                return (
+                                    <Input
+                                        key={index}
+                                        className="w-full"
+                                        type="text"
+                                        name={col.colname}
+                                        variant="underlined"
+                                        label={col.colsub}
+                                    />
+                                );
+                            case "inputpassword":
+                                return (
+                                    <Input
+                                        key={index}
+                                        className="w-full"
+                                        type="password"
+                                        name={col.colname}
+                                        variant="underlined"
+                                        label={col.colsub}
+                                    />
+                                );
+                            case "inputnumber":
+                                return (
+                                    <Input
+                                        key={index}
+                                        className="w-full"
+                                        type="number"
+                                        name={col.colname}
+                                        variant="underlined"
+                                        label={col.colsub}
+                                    />
+                                );
+                            case "inputfile":
+                                return (
+                                    <div key={index}>
+                                        <h1 className="text-sm text-zinc-400 pl-1 pt-3">{col.colsub}</h1>
+                                        <Input
+                                            id={`fileupload${index}`}
+                                            className="w-full pt-2"
+                                            type="file"
+                                            name={col.colname}
+                                            onChange={(e) =>
+                                                handleFileChange(col.colname, e.target.files?.[0] || null)
+                                            }
+                                        />
+                                    </div>
+                                );
+                            case "radio":
+                                return (
+                                    <RadioGroup
+                                        key={index}
+                                        label={col.colsub}
+                                        orientation="horizontal"
+                                        name={col.colname}
+                                        className="mt-2"
+                                        defaultValue={(rerenderData as any)[col.colname]}
+                                        onChange={(value) => {
+                                            (rerenderData as any)[col.colname] = value;
+                                        }}
+                                    >
+                                        {col.colvalues?.map((object) => (
+                                            <Radio key={object.key} value={object.key}>
+                                                <span className="text-sm">{object.value}</span>
+                                            </Radio>
+                                        ))}
+                                    </RadioGroup>
+                                );
+                            case "checkbox":
+                                let setupDefaultValue = (rerenderData)
+                                    ? (typeof rerenderData?.[col.colname] == "string")
+                                        ? JSON.parse(rerenderData?.[col.colname] as any)
+                                        : rerenderData?.[col.colname] as any
+                                    : []
+
+                                setupDefaultValue = convertArrayToLowercaseArray(setupDefaultValue);
+                                return (
+                                    <CheckboxGroup
+                                        key={index}
+                                        label={col.colsub}
+                                        orientation="horizontal"
+                                        name={col.colname}
+                                        className="mt-2"
+                                        defaultValue={setupDefaultValue}
+                                    >
+                                        {col.colvalues?.map((object) => (
+                                            <Checkbox
+                                                key={object.key}
+                                                value={object.key}
+                                                onChange={() => handleCheckboxChange(col.colname, object.key)}
+                                            >
+                                                <span className="text-sm">{object.value}</span>
+                                            </Checkbox>
+                                        ))}
+                                    </CheckboxGroup>
+                                );
+                            default:
+                                return null;
+                        }
+                    })}
+                    <Button
+                        size="md"
+                        className="mt-8 w-full"
+                        type="submit"
+                        disabled={isLoading}
+                        variant="shadow"
+                        color="primary"
+                    >
+                        {isLoading ? "Loading..." : adminFormCofig.buttonText}
+                    </Button>
+                </form>
+            )}
         </Card>
     );
 }
