@@ -49,7 +49,7 @@ export default function PaymentMethodsComponent() {
       {sectionState == 1 && (
         <Transition>
           <div>
-            <div className="mb-6 flex justify-center">
+            <div className="mb-6 mt-6 flex justify-center">
               <h1 className="text-2xl">Chọn gói sử dụng</h1>
             </div>
             <div className="mt-12 mb-12 flex flex-row flex-wrap gap-12 justify-center">

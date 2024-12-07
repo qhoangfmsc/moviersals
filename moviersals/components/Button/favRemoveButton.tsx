@@ -5,6 +5,7 @@ import { IconHeartAlready } from "../icons";
 import { showResponseToast } from "@/lib/utils";
 import removeFavouriteEpisode from "@/app/api/favourite/removeFavouriteEpisode";
 import { useState } from "react";
+import { Tooltip } from "@nextui-org/react";
 
 interface EpisodeInfo {
   movieid: string;
@@ -53,12 +54,16 @@ export default function FavRemoveButton({ data, onClick, showText = true }: FavA
   };
 
   return (
-    <Button
-      isIconOnly={!showText}
-      disabled={isDisabled}
-      variant="light"
-      onClick={handleRemoveFavourite}>
-      <IconHeartAlready /> {showText ? "Bỏ yêu thích" : ""}
-    </Button>
+    <Tooltip
+      content="Bỏ yêu thích"
+      placement="top-end">
+      <Button
+        isIconOnly={!showText}
+        disabled={isDisabled}
+        variant="light"
+        onClick={handleRemoveFavourite}>
+        <IconHeartAlready /> {showText ? "Bỏ yêu thích" : ""}
+      </Button>
+    </Tooltip>
   );
 }
