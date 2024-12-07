@@ -39,7 +39,9 @@ export default function PaypalButon({ subcriptionid, price }: PaypalDataProps) {
       const result = await createPaypalOrder(request);
       if (result.status === "success") {
         showResponseToast({ status: "success", content: "Thanh toán thành công, xin cảm ơn quý khách" });
-        router.push("/order/history");
+        // router.push("/subscription");
+        // router.refresh();
+        window.location.reload();
       }
     });
   }

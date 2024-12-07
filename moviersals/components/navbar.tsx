@@ -55,7 +55,7 @@ export const Navbar = () => {
 
   return (
     <NextUINavbar
-      className="bg-transparent px-6"
+      className="bg-transparent px-6 border-b border-[#ffffff36]"
       maxWidth="full"
       position="sticky">
       <NavbarContent

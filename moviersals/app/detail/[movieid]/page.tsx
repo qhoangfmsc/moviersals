@@ -76,19 +76,20 @@ export default function DetailPage({ params }: { params: { movieid: string } }) 
               </div>
               <div className="flex justify-between text-gray-300 font-black mt-2">
                 <h1 className="text-sm">
-                  {Array.isArray(data?.movieDetail?.categories)
-                    ? data?.movieDetail?.categories.map((cat, index) => (
-                      <span key={index}>
-                        {categoriesSubtitles[cat as keyof typeof categoriesSubtitles]?.vietsub}
-                        {index !== data?.movieDetail?.categories.length - 1 && ", "}
-                      </span>
-                    ))
-                    : JSON.parse(data?.movieDetail?.categories || "[]").map((cat: string, index: number) => (
-                      <span key={index}>
-                        {categoriesSubtitles[cat as keyof typeof categoriesSubtitles]?.vietsub}
-                        {index !== JSON.parse(data?.movieDetail?.categories || "[]").length - 1 && ", "}
-                      </span>
-                    ))}
+                  {(Array.isArray(data?.movieDetail?.categoriesvi)
+                    ? data?.movieDetail?.categoriesvi
+                    : JSON.parse(data?.movieDetail?.categoriesvi || "[]")
+                  )?.map((cat: string, index: number) => (
+                    <span key={index}>
+                      {cat}
+                      {index !==
+                        (Array.isArray(data?.movieDetail?.categoriesvi)
+                          ? data?.movieDetail?.categoriesvi
+                          : JSON.parse(data?.movieDetail?.categoriesvi || "[]")
+                        ).length -
+                          1 && ", "}
+                    </span>
+                  ))}
                 </h1>
                 <h1 className="text-sm">{data?.movieDetail?.publishyear}</h1>
               </div>
@@ -102,7 +103,7 @@ export default function DetailPage({ params }: { params: { movieid: string } }) 
                       variant="shadow"
                       color="danger"
                       startContent={<LineMdPlayFilled />}
-                      onClick={() => directWatchPage(data?.list[0]?.episodeid)}>
+                      onClick={() => directWatchPage(data?.list[0]?.episodenumber)}>
                       Xem ngay
                     </Button>
                   ) : (

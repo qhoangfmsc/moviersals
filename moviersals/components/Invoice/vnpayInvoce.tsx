@@ -64,7 +64,7 @@ export default function VNPayInvoice() {
               <TableColumn> </TableColumn>
             </TableHeader>
             <TableBody>
-              {tableData.map((item, index) => (
+              {tableData?.map((item, index) => (
                 <TableRow key={index}>
                   <TableCell className="pr-[100px] py-[20px]">{item.field}</TableCell>
                   <TableCell className={item.className + " max-w-[200px]"}>{item.value}</TableCell>

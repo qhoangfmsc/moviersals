@@ -9,16 +9,15 @@ import { useEffect, useState } from "react";
 import getAllMovie from "@/app/api/movies/getAllMovie";
 
 export default function MoviesIntroduction() {
-  const [dataVideos, setDataVideos] = useState([]);
+  const [dataVideos, setDataVideos] = useState<any>(null);
 
   useEffect(() => {
     getAllMovieData();
   }, []);
 
   async function getAllMovieData() {
-    const response = await getAllMovie();
-    const content = response?.content || [];
-    setDataVideos(content);
+    const response = await getAllMovie(1);
+    setDataVideos(response.content);
   }
 
   return (
@@ -26,13 +25,13 @@ export default function MoviesIntroduction() {
       <div className="hidden lg:block">
         <MoviesTopCarousel
           title="10 bộ phim thịnh hành nhất hiện nay"
-          dataVideos={dataVideos}
+          dataVideos={dataVideos?.list}
         />
       </div>
       <div className="block lg:hidden overflow-hidden">
         <MoviesTop
           title="10 bộ phim thịnh hành nhất hiện nay"
-          dataVideos={dataVideos}
+          dataVideos={dataVideos?.list}
         />
       </div>
       <div className="flex flex-col mx-4 lg:mx-12 my-4 lg:my-28">
@@ -46,7 +45,7 @@ export default function MoviesIntroduction() {
         />
       </div>
       <div className="flex w-full flex-col items-center my-14">
-        <MoviesCategories dataVideos={dataVideos} />
+        <MoviesCategories dataVideos={dataVideos?.list} />
       </div>
     </div>
   );

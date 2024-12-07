@@ -13,7 +13,6 @@ export default function IsFavouriteSwitch({ isFav, data }: { isFav: boolean; dat
   const [isFavourite, setIsFavourite] = useState(isFav);
 
   useEffect(() => {
-    console.log("wat: ", isFav);
     setIsFavourite(isFav);
   }, [isFav]);
 

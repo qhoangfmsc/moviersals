@@ -2,12 +2,14 @@
 
 import PaymentBoard from "@/components/PaymentBoard/paymentBoard";
 import React, { useEffect, useState } from "react";
-import getAllSubcriptionPlan from "../api/subcriptionplan/getOrderHistory";
+import getAllSubcriptionPlan from "../api/subcriptionplan/getAllSubcription";
 import { showResponseToast } from "@/lib/utils";
 import SubcriptionPlanCard from "@/components/Card/subcriptionCard";
 import Transition from "@/components/MotionFramer/transition";
 import { Button } from "@nextui-org/button";
 import { LineMdArrowSmallLeft } from "@/components/icons";
+import { Card } from "@nextui-org/card";
+import TestInfoCard from "@/components/Card/testInfoCard";
 
 interface selectedSubcriptionProps {
   subcriptionid: string;
@@ -79,19 +81,22 @@ export default function PaymentMethodsComponent() {
             style={{
               display: selectedSubcription ? "block" : "none",
             }}>
-            <div className="mb-6 flex justify-center">
-              <h1 className="text-2xl">Xác nhận hoá đơn</h1>
-            </div>
-            <PaymentBoard
-              paymentData={selectedSubcription}
-              element={
-                <SubcriptionPlanCard
-                  data={selectedSubcription}
-                  onCardClick={null}
-                  showButton={false}
+            <div className="mb-6 flex flex-col justify-center items-center">
+              <h1 className="text-2xl ">Xác nhận hoá đơn</h1>
+              <div className="flex flex-row mt-8">
+                <TestInfoCard />
+                <PaymentBoard
+                  paymentData={selectedSubcription}
+                  element={
+                    <SubcriptionPlanCard
+                      data={selectedSubcription}
+                      onCardClick={null}
+                      showButton={false}
+                    />
+                  }
                 />
-              }
-            />
+              </div>
+            </div>
           </div>
         </Transition>
       )}

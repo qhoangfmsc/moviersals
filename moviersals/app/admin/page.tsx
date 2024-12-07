@@ -22,7 +22,7 @@ export default function AdminPage() {
           <BreadcrumbItem href="/admin">Moviersals</BreadcrumbItem>
         </Breadcrumbs>
         <div className="flex flex-row flex-wrap gap-8">
-          {adminSectionList.map((item, index) => (
+          {adminSectionList?.map((item, index) => (
             <div key={index}>
               <BlurCard cardData={item} />
             </div>

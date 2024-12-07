@@ -9,13 +9,13 @@ import Transition from "@/components/MotionFramer/transition";
 import MovieComments from "@/components/Movies/moviesComments";
 import MovieMyComment from "@/components/Movies/moviesMyComments";
 import MovieSuggestion from "@/components/Movies/moviesSuggestion";
-import { title } from "@/components/primitives";
-import CloudinaryVideoPlayer from "@/components/Video/videoplayer";
-import { categoriesSubtitles } from "@/config/categoriesSubtitles";
 import { showResponseToast } from "@/lib/utils";
-import { Button, Divider } from "@nextui-org/react";
+import { Button, Pagination } from "@nextui-org/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import CloudinaryVideoPlayer from "@/components/Video/videoplayer";
+import "next-cloudinary/dist/cld-video-player.css";
+import { CldVideoPlayer } from "next-cloudinary";
 
 interface Comment {
   id: number;
@@ -43,36 +43,35 @@ const emptyComment: Comment = {
   thumbnail: null,
 };
 
-interface episodeInfo {
-  movieid: string;
-  episodenumber: string;
-}
-
 export default function WatchPage({ params }: { params: { movieid: string; episodenumber: string } }) {
   const [data, setData] = useState<any>(null);
   const [userinfo, setUserInfo] = useState<any>(null);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
   const [movieComment, setMovieComment] = useState<{
     myComment: Comment | null;
     movieComments: Comment[] | null;
+    total: number;
   } | null>(null);
 
   useEffect(() => {
-    const tempUserinfo = JSON.parse(localStorage.getItem("userinfo")) || {};
-    setUserInfo(tempUserinfo);
-    fetchMovieInfo(tempUserinfo.id);
+    const tempUserinfo = JSON.parse(localStorage.getItem("userinfo")) || null;
+    if (userinfo == null) setUserInfo(tempUserinfo);
+    if (data == null) fetchMovieInfo(tempUserinfo?.id);
     fetchMovieComment(tempUserinfo?.id);
-  }, [params.movieid, params.episodenumber]);
+  }, [currentPage]);
 
   const fetchMovieInfo = async (userid: string) => {
     const response = await getMovieDetailById(params.movieid, userid);
     if (response.status == "success") {
       const currentEpisode = response.content.list.find((episode) => episode.episodenumber == params.episodenumber);
-      const videoid = currentEpisode?.episodepath?.match(/\/upload\/v\d+\/(.+)/)[1];
+      const videoid = currentEpisode?.episodepath?.match(/\/upload\/v\d+\/(.+)/)[1].split(".")[0];
       const updatedContent = {
         ...response.content,
         current: currentEpisode,
         videoid,
       };
+      console.log("path: ", videoid);
       setData((prevData) => ({
         ...prevData,
         ...updatedContent,
@@ -83,17 +82,18 @@ export default function WatchPage({ params }: { params: { movieid: string; episo
   };
 
   const fetchMovieComment = async (userid: string) => {
-    const response = await getMovieComment(params.movieid, userid);
+    const response = await getMovieComment(params.movieid, userid, currentPage);
     if (response.status == "success") {
       let myComment = emptyComment;
-      if (response.content[0].userid == userid) {
+      if (response.content?.list != null && response.content?.list[0].userid == userid) {
         // Reponse always put current userid in first index if exist
-        myComment = response.content[0];
-        response.content.shift();
+        myComment = response.content.list[0];
+        response.content.list.shift();
       }
       setMovieComment({
         myComment,
-        movieComments: response.content,
+        movieComments: response.content.list,
+        total: response.content.total,
       });
     } else {
       showResponseToast(response);
@@ -102,9 +102,9 @@ export default function WatchPage({ params }: { params: { movieid: string; episo
 
   return (
     <Transition>
-      <div className="h-[540px] w-[100%] flex items-center justify-center align-middle px-8 mt-12">
+      <div className="px-8 mt-12">
         {data && data?.movieDetail?.ispremium == true && userinfo?.ispremium != true ? (
-          <div className="h-[540px] w-[100%] border rounded-lg border-[#262626] flex items-center justify-center">
+          <div className="h-[540px] w-[100%] flex items-center justify-center align-middle border rounded-lg border-[#262626]">
             <div className="flex w-fit h-fit flex-col items-center justify-center gap-4 ">
               <h1 className="text-2xl text-center text-center">
                 Phim này chỉ dành cho gói người đăng ký <br /> Hãy đăng ký ngay để trải nghiệm
@@ -125,6 +125,7 @@ export default function WatchPage({ params }: { params: { movieid: string; episo
                 publicid={data.videoid}
                 movieid={params.movieid}
                 episodenumber={params.episodenumber}
+                userinfo={userinfo}
               />
             )} */}
           </div>
@@ -171,6 +172,14 @@ export default function WatchPage({ params }: { params: { movieid: string; episo
               />
             )}
             <MovieComments commentList={movieComment.movieComments} />
+            {movieComment && movieComment?.total > 1 && (
+              <Pagination
+                className="w-fit mt-4 mx-auto"
+                total={movieComment?.total}
+                page={currentPage}
+                onChange={setCurrentPage}
+              />
+            )}
           </div>
         )}
       </div>

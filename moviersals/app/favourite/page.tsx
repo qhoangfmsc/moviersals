@@ -19,13 +19,12 @@ interface CardEpisodeProps {
 }
 
 export default function UserFavouritePage() {
-  const [userFavList, setUserFavList] = useState<CardEpisodeProps[]>(null);
+  const [userFavList, setUserFavList] = useState<any>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
     const fetchUserFavList = async () => {
       const response = await getUserFavouriteList(currentPage);
-      console.log("here: ", response.content);
       setUserFavList(response.content);
     };
 
@@ -33,7 +32,7 @@ export default function UserFavouritePage() {
   }, [currentPage]);
 
   const handleRemoveFavCard = (movieid: string, episodenumber: string) => {
-    setUserFavList((prevCards) => prevCards.filter((card) => card.movieid !== movieid || card.episodenumber !== episodenumber));
+    setUserFavList((prevCards) => prevCards.list.filter((card) => card.movieid !== movieid || card.episodenumber !== episodenumber));
   };
 
   return (
@@ -45,7 +44,7 @@ export default function UserFavouritePage() {
         ) : (
           <div className="flex flex-col justify-center items-center">
             <div className="flex flex-row flex-wrap gap-8 mx-10 my-10">
-              {userFavList?.map((item, index) => (
+              {userFavList?.list?.map((item, index) => (
                 <div key={index}>
                   <FavouriteCard
                     cardData={item}
@@ -55,10 +54,10 @@ export default function UserFavouritePage() {
               ))}
             </div>
 
-            {userFavList && userFavList?.length > 0 && (
+            {userFavList && userFavList?.total > 1 && (
               <Pagination
                 className="w-fit"
-                total={10}
+                total={userFavList?.total}
                 page={currentPage}
                 onChange={setCurrentPage}
               />

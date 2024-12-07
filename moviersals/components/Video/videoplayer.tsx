@@ -8,14 +8,10 @@ export interface CloudinaryVideoPlayerUI {
   movieid: string;
   episodenumber: string;
   publicid: string;
+  userinfo: any;
 }
 
-const CloudinaryVideoPlayer = ({ movieid, episodenumber, publicid }: CloudinaryVideoPlayerUI) => {
-  let userinfo = null;
-  if (typeof window !== "undefined") {
-    userinfo = JSON.parse(localStorage.getItem("userinfo") || "{}");
-  }
-
+const CloudinaryVideoPlayer = ({ movieid, episodenumber, publicid, userinfo }: CloudinaryVideoPlayerUI) => {
   const adTagUrl =
     "//pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dskippablelinear&correlator=";
 
@@ -57,8 +53,8 @@ const CloudinaryVideoPlayer = ({ movieid, episodenumber, publicid }: CloudinaryV
       {userinfo != null ? (
         <div className="w-[60%]">
           <CldVideoPlayer
-            // width={playerSize.width}
-            // height={playerSize.height}
+            width={1280}
+            height={720}
             playedEventPercents={[10, 30, 50, 70, 100]}
             src={publicid}
             transformation={{

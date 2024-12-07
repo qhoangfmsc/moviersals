@@ -20,9 +20,8 @@ export default function MovieAdminPage() {
   }, [pathname]);
 
   const fetchData = async () => {
-    const response = await getAllMovie();
+    const response = await getAllMovie(1);
     const content = response.content;
-    console.log(content);
     setData(content);
   };
 

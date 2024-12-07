@@ -9,7 +9,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { useEffect, useState } from "react";
 
 export default function MovieSuggestion() {
-  const [dataVideos, setDataVideos] = useState([]);
+  const [dataVideos, setDataVideos] = useState<any>(null);
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, dragFree: true });
   const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(emblaApi);
 
@@ -20,7 +20,7 @@ export default function MovieSuggestion() {
   }, []);
 
   async function getAllMovieData() {
-    const response = await getAllMovie();
+    const response = await getAllMovie(1);
     const content = response?.content;
     setDataVideos(content);
   }
@@ -31,7 +31,7 @@ export default function MovieSuggestion() {
         className="embla__viewport"
         ref={emblaRef}>
         <div className="embla__container">
-          {dataVideos.map((item) => (
+          {dataVideos?.list.map((item) => (
             <div
               className="embla__slide"
               key={item.id}>
@@ -50,12 +50,13 @@ export default function MovieSuggestion() {
                   <div className="text-white/80 w-4/5">
                     <div className="font-black">{item.name}</div>
                     <div className="text-sm">
-                      {(Array.isArray(item.categories) ? item.categories : JSON.parse(item.categories || "[]"))?.map(
+                      {(Array.isArray(item?.categoriesvi) ? item.categoriesvi : JSON.parse(item.categoriesvi || "[]"))?.map(
                         (cat: string, index: number) => (
                           <span key={index}>
-                            {categoriesSubtitles[cat as keyof typeof categoriesSubtitles]?.vietsub}
+                            {cat}
                             {index !==
-                              (Array.isArray(item.categories) ? item.categories : JSON.parse(item.categories || "[]")).length - 1 && ", "}
+                              (Array.isArray(item.categoriesvi) ? item.categoriesvi : JSON.parse(item.categoriesvi || "[]")).length - 1 &&
+                              ", "}
                           </span>
                         )
                       )}
