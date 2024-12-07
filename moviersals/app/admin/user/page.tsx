@@ -69,7 +69,6 @@ export default function MovieAdminPage() {
       const phonenumber = formData.get("phonenumber")?.toString();
       const username = formData.get("username")?.toString();
       const password = formData.get("password")?.toString();
-      const repassword = formData.get("repassword")?.toString();
 
       // CALL API
       const response = await register(username, password, displayname, email, phonenumber);
