@@ -42,7 +42,6 @@
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-simple-star-rating": "^5.1.7",
-    "react-tag-input": "^6.10.3",
     "react-toastify": "^10.0.6",
     "rimraf": "^6.0.1"
   },
