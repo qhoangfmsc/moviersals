@@ -31,33 +31,22 @@ export default function TableNextUI({ tableData }: { tableData: TableData }) {
     ...(tableData.optionsButtonContent ? [{ colname: "options", colsub: "Chức năng" }] : []),
   ];
 
-  const enhancedBodyData = tableData?.bodyData?.list?.map((row) => ({
+  const processData = tableData?.bodyData?.list ?? tableData?.bodyData;
+  const enhancedBodyData = processData?.map((row) => ({
     ...row,
     ...(tableData.optionsButtonContent
       ? {
-          options: (
-            <Button
-              size={tableData?.optionsButtonCustom?.size || "sm"}
-              onPress={() => tableData.optionsHandler?.(row[tableData.optionsButtonValue])}
-              color={tableData?.optionsButtonCustom?.color || "primary"}>
-              {tableData.optionsButtonContent}
-            </Button>
-          ),
-        }
+        options: (
+          <Button
+            size={tableData?.optionsButtonCustom?.size || "sm"}
+            onPress={() => tableData.optionsHandler?.(row[tableData.optionsButtonValue])}
+            color={tableData?.optionsButtonCustom?.color || "primary"}>
+            {tableData.optionsButtonContent}
+          </Button>
+        ),
+      }
       : {}),
   }));
-
-  // SPLIT DATA BASED ON RECORD PER PAGE
-  const splitData = () => {
-    const resultData: Record<string, any>[] = [];
-    for (let i = 0; i < enhancedBodyData?.length; i += recordPerPage) {
-      resultData.push(enhancedBodyData?.slice(i, i + recordPerPage));
-    }
-    return resultData;
-  };
-
-  // Paginated data for current page
-  //   const dataByPage = splitData();
 
   return (
     <>

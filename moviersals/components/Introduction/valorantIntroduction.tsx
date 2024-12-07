@@ -67,7 +67,7 @@ export default function ValorantIntroduction(): JSX.Element {
             className="w-full mb-2"
             startContent={<LineMdPlayFilled />}
             as={Link}
-            href="/detail/1">
+            href="/detail/valorant">
             Xem ngay trên Moviersals
           </Button>
           <Button
@@ -75,7 +75,7 @@ export default function ValorantIntroduction(): JSX.Element {
             className="w-full"
             startContent={<AkarIconsInfo />}
             as={Link}
-            href="/detail/1">
+            href="/detail/valorant">
             Chi tiết về VALORANT
           </Button>
         </div>
