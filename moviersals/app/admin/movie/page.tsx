@@ -3,11 +3,11 @@
 import getAllMovie from "@/app/api/movies/getAllMovie";
 import uploadMovie from "@/app/api/movies/uploadMovie";
 import AdminForm, { AdminFormCofig } from "@/components/Form/adminForm";
-import { LetsIconsExpandRight } from "@/components/icons";
+import { BxsCategory, LetsIconsExpandRight } from "@/components/icons";
 import Transition from "@/components/MotionFramer/transition";
 import { title } from "@/components/primitives";
 import TableNextUI from "@/components/Table/tableNextUI";
-import { BreadcrumbItem, Breadcrumbs } from "@nextui-org/react";
+import { BreadcrumbItem, Breadcrumbs, Button } from "@nextui-org/react";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -97,15 +97,18 @@ export default function MovieAdminPage() {
   return (
     <Transition>
       <h1 className={title()}>Quản lý phim ảnh</h1>
-      <Breadcrumbs
-        className="my-4"
-        itemClasses={{
-          item: "px-2",
-          separator: "px-0",
-        }}>
-        <BreadcrumbItem href="/admin">Moviersals</BreadcrumbItem>
-        <BreadcrumbItem href="/admin/movie">Phim ảnh</BreadcrumbItem>
-      </Breadcrumbs>
+      <div className="flex flex-row justify-between">
+        <Breadcrumbs
+          className="my-4"
+          itemClasses={{
+            item: "px-2",
+            separator: "px-0",
+          }}>
+          <BreadcrumbItem href="/admin">Moviersals</BreadcrumbItem>
+          <BreadcrumbItem href="/admin/movie">Phim ảnh</BreadcrumbItem>
+        </Breadcrumbs>
+        <Button className="text-white" endContent={<BxsCategory />} color="success">Chỉnh sửa thể loại phim</Button>
+      </div>
       <div className="flex lg:flex-row flex-col-reverse">
         <div className="lg:w-4/5 lg:mr-8">
           <TableNextUI tableData={tableData} />

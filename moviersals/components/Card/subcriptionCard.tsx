@@ -54,7 +54,12 @@ export default function SubcriptionPlanCard({ data, onCardClick, showButton }: S
           </div>
         )}
         <p className="text-md text-white/80 mb-2 bg-purple-700 py-2 px-4 rounded-lg mx-4">
-          {data?.daysduration != "0" ? `${Number(data?.daysduration) / 30} tháng` : "Không thời hạn"}
+          {
+            data?.daysduration != "0"
+              ? (Number(data?.daysduration) / 30) > 1
+                ? `${Number(data?.daysduration) / 30} tháng`
+                : `${Number(data?.daysduration)} ngày`
+              : "Không thời hạn"}
         </p>
         <div className="justify-items-start mt-4 mx-3">
           <p className="flex flex-row text-sm text-white/80 mb-4">

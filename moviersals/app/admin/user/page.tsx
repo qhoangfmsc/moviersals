@@ -2,6 +2,7 @@
 
 import getAllUser from "@/app/api/account/getAllUser";
 import register from "@/app/api/account/register";
+import updateState from "@/app/api/account/updateState";
 import AdminForm, { AdminFormCofig } from "@/components/Form/adminForm";
 import Transition from "@/components/MotionFramer/transition";
 import { title } from "@/components/primitives";
@@ -75,6 +76,16 @@ export default function MovieAdminPage() {
     },
   };
 
+  const handleUpdateStatusAccount = async (value: Boolean) => {
+    console.log("hehe");
+    const request = {
+      "username": dataModal["username"],
+      "id": dataModal["id"],
+      "isactive": value,
+    };
+    const response = await updateState(request);
+  };
+
   return (
     <Transition>
       <h1 className={title()}>Quản lý phim ảnh</h1>
@@ -122,7 +133,8 @@ export default function MovieAdminPage() {
                   Đóng
                 </Button>
                 <Button
-                  color={(dataModal?.isactive) ? "danger" : "success"}>
+                  color={(dataModal?.isactive) ? "danger" : "success"}
+                  onClick={() => { handleUpdateStatusAccount(!dataModal?.isactive) }}>
                   {(dataModal?.isactive) ? "Tắt hoạt động" : "Bật hoạt động"}
                 </Button>
               </ModalFooter>

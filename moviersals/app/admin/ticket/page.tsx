@@ -76,10 +76,12 @@ export default function MovieAdminPage() {
       { colname: "price", colsub: "Giá bán", coltype: "inputnumber", colvalues: null },
       { colname: "daysduration", colsub: "Thời hạn sử dụng", coltype: "inputnumber", colvalues: null },
       { colname: "quality", colsub: "Chất lượng tối đa", coltype: "inputnumber", colvalues: null },
+      { colname: "connection", colsub: "Số lượng IP kết nối", coltype: "inputnumber", colvalues: null },
     ],
     buttonText: "Tạo gói",
     handler: async (formData: FormData) => {
       const data = convertFormDataToJson(formData);
+      data["quality"] = `${data["quality"]}p`;
       const response = await createSubscriptionPlan(data);
     },
   };
@@ -89,7 +91,11 @@ export default function MovieAdminPage() {
 
     try {
       const formData = new FormData(event.currentTarget);
-      const response = await editSubscriptionPlan(formData);
+      const data = convertFormDataToJson(formData);
+      console.log(data);
+      data["quality"] = `${data["quality"]}p`;
+      data["isads"] = false;
+      const response = await editSubscriptionPlan(data);
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.log(error.message);
@@ -132,43 +138,43 @@ export default function MovieAdminPage() {
                 <ModalHeader className="flex flex-col gap-1">Chi tiết hạng vé</ModalHeader>
                 <ModalBody className="font-thin">
                   <Input
-                    key={dataModal.priority}
+                    name="priority"
                     label="Độ ưu tiên"
                     defaultValue={dataModal.priority}
                   />
                   <Input
-                    key={dataModal.subcriptionid}
+                    name="subcriptionid"
                     label="ID gói"
                     defaultValue={dataModal.subcriptionid}
                   />
                   <Input
-                    key={dataModal.name}
+                    name="name"
                     label="Tên gói"
                     defaultValue={dataModal.name}
                   />
                   <Input
-                    key={dataModal.baseprice}
+                    name="baseprice"
                     label="Giá gốc"
                     defaultValue={dataModal.baseprice}
                   />
                   <Input
-                    key={dataModal.price}
+                    name="price"
                     label="Giá bán"
                     defaultValue={dataModal.price}
                   />
                   <Input
-                    key={dataModal.daysduration}
+                    name="daysduration"
                     label="Thời hạn sử dụng"
                     defaultValue={dataModal.daysduration}
                   />
                   <Input
-                    key={dataModal.quality}
+                    name="quality"
                     label="Chất lượng tối đa"
                     defaultValue={dataModal.quality}
                   />
                   <Input
-                    key={dataModal.connection}
-                    label="Chất lượng tối đa"
+                    name="connection"
+                    label="Số lượng IP kết nối"
                     defaultValue={dataModal.connection}
                   />
                 </ModalBody>
