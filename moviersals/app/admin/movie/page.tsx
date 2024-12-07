@@ -7,6 +7,7 @@ import { LetsIconsExpandRight } from "@/components/icons";
 import Transition from "@/components/MotionFramer/transition";
 import { title } from "@/components/primitives";
 import TableNextUI from "@/components/Table/tableNextUI";
+import { showResponseToast } from "@/lib/utils";
 import { BreadcrumbItem, Breadcrumbs } from "@nextui-org/react";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -91,6 +92,7 @@ export default function MovieAdminPage() {
     buttonText: "Tạo mới",
     handler: async (request: { [key: string]: any }) => {
       const response = await uploadMovie(request);
+      showResponseToast(response);
     },
   };
 

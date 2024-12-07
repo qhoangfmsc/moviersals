@@ -1,13 +1,14 @@
 "use client";
 
 import createSubscriptionPlan from "@/app/api/subcriptionplan/createSubscription";
+import deleteSubscriptionPlan from "@/app/api/subcriptionplan/deleteSubscription";
 import editSubscriptionPlan from "@/app/api/subcriptionplan/editSubscription";
 import getAllSubcriptionPlan from "@/app/api/subcriptionplan/getAllSubcription";
 import AdminForm, { AdminFormCofig } from "@/components/Form/adminForm";
 import Transition from "@/components/MotionFramer/transition";
 import { title } from "@/components/primitives";
 import TableNextUI from "@/components/Table/tableNextUI";
-import { convertFormDataToJson, getObjectById } from "@/lib/utils";
+import { convertFormDataToJson, getObjectById, showResponseToast } from "@/lib/utils";
 import {
   BreadcrumbItem,
   Breadcrumbs,
@@ -27,14 +28,15 @@ export default function MovieAdminPage() {
   // MODAL
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [dataModal, setDataModal] = useState(null);
+  const [isRefetch, setIsRefetch] = useState(false);
 
   // MAIN
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
   const pathname = usePathname();
 
   useEffect(() => {
     fetchData();
-  }, [pathname]);
+  }, [pathname, isRefetch]);
 
   const fetchData = async () => {
     const response = await getAllSubcriptionPlan();
@@ -59,7 +61,7 @@ export default function MovieAdminPage() {
     optionsButtonContent: <div className="flex place-items-center">Xem thông tin</div>,
     optionsButtonValue: "id",
     optionsHandler: function (id) {
-      const idInformation = getObjectById(data, id);
+      const idInformation = getObjectById(data?.list, id);
       console.log(idInformation);
       setDataModal(idInformation);
       onOpen();
@@ -75,12 +77,16 @@ export default function MovieAdminPage() {
       { colname: "baseprice", colsub: "Giá gốc", coltype: "inputnumber", colvalues: null },
       { colname: "price", colsub: "Giá bán", coltype: "inputnumber", colvalues: null },
       { colname: "daysduration", colsub: "Thời hạn sử dụng", coltype: "inputnumber", colvalues: null },
-      { colname: "quality", colsub: "Chất lượng tối đa", coltype: "inputnumber", colvalues: null },
+      { colname: "quality", colsub: "Chất lượng tối đa", coltype: "inputtext", colvalues: null },
+      { colname: "connection", colsub: "IP tối đa", coltype: "inputnumber", colvalues: null },
     ],
     buttonText: "Tạo gói",
     handler: async (formData: FormData) => {
-      const data = convertFormDataToJson(formData);
-      const response = await createSubscriptionPlan(data);
+      const response = await createSubscriptionPlan(formData);
+      showResponseToast(response);
+      if (response.status == "success") {
+        setIsRefetch(!isRefetch);
+      }
     },
   };
 
@@ -89,7 +95,28 @@ export default function MovieAdminPage() {
 
     try {
       const formData = new FormData(event.currentTarget);
+      formData.forEach((value, key) => console.log(key, value));
       const response = await editSubscriptionPlan(formData);
+      showResponseToast(response);
+      if (response.status == "success") {
+        setIsRefetch(!isRefetch);
+      }
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      }
+    }
+  }
+
+  async function handleDelete(subcriptionid: string, onClose: () => void) {
+    try {
+      const request = { subcriptionid: subcriptionid };
+      const response = await deleteSubscriptionPlan(request);
+      showResponseToast(response);
+      if (response.status == "success") {
+        setIsRefetch(!isRefetch);
+        onClose();
+      }
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.log(error.message);
@@ -133,48 +160,62 @@ export default function MovieAdminPage() {
                 <ModalBody className="font-thin">
                   <Input
                     key={dataModal.priority}
+                    name={"priority"}
                     label="Độ ưu tiên"
                     defaultValue={dataModal.priority}
                   />
                   <Input
                     key={dataModal.subcriptionid}
+                    name={"subcriptionid"}
                     label="ID gói"
                     defaultValue={dataModal.subcriptionid}
                   />
                   <Input
                     key={dataModal.name}
+                    name={"name"}
                     label="Tên gói"
                     defaultValue={dataModal.name}
                   />
                   <Input
                     key={dataModal.baseprice}
+                    name={"baseprice"}
                     label="Giá gốc"
                     defaultValue={dataModal.baseprice}
                   />
                   <Input
                     key={dataModal.price}
+                    name={"price"}
                     label="Giá bán"
                     defaultValue={dataModal.price}
                   />
                   <Input
                     key={dataModal.daysduration}
+                    name={"daysduration"}
                     label="Thời hạn sử dụng"
                     defaultValue={dataModal.daysduration}
                   />
                   <Input
                     key={dataModal.quality}
+                    name={"quality"}
                     label="Chất lượng tối đa"
                     defaultValue={dataModal.quality}
                   />
                   <Input
                     key={dataModal.connection}
-                    label="Chất lượng tối đa"
+                    name={"connection"}
+                    label="IP tối đa"
                     defaultValue={dataModal.connection}
                   />
                 </ModalBody>
                 <ModalFooter>
                   <Button
                     color="danger"
+                    variant="light"
+                    onPress={async () => handleDelete(dataModal.subcriptionid, onClose)}>
+                    Xóa
+                  </Button>
+                  <Button
+                    color="default"
                     variant="light"
                     onPress={onClose}>
                     Đóng

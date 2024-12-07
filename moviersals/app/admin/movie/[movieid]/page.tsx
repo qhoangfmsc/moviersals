@@ -22,6 +22,7 @@ import editMovie from "@/app/api/movies/editMovie";
 import AddNewEpisodeAdminForm from "@/components/Episode/episodeAdminForm";
 import AdminForm, { AdminFormCofig } from "@/components/Form/adminForm";
 import Transition from "@/components/MotionFramer/transition";
+import { showResponseToast } from "@/lib/utils";
 
 export default function episodeEpisodesListForm({ params }: { params: { movieid: string } }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -87,6 +88,7 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
     buttonText: "Xác nhận",
     handler: async (request: { [key: string]: any }) => {
       const response = await editMovie(request);
+      showResponseToast(response);
     },
   };
 
