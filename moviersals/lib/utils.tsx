@@ -80,6 +80,18 @@ export function convertRequestToFormData(request: Object) {
   return formData;
 }
 
+export function convertFormDataToJson(formData) {
+  const json = {};
+  formData.forEach((value, key) => {
+    if (json[key]) {
+      json[key] = [].concat(json[key], value); // Convert to an array
+    } else {
+      json[key] = value;
+    }
+  });
+  return json;
+}
+
 export function convertArrayToLowercaseArray(array: Array<string>) {
   const lowercaseDataArray = array.map((item) => item.toLowerCase());
   return lowercaseDataArray;
@@ -102,5 +114,5 @@ export function showResponseToast(response: Record<string, any>) {
 }
 
 export function getObjectById(list: Record<string, any>[], id: string) {
-  return list.find(item => item.id === id);
+  return list.find((item) => item.id === id);
 }

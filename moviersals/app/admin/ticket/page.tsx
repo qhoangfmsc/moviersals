@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import createSubscriptionPlan from "@/app/api/subcriptionplan/createSubscription";
 import editSubscriptionPlan from "@/app/api/subcriptionplan/editSubscription";
@@ -7,8 +7,19 @@ import AdminForm, { AdminFormCofig } from "@/components/Form/adminForm";
 import Transition from "@/components/MotionFramer/transition";
 import { title } from "@/components/primitives";
 import TableNextUI from "@/components/Table/tableNextUI";
-import { getObjectById } from "@/lib/utils";
-import { BreadcrumbItem, Breadcrumbs, Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@nextui-org/react";
+import { convertFormDataToJson, getObjectById } from "@/lib/utils";
+import {
+  BreadcrumbItem,
+  Breadcrumbs,
+  Button,
+  Input,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  useDisclosure,
+} from "@nextui-org/react";
 import { usePathname } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 
@@ -45,11 +56,7 @@ export default function MovieAdminPage() {
       { colname: "connection", colsub: "Số lượng IP kết nối" },
     ],
     bodyData: data,
-    optionsButtonContent: (
-      <div className="flex place-items-center">
-        Xem thông tin
-      </div>
-    ),
+    optionsButtonContent: <div className="flex place-items-center">Xem thông tin</div>,
     optionsButtonValue: "id",
     optionsHandler: function (id) {
       const idInformation = getObjectById(data, id);
@@ -72,7 +79,8 @@ export default function MovieAdminPage() {
     ],
     buttonText: "Tạo gói",
     handler: async (formData: FormData) => {
-      const response = await createSubscriptionPlan(formData);
+      const data = convertFormDataToJson(formData);
+      const response = await createSubscriptionPlan(data);
     },
   };
 
@@ -97,8 +105,7 @@ export default function MovieAdminPage() {
         itemClasses={{
           item: "px-2",
           separator: "px-0",
-        }}
-      >
+        }}>
         <BreadcrumbItem href="/admin">Moviersals</BreadcrumbItem>
         <BreadcrumbItem href="/admin/ticket">Hạng vé</BreadcrumbItem>
       </Breadcrumbs>
@@ -115,7 +122,9 @@ export default function MovieAdminPage() {
       </div>
 
       {/* MODAL DETAIL */}
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}>
         {dataModal && (
           <ModalContent>
             {(onClose) => (
@@ -164,7 +173,10 @@ export default function MovieAdminPage() {
                   />
                 </ModalBody>
                 <ModalFooter>
-                  <Button color="danger" variant="light" onPress={onClose}>
+                  <Button
+                    color="danger"
+                    variant="light"
+                    onPress={onClose}>
                     Đóng
                   </Button>
                   <Button
