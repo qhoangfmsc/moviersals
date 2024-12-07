@@ -157,6 +157,11 @@ export default function MovieAdminPage() {
                     label="Chất lượng tối đa"
                     defaultValue={dataModal.quality}
                   />
+                  <Input
+                    key={dataModal.connection}
+                    label="Chất lượng tối đa"
+                    defaultValue={dataModal.connection}
+                  />
                 </ModalBody>
                 <ModalFooter>
                   <Button color="danger" variant="light" onPress={onClose}>
