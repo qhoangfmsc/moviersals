@@ -87,6 +87,13 @@ export const Navbar = () => {
             Về chúng tôi
           </Link>
         </NavbarItem>
+        <NavbarItem>
+          <Link
+            color={pathname == "/staticpage" ? "success" : "foreground"}
+            href="/list">
+            Mục lục
+          </Link>
+        </NavbarItem>
       </NavbarContent>
 
       {authentication ? (
