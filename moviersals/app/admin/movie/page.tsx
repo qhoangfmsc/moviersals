@@ -121,7 +121,8 @@ export default function MovieAdminPage() {
         <Button
           className="text-white"
           endContent={<BxsCategory />}
-          color="success">
+          color="success"
+          href="/admin/movie/category">
           Chỉnh sửa thể loại phim
         </Button>
       </div>

@@ -21,6 +21,6 @@ export const adminSectionList = [
     img: "image/admin-categorie-section.png",
     leftText: "Thể loại",
     rightText: "Xem",
-    href: "/admin/categorie",
+    href: "/admin/categories",
   },
 ];
