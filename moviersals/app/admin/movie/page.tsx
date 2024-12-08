@@ -122,7 +122,7 @@ export default function MovieAdminPage() {
           className="text-white"
           endContent={<BxsCategory />}
           color="success"
-          href="/admin/movie/category">
+          onClick={() => router.push("/admin/categories")}>
           Chỉnh sửa thể loại phim
         </Button>
       </div>
