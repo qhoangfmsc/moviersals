@@ -31,7 +31,7 @@ export default function PaymentMethodsComponent() {
     async function getAllSubcriptionPlanData() {
       const response = await getAllSubcriptionPlan();
       if (response.status == "success") {
-        setSubcriptionListData(response.content);
+        setSubcriptionListData(response.content.list);
       } else showResponseToast(response);
     }
 
@@ -53,7 +53,7 @@ export default function PaymentMethodsComponent() {
               <h1 className="text-2xl">Chọn gói sử dụng</h1>
             </div>
             <div className="mt-12 mb-12 flex flex-row flex-wrap gap-12 justify-center">
-              {subcriptionListData.map((item, index) => (
+              {subcriptionListData?.map((item, index) => (
                 <div key={index}>
                   <SubcriptionPlanCard
                     data={item}

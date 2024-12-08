@@ -12,9 +12,9 @@ import {
 import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
 import { siteConfig } from "@/config/site";
-import { ArrowDown, MingcuteVip2Fill, SearchIcon } from "@/components/icons";
+import { ArrowDown, BxsCategory, IcRoundShop, MingcuteVip2Fill } from "@/components/icons";
 import Image from "next/image";
-import { Avatar, Badge, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, User } from "@nextui-org/react";
+import { Avatar, Badge, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Tooltip, User } from "@nextui-org/react";
 import checkAuthen from "@/app/api/account/checkAuthen";
 import { useEffect, useState } from "react";
 import logout from "@/app/api/account/logout";
@@ -38,13 +38,6 @@ export const Navbar = () => {
     setAuthentication(auth);
     localStorage.setItem("userinfo", JSON.stringify(auth));
   };
-
-  const searchInput = (
-    <Button
-      variant="light"
-      startContent={<SearchIcon />}
-    />
-  );
 
   async function logoutHandle() {
     await logout();
@@ -87,20 +80,36 @@ export const Navbar = () => {
             Về chúng tôi
           </Link>
         </NavbarItem>
-        <NavbarItem>
-          <Link
-            color={pathname == "/staticpage" ? "success" : "foreground"}
-            href="/list">
-            Mục lục
-          </Link>
-        </NavbarItem>
       </NavbarContent>
 
       {authentication ? (
         <NavbarContent
           className="hidden sm:flex basis-1/5 sm:basis-full"
           justify="end">
-          <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
+          <NavbarItem className="hidden lg:flex">
+            <Tooltip content="Khám phá phim">
+              <Link
+                href="/categories">
+                <Button
+                  color={pathname == "/categories" ? "success" : "default"}
+                  variant="light"
+                  startContent={<BxsCategory />}
+                />
+              </Link>
+            </Tooltip>
+          </NavbarItem>
+          <NavbarItem className="hidden lg:flex">
+            <Tooltip content="Mua gói thành viên">
+              <Link
+                href="/subscription">
+                <Button
+                  color={pathname == "/subscription" ? "success" : "default"}
+                  variant="light"
+                  startContent={<IcRoundShop />}
+                />
+              </Link>
+            </Tooltip>
+          </NavbarItem>
           <NavbarItem className="hidden lg:flex">
             <Dropdown>
               <DropdownTrigger>
@@ -134,13 +143,8 @@ export const Navbar = () => {
               </DropdownTrigger>
               <DropdownMenu aria-label="My account">
                 <DropdownItem href="/profile">Thông tin của tôi</DropdownItem>
-                <DropdownItem
-                  className="text-secondary-600"
-                  href="/subscription">
-                  Mua gói thành viên
-                </DropdownItem>
-                <DropdownItem href="/order/history">Lịch sử mua hàng</DropdownItem>
-                <DropdownItem href="/favourite">Phim của tôi</DropdownItem>
+                <DropdownItem showDivider href="/order/history">Lịch sử mua hàng</DropdownItem>
+                <DropdownItem showDivider href="/favourite">Phim của tôi</DropdownItem>
                 <DropdownItem
                   className="text-danger"
                   color="danger"

@@ -27,7 +27,7 @@ export const staticPageData = [
         <br />
         <br />
 
-        <div className="text-xl text-center">Hãy để Moviersal đồng hành cùng bạn trong mọi khoảnh khắc giải trí!</div>
+        <div className="text-xl">Hãy để Moviersal đồng hành cùng bạn trong mọi khoảnh khắc giải trí!</div>
       </div>
     ),
   },

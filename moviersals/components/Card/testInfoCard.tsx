@@ -2,7 +2,7 @@ import { Card, Snippet } from "@nextui-org/react";
 
 export default function TestInfoCard() {
   return (
-    <Card className="w-1/2 mx-auto flex flex-col gap-4 w-fit p-8 h-[500px] mt-4">
+    <Card className="w-1/2 mx-auto flex flex-col gap-4 w-fit p-8 h-[600px] mt-4">
       <div>
         <h1>🧾 Tài khoản Paypal (Test)</h1>
         <div className="flex flex-row mt-4 items-center">
