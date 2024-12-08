@@ -16,12 +16,10 @@ export interface TableData {
     color?: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
   };
   optionsHandler?: (id: any) => void; // Optional function to handle the edit button click
+  changePage?: (page: number) => void;
 }
 
 export default function TableNextUI({ tableData }: { tableData: TableData }) {
-  const [pageNum, setPageNum] = useState<number>(1);
-  const recordPerPage = 5;
-
   // Config img tag
   const imgColname = ["thumbnail", "avatar"];
 
@@ -36,17 +34,23 @@ export default function TableNextUI({ tableData }: { tableData: TableData }) {
     ...row,
     ...(tableData.optionsButtonContent
       ? {
-        options: (
-          <Button
-            size={tableData?.optionsButtonCustom?.size || "sm"}
-            onPress={() => tableData.optionsHandler?.(row[tableData.optionsButtonValue])}
-            color={tableData?.optionsButtonCustom?.color || "primary"}>
-            {tableData.optionsButtonContent}
-          </Button>
-        ),
-      }
+          options: (
+            <Button
+              size={tableData?.optionsButtonCustom?.size || "sm"}
+              onPress={() => tableData.optionsHandler?.(row[tableData.optionsButtonValue])}
+              color={tableData?.optionsButtonCustom?.color || "primary"}>
+              {tableData.optionsButtonContent}
+            </Button>
+          ),
+        }
       : {}),
   }));
+
+  function handleChangePage(e: number) {
+    console.log(e);
+    tableData.changePage?.(e);
+    // setPageNum(pageNum);
+  }
 
   return (
     <>
@@ -91,9 +95,9 @@ export default function TableNextUI({ tableData }: { tableData: TableData }) {
         <Pagination
           showControls
           isCompact
-          total={tableData?.bodyData?.page}
-          page={pageNum}
-          onChange={(e) => setPageNum(e)}
+          total={tableData?.bodyData?.total}
+          // page={pageNum}
+          onChange={(e) => handleChangePage(e)}
         />
       </div>
     </>

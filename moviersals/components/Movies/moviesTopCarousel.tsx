@@ -1,6 +1,5 @@
 "use client";
 
-import { categoriesSubtitles } from "@/config/categoriesSubtitles";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import React from "react";

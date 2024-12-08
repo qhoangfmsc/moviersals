@@ -1,6 +1,5 @@
 "use client";
 
-import { videosMockup } from "@/config/videosMockup";
 import StreamIntroduction from "../Stream/streamIntroduction";
 import MoviesCategories from "./moviesCategories";
 import MoviesTop from "./moviesTop";

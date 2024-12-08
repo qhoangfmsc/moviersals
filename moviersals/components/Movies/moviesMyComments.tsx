@@ -51,7 +51,7 @@ export default function MovieMyComment({ userinfo, movieid, mycomment }: { useri
   const [comment, setComment] = useState<Comment>();
   const [newRating, setNewRating] = useState(null);
   const [newComment, setNewComment] = useState(comment?.content || "");
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
 
   // let userinfo = null;
   // if (typeof window !== "undefined") {
@@ -77,7 +77,7 @@ export default function MovieMyComment({ userinfo, movieid, mycomment }: { useri
     setNewRating(newRating);
   };
 
-  const handleDeleteComment = async (onClose: () => void) => {
+  const handleDeleteComment = async () => {
     const response = await deleteComment({ id: comment?.id, movieid: movieid });
     showResponseToast(response);
     setComment(null);
@@ -233,7 +233,7 @@ export default function MovieMyComment({ userinfo, movieid, mycomment }: { useri
                 <Button
                   color="danger"
                   onPress={() => {
-                    handleDeleteComment(onClose);
+                    handleDeleteComment();
                   }}>
                   {"Đồng ý"}
                 </Button>

@@ -24,16 +24,18 @@ import { useEffect, useState } from "react";
 
 export default function MovieAdminPage() {
   // MODAL
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
   const [dataModal, setDataModal] = useState(null);
   const [isRefetch, setIsRefetch] = useState(false);
+  const [page, setPage] = useState(1);
+
   // MAIN
   const [data, setData] = useState(null);
   const pathname = usePathname();
 
   useEffect(() => {
     fetchData();
-  }, [pathname, isRefetch]);
+  }, [pathname, isRefetch, page]);
 
   const fetchData = async () => {
     const response = await getAllUser();
@@ -57,6 +59,9 @@ export default function MovieAdminPage() {
       const idInformation = getObjectById(data?.list, id);
       setDataModal(idInformation);
       onOpen();
+    },
+    changePage: function (page: number) {
+      setPage(page);
     },
   };
 
@@ -86,7 +91,7 @@ export default function MovieAdminPage() {
     },
   };
 
-  const handleUpdateStatusAccount = async (value: Boolean, onClose: () => void) => {
+  const handleUpdateStatusAccount = async (value: Boolean) => {
     console.log("hehe");
     const request = {
       username: dataModal["username"],
@@ -170,7 +175,7 @@ export default function MovieAdminPage() {
                 <Button
                   color={dataModal?.isactive ? "danger" : "success"}
                   onClick={() => {
-                    handleUpdateStatusAccount(!dataModal?.isactive, onClose);
+                    handleUpdateStatusAccount(!dataModal?.isactive);
                   }}>
                   {dataModal?.isactive ? "Tắt hoạt động" : "Bật hoạt động"}
                 </Button>

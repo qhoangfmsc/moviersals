@@ -1,14 +1,15 @@
 "use client";
 
+import createCategorie from "@/app/api/categorie/createCategorie";
+import deleteCategorie from "@/app/api/categorie/deleteCategorie";
+import editCategorie from "@/app/api/categorie/editCategorie";
+import getAllCategories from "@/app/api/categorie/getAllCategories";
 import createSubscriptionPlan from "@/app/api/subcriptionplan/createSubscription";
-import deleteSubscriptionPlan from "@/app/api/subcriptionplan/deleteSubscription";
-import editSubscriptionPlan from "@/app/api/subcriptionplan/editSubscription";
-import getAllSubcriptionPlan from "@/app/api/subcriptionplan/getAllSubcription";
 import AdminForm, { AdminFormCofig } from "@/components/Form/adminForm";
 import Transition from "@/components/MotionFramer/transition";
 import { title } from "@/components/primitives";
 import TableNextUI from "@/components/Table/tableNextUI";
-import { convertFormDataToJson, getObjectById, showResponseToast } from "@/lib/utils";
+import { getObjectById, showResponseToast } from "@/lib/utils";
 import {
   BreadcrumbItem,
   Breadcrumbs,
@@ -24,12 +25,11 @@ import {
 import { usePathname } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 
-export default function MovieTicketPage() {
+export default function CategeorieAdminPage() {
   // MODAL
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
   const [dataModal, setDataModal] = useState(null);
   const [page, setPage] = useState(1);
-
   // MAIN
   const [data, setData] = useState(null);
   const [isRefetch, setIsRefetch] = useState(false);
@@ -40,7 +40,7 @@ export default function MovieTicketPage() {
   }, [pathname, isRefetch, page]);
 
   const fetchData = async () => {
-    const response = await getAllSubcriptionPlan();
+    const response = await getAllCategories(page);
     const content = response.content;
     console.log(content);
     setData(content);
@@ -48,15 +48,8 @@ export default function MovieTicketPage() {
 
   const tableData = {
     headerData: [
-      { colname: "priority", colsub: "Độ ưu tiên" },
-      { colname: "subcriptionid", colsub: "ID gói" },
-      { colname: "name", colsub: "Tên gói" },
-      { colname: "baseprice", colsub: "Giá gốc" },
-      { colname: "price", colsub: "Giá bán" },
-      { colname: "daysduration", colsub: "Thời hạn sử dụng" },
-      { colname: "isads", colsub: "Quảng cáo" },
-      { colname: "quality", colsub: "Chất lượng tối đa" },
-      { colname: "connection", colsub: "Số lượng IP kết nối" },
+      { colname: "name", colsub: "Tên thể loại(EN)" },
+      { colname: "namevi", colsub: "Tên thể loại(VI)" },
     ],
     bodyData: data,
     optionsButtonContent: <div className="flex place-items-center">Xem thông tin</div>,
@@ -67,6 +60,7 @@ export default function MovieTicketPage() {
       setDataModal(idInformation);
       onOpen();
     },
+
     changePage: function (page: number) {
       setPage(page);
     },
@@ -75,20 +69,12 @@ export default function MovieTicketPage() {
   const adminFormCofig: AdminFormCofig = {
     label: "Tạo mới",
     colList: [
-      { colname: "priority", colsub: "Độ ưu tiên", coltype: "inputnumber", colvalues: null },
-      { colname: "subcriptionid", colsub: "ID gói", coltype: "inputtext", colvalues: null },
-      { colname: "name", colsub: "Tên gói", coltype: "inputtext", colvalues: null },
-      { colname: "baseprice", colsub: "Giá gốc", coltype: "inputnumber", colvalues: null },
-      { colname: "price", colsub: "Giá bán", coltype: "inputnumber", colvalues: null },
-      { colname: "daysduration", colsub: "Thời hạn sử dụng", coltype: "inputnumber", colvalues: null },
-      { colname: "quality", colsub: "Chất lượng tối đa", coltype: "inputnumber", colvalues: null },
-      { colname: "connection", colsub: "Số lượng IP kết nối", coltype: "inputnumber", colvalues: null },
+      { colname: "name", colsub: "Tên thể loại(EN)", coltype: "inputtext", colvalues: null },
+      { colname: "namevi", colsub: "Tên thể loại(VI)", coltype: "inputtext", colvalues: null },
     ],
-    buttonText: "Tạo gói",
+    buttonText: "Tạo thể loại",
     handler: async (formData: FormData) => {
-      const data = convertFormDataToJson(formData);
-      data["quality"] = `${data["quality"]}p`;
-      const response = await createSubscriptionPlan(data);
+      const response = await createCategorie(formData);
       showResponseToast(response);
       if (response.status == "success") {
         setIsRefetch(!isRefetch);
@@ -101,14 +87,11 @@ export default function MovieTicketPage() {
 
     try {
       const formData = new FormData(event.currentTarget);
-      const data = convertFormDataToJson(formData);
-      console.log(data);
-      data["quality"] = `${data["quality"]}p`;
-      data["isads"] = false;
-      const response = await editSubscriptionPlan(data);
+      const response = await editCategorie(formData);
       showResponseToast(response);
       if (response.status == "success") {
         setIsRefetch(!isRefetch);
+        onClose();
       }
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -117,9 +100,9 @@ export default function MovieTicketPage() {
     }
   }
 
-  async function handleDelte(subcriptionid: string) {
-    const body = { subcriptionid: subcriptionid };
-    const response = await deleteSubscriptionPlan(body);
+  async function handleDelte(id: string, name: string) {
+    const body = { id: id, name: name };
+    const response = await deleteCategorie(body);
     showResponseToast(response);
     if (response.status == "success") {
       setIsRefetch(!isRefetch);
@@ -162,51 +145,27 @@ export default function MovieTicketPage() {
                 <ModalHeader className="flex flex-col gap-1">Chi tiết hạng vé</ModalHeader>
                 <ModalBody className="font-thin">
                   <Input
-                    name="priority"
-                    label="Độ ưu tiên"
-                    defaultValue={dataModal.priority}
-                  />
-                  <Input
-                    name="subcriptionid"
-                    label="ID gói"
-                    defaultValue={dataModal.subcriptionid}
+                    readOnly
+                    name="id"
+                    label="ID thể loại"
+                    defaultValue={dataModal.id}
                   />
                   <Input
                     name="name"
-                    label="Tên gói"
+                    label="Tên thể loại (EN)"
                     defaultValue={dataModal.name}
                   />
                   <Input
-                    name="baseprice"
-                    label="Giá gốc"
-                    defaultValue={dataModal.baseprice}
-                  />
-                  <Input
-                    name="price"
-                    label="Giá bán"
-                    defaultValue={dataModal.price}
-                  />
-                  <Input
-                    name="daysduration"
-                    label="Thời hạn sử dụng"
-                    defaultValue={dataModal.daysduration}
-                  />
-                  <Input
-                    name="quality"
-                    label="Chất lượng tối đa"
-                    defaultValue={dataModal.quality}
-                  />
-                  <Input
-                    name="connection"
-                    label="Số lượng IP kết nối"
-                    defaultValue={dataModal.connection}
+                    name="namevi"
+                    label="Tên thể loại (VI)"
+                    defaultValue={dataModal.namevi}
                   />
                 </ModalBody>
                 <ModalFooter>
                   <Button
                     color="danger"
                     variant="light"
-                    onPress={async () => await handleDelte(dataModal.subcriptionid)}>
+                    onPress={async () => await handleDelte(dataModal.id, dataModal.name)}>
                     Xóa
                   </Button>
                   <Button

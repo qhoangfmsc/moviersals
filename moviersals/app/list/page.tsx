@@ -1,10 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
-import getCategories from "../api/movies/getCategories";
 import { Button, Checkbox, CheckboxGroup, Input, Pagination, Select, SelectItem } from "@nextui-org/react";
 import { yearArray } from "./yearMockup";
 import getFilterMovie from "../api/movies/getFilterMovie";
 import MoviesTop from "@/components/Movies/moviesTop";
+import getAllCategories from "../api/categorie/getAllCategories";
 
 interface Filter {
   moviename: string | null;
@@ -20,9 +20,9 @@ export default function MovieListPage() {
 
   useEffect(() => {
     async function fetchCategories() {
-      const response = await getCategories();
+      const response = await getAllCategories(1);
       if (response.status == "success") {
-        setTags(response.content);
+        setTags(response.content.list);
       }
     }
 

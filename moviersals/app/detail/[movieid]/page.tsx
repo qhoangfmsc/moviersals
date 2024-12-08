@@ -4,7 +4,6 @@ import getMovieDetailById from "@/app/api/movies/getMovieById";
 import { LineMdArrowSmallLeft, LineMdPlayFilled, MdiEyeOutline, SvgSpinners3DotsFade, SvgSpinnersClock } from "@/components/icons";
 import { title } from "@/components/primitives";
 import { toast } from "react-toastify";
-import { categoriesSubtitles } from "@/config/categoriesSubtitles";
 import { Button, Image } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";

@@ -1,6 +1,7 @@
+import getAllCategories from "@/app/api/categorie/getAllCategories";
 import { categoriesSubtitles } from "@/config/categoriesSubtitles";
 import { Button, Card, CardFooter, Image, Link, Tab, Tabs } from "@nextui-org/react";
-import React, { Key } from "react";
+import { Key, useEffect, useState } from "react";
 
 // Video interface with dynamic keys
 interface Video {
@@ -21,7 +22,17 @@ interface MoviesCategoriesProps {
 
 export default function MoviesCategories({ dataVideos }: MoviesCategoriesProps) {
   // CATEGORIES TABS
-  const [selected, setSelected] = React.useState("action");
+  const [selected, setSelected] = useState("action");
+  const [tags, setTags] = useState<any>(null);
+
+  useEffect(() => {
+    async function getAllTags() {
+      const response = await getAllCategories(1);
+      setTags(response.content.list);
+    }
+
+    if (tags == null) getAllTags();
+  }, [tags]);
 
   const handleSelectionChange = (key: Key) => {
     setSelected(String(key));
@@ -36,23 +47,22 @@ export default function MoviesCategories({ dataVideos }: MoviesCategoriesProps) 
         color="primary"
         variant="underlined"
         size="lg">
-        {Object.values(categoriesSubtitles).map(function (category) {
+        {tags?.map((item) => {
           return (
             <Tab
-              key={category.name}
+              key={item.id}
               title={
                 <>
                   <div className="hidden lg:flex items-center space-x-2">
-                    {category.icon}
-                    <span>{category.vietsub}</span>
+                    <span>{item.namevi}</span>
                   </div>
-                  <div className="flex lg:hidden items-center space-x-2">{category.icon}</div>
+                  {/* <div className="flex lg:hidden items-center space-x-2">{item.icon}</div> */}
                 </>
               }
               className="flex justify-center flex-wrap p-2">
-              {dataVideos?.filter((video) => video.categories.includes(category.name)).length > 0 ? (
+              {dataVideos?.filter((video) => video.categories.includes(item.name)).length > 0 ? (
                 dataVideos
-                  ?.filter((video) => video.categories.includes(category.name))
+                  ?.filter((video) => video.categories.includes(item.name))
                   ?.map(function (item) {
                     return (
                       <div

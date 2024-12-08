@@ -16,9 +16,12 @@ export default function MovieAdminPage() {
   const router = useRouter();
   const [data, setData] = useState(null);
   const pathname = usePathname();
+  const [page, setPage] = useState(1);
+  const [isRefetch, setIsRefetch] = useState(false);
+
   useEffect(() => {
     fetchData();
-  }, [pathname]);
+  }, [pathname, isRefetch, page]);
 
   const fetchData = async () => {
     const response = await getAllMovie(1);
@@ -44,6 +47,9 @@ export default function MovieAdminPage() {
     optionsHandler: function (movieid) {
       const href = `/admin/movie/${movieid}`;
       router.push(href);
+    },
+    changePage: function (page: number) {
+      setPage(page);
     },
   };
 
@@ -93,6 +99,9 @@ export default function MovieAdminPage() {
     handler: async (request: { [key: string]: any }) => {
       const response = await uploadMovie(request);
       showResponseToast(response);
+      if (response.status == "success") {
+        setIsRefetch(!isRefetch);
+      }
     },
   };
 

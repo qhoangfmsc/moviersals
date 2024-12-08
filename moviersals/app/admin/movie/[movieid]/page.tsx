@@ -25,7 +25,7 @@ import Transition from "@/components/MotionFramer/transition";
 import { showResponseToast } from "@/lib/utils";
 
 export default function episodeEpisodesListForm({ params }: { params: { movieid: string } }) {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
   const [data, setData] = useState<any>({});
   const [isRefetch, setIsRefetch] = useState(false);
 
@@ -93,7 +93,7 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
     },
   };
 
-  function handleCreateEpisode(onClose: () => void) {
+  function handleCreateEpisode() {
     onClose();
     setIsRefetch(!isRefetch);
   }
@@ -150,7 +150,7 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
               <ModalBody>
                 <AddNewEpisodeAdminForm
                   movieid={params.movieid}
-                  handleClose={() => handleCreateEpisode(onClose)}
+                  handleClose={() => handleCreateEpisode()}
                 />
               </ModalBody>
             </>
