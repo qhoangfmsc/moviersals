@@ -1,13 +1,14 @@
 "use client";
 
 import createSubscriptionPlan from "@/app/api/subcriptionplan/createSubscription";
+import deleteSubscriptionPlan from "@/app/api/subcriptionplan/deleteSubscription";
 import editSubscriptionPlan from "@/app/api/subcriptionplan/editSubscription";
 import getAllSubcriptionPlan from "@/app/api/subcriptionplan/getAllSubcription";
 import AdminForm, { AdminFormCofig } from "@/components/Form/adminForm";
 import Transition from "@/components/MotionFramer/transition";
 import { title } from "@/components/primitives";
 import TableNextUI from "@/components/Table/tableNextUI";
-import { convertFormDataToJson, getObjectById } from "@/lib/utils";
+import { convertFormDataToJson, getObjectById, showResponseToast } from "@/lib/utils";
 import {
   BreadcrumbItem,
   Breadcrumbs,
@@ -29,12 +30,13 @@ export default function MovieAdminPage() {
   const [dataModal, setDataModal] = useState(null);
 
   // MAIN
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
+  const [isRefetch, setIsRefetch] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
     fetchData();
-  }, [pathname]);
+  }, [pathname, isRefetch]);
 
   const fetchData = async () => {
     const response = await getAllSubcriptionPlan();
@@ -59,7 +61,7 @@ export default function MovieAdminPage() {
     optionsButtonContent: <div className="flex place-items-center">Xem thông tin</div>,
     optionsButtonValue: "id",
     optionsHandler: function (id) {
-      const idInformation = getObjectById(data, id);
+      const idInformation = getObjectById(data?.list, id);
       console.log(idInformation);
       setDataModal(idInformation);
       onOpen();
@@ -83,6 +85,10 @@ export default function MovieAdminPage() {
       const data = convertFormDataToJson(formData);
       data["quality"] = `${data["quality"]}p`;
       const response = await createSubscriptionPlan(data);
+      showResponseToast(response);
+      if (response.status == "success") {
+        setIsRefetch(!isRefetch);
+      }
     },
   };
 
@@ -96,10 +102,24 @@ export default function MovieAdminPage() {
       data["quality"] = `${data["quality"]}p`;
       data["isads"] = false;
       const response = await editSubscriptionPlan(data);
+      showResponseToast(response);
+      if (response.status == "success") {
+        setIsRefetch(!isRefetch);
+      }
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.log(error.message);
       }
+    }
+  }
+
+  async function handleDelte(subcriptionid: string, onClose: () => void) {
+    const body = { subcriptionid: subcriptionid };
+    const response = await deleteSubscriptionPlan(body);
+    showResponseToast(response);
+    if (response.status == "success") {
+      setIsRefetch(!isRefetch);
+      onClose();
     }
   }
 
@@ -181,6 +201,12 @@ export default function MovieAdminPage() {
                 <ModalFooter>
                   <Button
                     color="danger"
+                    variant="light"
+                    onPress={async () => await handleDelte(dataModal.subcriptionid, onClose)}>
+                    Xóa
+                  </Button>
+                  <Button
+                    color="default"
                     variant="light"
                     onPress={onClose}>
                     Đóng

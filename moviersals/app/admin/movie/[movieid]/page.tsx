@@ -27,10 +27,11 @@ import { showResponseToast } from "@/lib/utils";
 export default function episodeEpisodesListForm({ params }: { params: { movieid: string } }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [data, setData] = useState<any>({});
+  const [isRefetch, setIsRefetch] = useState(false);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [isRefetch]);
 
   const fetchData = async () => {
     const response = await getMovieDetailById(params.movieid, null);
@@ -92,6 +93,11 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
     },
   };
 
+  function handleCreateEpisode(onClose: () => void) {
+    onClose();
+    setIsRefetch(!isRefetch);
+  }
+
   return (
     <Transition>
       <h1 className={title()}>Quản lý phim {data?.movieDetail?.name}</h1>
@@ -138,11 +144,14 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
         isOpen={isOpen}
         onOpenChange={onOpenChange}>
         <ModalContent>
-          {() => (
+          {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">{"Thêm tập phim"}</ModalHeader>
               <ModalBody>
-                <AddNewEpisodeAdminForm movieid={params.movieid} />
+                <AddNewEpisodeAdminForm
+                  movieid={params.movieid}
+                  handleClose={() => handleCreateEpisode(onClose)}
+                />
               </ModalBody>
             </>
           )}

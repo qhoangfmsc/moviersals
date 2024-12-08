@@ -30,9 +30,9 @@ export default function EpisodeCard({ cardData, onCardClick }: CardEpisodeProps)
       />
       {cardData ? (
         <CardFooter className="flex flex-col items-start">
-          <p className="text-1xl text-white/80 mb-2">{"Episode " + cardData?.episodenumber}</p>
+          <p className="text-1xl text-white/80 mb-2">{"Tập " + cardData?.episodenumber}</p>
           <p className="text-tiny text-white/80 mb-2">{cardData?.name}</p>
-          <p className="text-tiny text-white/80 mb-2">{"View " + cardData?.view}</p>
+          <p className="text-tiny text-white/80 mb-2">{"Lượt xem " + cardData?.view}</p>
         </CardFooter>
       ) : (
         <CardFooter className="flex flex-col items-center">

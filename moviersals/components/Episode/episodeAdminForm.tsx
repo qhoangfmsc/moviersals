@@ -6,8 +6,9 @@ import { FormEvent, useState } from "react";
 import { useParams } from "next/navigation";
 import uploadEpisode from "@/app/api/episode/uploadEpisode";
 import VideoUploader from "../Cloudinary/uploadvideo";
+import { showResponseToast } from "@/lib/utils";
 
-export default function AddNewEpisodeAdminForm({ movieid }: { movieid: string }) {
+export default function AddNewEpisodeAdminForm({ movieid, handleClose }: { movieid: string; handleClose: () => void }) {
   const params = useParams();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -37,7 +38,7 @@ export default function AddNewEpisodeAdminForm({ movieid }: { movieid: string })
     try {
       const formData = new FormData(event.currentTarget);
       const episodename = formData.get("name")?.toString();
-      const episodepath = formData.get("episodepath")?.toString();
+      const episodepath = uploadedVideoUrl;
       const episodenumber = formData.get("episodenumber")?.toString();
       const movieid = params?.movieid as string;
 
@@ -46,8 +47,10 @@ export default function AddNewEpisodeAdminForm({ movieid }: { movieid: string })
       if (episodename && episodepath && episodenumber && movieid) {
         const response = await uploadEpisode(movieid, episodename, episodepath, episodenumber);
         setIsLoading(false);
+        showResponseToast(response);
         if (response.result == "success") {
           setIsLoading(false);
+          handleClose();
         } else {
           setIsLoading(false);
           setError(response.content);
@@ -89,14 +92,14 @@ export default function AddNewEpisodeAdminForm({ movieid }: { movieid: string })
       />
       <div className="flex flex-row">
         <Input
-          isReadOnly
           defaultValue="null"
           size="lg"
           className="w-full"
           type="text"
           name="episodepath"
           variant="underlined"
-          value={uploadedVideoUrl}
+          // value={uploadedVideoUrl}
+          onChange={(e) => setUploadedVideoUrl(e.target.value)}
           label="Đường dẫn tập phim"
         />
         <VideoUploader

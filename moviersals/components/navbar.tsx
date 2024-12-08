@@ -133,26 +133,15 @@ export const Navbar = () => {
                 </Button>
               </DropdownTrigger>
               <DropdownMenu aria-label="My account">
+                <DropdownItem href="/profile">Thông tin của tôi</DropdownItem>
                 <DropdownItem
-                  as={Link}
-                  className="text-white"
-                  href="/profile">Thông tin của tôi</DropdownItem>
-                <DropdownItem
-                  as={Link}
                   className="text-secondary-600"
                   href="/subscription">
                   Mua gói thành viên
                 </DropdownItem>
+                <DropdownItem href="/order/history">Lịch sử mua hàng</DropdownItem>
+                <DropdownItem href="/favourite">Phim của tôi</DropdownItem>
                 <DropdownItem
-                  className="text-white"
-                  as={Link}
-                  href="/order/history">Lịch sử mua hàng</DropdownItem>
-                <DropdownItem
-                  className="text-white"
-                  as={Link}
-                  href="/favourite">Phim của tôi</DropdownItem>
-                <DropdownItem
-                  as={Link}
                   className="text-danger"
                   color="danger"
                   onClick={logoutHandle}>
@@ -181,16 +170,12 @@ export const Navbar = () => {
               </DropdownTrigger>
               <DropdownMenu aria-label="My account">
                 <DropdownItem
-                  as={Link}
                   className="text-success"
                   color="success"
                   href="/login">
                   Đăng nhập
                 </DropdownItem>
-                <DropdownItem
-                  className="text-white"
-                  as={Link}
-                  href="/register">Đăng ký</DropdownItem>
+                <DropdownItem href="/register">Đăng ký</DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </NavbarItem>
