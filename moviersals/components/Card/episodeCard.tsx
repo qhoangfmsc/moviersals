@@ -1,4 +1,4 @@
-import { Card, CardFooter, Image, Button, Link } from "@nextui-org/react";
+import { Card, CardFooter, Image } from "@nextui-org/react";
 
 interface CardEpisodeProps {
   cardData: {
@@ -12,7 +12,7 @@ interface CardEpisodeProps {
   onCardClick: () => void;
 }
 
-export default function EpisodeCard({ cardData, onCardClick }: CardEpisodeProps) {
+export default function AdminEpisodeCard({ cardData, onCardClick }: CardEpisodeProps) {
   return (
     <Card
       isPressable={cardData ? false : true}
@@ -24,7 +24,6 @@ export default function EpisodeCard({ cardData, onCardClick }: CardEpisodeProps)
         className={cardData ? "object-cover" : "object-contain"}
         height={cardData ? 180 : 100}
         style={{ margin: cardData ? "0px 0px" : "50px 0px" }}
-        // src={cardData?.episodepath?.split(".").slice(0, -1).join(".") + ".jpg"}
         src={cardData ? "https://media-cache.cinematerial.com/p/500x/l35kpwhw/it-re-release-movie-poster.jpg" : "/image/plus.png"}
         width={cardData ? 280 : 280}
       />

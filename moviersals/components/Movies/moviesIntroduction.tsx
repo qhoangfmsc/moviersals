@@ -1,11 +1,11 @@
 "use client";
 
 import StreamIntroduction from "../Stream/streamIntroduction";
-import MoviesCategories from "./moviesCategories";
 import MoviesTop from "./moviesTop";
 import MoviesTopCarousel from "./moviesTopCarousel";
 import { useEffect, useState } from "react";
 import getAllMovie from "@/app/api/movies/getAllMovie";
+import MoviesIntroductionCategories from "./moviesIntroductionCategories";
 
 export default function MoviesIntroduction() {
   const [dataVideos, setDataVideos] = useState<any>(null);
@@ -44,7 +44,7 @@ export default function MoviesIntroduction() {
         />
       </div>
       <div className="flex w-full flex-col items-center my-14">
-        <MoviesCategories dataVideos={dataVideos?.list} />
+        <MoviesIntroductionCategories dataVideos={dataVideos?.list} />
       </div>
     </div>
   );

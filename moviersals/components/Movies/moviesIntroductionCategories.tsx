@@ -1,5 +1,4 @@
 import getAllCategories from "@/app/api/categorie/getAllCategories";
-import { categoriesSubtitles } from "@/config/categoriesSubtitles";
 import { Button, Card, CardFooter, Image, Link, Tab, Tabs } from "@nextui-org/react";
 import { Key, useEffect, useState } from "react";
 
@@ -20,7 +19,7 @@ interface MoviesCategoriesProps {
   dataVideos: Video[]; // An array of Video objects
 }
 
-export default function MoviesCategories({ dataVideos }: MoviesCategoriesProps) {
+export default function MoviesIntroductionCategories({ dataVideos }: MoviesCategoriesProps) {
   // CATEGORIES TABS
   const [selected, setSelected] = useState("action");
   const [tags, setTags] = useState<any>(null);

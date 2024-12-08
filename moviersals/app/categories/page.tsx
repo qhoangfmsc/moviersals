@@ -6,6 +6,7 @@ import getFilterMovie from "../api/movies/getFilterMovie";
 import MoviesTop from "@/components/Movies/moviesTop";
 import getAllCategories from "../api/categorie/getAllCategories";
 import { TablerCalendar } from "@/components/icons";
+import ReviewMovieList from "@/components/Movies/reviewMovieList";
 
 interface Filter {
   moviename: string | null;
@@ -95,7 +96,10 @@ export default function MovieListPage() {
           </div>
         </div>
       </div>
-      <div className="p-10 flex justify-end">
+      <div className="px-10 flex flex-row flex-wrap justify-start m-2">
+        <ReviewMovieList dataVideos={data} />
+      </div>
+      <div className="px-20 flex justify-end">
         <Pagination
           className="w-fit"
           total={data?.total}

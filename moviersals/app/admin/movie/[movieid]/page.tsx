@@ -1,7 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
-import uploadEpisode from "@/app/api/episode/uploadEpisode";
+import { useEffect, useState } from "react";
 import getMovieDetailById from "@/app/api/movies/getMovieById";
 import {
   BreadcrumbItem,
@@ -16,8 +15,7 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import { title } from "@/components/primitives";
-import EpisodeCard from "@/components/Card/episodeCard";
-import VideoUploader from "@/components/Cloudinary/uploadvideo";
+import AdminEpisodeCard from "@/components/Card/episodeCard";
 import editMovie from "@/app/api/movies/editMovie";
 import AddNewEpisodeAdminForm from "@/components/Episode/episodeAdminForm";
 import AdminForm, { AdminFormCofig } from "@/components/Form/adminForm";
@@ -117,7 +115,7 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
           <div className="flex flex-row flex-wrap gap-3">
             {data?.list?.length > 0 ? (
               data?.list?.map((item: any) => (
-                <EpisodeCard
+                <AdminEpisodeCard
                   key={item.episodeid}
                   cardData={item}
                   onCardClick={null}
@@ -126,7 +124,7 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
             ) : (
               <></>
             )}
-            <EpisodeCard
+            <AdminEpisodeCard
               key={"null"}
               cardData={null}
               onCardClick={handleCreateClick}
