@@ -15,7 +15,7 @@ export default function AboutPage() {
       </div>
       <div className="flex flex-col px-4">
         <div className="flex w-full flex-col">
-          <Tabs
+          {data && (<Tabs
             className="ml-10"
             aria-label="Options"
             isVertical={true}>
@@ -30,6 +30,7 @@ export default function AboutPage() {
               </Tab>
             ))}
           </Tabs>
+          )}
         </div>
       </div>
     </Transition>

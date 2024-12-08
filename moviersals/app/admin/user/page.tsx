@@ -1,23 +1,14 @@
-"use client";
+"use client"
 
 import getAllUser from "@/app/api/account/getAllUser";
 import register from "@/app/api/account/register";
+import updateState from "@/app/api/account/updateState";
 import AdminForm, { AdminFormCofig } from "@/components/Form/adminForm";
 import Transition from "@/components/MotionFramer/transition";
 import { title } from "@/components/primitives";
 import TableNextUI from "@/components/Table/tableNextUI";
-import { getObjectById, showResponseToast } from "@/lib/utils";
-import {
-  BreadcrumbItem,
-  Breadcrumbs,
-  Button,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  useDisclosure,
-} from "@nextui-org/react";
+import { getObjectById } from "@/lib/utils";
+import { BreadcrumbItem, Breadcrumbs, Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@nextui-org/react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -50,7 +41,11 @@ export default function MovieAdminPage() {
       { colname: "ispremium", colsub: "Hạng vé VIP" },
     ],
     bodyData: data,
-    optionsButtonContent: <div className="flex place-items-center">Xem thông tin</div>,
+    optionsButtonContent: (
+      <div className="flex place-items-center">
+        Xem thông tin
+      </div>
+    ),
     optionsButtonValue: "id",
     optionsHandler: function (id) {
       const idInformation = getObjectById(data, id);
@@ -78,8 +73,17 @@ export default function MovieAdminPage() {
 
       // CALL API
       const response = await register(username, password, displayname, email, phonenumber);
-      showResponseToast(response);
     },
+  };
+
+  const handleUpdateStatusAccount = async (value: Boolean) => {
+    console.log("hehe");
+    const request = {
+      "username": dataModal["username"],
+      "id": dataModal["id"],
+      "isactive": value,
+    };
+    const response = await updateState(request);
   };
 
   return (
@@ -90,7 +94,8 @@ export default function MovieAdminPage() {
         itemClasses={{
           item: "px-2",
           separator: "px-0",
-        }}>
+        }}
+      >
         <BreadcrumbItem href="/admin">Moviersals</BreadcrumbItem>
         <BreadcrumbItem href="/admin/user">Khách hàng</BreadcrumbItem>
       </Breadcrumbs>
@@ -107,49 +112,30 @@ export default function MovieAdminPage() {
       </div>
 
       {/* MODAL DETAIL */}
-      <Modal
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">Chi tiết tài khoản</ModalHeader>
               <ModalBody className="font-thin">
-                <div>
-                  ID: <b>{dataModal?.id}</b>
-                </div>
-                <div>
-                  Tên hiển thị: <b>{dataModal?.displayname}</b>
-                </div>
-                <div>
-                  Số điện thoại: <b>{dataModal?.phonenumber}</b>
-                </div>
-                <div>
-                  Email: <b>{dataModal?.email}</b>
-                </div>
+                <div>ID: <b>{dataModal?.id}</b></div>
+                <div>Tên hiển thị: <b>{dataModal?.displayname}</b></div>
+                <div>Số điện thoại: <b>{dataModal?.phonenumber}</b></div>
+                <div>Email: <b>{dataModal?.email}</b></div>
                 <br />
-                <div>
-                  Tên tài khoản: <b>{dataModal?.username}</b>
-                </div>
-                <div>
-                  Hạng vé: <b>{dataModal?.ispremium ? "VIP" : "Phổ thông"}</b>
-                </div>
-                <div>
-                  Xác thực email: <b>{dataModal?.isverified ? "Xác thực" : "Chưa xác thực"}</b>
-                </div>
-                <div>
-                  Trạng thái tài khoản: <b>{dataModal?.isactive ? "Đang hoạt động" : "Tắt hoạt động"}</b>
-                </div>
+                <div>Tên tài khoản: <b>{dataModal?.username}</b></div>
+                <div>Hạng vé: <b>{(dataModal?.ispremium) ? "VIP" : "Phổ thông"}</b></div>
+                <div>Xác thực email: <b>{(dataModal?.isverified) ? "Xác thực" : "Chưa xác thực"}</b></div>
+                <div>Trạng thái tài khoản: <b>{(dataModal?.isactive) ? "Đang hoạt động" : "Tắt hoạt động"}</b></div>
               </ModalBody>
               <ModalFooter>
-                <Button
-                  color="danger"
-                  variant="light"
-                  onPress={onClose}>
+                <Button color="danger" variant="light" onPress={onClose}>
                   Đóng
                 </Button>
-                <Button color={dataModal?.isactive ? "danger" : "success"}>
-                  {dataModal?.isactive ? "Tắt hoạt động" : "Bật hoạt động"}
+                <Button
+                  color={(dataModal?.isactive) ? "danger" : "success"}
+                  onClick={() => { handleUpdateStatusAccount(!dataModal?.isactive) }}>
+                  {(dataModal?.isactive) ? "Tắt hoạt động" : "Bật hoạt động"}
                 </Button>
               </ModalFooter>
             </>

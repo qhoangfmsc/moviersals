@@ -13,11 +13,11 @@ export interface AdminFormCofig {
     colsub: string;
     coltype: "inputtext" | "inputpassword" | "inputnumber" | "inputfile" | "radio" | "checkbox";
     colvalues:
-      | {
-          key: any;
-          value: any;
-        }[]
-      | null;
+    | {
+      key: any;
+      value: any;
+    }[]
+    | null;
   }[];
   buttonText: string;
   handler: (request: Record<string, any>) => void;
@@ -279,15 +279,13 @@ export default function AdminForm({ adminFormCofig, rerenderData }: { adminFormC
               case "radio":
                 return (
                   <RadioGroup
+                    aria-label="Radio group"
                     key={index}
                     label={col.colsub}
                     orientation="horizontal"
                     name={col.colname}
                     className="mt-2"
-                    defaultValue={(rerenderData as any)?.[col?.colname]}
-                    onChange={(value) => {
-                      (rerenderData as any)[col?.colname] = value;
-                    }}>
+                    defaultValue={(rerenderData as any)?.[col?.colname]}>
                     {col.colvalues?.map((object) => (
                       <Radio
                         key={object.key}
@@ -307,6 +305,7 @@ export default function AdminForm({ adminFormCofig, rerenderData }: { adminFormC
                 setupDefaultValue = convertArrayToLowercaseArray(setupDefaultValue);
                 return (
                   <CheckboxGroup
+                    aria-label="Checkbox group"
                     key={index}
                     label={col.colsub}
                     orientation="horizontal"
