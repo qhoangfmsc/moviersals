@@ -23,4 +23,10 @@ export const adminSectionList = [
     rightText: "Xem",
     href: "/admin/categorie",
   },
+  {
+    img: "image/admin-statistic-section.png",
+    leftText: "Thống Kê",
+    rightText: "Xem",
+    href: "/admin/statistic",
+  },
 ];
