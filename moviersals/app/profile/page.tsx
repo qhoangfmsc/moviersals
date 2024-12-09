@@ -8,6 +8,7 @@ import { convertRequestToFormData, preexecuteRequest, showResponseToast } from "
 import RequestEmailVerification from "../api/account/requestemailverification";
 import ConfirmEmailVerification from "../api/account/confirmemailverification";
 import Transition from "@/components/MotionFramer/transition";
+import moment from "moment";
 
 export default function TemplatePage() {
   const [fileState, setFileState] = useState<File>(null);
@@ -138,14 +139,24 @@ export default function TemplatePage() {
                 label="Tên người dùng"
                 value={userInfo?.username}
               />
-              <Input
-                isDisabled
-                className="w-full my-2"
-                type="text"
-                variant="underlined"
-                label="Gói sử dụng"
-                value={userInfo?.subcriptionid}
-              />
+              <div className="flex flex-row gap-4 w-fit">
+                <Input
+                  isDisabled
+                  className="w-fit"
+                  type="text"
+                  variant="underlined"
+                  label="Gói sử dụng"
+                  value={userInfo?.subcriptionid}
+                />
+                <Input
+                  isDisabled
+                  className="w-full"
+                  type="text"
+                  variant="underlined"
+                  label="Thời gian hết hạn &nbsp;(DD/MM/YYYY)"
+                  value={userInfo?.usingend ? moment(userInfo?.usingend).format("DD/MM/YYYY") : ""}
+                />
+              </div>
               <div className="flex justify-between">
                 {!isRequestClick ? (
                   <Input

@@ -2,6 +2,7 @@ import Image from "next/image";
 
 export const staticPageData = [
   {
+    id: "aboutus",
     title: "VỀ CHÚNG TÔI",
     body: (
       <div className="flex flex-col">
@@ -209,6 +210,13 @@ export const staticPageData = [
         <div className="font-thin">
           &emsp;Email website đăng ký: <b>moviersals@gmail.com</b>
         </div>
+        <br />
+        <div>
+          Trong mọi trường hợp, Moviersal rất tiếc không hỗ trợ chính sách hoàn tiền gói thành viên cho khách hàng kể từ khi gói thành viên
+          được kích hoạt.
+        </div>
+        <br />
+        <div>Nếu có sự cố trong và sau quá trình thanh toán, vui lòng liên hệ với chúng tôi thông qua Zalo: 0972 xx xx xx</div>
       </div>
     ),
   },
@@ -265,6 +273,7 @@ export const staticPageData = [
     ),
   },
   {
+    id: "vnpaypayment",
     title: "HƯỚNG DẪN THANH TOÁN VNPAY",
     body: (
       <div>
@@ -383,6 +392,7 @@ export const staticPageData = [
     ),
   },
   {
+    id: "paypalpayment",
     title: "HƯỚNG DẪN THANH TOÁN PAYPAL",
     body: (
       <div>

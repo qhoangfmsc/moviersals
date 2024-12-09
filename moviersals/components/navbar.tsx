@@ -142,20 +142,20 @@ export const Navbar = () => {
               <DropdownMenu aria-label="My account">
                 <DropdownItem
                   key="profile"
-                  as={Link}
+                  // as={Link}
                   href="/profile">
                   Thông tin của tôi
                 </DropdownItem>
                 <DropdownItem
                   key="order-history"
-                  as={Link}
+                  // as={Link}
                   showDivider
                   href="/order/history">
                   Lịch sử mua hàng
                 </DropdownItem>
                 <DropdownItem
                   key="favourite"
-                  as={Link}
+                  // as={Link}
                   showDivider
                   href="/favourite">
                   Phim của tôi
@@ -191,7 +191,7 @@ export const Navbar = () => {
               <DropdownMenu aria-label="My account">
                 <DropdownItem
                   key="login"
-                  as={Link}
+                  // as={Link}
                   className="text-success"
                   color="success"
                   href="/login">
@@ -199,7 +199,7 @@ export const Navbar = () => {
                 </DropdownItem>
                 <DropdownItem
                   key="register"
-                  as={Link}
+                  // as={Link}
                   href="/register">
                   Đăng ký
                 </DropdownItem>

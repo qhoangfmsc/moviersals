@@ -10,6 +10,8 @@ import { Button } from "@nextui-org/button";
 import { LineMdArrowSmallLeft } from "@/components/icons";
 import { Card } from "@nextui-org/card";
 import TestInfoCard from "@/components/Card/testInfoCard";
+import getUserSubcription from "../api/subcriptionplan/getUserSubcription";
+import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure, user } from "@nextui-org/react";
 
 interface selectedSubcriptionProps {
   subcriptionid: string;
@@ -25,7 +27,9 @@ interface selectedSubcriptionProps {
 export default function PaymentMethodsComponent() {
   const [subcriptionListData, setSubcriptionListData] = useState<Array<any>>([]);
   const [selectedSubcription, setSelectedSubcription] = useState<selectedSubcriptionProps>(null);
+  const [userSubcription, setUserSubcription] = useState<any>(null);
   const [sectionState, setSectionState] = useState(1);
+  const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
 
   useEffect(() => {
     async function getAllSubcriptionPlanData() {
@@ -35,13 +39,28 @@ export default function PaymentMethodsComponent() {
       } else showResponseToast(response);
     }
 
+    async function getUserSubcriptionData() {
+      const response = await getUserSubcription();
+      if (response.status == "success") {
+        setUserSubcription(response.content);
+      }
+    }
+    getUserSubcriptionData();
     getAllSubcriptionPlanData();
   }, []);
 
   const handleReceivePlanInfo = (data) => {
     setSelectedSubcription(data);
+    if (data.priority < userSubcription?.priority) {
+      onOpen();
+    } else {
+      setSectionState(2);
+    }
+  };
+
+  const handleConfirmWarning = () => {
+    onClose();
     setSectionState(2);
-    console.log("Here: ", data.subcriptionid, data.price);
   };
 
   return (
@@ -64,6 +83,37 @@ export default function PaymentMethodsComponent() {
               ))}
             </div>
           </div>
+          <Modal
+            isOpen={isOpen}
+            onOpenChange={onOpenChange}>
+            <ModalContent>
+              {(onClose) => (
+                <>
+                  <ModalHeader className="flex flex-col gap-1">Cảnh báo</ModalHeader>
+                  <ModalBody>
+                    <p>
+                      Quý khách đang chọn gói thành viên thấp hơn gói đang sử dụng. Nếu đồng ý, quý khách sẽ mất phúc lợi hiện tại nhưng vẫn
+                      đảm bảo số ngày sử dụng
+                    </p>
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button
+                      color="danger"
+                      variant="light"
+                      onPress={handleConfirmWarning}>
+                      Đồng ý
+                    </Button>
+                    <Button
+                      color="default"
+                      variant="light"
+                      onPress={onClose}>
+                      Chọn lại
+                    </Button>
+                  </ModalFooter>
+                </>
+              )}
+            </ModalContent>
+          </Modal>
         </Transition>
       )}
       {sectionState == 2 && (
