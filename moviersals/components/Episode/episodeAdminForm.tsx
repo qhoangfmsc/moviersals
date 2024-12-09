@@ -92,7 +92,6 @@ export default function AddNewEpisodeAdminForm({ movieid, handleClose }: { movie
       />
       <div className="flex flex-row">
         <Input
-          defaultValue="null"
           size="lg"
           className="w-full"
           type="text"
