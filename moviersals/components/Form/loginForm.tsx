@@ -7,6 +7,7 @@ import { FormEvent, useState } from "react";
 import GoogleSignInButton from "@/components/Button/googleSignInButton";
 import login from "@/app/api/account/login";
 import { useRouter } from "next/navigation";
+import { showResponseToast } from "@/lib/utils";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -28,8 +29,10 @@ export default function LoginForm() {
         setIsLoading(false);
         if (response.result == "success") {
           setIsLoading(false);
+          showResponseToast(response);
           router.push("/");
         } else {
+          showResponseToast(response);
           setIsLoading(false);
           setError(response.content);
         }

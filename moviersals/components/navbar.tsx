@@ -19,6 +19,7 @@ import checkAuthen from "@/app/api/account/checkAuthen";
 import { useEffect, useState } from "react";
 import logout from "@/app/api/account/logout";
 import { usePathname, useRouter } from "next/navigation";
+import { showResponseToast } from "@/lib/utils";
 
 export const Navbar = () => {
   const router = useRouter();
@@ -40,7 +41,8 @@ export const Navbar = () => {
   };
 
   async function logoutHandle() {
-    await logout();
+    const response = await logout();
+    showResponseToast(response);
     router.push("/login");
   }
 

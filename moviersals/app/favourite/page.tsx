@@ -32,7 +32,10 @@ export default function UserFavouritePage() {
   }, [currentPage]);
 
   const handleRemoveFavCard = (movieid: string, episodenumber: string) => {
-    setUserFavList((prevCards) => prevCards.list.filter((card) => card.movieid !== movieid || card.episodenumber !== episodenumber));
+    setUserFavList((prevCards) => ({
+      ...prevCards, // Preserve other properties in the state
+      list: prevCards.list.filter((card) => card.movieid !== movieid || card.episodenumber !== episodenumber),
+    }));
   };
 
   return (
