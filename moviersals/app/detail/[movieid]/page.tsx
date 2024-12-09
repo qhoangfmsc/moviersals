@@ -24,10 +24,9 @@ export default function DetailPage({ params }: { params: { movieid: string } }) 
     setData(content);
   };
 
-  const directWatchPage = (episodeid: string) => {
-    console.log("watch", episodeid);
-
-    const href = `/detail/${params.movieid}/${episodeid}`;
+  const directWatchPage = (episodenumber: string) => {
+    console.log("watch", episodenumber);
+    const href = `/detail/${params.movieid}/${episodenumber}`;
     router.push(href);
   };
 
@@ -114,7 +113,7 @@ export default function DetailPage({ params }: { params: { movieid: string } }) 
                             variant="flat"
                             className="m-1"
                             key={item.episodeid}
-                            onClick={() => directWatchPage(item.episodeid)}>
+                            onClick={() => directWatchPage(item.episodenumber)}>
                             Tập {item.episodenumber}
                           </Button>
                         ))}
