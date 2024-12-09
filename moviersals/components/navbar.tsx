@@ -88,8 +88,7 @@ export const Navbar = () => {
           justify="end">
           <NavbarItem className="hidden lg:flex">
             <Tooltip content="Khám phá phim">
-              <Link
-                href="/categories">
+              <Link href="/categories">
                 <Button
                   color={pathname == "/categories" ? "success" : "default"}
                   variant="light"
@@ -100,8 +99,7 @@ export const Navbar = () => {
           </NavbarItem>
           <NavbarItem className="hidden lg:flex">
             <Tooltip content="Mua gói thành viên">
-              <Link
-                href="/subscription">
+              <Link href="/subscription">
                 <Button
                   color={pathname == "/subscription" ? "success" : "default"}
                   variant="light"
@@ -142,10 +140,28 @@ export const Navbar = () => {
                 </Button>
               </DropdownTrigger>
               <DropdownMenu aria-label="My account">
-                <DropdownItem href="/profile">Thông tin của tôi</DropdownItem>
-                <DropdownItem showDivider href="/order/history">Lịch sử mua hàng</DropdownItem>
-                <DropdownItem showDivider href="/favourite">Phim của tôi</DropdownItem>
                 <DropdownItem
+                  key="profile"
+                  as={Link}
+                  href="/profile">
+                  Thông tin của tôi
+                </DropdownItem>
+                <DropdownItem
+                  key="order-history"
+                  as={Link}
+                  showDivider
+                  href="/order/history">
+                  Lịch sử mua hàng
+                </DropdownItem>
+                <DropdownItem
+                  key="favourite"
+                  as={Link}
+                  showDivider
+                  href="/favourite">
+                  Phim của tôi
+                </DropdownItem>
+                <DropdownItem
+                  key="logout"
                   className="text-danger"
                   color="danger"
                   onClick={logoutHandle}>
@@ -174,12 +190,19 @@ export const Navbar = () => {
               </DropdownTrigger>
               <DropdownMenu aria-label="My account">
                 <DropdownItem
+                  key="login"
+                  as={Link}
                   className="text-success"
                   color="success"
                   href="/login">
                   Đăng nhập
                 </DropdownItem>
-                <DropdownItem href="/register">Đăng ký</DropdownItem>
+                <DropdownItem
+                  key="register"
+                  as={Link}
+                  href="/register">
+                  Đăng ký
+                </DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </NavbarItem>
