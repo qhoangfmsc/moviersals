@@ -106,7 +106,7 @@ const toastTheme = "dark";
 const toastDuration = 2000;
 
 export function showResponseToast(response: Record<string, any>) {
-  if (response.status == "fail") {
+  if (response.result == "error") {
     toast.error(response.content, { autoClose: toastDuration, theme: toastTheme });
   } else {
     toast.success(response.content, { autoClose: toastDuration, theme: toastTheme });

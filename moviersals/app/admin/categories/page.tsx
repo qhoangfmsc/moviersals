@@ -112,7 +112,7 @@ export default function CategeorieAdminPage() {
 
   return (
     <Transition>
-      <h1 className={title()}>Quản lý hạng vé</h1>
+      <h1 className={title()}>Quản lý thể loại</h1>
       <Breadcrumbs
         className="my-4"
         itemClasses={{
@@ -120,7 +120,7 @@ export default function CategeorieAdminPage() {
           separator: "px-0",
         }}>
         <BreadcrumbItem href="/admin">Moviersals</BreadcrumbItem>
-        <BreadcrumbItem href="/admin/ticket">Hạng vé</BreadcrumbItem>
+        <BreadcrumbItem href="/admin/categories">Thể loại</BreadcrumbItem>
       </Breadcrumbs>
       <div className="flex lg:flex-row flex-col-reverse">
         <div className="lg:w-4/5 lg:mr-8">

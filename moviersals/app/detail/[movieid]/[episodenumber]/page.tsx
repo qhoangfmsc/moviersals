@@ -103,31 +103,48 @@ export default function WatchPage({ params }: { params: { movieid: string; episo
   return (
     <Transition>
       <div className="px-8 mt-12">
-        {data && data?.movieDetail?.ispremium == true && userinfo?.ispremium != true ? (
+        {userinfo != null ? (
+          <>
+            {data && data?.movieDetail?.ispremium == true && userinfo?.ispremium != true ? (
+              <div className="h-[540px] w-[100%] flex items-center justify-center align-middle border rounded-lg border-[#262626]">
+                <div className="flex w-fit h-fit flex-col items-center justify-center gap-4 ">
+                  <h1 className="text-2xl text-center text-center">
+                    Phim này chỉ dành cho gói người đăng ký <br /> Hãy đăng ký ngay để trải nghiệm
+                  </h1>
+                  <Button
+                    size="lg"
+                    color="primary"
+                    as={Link}
+                    href="/subscription">
+                    Mua ngay
+                  </Button>
+                </div>
+              </div>
+            ) : (
+              <div>
+                {data?.videoid && (
+                  <CloudinaryVideoPlayer
+                    publicid={data.videoid}
+                    movieid={params.movieid}
+                    episodenumber={params.episodenumber}
+                    userinfo={userinfo}
+                  />
+                )}
+              </div>
+            )}
+          </>
+        ) : (
           <div className="h-[540px] w-[100%] flex items-center justify-center align-middle border rounded-lg border-[#262626]">
             <div className="flex w-fit h-fit flex-col items-center justify-center gap-4 ">
-              <h1 className="text-2xl text-center text-center">
-                Phim này chỉ dành cho gói người đăng ký <br /> Hãy đăng ký ngay để trải nghiệm
-              </h1>
+              <h1 className="text-2xl text-center text-center">Hãy đăng nhập để trải nghiệm</h1>
               <Button
                 size="lg"
                 color="primary"
                 as={Link}
-                href="/subscription">
-                Mua ngay
+                href="/login">
+                Đi đến đăng nhập
               </Button>
             </div>
-          </div>
-        ) : (
-          <div>
-            {/* {data?.videoid && (
-              <CloudinaryVideoPlayer
-                publicid={data.videoid}
-                movieid={params.movieid}
-                episodenumber={params.episodenumber}
-                userinfo={userinfo}
-              />
-            )} */}
           </div>
         )}
       </div>
@@ -146,7 +163,11 @@ export default function WatchPage({ params }: { params: { movieid: string; episo
             <div className="self-center">
               <MdiEyeOutline />
             </div>
-            <div className="self-center">&nbsp; {data?.movieDetail?.view >= 0 ? data?.movieDetail?.view : "Chưa có"} lượt xem</div>
+            <div className="self-center">
+              &nbsp;{" "}
+              {data?.list[Number(params.episodenumber) - 1]?.view >= 0 ? data?.list[Number(params.episodenumber) - 1]?.view : "Chưa có"}{" "}
+              lượt xem
+            </div>
           </div>
         </div>
         {data?.movieDetail?.type == "movie" ? (

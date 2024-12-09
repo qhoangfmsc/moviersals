@@ -29,13 +29,11 @@ export default function LoginForm() {
         setIsLoading(false);
         if (response.result == "success") {
           setIsLoading(false);
-          showResponseToast(response);
           router.push("/");
         } else {
-          showResponseToast(response);
           setIsLoading(false);
-          setError(response.content);
         }
+        showResponseToast(response);
       } else {
         setIsLoading(false);
         setError("Vui lòng nhập đầy đủ thông tin!");
