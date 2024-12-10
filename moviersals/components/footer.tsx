@@ -1,6 +1,7 @@
 import Image from "next/image";
 import ModalNextUI from "./Modal/modalNextUi";
 import { HeartFilledIcon } from "./icons";
+import { toast } from "react-toastify";
 
 export const Footer = () => {
   return (
@@ -59,6 +60,7 @@ export const Footer = () => {
                 height={1}
                 alt="chplay"
                 src="/image/downloadChplay.png"
+                onClick={() => { toast("Ứng dụng trên CH Play đang trong quá trình thử nghiệm. Cảm ơn quý khách đã quan tâm!") }}
               />
             </div>
             <div className="cursor-pointer">
@@ -67,6 +69,7 @@ export const Footer = () => {
                 height={1}
                 alt="ios"
                 src="/image/downloadIos.png"
+                onClick={() => { toast("Ứng dụng trên App Store đang trong quá trình thử nghiệm. Cảm ơn quý khách đã quan tâm!") }}
               />
             </div>
           </div>

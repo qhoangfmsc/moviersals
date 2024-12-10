@@ -122,7 +122,7 @@ export default function MovieMyComment({ userinfo, movieid, mycomment }: { useri
       // Clear the textarea after submission
       // setNewComment("");
     } else {
-      showResponseToast({ content: "Vui liệu đánh giá và nhập bình luận trước khi gửi", status: "fail" });
+      showResponseToast({ content: "Vui liệu đánh giá và nhập bình luận trước khi gửi", result: "error" });
     }
   };
 

@@ -37,10 +37,10 @@ export default function MoviesIntroduction() {
         <StreamIntroduction
           title={
             <span>
-              Các buổi phát sóng trực tiếp tại <b>Moviersals</b>
+              Chức năng sắp có mặt tại <b>Moviersals</b>
             </span>
           }
-          subtitle={<span>xu hướng</span>}
+          subtitle={<span>LIVESTREAM</span>}
         />
       </div>
       <div className="flex w-full flex-col items-center my-14">

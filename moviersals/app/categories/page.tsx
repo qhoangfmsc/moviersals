@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { Button, Checkbox, CheckboxGroup, Input, Pagination, Select, SelectItem } from "@nextui-org/react";
 import { yearArray } from "./yearMockup";
 import getFilterMovie from "../api/movies/getFilterMovie";
-import MoviesTop from "@/components/Movies/moviesTop";
 import getAllCategories from "../api/categorie/getAllCategories";
 import { TablerCalendar } from "@/components/icons";
 import ReviewMovieList from "@/components/Movies/reviewMovieList";
@@ -22,7 +21,7 @@ export default function MovieListPage() {
 
   useEffect(() => {
     async function fetchCategories() {
-      const response = await getAllCategories(1);
+      const response = await getAllCategories(page);
       if (response.status == "success") {
         setTags(response.content.list);
       }
@@ -33,11 +32,10 @@ export default function MovieListPage() {
   }, [page]);
 
   async function fetchFilterMovie() {
-    const request = { year: filter?.year, moviename: filter?.moviename, categories: JSON.stringify(filter?.categories) };
-    console.log(request);
+    const request = { year: filter?.year, moviename: filter?.moviename, categories: JSON.stringify(filter?.categories), page: page };
     const response = await getFilterMovie(request);
     if (response.status == "success") {
-      setData(response.content.list);
+      setData(response.content);
     }
   }
 
@@ -97,14 +95,14 @@ export default function MovieListPage() {
         </div>
       </div>
       <div className="px-10 flex flex-row flex-wrap justify-start m-2">
-        <ReviewMovieList dataVideos={data} />
+        <ReviewMovieList dataVideos={data?.list} />
       </div>
       <div className="px-20 flex justify-end">
         <Pagination
           className="w-fit"
           total={data?.total}
           page={page}
-          onChange={(e) => setPage(e)}
+          onChange={(e) => { setPage(e) }}
         />
       </div>
     </div>

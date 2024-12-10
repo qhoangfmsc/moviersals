@@ -50,7 +50,7 @@ export default function OrderHistoryPage() {
                   <TableColumn key={column.uid}>{column.name}</TableColumn>
                 ))}
               </TableHeader>
-              <TableBody>
+              <TableBody emptyContent={"Chưa có giao dịch"}>
                 {orders?.list?.map((order) => (
                   <TableRow key={order.orderid}>
                     <TableCell>{order.orderid}</TableCell>

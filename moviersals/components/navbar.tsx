@@ -39,7 +39,6 @@ export const Navbar = () => {
     setAuthentication(auth);
     if (auth == null) {
       localStorage.removeItem("userinfo");
-      // router.push("/login");
     } else {
       localStorage.setItem("userinfo", JSON.stringify(auth));
     }
@@ -148,12 +147,14 @@ export const Navbar = () => {
               </DropdownTrigger>
               <DropdownMenu aria-label="My account">
                 <DropdownItem
+                  className="text-default-foreground"
                   key="profile"
                   as={Link}
                   href="/profile">
                   Thông tin của tôi
                 </DropdownItem>
                 <DropdownItem
+                  className="text-default-foreground"
                   key="order-history"
                   as={Link}
                   showDivider
@@ -161,6 +162,7 @@ export const Navbar = () => {
                   Lịch sử mua hàng
                 </DropdownItem>
                 <DropdownItem
+                  className="text-default-foreground"
                   key="favourite"
                   as={Link}
                   showDivider
@@ -205,6 +207,7 @@ export const Navbar = () => {
                   Đăng nhập
                 </DropdownItem>
                 <DropdownItem
+                  className="text-default-foreground"
                   key="register"
                   as={Link}
                   href="/register">

@@ -24,7 +24,7 @@ export default function MovieAdminPage() {
   }, [pathname, isRefetch, page]);
 
   const fetchData = async () => {
-    const response = await getAllMovie(1);
+    const response = await getAllMovie(page);
     const content = response.content;
     setData(content);
   };

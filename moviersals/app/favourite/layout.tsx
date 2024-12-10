@@ -4,7 +4,7 @@ import { showResponseToast } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function ProfileLayout({
+export default function FavoriteLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -30,5 +30,5 @@ export default function ProfileLayout({
     return null;
   }
 
-  return <section className="flex flex-col gap-4 py-8 md:py-10">{children}</section>
+  return <section>{children}</section>
 }

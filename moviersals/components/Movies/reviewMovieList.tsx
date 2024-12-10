@@ -9,7 +9,6 @@ export default function ReviewMovieList({ dataVideos, onCardClick }: CardEpisode
     return (
         (dataVideos?.length > 0)
             ? dataVideos?.map(function (item) {
-                console.log("test", item);
                 return (
                     <div key={item.id}>
                         <ReviewMovieCard cardData={item} onCardClick={onCardClick} />

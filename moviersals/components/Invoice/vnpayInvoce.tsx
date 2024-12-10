@@ -11,7 +11,7 @@ export default function VNPayInvoice() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    showResponseToast({ status: "success", content: "Thanh toán thành công, xin cảm ơn quý khách" });
+    showResponseToast({ result: "success", content: "Thanh toán thành công, xin cảm ơn quý khách" });
   }, []);
 
   // Get data from URL params using useSearchParams

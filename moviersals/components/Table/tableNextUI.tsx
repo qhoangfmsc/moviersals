@@ -49,7 +49,6 @@ export default function TableNextUI({ tableData }: { tableData: TableData }) {
   function handleChangePage(e: number) {
     console.log(e);
     tableData.changePage?.(e);
-    // setPageNum(pageNum);
   }
 
   return (
@@ -96,7 +95,6 @@ export default function TableNextUI({ tableData }: { tableData: TableData }) {
           showControls
           isCompact
           total={tableData?.bodyData?.total}
-          // page={pageNum}
           onChange={(e) => handleChangePage(e)}
         />
       </div>

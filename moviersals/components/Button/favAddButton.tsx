@@ -45,8 +45,8 @@ export default function FavAddButton({ data, onClick, showText = true }: FavAddB
   const checkIfLoggedin = () => {
     if (userinfo == null || userinfo.id == null) {
       showResponseToast({
-        status: "error",
-        message: "Vui lòng đăng nhập trước khi thực hiện hành động này!",
+        result: "error",
+        content: "Vui lòng đăng nhập trước khi thực hiện hành động này!",
       });
       return false;
     } else return true;
