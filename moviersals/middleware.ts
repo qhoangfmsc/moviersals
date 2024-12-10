@@ -4,7 +4,7 @@ import type { NextRequest } from 'next/server';
 export function middleware(req: NextRequest) {
   let isLoggedIn = req.cookies.get('isLoggedIn');
 
-  console.log("isLoggedIn: ", isLoggedIn + ", ", new Date())
+  // console.log("isLoggedIn: ", isLoggedIn + ", ", new Date())
   console.log("cookie: ", req.cookies)
   const nonPermissionArray = ['/profile', '/favourite', '/admin', '/order/history'];
 
