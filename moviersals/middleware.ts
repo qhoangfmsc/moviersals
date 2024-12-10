@@ -2,9 +2,9 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(req: NextRequest) {
-  const isLoggedIn = req.cookies.get('isLoggedIn');
+  let isLoggedIn = req.cookies.get('isLoggedIn');
 
-  // List of protected paths
+  console.log("isLoggedIn: ", isLoggedIn + ", ", new Date())  // List of protected paths
   const nonPermissionArray = ['/profile', '/favourite', '/admin', '/order/history'];
 
   if (nonPermissionArray.some((path) => req.nextUrl.pathname.startsWith(path))) {
