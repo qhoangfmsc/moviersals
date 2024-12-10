@@ -61,7 +61,7 @@ export default function WatchPage({ params }: { params: { movieid: string; episo
     if (userinfo == null) setUserInfo(tempUserinfo);
     if (data == null) fetchMovieInfo(tempUserinfo?.id);
     fetchMovieComment(tempUserinfo?.id);
-  }, [currentPage]);
+  }, [currentPage, pathname]);
 
   const fetchMovieInfo = async (userid: string) => {
     const response = await getMovieDetailById(params.movieid, userid);
