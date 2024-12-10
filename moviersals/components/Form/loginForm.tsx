@@ -32,6 +32,7 @@ export default function LoginForm() {
           setIsLoading(false);
           let returnUrl = searchParams.get("next") || "/";
           router.replace(returnUrl);
+          router.refresh();
         } else {
           setIsLoading(false);
         }
