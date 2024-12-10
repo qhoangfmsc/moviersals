@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Button, Checkbox, CheckboxGroup, Input, Pagination, Select, SelectItem } from "@nextui-org/react";
 import { yearArray } from "./yearMockup";
 import getFilterMovie from "../api/movies/getFilterMovie";
-import getAllCategories from "../api/categorie/getAllCategories";
+import getAllCategories from "../api/categories/getAllCategories";
 import { TablerCalendar } from "@/components/icons";
 import ReviewMovieList from "@/components/Movies/reviewMovieList";
 

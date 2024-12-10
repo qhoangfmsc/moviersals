@@ -1,4 +1,4 @@
-import getAllCategories from "@/app/api/categorie/getAllCategories";
+import getAllCategories from "@/app/api/categories/getAllCategories";
 import { Button, Card, CardFooter, Image, Link, Tab, Tabs } from "@nextui-org/react";
 import { Key, useEffect, useState } from "react";
 

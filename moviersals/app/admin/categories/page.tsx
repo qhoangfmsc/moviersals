@@ -1,9 +1,9 @@
 "use client";
 
-import createCategorie from "@/app/api/categorie/createCategorie";
-import deleteCategorie from "@/app/api/categorie/deleteCategorie";
-import editCategorie from "@/app/api/categorie/editCategorie";
-import getAllCategories from "@/app/api/categorie/getAllCategories";
+import createCategorie from "@/app/api/categories/createCategorie";
+import deleteCategorie from "@/app/api/categories/deleteCategorie";
+import editCategorie from "@/app/api/categories/editCategorie";
+import getAllCategories from "@/app/api/categories/getAllCategories";
 import createSubscriptionPlan from "@/app/api/subcriptionplan/createSubscription";
 import AdminForm, { AdminFormCofig } from "@/components/Form/adminForm";
 import Transition from "@/components/MotionFramer/transition";
