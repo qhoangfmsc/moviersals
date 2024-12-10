@@ -61,7 +61,7 @@ export default function WatchPage({ params }: { params: { movieid: string; episo
     if (userinfo == null) setUserInfo(tempUserinfo);
     if (data == null) fetchMovieInfo(tempUserinfo?.id);
     fetchMovieComment(tempUserinfo?.id);
-  }, [currentPage, pathname]);
+  }, [currentPage, data, userinfo]);
 
   const fetchMovieInfo = async (userid: string) => {
     const response = await getMovieDetailById(params.movieid, userid);
@@ -104,46 +104,44 @@ export default function WatchPage({ params }: { params: { movieid: string; episo
 
   function handleDirectLogin() {
     let returnUrl = `/login?next=${pathname}`;
-    router.replace(returnUrl);
+    router.push(returnUrl);
   }
 
   return (
     <Transition>
       <div className="px-8 mt-12">
         {userinfo != null ? (
-          <>
-            {data && data?.movieDetail?.ispremium == true && userinfo?.ispremium != true ? (
-              <div className="h-[540px] w-[100%] flex items-center justify-center align-middle border rounded-lg border-[#262626]">
-                <div className="flex w-fit h-fit flex-col items-center justify-center gap-4 ">
-                  <h1 className="text-2xl text-center text-center">
-                    Phim này chỉ dành cho gói người đăng ký <br /> Hãy đăng ký ngay để trải nghiệm
-                  </h1>
-                  <Button
-                    size="lg"
-                    color="primary"
-                    as={Link}
-                    href="/subscription">
-                    Mua ngay
-                  </Button>
-                </div>
+          data && data?.movieDetail?.ispremium == true && userinfo?.ispremium != true ? (
+            <div className="h-[540px] w-[100%] flex items-center justify-center align-middle border rounded-lg border-[#262626]">
+              <div className="flex w-fit h-fit flex-col items-center justify-center gap-4 ">
+                <h1 className="text-2xl text-center">
+                  Phim này chỉ dành cho gói người đăng ký <br /> Hãy đăng ký ngay để trải nghiệm
+                </h1>
+                <Button
+                  size="lg"
+                  color="primary"
+                  as={Link}
+                  href="/subscription">
+                  Mua ngay
+                </Button>
               </div>
-            ) : (
-              <div>
-                {data?.videoid && (
-                  <CloudinaryVideoPlayer
-                    publicid={data.videoid}
-                    movieid={params.movieid}
-                    episodenumber={params.episodenumber}
-                    userinfo={userinfo}
-                  />
-                )}
-              </div>
-            )}
-          </>
+            </div>
+          ) : (
+            <div>
+              {data?.videoid && (
+                <CloudinaryVideoPlayer
+                  publicid={data.videoid}
+                  movieid={params.movieid}
+                  episodenumber={params.episodenumber}
+                  userinfo={userinfo}
+                />
+              )}
+            </div>
+          )
         ) : (
           <div className="h-[540px] w-[100%] flex items-center justify-center align-middle border rounded-lg border-[#262626]">
             <div className="flex w-fit h-fit flex-col items-center justify-center gap-4 ">
-              <h1 className="text-2xl text-center text-center">Hãy đăng nhập để trải nghiệm</h1>
+              <h1 className="text-2xl text-center">Hãy đăng nhập để trải nghiệm</h1>
               <Button
                 size="lg"
                 color="primary"

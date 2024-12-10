@@ -31,8 +31,7 @@ export default function LoginForm() {
         if (response.result == "success") {
           setIsLoading(false);
           let returnUrl = searchParams.get("next") || "/";
-          router.replace(returnUrl);
-          router.refresh();
+          router.push(returnUrl);
         } else {
           setIsLoading(false);
         }
