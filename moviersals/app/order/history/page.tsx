@@ -66,7 +66,7 @@ export default function OrderHistoryPage() {
                     </TableCell>
                     <TableCell>{order.status == "PAID" ? "Đã thanh toán" : "Chưa thanh toán"}</TableCell>
                     <TableCell className="text-yellow-500">
-                      {order.type == "UPGRADE" ? "Nâng câp" : "EXTEND" ? "Gia hạn" : "Xuống cấp"}
+                      {order.type == "UPGRADE" ? "Nâng câp" : order.type == "EXTEND" ? "Gia hạn" : "Xuống cấp"}
                     </TableCell>
                     <TableCell>
                       {order.paymenturl ? (
