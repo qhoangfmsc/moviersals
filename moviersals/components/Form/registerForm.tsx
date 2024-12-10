@@ -27,58 +27,51 @@ export default function RegisterForm() {
   const router = useRouter();
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    console.log("here");
     event.preventDefault();
     setIsLoading(true);
     setErrorUser(null);
     setErrorAccount(null);
 
-    try {
-      const formData = new FormData(event.currentTarget);
-      // USER
-      const displayname = formData.get("displayname")?.toString();
-      const email = formData.get("email")?.toString();
-      const phonenumber = formData.get("phonenumber")?.toString();
-      // ACCOUNT
-      const username = formData.get("username")?.toString();
-      const password = formData.get("password")?.toString();
-      const repassword = formData.get("repassword")?.toString();
+    const formData = new FormData(event.currentTarget);
+    // USER
+    const displayname = formData.get("displayname")?.toString();
+    const email = formData.get("email")?.toString();
+    const phonenumber = formData.get("phonenumber")?.toString();
+    // ACCOUNT
+    const username = formData.get("username")?.toString();
+    const password = formData.get("password")?.toString();
+    const repassword = formData.get("repassword")?.toString();
 
-      if (displayname && email && phonenumber) {
-        if (username && password) {
-          setIsLoading(false);
-          if (password == repassword) {
-            if (isSelected) {
-              const response = await register(username, password, displayname, email, phonenumber);
-              showResponseToast(response);
-              if (response.result == "success") {
-                setIsLoading(false);
-                router.push("/login");
-                onOpen();
-              } else {
-                setIsLoading(false);
-                setErrorAccount(response.content);
-              }
+    if (displayname && email && phonenumber) {
+      if (username && password) {
+        setIsLoading(false);
+        if (password == repassword) {
+          if (isSelected) {
+            const response = await register(username, password, displayname, email, phonenumber);
+            showResponseToast(response);
+            if (response.result == "success") {
+              setIsLoading(false);
+              router.push("/login");
+              onOpen();
             } else {
               setIsLoading(false);
-              setErrorAccount("Vui lòng chấp nhận điều khoản trước khi đăng ký!");
             }
           } else {
             setIsLoading(false);
-            setErrorAccount("Mật khẩu không trùng khớp!");
+            setErrorAccount("Vui lòng chấp nhận điều khoản trước khi đăng ký!");
           }
         } else {
           setIsLoading(false);
-          setErrorAccount("Vui lòng nhập đầy đủ thông tin tài khoản!");
+          setErrorAccount("Mật khẩu không trùng khớp!");
         }
       } else {
         setIsLoading(false);
-        setErrorUser("Vui lòng nhập đầy đủ thông tin người dùng!");
+        setErrorAccount("Vui lòng nhập đầy đủ thông tin tài khoản!");
       }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        setIsLoading(false);
-        setErrorAccount(error.message);
-      }
+    } else {
+      setIsLoading(false);
+      setErrorUser("Vui lòng nhập đầy đủ thông tin người dùng!");
     }
   }
 

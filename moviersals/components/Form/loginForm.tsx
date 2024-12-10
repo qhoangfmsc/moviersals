@@ -6,11 +6,12 @@ import { Link } from "@nextui-org/link";
 import { FormEvent, useState } from "react";
 import GoogleSignInButton from "@/components/Button/googleSignInButton";
 import login from "@/app/api/account/login";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { showResponseToast } from "@/lib/utils";
 
 export default function LoginForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -29,7 +30,8 @@ export default function LoginForm() {
         setIsLoading(false);
         if (response.result == "success") {
           setIsLoading(false);
-          router.push("/");
+          let returnUrl = searchParams.get("next") || "/";
+          router.replace(returnUrl);
         } else {
           setIsLoading(false);
         }

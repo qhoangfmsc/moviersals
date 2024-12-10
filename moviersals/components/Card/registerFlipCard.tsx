@@ -1,4 +1,5 @@
 import register from "@/app/api/account/register";
+import { showResponseToast } from "@/lib/utils";
 import {
   Button,
   Card,
@@ -13,6 +14,7 @@ import {
   ModalHeader,
   useDisclosure,
 } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 export default function RegisterFlipCard() {
@@ -21,6 +23,7 @@ export default function RegisterFlipCard() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorAccount, setErrorAccount] = useState<string | null>(null);
   const [errorUser, setErrorUser] = useState<string | null>(null);
+  const router = useRouter();
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -45,12 +48,13 @@ export default function RegisterFlipCard() {
           if (password == repassword) {
             if (isSelected) {
               const response = await register(username, password, displayname, email, phonenumber);
+              showResponseToast(response);
               if (response.result == "success") {
                 setIsLoading(false);
+                router.push("/login");
                 onOpen();
               } else {
                 setIsLoading(false);
-                setErrorAccount(response.content);
               }
             } else {
               setIsLoading(false);

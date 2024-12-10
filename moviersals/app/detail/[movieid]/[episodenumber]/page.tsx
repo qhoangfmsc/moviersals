@@ -15,7 +15,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import CloudinaryVideoPlayer from "@/components/Video/videoplayer";
 import "next-cloudinary/dist/cld-video-player.css";
-import { CldVideoPlayer } from "next-cloudinary";
+import { usePathname, useRouter } from "next/navigation";
 
 interface Comment {
   id: number;
@@ -47,6 +47,8 @@ export default function WatchPage({ params }: { params: { movieid: string; episo
   const [data, setData] = useState<any>(null);
   const [userinfo, setUserInfo] = useState<any>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const router = useRouter();
+  const pathname = usePathname();
 
   const [movieComment, setMovieComment] = useState<{
     myComment: Comment | null;
@@ -100,6 +102,11 @@ export default function WatchPage({ params }: { params: { movieid: string; episo
     }
   };
 
+  function handleDirectLogin() {
+    let returnUrl = `/login?next=${pathname}`;
+    router.replace(returnUrl);
+  }
+
   return (
     <Transition>
       <div className="px-8 mt-12">
@@ -140,8 +147,7 @@ export default function WatchPage({ params }: { params: { movieid: string; episo
               <Button
                 size="lg"
                 color="primary"
-                as={Link}
-                href="/login">
+                onClick={handleDirectLogin}>
                 Đi đến đăng nhập
               </Button>
             </div>

@@ -5,7 +5,7 @@ export function middleware(req: NextRequest) {
   const isLoggedIn = req.cookies.get('isLoggedIn');
 
   // List of protected paths
-  const nonPermissionArray = ['/profile', '/favourite', 'admin'];
+  const nonPermissionArray = ['/profile', '/favourite', '/admin', '/order/history'];
 
   if (nonPermissionArray.some((path) => req.nextUrl.pathname.startsWith(path))) {
     if (!isLoggedIn) {

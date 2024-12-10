@@ -39,6 +39,7 @@ export const Navbar = () => {
     setAuthentication(auth);
     if (auth == null) {
       localStorage.removeItem("userinfo");
+      // router.push("/login");
     } else {
       localStorage.setItem("userinfo", JSON.stringify(auth));
     }

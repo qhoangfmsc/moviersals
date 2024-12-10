@@ -46,13 +46,19 @@ const CloudinaryVideoPlayer = ({ movieid, episodenumber, publicid, userinfo }: C
 
   return (
     <div className="flex items-center justify-center">
-      <Script
-        src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"
-        async
-      />
+      <Script src="https://imasdk.googleapis.com/js/sdkloader/ima3.js" />
       {userinfo != null ? (
         <div className="w-[60%]">
           <CldVideoPlayer
+            {...(!userinfo.ispremium && {
+              ads: {
+                adTagUrl: adTagUrl,
+                showCountdown: true,
+                adLabel: "Advertisement",
+                prerollTimeout: 5000,
+                locale: "vi",
+              },
+            })}
             width={1280}
             height={720}
             playedEventPercents={[10, 30, 50, 70, 100]}
@@ -64,15 +70,6 @@ const CloudinaryVideoPlayer = ({ movieid, episodenumber, publicid, userinfo }: C
             onEnded={cleanupPlayer}
             sourceTypes={["hls"]}
             // onPlay={increaseView}
-            {...(!userinfo.ispremium && {
-              ads: {
-                adTagUrl: adTagUrl,
-                showCountdown: true,
-                adLabel: "Advertisement",
-                prerollTimeout: 5000,
-                locale: "vi",
-              },
-            })}
           />
         </div>
       ) : (
