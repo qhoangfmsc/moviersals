@@ -1,7 +1,7 @@
 export const adminSectionList = [
   {
     img: "image/admin-user-section.png",
-    leftText: "Khách hàng",
+    leftText: "Tài khoản",
     rightText: "Xem",
     href: "/admin/user",
   },
