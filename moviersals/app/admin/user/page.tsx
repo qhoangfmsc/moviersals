@@ -116,7 +116,7 @@ export default function MovieAdminPage() {
           separator: "px-0",
         }}>
         <BreadcrumbItem href="/admin">Moviersals</BreadcrumbItem>
-        <BreadcrumbItem href="/admin/user">Khách hàng</BreadcrumbItem>
+        <BreadcrumbItem href="/admin/user">Tài khoản</BreadcrumbItem>
       </Breadcrumbs>
       <div className="flex lg:flex-row flex-col-reverse">
         <div className="lg:w-4/5 lg:mr-8">
