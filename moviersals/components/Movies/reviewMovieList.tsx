@@ -15,6 +15,6 @@ export default function ReviewMovieList({ dataVideos, onCardClick }: CardEpisode
                     </div>
                 );
             })
-            : <div className="text-4xl text-gray-700 p-10 w-full text-center">Không có kết quả tỉm kiếm</div>
+            : <div className="text-4xl text-gray-700 p-10 w-full text-center">Không có kết quả tìm kiếm</div>
     );
 }
