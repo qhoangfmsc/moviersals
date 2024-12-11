@@ -204,7 +204,7 @@ export default function MoviersalsIntroduction() {
             autoPlay
             // loop
             muted
-            preload="auto"
+            preload="metadata"
             controlsList="nodownload">
             <source
               src="/video/multideviceesports.mp4"

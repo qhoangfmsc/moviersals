@@ -94,7 +94,7 @@ export default function PasswordRecoveryForm() {
               variant="underlined"
               label="Confirm new password"
             />
-            <div>
+            <div className="flex justify-center">
               <Button
                 size="lg"
                 className="my-4 w-[350px]"
