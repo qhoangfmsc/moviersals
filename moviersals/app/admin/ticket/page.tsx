@@ -84,7 +84,7 @@ export default function MovieTicketPage() {
       { colname: "quality", colsub: "Chất lượng tối đa", coltype: "inputnumber", colvalues: null },
       { colname: "connection", colsub: "Số lượng IP kết nối", coltype: "inputnumber", colvalues: null },
     ],
-    buttonText: "Tạo gói",
+    buttonText: "Tạo hạng vé",
     handler: async (formData: FormData) => {
       const data = convertFormDataToJson(formData);
       data["quality"] = `${data["quality"]}p`;
@@ -204,16 +204,15 @@ export default function MovieTicketPage() {
                 </ModalBody>
                 <ModalFooter>
                   <Button
-                    color="danger"
-                    variant="light"
-                    onPress={async () => await handleDelte(dataModal.subcriptionid)}>
-                    Xóa
-                  </Button>
-                  <Button
                     color="default"
                     variant="light"
                     onPress={onClose}>
                     Đóng
+                  </Button>
+                  <Button
+                    color="danger"
+                    onPress={async () => await handleDelte(dataModal.subcriptionid)}>
+                    Xóa hạng vé
                   </Button>
                   <Button
                     type="submit"
