@@ -25,7 +25,10 @@ export default function AboutPage() {
                 key={item.id}
                 title={item.title}>
                 <Card className="ml-5 mr-10">
-                  <CardBody className="p-10">{item.body}</CardBody>
+                  <CardBody className="p-10">
+                    <h1 className="text-3xl font-bold mb-6">{item.title}</h1>
+                    {item.body}
+                  </CardBody>
                 </Card>
               </Tab>
             ))}
