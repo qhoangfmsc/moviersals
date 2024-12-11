@@ -40,11 +40,13 @@ export default function DetailPage({ params }: { params: { movieid: string } }) 
             top: "-5rem",
           }}>
           <Image
-            width={"100vw"}
-            height={"100vh"}
             className="object-cover z-0"
             alt="Thumbnail"
             src={data?.movieDetail?.thumbnail}
+            style={{
+              width: "100vw !important",
+              height: "100vh !important",
+            }}
           />
         </div>
         <div className="absolute left-0 top-0 flex flex-row w-full h-[1000px]">

@@ -9,7 +9,7 @@ export default function RequestPasswordRecoveryPage() {
     <Transition>
       <div className="flex flex-col items-center justify-center">
         <div className="lg:mb-10">
-          <h1 className={title()}>Reset mật khẩu bằng email</h1>
+          <h1 className={title()}>Đổi mật khẩu bằng email</h1>
         </div>
         <div className="my-2">
           <RequestPasswordRecoveryForm />
