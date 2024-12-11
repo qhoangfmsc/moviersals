@@ -83,13 +83,13 @@ export default function PasswordRecoveryForm() {
             <Input
               size="lg"
               type="text"
-              name="newpassword"
+              name="password"
               variant="underlined"
               label="New password"
             />
             <Input
               size="lg"
-              type="text"
+              type="password"
               name="confirmnewpassword"
               variant="underlined"
               label="Confirm new password"

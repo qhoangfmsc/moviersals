@@ -21,7 +21,7 @@ export default function MovieListPage() {
 
   useEffect(() => {
     async function fetchCategories() {
-      const response = await getAllCategories(page);
+      const response = await getAllCategories(null);
       if (response.status == "success") {
         setTags(response.content.list);
       }
@@ -102,7 +102,9 @@ export default function MovieListPage() {
           className="w-fit"
           total={data?.total}
           page={page}
-          onChange={(e) => { setPage(e) }}
+          onChange={(e) => {
+            setPage(e);
+          }}
         />
       </div>
     </div>
