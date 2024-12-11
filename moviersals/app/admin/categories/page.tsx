@@ -141,7 +141,7 @@ export default function CategeorieAdminPage() {
           <ModalContent>
             {(onClose) => (
               <form onSubmit={onSubmit}>
-                <ModalHeader className="flex flex-col gap-1">Chi tiết hạng vé</ModalHeader>
+                <ModalHeader className="flex flex-col gap-1">Thể loại</ModalHeader>
                 <ModalBody className="font-thin">
                   <Input
                     readOnly
