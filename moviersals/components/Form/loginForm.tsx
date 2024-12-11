@@ -83,12 +83,12 @@ export default function LoginForm() {
         color="success">
         {isLoading ? "Loading..." : "Vào rạp phim"}
       </Button>
-      <GoogleSignInButton
+      {/* <GoogleSignInButton
         text="Tham gia bằng Google"
         variant="shadow"
         size="lg"
         color={undefined}
-      />
+      /> */}
       <p className="mt-8">
         Chưa có tài khoản? -
         <span className="text-gray-100">
