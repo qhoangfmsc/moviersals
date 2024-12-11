@@ -202,9 +202,8 @@ export default function MoviersalsIntroduction() {
             height="300"
             playsInline
             autoPlay
-            // loop
             muted
-            preload="metadata"
+            preload="none"
             controlsList="nodownload">
             <source
               src="/video/multideviceesports.mp4"
