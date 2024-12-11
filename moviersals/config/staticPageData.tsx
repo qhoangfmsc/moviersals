@@ -59,25 +59,21 @@ export const staticPageData = [
           <strong>3. Khiếu Nại Về Bản Quyền</strong>
         </div>
         <div>
-          Nếu bạn tin rằng nội dung trên Moviersals vi phạm quyền sở hữu trí tuệ của mình, vui lòng thông báo cho chúng tôi bằng cách gửi email đến <a href="mailto:moviersals@gmail.com">moviersals@gmail.com</a>. Trong thông báo, vui lòng cung cấp các thông tin sau:
-          <ul>
-            <li>• Mô tả chi tiết về nội dung bị vi phạm bản quyền.</li>
-            <li>• Tài liệu chứng minh bạn là chủ sở hữu hoặc đại diện hợp pháp của nội dung đó.</li>
-            <li>• Thông tin liên hệ của bạn (họ tên, số điện thoại, địa chỉ email).</li>
-            <li>• Cam kết rằng các thông tin bạn cung cấp là chính xác và bạn có quyền hợp pháp để gửi thông báo này.</li>
-          </ul>
+          <div>Nếu bạn tin rằng nội dung trên Moviersals vi phạm quyền sở hữu trí tuệ của mình, vui lòng thông báo cho chúng tôi bằng cách gửi email đến <a href="mailto:moviersals@gmail.com">moviersals@gmail.com</a>. Trong thông báo, vui lòng cung cấp các thông tin sau:</div>
+          <div>• Mô tả chi tiết về nội dung bị vi phạm bản quyền.</div>
+          <div>• Tài liệu chứng minh bạn là chủ sở hữu hoặc đại diện hợp pháp của nội dung đó.</div>
+          <div>• Thông tin liên hệ của bạn (họ tên, số điện thoại, địa chỉ email).</div>
+          <div>• Cam kết rằng các thông tin bạn cung cấp là chính xác và bạn có quyền hợp pháp để gửi thông báo này.</div>
         </div>
         <br />
         <div>
           <strong>4. Xử Lý Khiếu Nại</strong>
         </div>
         <div>
-          Sau khi nhận được khiếu nại, chúng tôi sẽ:
-          <ul>
-            <li>• Xem xét và xác minh tính chính xác của khiếu nại.</li>
-            <li>• Gỡ bỏ hoặc tạm thời ẩn nội dung vi phạm (nếu có).</li>
-            <li>• Liên hệ với bên liên quan để giải quyết khiếu nại một cách công bằng và hợp lý.</li>
-          </ul>
+          <div>Sau khi nhận được khiếu nại, chúng tôi sẽ:</div>
+          <div>• Xem xét và xác minh tính chính xác của khiếu nại.</div>
+          <div>• Gỡ bỏ hoặc tạm thời ẩn nội dung vi phạm (nếu có).</div>
+          <div>• Liên hệ với bên liên quan để giải quyết khiếu nại một cách công bằng và hợp lý.</div>
         </div>
         <br />
         <div>

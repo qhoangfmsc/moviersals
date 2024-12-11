@@ -26,7 +26,7 @@ export default function ProfileLayout({
     }
   }, [router]);
 
-  if (!userinfo || userinfo.role !== "customer") {
+  if (!userinfo) {
     return null;
   }
 

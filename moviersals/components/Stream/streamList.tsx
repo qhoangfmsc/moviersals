@@ -43,7 +43,7 @@ export default function StreamList(): JSX.Element {
     return (
         <>
             {streamList.map((item) => (
-                <Tooltip content="Chức năng sẽ ra mắt trong thời gian tới. Cảm ơn quý khách đã quan tâm!" showArrow={true} placement="top-end" size="lg">
+                <Tooltip content="Chức năng sẽ ra mắt trong thời gian tới. Cảm ơn quý khách đã quan tâm!" showArrow={true} key={item.id} placement="top-end" size="lg">
                     <Card className="lg:w-1/2 m-4" key={item.id}>
                         <div className="lg:flex flex-row p-2 lg:p-6 lg:gap-6">
                             <Image src={item.thumbnail ?? "/image/streaming-thumbnail.gif"} alt="background" width={450} />

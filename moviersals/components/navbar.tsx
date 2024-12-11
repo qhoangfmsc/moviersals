@@ -94,26 +94,28 @@ export const Navbar = () => {
         justify="end">
         <NavbarItem className="hidden lg:flex">
           <Tooltip content="Khám phá phim">
-            <Link href="/categories">
-              <Button
-                color={pathname == "/categories" ? "success" : "default"}
-                variant="light"
-                startContent={<BxsCategory />}
-              />
-            </Link>
+            <Button
+              as={Link}
+              href="/categories"
+              color={pathname == "/categories" ? "success" : "default"}
+              variant="light"
+              startContent={<BxsCategory />}
+            />
           </Tooltip>
         </NavbarItem>
-        <NavbarItem className="hidden lg:flex">
-          <Tooltip content="Mua gói thành viên">
-            <Link href="/subscription">
+        {authentication?.role == "customer" && (
+          <NavbarItem className="hidden lg:flex">
+            <Tooltip content="Mua gói thành viên">
               <Button
+                as={Link}
+                href="/subscription"
                 color={pathname == "/subscription" ? "success" : "default"}
                 variant="light"
                 startContent={<IcRoundShop />}
               />
-            </Link>
-          </Tooltip>
-        </NavbarItem>
+            </Tooltip>
+          </NavbarItem>
+        )}
         <NavbarItem className="hidden lg:flex">
           {authentication ? (
             <Dropdown>
@@ -154,22 +156,36 @@ export const Navbar = () => {
                   href="/profile">
                   Thông tin của tôi
                 </DropdownItem>
-                <DropdownItem
-                  className="text-default-foreground"
-                  key="order-history"
-                  as={Link}
-                  showDivider
-                  href="/order/history">
-                  Lịch sử mua hàng
-                </DropdownItem>
-                <DropdownItem
-                  className="text-default-foreground"
-                  key="favourite"
-                  as={Link}
-                  showDivider
-                  href="/favourite">
-                  Phim của tôi
-                </DropdownItem>
+                {authentication?.role == "admin" && (
+                  <DropdownItem
+                    className="text-default-foreground"
+                    key="order-history"
+                    as={Link}
+                    showDivider
+                    href="/admin">
+                    Quản lý Moviersals
+                  </DropdownItem>
+                )}
+                {authentication?.role == "customer" && (
+                  <DropdownItem
+                    className="text-default-foreground"
+                    key="order-history"
+                    as={Link}
+                    showDivider
+                    href="/order/history">
+                    Lịch sử mua hàng
+                  </DropdownItem>
+                )}
+                {authentication?.role == "customer" && (
+                  <DropdownItem
+                    className="text-default-foreground"
+                    key="favourite"
+                    as={Link}
+                    showDivider
+                    href="/favourite">
+                    Phim của tôi
+                  </DropdownItem>
+                )}
                 <DropdownItem
                   key="logout"
                   className="text-danger"
