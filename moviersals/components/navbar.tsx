@@ -88,33 +88,34 @@ export const Navbar = () => {
         </NavbarItem>
       </NavbarContent>
 
-      {authentication ? (
-        <NavbarContent
-          className="hidden sm:flex basis-1/5 sm:basis-full"
-          justify="end">
-          <NavbarItem className="hidden lg:flex">
-            <Tooltip content="Khám phá phim">
-              <Link href="/categories">
-                <Button
-                  color={pathname == "/categories" ? "success" : "default"}
-                  variant="light"
-                  startContent={<BxsCategory />}
-                />
-              </Link>
-            </Tooltip>
-          </NavbarItem>
-          <NavbarItem className="hidden lg:flex">
-            <Tooltip content="Mua gói thành viên">
-              <Link href="/subscription">
-                <Button
-                  color={pathname == "/subscription" ? "success" : "default"}
-                  variant="light"
-                  startContent={<IcRoundShop />}
-                />
-              </Link>
-            </Tooltip>
-          </NavbarItem>
-          <NavbarItem className="hidden lg:flex">
+
+      <NavbarContent
+        className="hidden sm:flex basis-1/5 sm:basis-full"
+        justify="end">
+        <NavbarItem className="hidden lg:flex">
+          <Tooltip content="Khám phá phim">
+            <Link href="/categories">
+              <Button
+                color={pathname == "/categories" ? "success" : "default"}
+                variant="light"
+                startContent={<BxsCategory />}
+              />
+            </Link>
+          </Tooltip>
+        </NavbarItem>
+        <NavbarItem className="hidden lg:flex">
+          <Tooltip content="Mua gói thành viên">
+            <Link href="/subscription">
+              <Button
+                color={pathname == "/subscription" ? "success" : "default"}
+                variant="light"
+                startContent={<IcRoundShop />}
+              />
+            </Link>
+          </Tooltip>
+        </NavbarItem>
+        <NavbarItem className="hidden lg:flex">
+          {authentication ? (
             <Dropdown>
               <DropdownTrigger>
                 <Button
@@ -178,13 +179,7 @@ export const Navbar = () => {
                 </DropdownItem>
               </DropdownMenu>
             </Dropdown>
-          </NavbarItem>
-        </NavbarContent>
-      ) : (
-        <NavbarContent
-          className="hidden sm:flex basis-1/5 sm:basis-full"
-          justify="end">
-          <NavbarItem className="hidden lg:flex">
+          ) : (
             <Dropdown>
               <DropdownTrigger>
                 <Button variant="light">
@@ -215,15 +210,9 @@ export const Navbar = () => {
                 </DropdownItem>
               </DropdownMenu>
             </Dropdown>
-          </NavbarItem>
-        </NavbarContent>
-      )}
-      <NavbarContent
-        className="sm:hidden basis-1 pl-4"
-        justify="end">
-        <NavbarMenuToggle />
+          )}
+        </NavbarItem>
       </NavbarContent>
-
       <NavbarMenu>
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMobileItems.map((item, index) => (

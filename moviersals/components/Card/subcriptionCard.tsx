@@ -1,5 +1,7 @@
 import { Card, CardFooter, Button, CardHeader, Tooltip } from "@nextui-org/react";
 import { MageInformationSquareIsSmall, UpsideDownTriangle } from "../icons";
+import { showResponseToast } from "@/lib/utils";
+import { toast } from "react-toastify";
 
 interface SubcriptionProps {
   data: {
@@ -18,8 +20,18 @@ interface SubcriptionProps {
 
 export default function SubcriptionPlanCard({ data, onCardClick, showButton }: SubcriptionProps) {
   const handleSubcriptionClick = () => {
-    if (onCardClick) {
-      onCardClick(data);
+    const userinfo = localStorage.getItem("userinfo");
+    if (userinfo) {
+      const user = JSON.parse(userinfo);
+      if (user?.id) {
+        if (onCardClick) {
+          onCardClick(data);
+        }
+      } else {
+        toast.error("Vui lòng đăng nhập trước khi chọn gói!");
+      }
+    } else {
+      toast.error("Vui lòng đăng nhập trước khi chọn gói!");
     }
   };
 
@@ -63,7 +75,7 @@ export default function SubcriptionPlanCard({ data, onCardClick, showButton }: S
         <div className="justify-items-start mt-4 mx-3">
           <p className="flex flex-row text-sm text-white/80 mb-4">
             <UpsideDownTriangle /> &nbsp; {`Số lượng IP: ${data?.connection}`} &nbsp;
-            <Tooltip content="Số lượng IP tối đa mỗi tài khoản được sử dụng">
+            <Tooltip content="Số lượng IP tối đa mỗi tài khoản đồng thời được sử dụng">
               <span>
                 <MageInformationSquareIsSmall />
               </span>
