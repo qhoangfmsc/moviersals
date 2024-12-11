@@ -205,12 +205,12 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
             <ModalBody>
               {dataView && (
                 <div className="mb-4">
-                  {/* <CloudinaryVideoPlayer
+                  <CloudinaryVideoPlayer
                     publicid={dataView?.episodepath?.match(/\/upload\/v\d+\/(.+)/)[1].split(".")[0]}
                     movieid={dataView?.movieid}
                     episodenumber={dataView?.episodenumber}
                     userinfo={userinfo}
-                  /> */}
+                  />
                 </div>
               )}
               <h1 className="text-xl">Tập {dataView.episodenumber}: {dataView.name}</h1>
