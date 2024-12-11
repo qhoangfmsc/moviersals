@@ -52,9 +52,9 @@ export default function TemplatePage() {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImageSrc(reader.result); // Set the image source to the file's data URL
+        setImageSrc(reader.result);
       };
-      reader.readAsDataURL(file); // Read the file as a data URL
+      reader.readAsDataURL(file);
     }
   }
 
@@ -99,16 +99,15 @@ export default function TemplatePage() {
               rotate-45 
               border-2 border-white"
               style={{
-                top: "1.75rem",
-                right: "-6.5rem",
+                top: "1.5rem",
+                right: "-6.75rem",
               }}>
-              {userInfo?.membership}
+              Member
             </div>
           ) : (
             <></>
           )}
           <h1 className="break-all text-4xl">{userInfo?.displayname}</h1>
-          <h1 className="text-tiny text-gray-400 mb-6">@{userInfo?.username}</h1>
           <Image
             isBlurred
             width={240}
@@ -153,7 +152,7 @@ export default function TemplatePage() {
                   className="w-full"
                   type="text"
                   variant="underlined"
-                  label="Thời gian hết hạn &nbsp;(DD/MM/YYYY)"
+                  label="Thời gian hết hạn"
                   value={userInfo?.usingend ? moment(userInfo?.usingend).format("DD/MM/YYYY") : ""}
                 />
               </div>

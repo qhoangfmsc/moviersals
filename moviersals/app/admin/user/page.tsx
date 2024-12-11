@@ -38,7 +38,7 @@ export default function MovieAdminPage() {
   }, [pathname, isRefetch, page]);
 
   const fetchData = async () => {
-    const response = await getAllUser();
+    const response = await getAllUser(page);
     const content = response.content;
     console.log(content);
     setData(content);

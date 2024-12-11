@@ -36,14 +36,14 @@ export default function ChartPage() {
         <BreadcrumbItem href="/admin">Moviersals</BreadcrumbItem>
         <BreadcrumbItem href="/admin/statistic">Thống kê</BreadcrumbItem>
       </Breadcrumbs>
-      <div className="w-full h-full flex flex-row gap-4">
+      <div className="w-full h-full flex lg:flex-row flex-col gap-4">
         <div className="h-full w-full">
           <RevenueChartCard chartData={null} />
         </div>
         <div className="h-full w-full flex flex-col gap-4">
           <div className="flex flex-row gap-4 h-fit ">
             <NumberStatisticCard
-              title={"💸Tổng doanh thu (VNĐ)"}
+              title={"💸Tổng doanh thu"}
               data={data?.list[0]?.total_revenue}
             />
             <TextStatisticCard

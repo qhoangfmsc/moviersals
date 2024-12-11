@@ -283,7 +283,7 @@ export const staticPageData = [
           được kích hoạt.
         </div>
         <br />
-        <div>Nếu có sự cố trong và sau quá trình thanh toán, vui lòng liên hệ với chúng tôi thông qua Zalo: 0972 xx xx xx</div>
+        <div>Nếu có sự cố trong và sau quá trình thanh toán, vui lòng liên hệ với chúng tôi thông qua Email: moviersals@gmail.com</div>
       </div>
     ),
   },

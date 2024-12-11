@@ -1,9 +1,21 @@
 "use client";
 
+import checkAuthen from "@/app/api/account/checkAuthen";
 import { Avatar, Button, Card, CardBody, CardFooter, CardHeader, Divider, Image, Link } from "@nextui-org/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export default function MoviersalsIntroduction() {
+  const [userinfo, setUserInfo] = useState<any>(null);
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+
+  async function getUserInfo() {
+    const auth = await checkAuthen();
+    setUserInfo(auth);
+  }
+
   return (
     <div className="relative my-12 lg:my-36">
       <Image
@@ -86,14 +98,25 @@ export default function MoviersalsIntroduction() {
           </CardBody>
           <Divider />
           <CardFooter className="justify-center">
-            <Button
-              className="uppercase"
-              color="success"
-              as={Link}
-              href="/login">
-              {" "}
-              Tham gia ngay hôm nay!{" "}
-            </Button>
+            {
+              userinfo
+                ?
+                <Button
+                  className="uppercase"
+                  color="success"
+                  as={Link}
+                  href="/categories">
+                  Xem phim ngay{" "}
+                </Button>
+                :
+                <Button
+                  className="uppercase"
+                  color="success"
+                  as={Link}
+                  href="/login">
+                  Tham gia ngay hôm nay!{" "}
+                </Button>
+            }
           </CardFooter>
         </Card>
         <Card className="relative flex lg:hidden m-2 lg:bottom-5 max-w-[400px]">
@@ -122,14 +145,25 @@ export default function MoviersalsIntroduction() {
           </CardBody>
           <Divider />
           <CardFooter className="justify-center">
-            <Button
-              className="uppercase"
-              color="success"
-              as={Link}
-              href="/login">
-              {" "}
-              Tham gia ngay hôm nay!{" "}
-            </Button>
+            {
+              userinfo
+                ?
+                <Button
+                  className="uppercase"
+                  color="success"
+                  as={Link}
+                  href="/categories">
+                  Xem phim ngay{" "}
+                </Button>
+                :
+                <Button
+                  className="uppercase"
+                  color="success"
+                  as={Link}
+                  href="/login">
+                  Tham gia ngay hôm nay!{" "}
+                </Button>
+            }
           </CardFooter>
         </Card>
         <Card className="relative hidden lg:flex m-2 lg:left-1/3 lg:top-5 text-left max-w-[340px]">

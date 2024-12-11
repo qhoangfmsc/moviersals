@@ -91,17 +91,7 @@ export default function AdminForm({ adminFormCofig, rerenderData }: { adminFormC
       {rerenderData && (
         <form
           className="flex flex-col"
-          onSubmit={onSubmit}
-          encType="multipart/form-data">
-          <Input
-            className="w-full"
-            type="text"
-            name="id"
-            variant="underlined"
-            isDisabled
-            label="ID (không thể chỉnh sửa)"
-            defaultValue={(rerenderData as any)?.id}
-          />
+          onSubmit={onSubmit}>
           {adminFormCofig?.colList.map((col, index) => {
             switch (col.coltype) {
               case "inputtext":
@@ -218,16 +208,7 @@ export default function AdminForm({ adminFormCofig, rerenderData }: { adminFormC
       {!rerenderData && (
         <form
           className="flex flex-col"
-          onSubmit={onSubmit}
-          encType="multipart/form-data">
-          <Input
-            className="w-full"
-            type="text"
-            name="id"
-            variant="underlined"
-            isDisabled
-            label="ID (không thể chỉnh sửa)"
-          />
+          onSubmit={onSubmit}>
           {adminFormCofig.colList.map((col, index) => {
             switch (col.coltype) {
               case "inputtext":
