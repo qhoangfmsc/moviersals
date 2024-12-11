@@ -162,16 +162,15 @@ export default function CategeorieAdminPage() {
                 </ModalBody>
                 <ModalFooter>
                   <Button
-                    color="danger"
-                    variant="light"
-                    onPress={async () => await handleDelte(dataModal.id, dataModal.name)}>
-                    Xóa
-                  </Button>
-                  <Button
                     color="default"
                     variant="light"
                     onPress={onClose}>
                     Đóng
+                  </Button>
+                  <Button
+                    color="danger"
+                    onPress={async () => await handleDelte(dataModal.id, dataModal.name)}>
+                    Xóa thể loại
                   </Button>
                   <Button
                     type="submit"

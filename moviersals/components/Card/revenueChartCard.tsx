@@ -40,7 +40,7 @@ export default function RevenueChartCard({ chartData }: { chartData: any }) {
 
   const chartProps = {
     isDarkMode: isDarkMode,
-    width: 600,
+    width: 800,
     height: 300,
     hoverLabel: "Doanh thu",
     data: chartData ? chartData : data,
@@ -56,7 +56,6 @@ export default function RevenueChartCard({ chartData }: { chartData: any }) {
     if (!value) return;
     const formattedDate = formatter.format(value.toDate("Asia/Ho_Chi_Minh"));
     const [month, day, year] = formattedDate.split("/");
-    // Convert to "YYYY-MM-DD" format
     const finalFormattedDate = `${year}-${month}-${day}`;
     setRevenueDateTime((prev) => ({
       ...prev,
@@ -71,29 +70,28 @@ export default function RevenueChartCard({ chartData }: { chartData: any }) {
   return (
     <Card className="border border-[#ffffff0f] bg-[#ffffff0f] rounded-md w-full h-full p-6">
       <h1 className=" mb-8 font-md text-gray-400 ml-4">Doanh thu theo ngày</h1>
-      <div className="mt-2">
-        <CustomLineChart chartProps={chartProps} />
-      </div>
-      <div className="flex flex-row gap-4 p-4 justify-center my-auto">
+      <div className="flex flex-row gap-4 p-4 justify-center mt-1 mb-16">
         <DatePicker
           variant="bordered"
-          className="max-w-[150px]"
+          className="basis-1/3"
           label="Ngày bắt đầu"
           onChange={(value) => handleDateChange("startdate", value)}
         />
         <DatePicker
           variant="bordered"
-          className="max-w-[150px]"
+          className="basis-1/3"
           label="Ngày kết thúc"
           onChange={(value) => handleDateChange("enddate", value)}
         />
-
         <Button
-          className="w-fit h-[56px]"
+          className="basis-1/3 h-14"
           color="primary"
           onClick={handleRevenueDateClick}>
-          Chọn
+          Xem theo bộ lọc
         </Button>
+      </div>
+      <div className="mt-2">
+        <CustomLineChart chartProps={chartProps} />
       </div>
     </Card>
   );

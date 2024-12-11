@@ -12,7 +12,7 @@ export function PopularMovieChartCard({ chartData }: { chartData: any }) {
 
   return (
     <Card className="border border-[#ffffff0f] bg-[#ffffff0f] rounded-md w-full h-full p-6">
-      <h1 className=" mb-8 font-md text-gray-400 ml-4">{"Lượt xem nhiều nhất"}</h1>
+      <h1 className=" mb-8 font-md text-gray-400 ml-4">{"Lượt xem nhiều nhất/phim"}</h1>
       <div className="mt-2">
         <CustomBarChart chartProps={barChartProps} />
       </div>
