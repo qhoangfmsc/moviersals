@@ -103,7 +103,7 @@ export const Navbar = () => {
             />
           </Tooltip>
         </NavbarItem>
-        {authentication?.role == "customer" && (
+        {authentication?.role != "admin" && (
           <NavbarItem className="hidden lg:flex">
             <Tooltip content="Mua gói thành viên">
               <Button
