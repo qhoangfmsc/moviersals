@@ -55,13 +55,12 @@ export default function MoviesIntroductionCategories({ dataVideos }: MoviesCateg
                   <div className="hidden lg:flex items-center space-x-2">
                     <span>{item.namevi}</span>
                   </div>
-                  {/* <div className="flex lg:hidden items-center space-x-2">{item.icon}</div> */}
                 </>
               }
               className="flex justify-center flex-wrap p-2">
-              {dataVideos?.filter((video) => video.categories.includes(item.name)).length > 0 ? (
+              {dataVideos?.filter((video) => video?.categories?.includes(item.name)).length > 0 ? (
                 dataVideos
-                  ?.filter((video) => video.categories.includes(item.name))
+                  ?.filter((video) => video?.categories?.includes(item.name))
                   ?.map(function (item) {
                     return (
                       <div
@@ -89,7 +88,7 @@ export default function MoviesIntroductionCategories({ dataVideos }: MoviesCateg
                                       {index !==
                                         (Array.isArray(item.categoriesvi) ? item.categoriesvi : JSON.parse(item.categoriesvi || "[]"))
                                           .length -
-                                          1 && ", "}
+                                        1 && ", "}
                                     </span>
                                   )
                                 )}
