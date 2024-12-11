@@ -33,6 +33,77 @@ export const staticPageData = [
     ),
   },
   {
+    id: "chinhsachbanquyen",
+    title: "CHÍNH SÁCH BẢN QUYỀN",
+    body: (
+      <div>
+        <div>
+          <strong>Chào mừng bạn đến với Moviersals!</strong> Chúng tôi cam kết bảo vệ quyền sở hữu trí tuệ và đảm bảo rằng các nội dung được cung cấp trên trang web đều tuân thủ pháp luật hiện hành.
+        </div>
+        <br />
+        <div>
+          <strong>1. Quyền Sở Hữu Nội Dung</strong>
+        </div>
+        <div>
+          Tất cả các nội dung, bao gồm nhưng không giới hạn ở phim, chương trình truyền hình, video, hình ảnh, âm thanh, đồ họa, và các tài liệu khác trên Moviersals, đều thuộc quyền sở hữu của chúng tôi hoặc được cấp phép từ các chủ sở hữu hợp pháp. Việc sao chép, phân phối, chỉnh sửa, hoặc sử dụng các nội dung này mà không có sự cho phép rõ ràng từ Moviersals hoặc các chủ sở hữu bản quyền là hành vi vi phạm pháp luật.
+        </div>
+        <br />
+        <div>
+          <strong>2. Sử Dụng Cá Nhân</strong>
+        </div>
+        <div>
+          Người dùng chỉ được phép truy cập và sử dụng các nội dung trên trang web cho mục đích cá nhân và phi thương mại. Mọi hành vi sử dụng nội dung vượt quá phạm vi này đều phải được sự đồng ý bằng văn bản từ Moviersals.
+        </div>
+        <br />
+        <div>
+          <strong>3. Khiếu Nại Về Bản Quyền</strong>
+        </div>
+        <div>
+          Nếu bạn tin rằng nội dung trên Moviersals vi phạm quyền sở hữu trí tuệ của mình, vui lòng thông báo cho chúng tôi bằng cách gửi email đến <a href="mailto:moviersals@gmail.com">moviersals@gmail.com</a>. Trong thông báo, vui lòng cung cấp các thông tin sau:
+          <ul>
+            <li>• Mô tả chi tiết về nội dung bị vi phạm bản quyền.</li>
+            <li>• Tài liệu chứng minh bạn là chủ sở hữu hoặc đại diện hợp pháp của nội dung đó.</li>
+            <li>• Thông tin liên hệ của bạn (họ tên, số điện thoại, địa chỉ email).</li>
+            <li>• Cam kết rằng các thông tin bạn cung cấp là chính xác và bạn có quyền hợp pháp để gửi thông báo này.</li>
+          </ul>
+        </div>
+        <br />
+        <div>
+          <strong>4. Xử Lý Khiếu Nại</strong>
+        </div>
+        <div>
+          Sau khi nhận được khiếu nại, chúng tôi sẽ:
+          <ul>
+            <li>• Xem xét và xác minh tính chính xác của khiếu nại.</li>
+            <li>• Gỡ bỏ hoặc tạm thời ẩn nội dung vi phạm (nếu có).</li>
+            <li>• Liên hệ với bên liên quan để giải quyết khiếu nại một cách công bằng và hợp lý.</li>
+          </ul>
+        </div>
+        <br />
+        <div>
+          <strong>5. Các Quy Định Liên Quan</strong>
+        </div>
+        <div>
+          Moviersals tôn trọng và tuân thủ các quy định pháp luật về bản quyền tại Việt Nam và các quốc gia khác. Chúng tôi không chịu trách nhiệm đối với các nội dung do người dùng tải lên nếu người dùng không tuân thủ quy định về bản quyền.
+        </div>
+        <br />
+        <div>
+          <strong>6. Thay Đổi Chính Sách Bản Quyền</strong>
+        </div>
+        <div>
+          Chính sách này có thể được cập nhật để phù hợp với các thay đổi về luật pháp hoặc hoạt động của trang web. Người dùng được khuyến khích kiểm tra định kỳ để cập nhật thông tin mới nhất.
+        </div>
+        <br />
+        <div>
+          <strong>7. Liên Hệ</strong>
+        </div>
+        <div>
+          Nếu bạn có bất kỳ câu hỏi nào liên quan đến chính sách bản quyền, vui lòng liên hệ với chúng tôi qua email: <a href="mailto:moviersals@gmail.com">moviersals@gmail.com</a>.
+        </div>
+      </div>
+    ),
+  },
+  {
     id: "chinhsachbaomat",
     title: "CHÍNH SÁCH BẢO MẬT",
     body: (

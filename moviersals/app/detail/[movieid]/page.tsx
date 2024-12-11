@@ -40,9 +40,8 @@ export default function DetailPage({ params }: { params: { movieid: string } }) 
             top: "-5rem",
           }}>
           <Image
-            width={"100vw"}
-            height={"100vh"}
-            className="object-cover z-0"
+            height={1000}
+            className="object-cover z-0 w-screen"
             alt="Thumbnail"
             src={data?.movieDetail?.thumbnail}
           />
@@ -85,7 +84,7 @@ export default function DetailPage({ params }: { params: { movieid: string } }) 
                           ? data?.movieDetail?.categoriesvi
                           : JSON.parse(data?.movieDetail?.categoriesvi || "[]")
                         ).length -
-                          1 && ", "}
+                        1 && ", "}
                     </span>
                   ))}
                 </h1>

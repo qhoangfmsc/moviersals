@@ -93,7 +93,7 @@ export default function RequestPasswordRecoveryForm() {
             variant="underlined"
             label="Email"
           />
-          <div>
+          <div className="flex justify-center">
             <Button
               size="lg"
               className="my-4 w-[200px]"

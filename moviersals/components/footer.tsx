@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 export const Footer = () => {
   return (
     <footer
-      className="w-full flex flex-col items-center justify-center p-4 border-t-1 z-10 bg-darken"
+      className="w-full flex flex-col items-center justify-center p-4 border-t-1 z-20 bg-black"
       style={{
         borderTopLeftRadius: "50px",
         borderTopRightRadius: "50px",
