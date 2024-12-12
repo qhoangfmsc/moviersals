@@ -36,11 +36,13 @@ export const Navbar = () => {
 
   const fetchAuth = async () => {
     const auth = await checkAuthen();
-    setAuthentication(auth);
-    if (auth == null) {
-      localStorage.removeItem("userinfo");
-    } else {
-      localStorage.setItem("userinfo", JSON.stringify(auth));
+    if (JSON.stringify(authentication) !== JSON.stringify(auth)) {
+      setAuthentication(auth);
+      if (auth == null) {
+        localStorage.removeItem("userinfo");
+      } else {
+        localStorage.setItem("userinfo", JSON.stringify(auth));
+      }
     }
   };
 
@@ -49,8 +51,6 @@ export const Navbar = () => {
     showResponseToast(response);
     router.push("/login");
   }
-
-  if (!pathname) return null;
 
   return (
     <NextUINavbar
@@ -88,7 +88,6 @@ export const Navbar = () => {
         </NavbarItem>
       </NavbarContent>
 
-
       <NavbarContent
         className="hidden sm:flex basis-1/5 sm:basis-full"
         justify="end">
@@ -103,7 +102,7 @@ export const Navbar = () => {
             />
           </Tooltip>
         </NavbarItem>
-        {authentication?.role != "admin" && (
+        {authentication && authentication?.role != "admin" && (
           <NavbarItem className="hidden lg:flex">
             <Tooltip content="Mua gói thành viên">
               <Button

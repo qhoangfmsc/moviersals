@@ -4,6 +4,6 @@ export default async function getUSDConversionRate() {
     return fetch(url).then((response) => {
         return response.json();
     }).catch((error) => {
-        console.error("API Request Error:", error);
+        console.error("USD API Convert Request Error:", error);
     });
 }
