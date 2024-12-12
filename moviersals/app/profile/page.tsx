@@ -50,11 +50,10 @@ export default function TemplatePage() {
     setFileState(file);
 
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImageSrc(reader.result);
-      };
-      reader.readAsDataURL(file);
+      if (file) {
+        const url = URL.createObjectURL(file);
+        setImageSrc(url);
+      }
     }
   }
 
@@ -111,7 +110,7 @@ export default function TemplatePage() {
           <Image
             isBlurred
             width={240}
-            src={userInfo?.thumbnail ?? imageSrc ?? "/image/user.bmp"}
+            src={imageSrc || userInfo?.thumbnail || "/image/user.bmp"}
             alt="NextUI Album Cover"
             className="my-5 rounded-full p-3"
           />
