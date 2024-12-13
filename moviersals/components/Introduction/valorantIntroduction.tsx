@@ -1,7 +1,8 @@
 "use client";
 
 import { AkarIconsInfo, LineMdPlayFilled } from "@/components/icons";
-import { Button, Card, Image, Link } from "@nextui-org/react";
+import { Button, Card, Link } from "@nextui-org/react";
+import Image from "next/image";
 import React from "react";
 
 export default function ValorantIntroduction(): JSX.Element {
@@ -56,9 +57,11 @@ export default function ValorantIntroduction(): JSX.Element {
         </div>
         <div className="flex flex-col mx-10">
           <Image
+            loading="lazy"
             alt="valorantLogo"
             src="/image/valorantLogo.png"
             width={200}
+            height={200}
             className="mx-4 mb-10"
           />
           <Button
