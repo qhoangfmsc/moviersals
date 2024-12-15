@@ -4,7 +4,6 @@ import {
   Button,
   Card,
   Checkbox,
-  Image,
   Input,
   Link,
   Modal,
@@ -113,7 +112,7 @@ export default function RegisterFlipCard() {
             <Image
               alt="cardBackground"
               className="object-cover z-0"
-              src="/image/cardBackground.png"
+              src="/image/cardBackground.webp"
               height="670"
               width="500"
             />

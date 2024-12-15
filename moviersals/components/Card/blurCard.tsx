@@ -1,4 +1,5 @@
-import { Card, CardFooter, Image, Button, Link } from "@nextui-org/react";
+import { Card, CardFooter, Button, Link } from "@nextui-org/react";
+import Image from "next/image";
 
 export default function BlurCard({
     cardData
@@ -17,7 +18,7 @@ export default function BlurCard({
             className="border-none"
         >
             <Image
-                alt="Woman listing to music"
+                alt="alt"
                 className="object-cover"
                 height={200}
                 src={cardData.img}

@@ -32,7 +32,7 @@ export default function VNPayButon({ subcriptionid, price }: PaypalDataProps) {
             alt="VNPay logo"
             width={30}
             height={30}
-            src="/image/vnpaylogo.png"
+            src="/image/vnpaylogo.webp"
           />
         }
         style={{

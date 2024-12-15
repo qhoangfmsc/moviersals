@@ -1,5 +1,4 @@
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Pagination, Button, Image } from "@nextui-org/react";
-import { useState } from "react";
 
 interface HeaderDataItem {
   colname: string;

@@ -3,8 +3,9 @@
 import getAllMovie from "@/app/api/movies/getAllMovie";
 import { NextButton, PrevButton, usePrevNextButtons } from "@/components/EmblaCarousel/controls/EmblaCarouselArrowButtons";
 import { DotButton, useDotButton } from "@/components/EmblaCarousel/controls/EmblaCarouselDotButtons";
-import { Button, Card, CardFooter, Image, Link } from "@nextui-org/react";
+import { Button, Card, CardFooter, Link } from "@nextui-org/react";
 import useEmblaCarousel from "embla-carousel-react";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function MovieSuggestion() {

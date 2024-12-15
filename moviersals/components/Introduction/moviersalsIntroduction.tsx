@@ -20,7 +20,7 @@ export default function MoviersalsIntroduction() {
     <div className="relative my-12 lg:my-36">
       <Image
         className="absolute top-0 left-0 z-0"
-        src="/image/sundigital.jpeg"
+        src="/image/sundigital.webp"
         alt="background"
         width={"100%"}
         style={{ filter: "blur(300px)" }}
@@ -36,7 +36,7 @@ export default function MoviersalsIntroduction() {
                 isBordered
                 radius="full"
                 size="md"
-                src="/image/dev1.jpg"
+                src="/image/dev1.webp"
               />
               <div className="flex flex-col gap-1 items-start justify-center">
                 <h4 className="text-small font-semibold leading-none text-default-600">Nguyễn Quốc Hoàng</h4>
@@ -55,7 +55,7 @@ export default function MoviersalsIntroduction() {
                 isBordered
                 radius="full"
                 size="md"
-                src="/image/dev2.jpg"
+                src="/image/dev2.webp"
               />
               <div className="flex flex-col gap-1 items-start justify-center">
                 <h4 className="text-small font-semibold leading-none text-default-600">Chu Nguyễn Hoàng Sơn</h4>
@@ -78,7 +78,7 @@ export default function MoviersalsIntroduction() {
               alt="nextui logo"
               height={40}
               radius="sm"
-              src="/image/MoviersalsLogo.jpg"
+              src="/image/MoviersalsLogo.webp"
               width={40}
             />
             <div className="flex flex-col">
@@ -123,7 +123,7 @@ export default function MoviersalsIntroduction() {
               alt="nextui logo"
               height={40}
               radius="sm"
-              src="/image/MoviersalsLogo.jpg"
+              src="/image/MoviersalsLogo.webp"
               width={40}
             />
             <div className="flex flex-col">
@@ -169,7 +169,7 @@ export default function MoviersalsIntroduction() {
                 isBordered
                 radius="full"
                 size="md"
-                src="/image/cus1.jpg"
+                src="/image/cus1.webp"
               />
               <div className="flex flex-col gap-1 items-start justify-center">
                 <h4 className="text-small font-semibold leading-none text-default-600">Lê Duy Tân</h4>
@@ -188,7 +188,7 @@ export default function MoviersalsIntroduction() {
                 isBordered
                 radius="full"
                 size="md"
-                src="/image/cus2.jpg"
+                src="/image/cus2.webp"
               />
               <div className="flex flex-col gap-1 items-start justify-center">
                 <h4 className="text-small font-semibold leading-none text-default-600">Thanh Trúc</h4>
@@ -207,7 +207,7 @@ export default function MoviersalsIntroduction() {
                 isBordered
                 radius="full"
                 size="md"
-                src="/image/cus3.jpg"
+                src="/image/cus3.webp"
               />
               <div className="flex flex-col gap-1 items-start justify-center">
                 <h4 className="text-small font-semibold leading-none text-default-600">Minh Lê</h4>

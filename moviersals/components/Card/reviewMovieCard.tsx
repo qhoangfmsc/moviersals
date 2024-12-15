@@ -1,4 +1,4 @@
-import { Button, Card, CardFooter, Image, Link } from "@nextui-org/react";
+import { Button, Card, CardFooter, Link } from "@nextui-org/react";
 
 interface CardEpisodeProps {
   cardData: Record<string, any>;

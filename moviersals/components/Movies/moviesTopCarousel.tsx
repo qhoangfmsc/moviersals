@@ -5,7 +5,8 @@ import Autoplay from "embla-carousel-autoplay";
 import React from "react";
 import { DotButton, useDotButton } from "../EmblaCarousel/controls/EmblaCarouselDotButtons";
 import { NextButton, PrevButton, usePrevNextButtons } from "../EmblaCarousel/controls/EmblaCarouselArrowButtons";
-import { Button, Card, CardFooter, Image, Link } from "@nextui-org/react";
+import { Button, Card, CardFooter, Link } from "@nextui-org/react";
+import Image from "next/image";
 
 interface Video {
   id: number;

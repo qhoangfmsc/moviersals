@@ -4,7 +4,6 @@ import {
   Navbar as NextUINavbar,
   NavbarContent,
   NavbarMenu,
-  NavbarMenuToggle,
   NavbarBrand,
   NavbarItem,
   NavbarMenuItem,
@@ -13,13 +12,13 @@ import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
 import { siteConfig } from "@/config/site";
 import { ArrowDown, BxsCategory, IcRoundShop, MingcuteVip2Fill } from "@/components/icons";
-import Image from "next/image";
 import { Avatar, Badge, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Tooltip, User } from "@nextui-org/react";
 import checkAuthen from "@/app/api/account/checkAuthen";
 import { useEffect, useState } from "react";
 import logout from "@/app/api/account/logout";
 import { usePathname, useRouter } from "next/navigation";
 import { showResponseToast } from "@/lib/utils";
+import Image from "next/image";
 
 export const Navbar = () => {
   const router = useRouter();
@@ -133,14 +132,14 @@ export const Navbar = () => {
                       <Avatar
                         isBordered
                         color="default"
-                        src={authentication.thumbnail ? authentication.thumbnail : "/image/user.bmp"}
+                        src={authentication.thumbnail ? authentication.thumbnail : "/image/user.webp"}
                       />
                     </Badge>
                   ) : (
                     <Avatar
                       isBordered
                       color="default"
-                      src={authentication.thumbnail ? authentication.thumbnail : "/image/user.bmp"}
+                      src={authentication.thumbnail ? authentication.thumbnail : "/image/user.webp"}
                     />
                   )}
                   <div>{authentication.displayname}</div>
@@ -201,7 +200,7 @@ export const Navbar = () => {
                   <User
                     name="Moviegoer"
                     avatarProps={{
-                      src: "/image/user.bmp",
+                      src: "/image/user.webp",
                     }}
                   />
                   <ArrowDown />

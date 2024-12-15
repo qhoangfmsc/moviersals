@@ -1,11 +1,8 @@
 "use client";
 
-import { videosMockup } from "@/config/videosMockup";
 import { Avatar, Card, Divider, Tooltip } from "@nextui-org/react";
 import moment from "moment";
 import { Rating } from "react-simple-star-rating";
-
-// const trendingVideos = videosMockup;
 
 interface Comment {
   id: number;

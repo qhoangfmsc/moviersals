@@ -1,6 +1,5 @@
 "use client";
 import { Rating } from "react-simple-star-rating";
-import { videosMockup } from "@/config/videosMockup";
 import {
   Avatar,
   Button,
@@ -22,8 +21,6 @@ import moment from "moment";
 import createComment from "@/app/api/comment/createComment";
 import editComment from "@/app/api/comment/editComment";
 import deleteComment from "@/app/api/comment/deleteComment";
-
-const trendingVideos = videosMockup;
 
 interface Comment {
   id: number;

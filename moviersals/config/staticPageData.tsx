@@ -348,7 +348,7 @@ export const staticPageData = [
           <Image
             width={500}
             height={600}
-            src={"/image/vnpaymethod.png"}
+            src={"/image/vnpaymethod.webp"}
             alt="vnpay"
           />
           <i>Các phương thức thanh toán VNPAY</i>
@@ -429,13 +429,13 @@ export const staticPageData = [
                 <Image
                   width={500}
                   height={360}
-                  src={"/image/vnpaybank.png"}
+                  src={"/image/vnpaybank.webp"}
                   alt="vnpay"
                 />
                 <Image
                   width={500}
                   height={360}
-                  src={"/image/vnpaybankotp.png"}
+                  src={"/image/vnpaybankotp.webp"}
                   alt="vnpay"
                 />
               </div>
@@ -467,7 +467,7 @@ export const staticPageData = [
           <Image
             width={500}
             height={600}
-            src={"/image/paypallogin.png"}
+            src={"/image/paypallogin.webp"}
             alt="vnpay"
           />
           <i>Giao diện đăng nhập paypal</i>
@@ -500,7 +500,7 @@ export const staticPageData = [
               <Image
                 width={500}
                 height={600}
-                src={"/image/paypalinfo.png"}
+                src={"/image/paypalinfo.webp"}
                 alt="vnpay"
               />
               <i>Thông tin thanh toán PayPal</i>

@@ -110,7 +110,7 @@ export default function TemplatePage() {
           <Image
             isBlurred
             width={240}
-            src={imageSrc || userInfo?.thumbnail || "/image/user.bmp"}
+            src={imageSrc || userInfo?.thumbnail || "/image/user.webp"}
             alt="NextUI Album Cover"
             className="my-5 rounded-full p-3"
           />

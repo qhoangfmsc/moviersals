@@ -37,7 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <link
           rel="icon"
-          href="/image/MoviersalsLogo.jpg"
+          href="/image/MoviersalsLogo.webp"
         />
         <Script
           src="/js/fpsTrackerSrc.min.js"

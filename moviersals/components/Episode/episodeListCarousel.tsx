@@ -2,9 +2,9 @@
 
 import { NextButton, PrevButton, usePrevNextButtons } from "@/components/EmblaCarousel/controls/EmblaCarouselArrowButtons";
 import { DotButton, useDotButton } from "@/components/EmblaCarousel/controls/EmblaCarouselDotButtons";
-import { Button, Card, CardFooter, Image, Link } from "@nextui-org/react";
+import { Button, Card, CardFooter, Link } from "@nextui-org/react";
 import useEmblaCarousel from "embla-carousel-react";
-import { useParams } from "next/navigation";
+import Image from "next/image";
 
 export default function EpisodeListCarousel({ movieData }: { movieData: Record<string, any> }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, dragFree: true });

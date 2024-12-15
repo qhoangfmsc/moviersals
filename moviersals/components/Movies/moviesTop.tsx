@@ -1,9 +1,10 @@
 "use client";
 
-import { Button, Card, CardFooter, Image, Link } from "@nextui-org/react";
+import { Button, Card, CardFooter, Link } from "@nextui-org/react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import React from "react";
+import Image from "next/image";
 
 // Define the type for the props that the component will receive
 interface Video {

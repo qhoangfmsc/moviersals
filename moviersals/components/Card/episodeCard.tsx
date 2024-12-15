@@ -1,4 +1,5 @@
-import { Card, CardFooter, Image } from "@nextui-org/react";
+import { Card, CardFooter } from "@nextui-org/react";
+import Image from "next/image";
 
 interface CardEpisodeProps {
   cardData?: Record<string, any>;
@@ -17,7 +18,7 @@ export default function AdminEpisodeCard({ cardData, onCardClick }: CardEpisodeP
         className={`${cardData ? "object-cover" : "object-contain"}`}
         height={cardData ? 180 : 100}
         style={{ margin: cardData ? "0px 0px" : "50px 0px" }}
-        src={cardData ? "https://media-cache.cinematerial.com/p/500x/l35kpwhw/it-re-release-movie-poster.jpg" : "/image/plus.png"}
+        src={cardData ? "https://media-cache.cinematerial.com/p/500x/l35kpwhw/it-re-release-movie-poster.jpg" : "/image/plus.webp"}
         width={cardData ? 280 : 280}
       />
       {cardData ? (

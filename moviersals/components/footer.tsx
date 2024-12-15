@@ -18,7 +18,7 @@ export const Footer = () => {
               width={70}
               height={70}
               alt="MoviersalsLogo"
-              src="/image/MoviersalsLogo.jpg"
+              src="/image/MoviersalsLogo.webp"
             />
           </div>
           <div className="basis-1/5">
@@ -31,7 +31,7 @@ export const Footer = () => {
                       width={200}
                       height={70}
                       alt="QRCode"
-                      src="/image/sacombankPay.jpg"
+                      src="/image/sacombankPay.webp"
                     />
                   </div>
                   <p>Cảm ơn vì trải nghiệm của bạn. Ủng hộ chúng tôi thông qua Sacombank Pay.</p>
@@ -59,7 +59,7 @@ export const Footer = () => {
                 width={150}
                 height={1}
                 alt="chplay"
-                src="/image/downloadChplay.png"
+                src="/image/downloadChplay.webp"
                 onClick={() => { toast("Ứng dụng trên CH Play đang trong quá trình thử nghiệm. Cảm ơn quý khách đã quan tâm!") }}
               />
             </div>
@@ -68,7 +68,7 @@ export const Footer = () => {
                 width={135}
                 height={1}
                 alt="ios"
-                src="/image/downloadIos.png"
+                src="/image/downloadIos.webp"
                 onClick={() => { toast("Ứng dụng trên App Store đang trong quá trình thử nghiệm. Cảm ơn quý khách đã quan tâm!") }}
               />
             </div>

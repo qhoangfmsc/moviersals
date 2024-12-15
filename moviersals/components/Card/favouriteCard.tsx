@@ -1,4 +1,4 @@
-import { Card, CardFooter, Image, Button, Link, Tooltip, Badge } from "@nextui-org/react";
+import { Card, Link, Tooltip, Badge } from "@nextui-org/react";
 import moment from "moment";
 import FavRemoveButton from "../Button/favRemoveButton";
 
