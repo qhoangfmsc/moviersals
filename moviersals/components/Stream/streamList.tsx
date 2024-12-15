@@ -26,7 +26,7 @@ const streamList = [
       "Nội dung phim Light Shop Full tập xoay quanh một cửa hàng ánh sáng huyền bí, nơi những người đến tìm kiếm ánh sáng kỳ diệu sẽ đối mặt với những quyết định khó khăn giữa tình yêu, số phận và những lực lượng siêu nhiên.",
     createddate: "2024/11/20 20:57:00",
     isstreaming: false,
-    thumbnail: "/image/lightshop-thumbnail.webp",
+    thumbnail: "/image/lightshop-thumbnail.jpg",
   },
   {
     id: 3,
@@ -37,7 +37,7 @@ const streamList = [
       "Death’s game là một trong những bộ phim Hàn Quốc thu hút nhiều người xem vào cuối năm 2023 nay. Có rất nhiều điều về bộ phim khiến cho người xem ấn tượng dù chỉ mới chiếu vài tập đầu tiên như diễn xuất, nội dung và đặc biệt là dàn diễn viên tham gia.",
     createddate: "2023/09/13 12:30:30",
     isstreaming: false,
-    thumbnail: "/image/deathgame-thumbnail.webp",
+    thumbnail: "/image/deathgame-thumbnail.jpg",
   },
 ];
 
@@ -55,9 +55,11 @@ export default function StreamList(): JSX.Element {
             key={item.id}>
             <div className="lg:flex flex-row p-2 lg:p-6 lg:gap-6">
               <Image
-                src={item.thumbnail ?? "/image/streaming-thumbnail.webp"}
+                priority
+                src={item.thumbnail ?? "/image/streaming-thumbnail.gif"}
                 alt="background"
                 width={450}
+                height={100}
               />
               <div className="basis-2/5">
                 {item.isstreaming ? (

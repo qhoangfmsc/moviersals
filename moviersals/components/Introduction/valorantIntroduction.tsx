@@ -57,9 +57,11 @@ export default function ValorantIntroduction(): JSX.Element {
         </div>
         <div className="flex flex-col mx-10">
           <Image
+            loading="lazy"
             alt="valorantLogo"
             src="/image/valorantLogo.webp"
             width={200}
+            height={200}
             className="mx-4 mb-10"
           />
           <Button

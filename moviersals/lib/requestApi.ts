@@ -20,10 +20,8 @@ export async function requestCacheApi(url: string, param: Object | null | FormDa
             apiCache.delete(cacheKey);
         }
     }
-
     // Call requestApi if cache is not valid
     const data = await requestApi(url, param);
-
     // Store the response in cache with expiry
     apiCache.set(cacheKey, {
         data,
@@ -56,17 +54,20 @@ export async function requestApi(url: string, param: Object | null | FormData) {
 }
 
 export function convertParamBasedOnRequiredKeys(param: Object | null | FormData) {
-    if (param instanceof FormData) {
-        const hasAnyRequiredKey = requiredKeys.some((key) => param.has(key));
-        if (!hasAnyRequiredKey) {
-            return convertFormDataToJson(param);
+    if(param)
+        {
+            if (param instanceof FormData) {
+                const hasAnyRequiredKey = requiredKeys.some((key) => param.has(key));
+                if (!hasAnyRequiredKey) {
+                    return convertFormDataToJson(param);
+                }
+            } else if (typeof param === "object") {
+                const hasAnyRequiredKey = requiredKeys.some((key) => key in param);
+                if (hasAnyRequiredKey) {
+                    // Convert Object to FormData
+                    return convertRequestToFormData(param);
+                }
+            }
         }
-    } else if (typeof param === "object") {
-        const hasAnyRequiredKey = requiredKeys.some((key) => key in param);
-        if (hasAnyRequiredKey) {
-            // Convert Object to FormData
-            return convertRequestToFormData(param);
-        }
-    }
     return param;
 }

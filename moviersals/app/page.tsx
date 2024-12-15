@@ -1,4 +1,3 @@
-"use client";
 import MoviersalsIntroduction from "@/components/Introduction/moviersalsIntroduction";
 import ValorantIntroduction from "@/components/Introduction/valorantIntroduction";
 import Transition from "@/components/MotionFramer/transition";
