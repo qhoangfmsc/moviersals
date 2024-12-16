@@ -40,7 +40,7 @@ export default function RevenueChartCard({ chartData }: { chartData: any }) {
 
   const chartProps = {
     isDarkMode: isDarkMode,
-    width: 800,
+    width: 700,
     height: 300,
     hoverLabel: "Doanh thu",
     data: chartData ? chartData : data,
@@ -90,7 +90,7 @@ export default function RevenueChartCard({ chartData }: { chartData: any }) {
           Xem theo bộ lọc
         </Button>
       </div>
-      <div className="mt-2">
+      <div className="flex flex-row justify-center mt-2">
         <CustomLineChart chartProps={chartProps} />
       </div>
     </Card>
