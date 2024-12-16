@@ -75,7 +75,7 @@ export default function CategeorieAdminPage() {
     handler: async (formData: FormData) => {
       const response = await createCategorie(formData);
       showResponseToast(response);
-      if (response.status == "success") {
+      if (response?.status == "success") {
         setIsRefetch(!isRefetch);
       }
     },
@@ -88,7 +88,7 @@ export default function CategeorieAdminPage() {
       const formData = new FormData(event.currentTarget);
       const response = await editCategorie(formData);
       showResponseToast(response);
-      if (response.status == "success") {
+      if (response?.status == "success") {
         setIsRefetch(!isRefetch);
         onClose();
       }
@@ -103,7 +103,7 @@ export default function CategeorieAdminPage() {
     const body = { id: id, name: name };
     const response = await deleteCategorie(body);
     showResponseToast(response);
-    if (response.status == "success") {
+    if (response?.status == "success") {
       setIsRefetch(!isRefetch);
       onClose();
     }

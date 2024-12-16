@@ -1,7 +1,7 @@
 import { Card, CardFooter, Button, CardHeader, Tooltip } from "@nextui-org/react";
 import { MageInformationSquareIsSmall, UpsideDownTriangle } from "../icons";
-import { showResponseToast } from "@/lib/utils";
 import { toast } from "react-toastify";
+import { useState } from "react";
 
 interface SubcriptionProps {
   data: {
@@ -12,14 +12,19 @@ interface SubcriptionProps {
     connection: string;
     quality: string;
     baseprice: string;
+    priority: string;
     isads: boolean;
   };
   onCardClick: (data: SubcriptionProps["data"]) => void;
+  userData?: any;
   showButton: boolean;
 }
 
-export default function SubcriptionPlanCard({ data, onCardClick, showButton }: SubcriptionProps) {
+export default function SubcriptionPlanCard({ data, userData, onCardClick, showButton }: SubcriptionProps) {
+  const [isClick, setIsClick] = useState<boolean>(false);
+
   const handleSubcriptionClick = () => {
+    setIsClick(true);
     const userinfo = localStorage.getItem("userinfo");
     if (userinfo) {
       const user = JSON.parse(userinfo);
@@ -87,14 +92,33 @@ export default function SubcriptionPlanCard({ data, onCardClick, showButton }: S
           <p className="flex flex-row  text-sm text-white/80 mb-4">
             <UpsideDownTriangle /> &nbsp; {`Quảng cáo:  ${data?.isads ? "Có" : "Không"}`}
           </p>
+          {data?.price == "0" ? (
+            <p className="flex flex-row  text-sm text-white/80 mb-4">
+              <UpsideDownTriangle /> &nbsp; {`Loại phim: Miễn Phí`}
+            </p>
+          ) : (
+            <p className="flex flex-row  text-sm text-white/80 mb-4 text-start">
+              <UpsideDownTriangle /> &nbsp; {`Loại phim: Miễn Phí và Trả Phí`}
+            </p>
+          )}
         </div>
         <CardFooter className="flex flex-col items-start mt-auto">
-          {showButton && (
+          {showButton && userData?.priority < data?.priority && (
             <Button
+              isLoading={isClick}
               onClick={handleSubcriptionClick}
               className="w-full"
               color="primary">
               Chọn
+            </Button>
+          )}
+          {userData?.priority == data?.priority && (
+            <Button
+              isDisabled
+              variant="bordered"
+              className="w-full"
+              color="primary">
+              Đang sử dụng
             </Button>
           )}
         </CardFooter>

@@ -22,7 +22,7 @@ export default function MovieListPage() {
   useEffect(() => {
     async function fetchCategories() {
       const response = await getAllCategories(null);
-      if (response.status == "success") {
+      if (response?.status == "success") {
         setTags(response.content.list);
       }
     }
@@ -34,7 +34,7 @@ export default function MovieListPage() {
   async function fetchFilterMovie() {
     const request = { year: filter?.year, moviename: filter?.moviename, categories: JSON.stringify(filter?.categories), page: page };
     const response = await getFilterMovie(request);
-    if (response.status == "success") {
+    if (response?.status == "success") {
       setData(response.content);
     }
   }

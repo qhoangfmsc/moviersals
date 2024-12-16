@@ -90,7 +90,7 @@ export default function MovieTicketPage() {
       data["quality"] = `${data["quality"]}p`;
       const response = await createSubscriptionPlan(data);
       showResponseToast(response);
-      if (response.status == "success") {
+      if (response?.status == "success") {
         setIsRefetch(!isRefetch);
       }
     },
@@ -107,7 +107,7 @@ export default function MovieTicketPage() {
       data["isads"] = false;
       const response = await editSubscriptionPlan(data);
       showResponseToast(response);
-      if (response.status == "success") {
+      if (response?.status == "success") {
         setIsRefetch(!isRefetch);
       }
     } catch (error: unknown) {
@@ -121,7 +121,7 @@ export default function MovieTicketPage() {
     const body = { subcriptionid: subcriptionid };
     const response = await deleteSubscriptionPlan(body);
     showResponseToast(response);
-    if (response.status == "success") {
+    if (response?.status == "success") {
       setIsRefetch(!isRefetch);
       onClose();
     }

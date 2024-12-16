@@ -3,24 +3,13 @@
 import CheckPasswordRecovery from "@/app/api/account/checkpasswordrecovery";
 import ConfirmPasswordRecovery from "@/app/api/account/confirmpasswordrecovery";
 import { showResponseToast } from "@/lib/utils";
-import {
-  Button,
-  Card,
-  Checkbox,
-  Input,
-  Link,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  useDisclosure,
-} from "@nextui-org/react";
-import { useSearchParams } from "next/navigation";
+import { Button, Card, Input, Link } from "@nextui-org/react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 
 export default function PasswordRecoveryForm() {
   const urlParams = useSearchParams();
+  const router = useRouter();
   const passwordToken = urlParams.get("token");
   const [isTokenValid, setIsTokenValid] = useState<boolean>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -55,6 +44,9 @@ export default function PasswordRecoveryForm() {
         if (response.result == "success") {
           setIsLoading(false);
           showResponseToast(response);
+          setTimeout(() => {
+            router.push("/login");
+          }, 1000);
         } else {
           setIsLoading(false);
           showResponseToast(response);
@@ -82,17 +74,17 @@ export default function PasswordRecoveryForm() {
             {errorAccount && <div style={{ color: "red" }}>{errorAccount}</div>}
             <Input
               size="lg"
-              type="text"
-              name="password"
+              type="password"
+              name="newpassword"
               variant="underlined"
-              label="New password"
+              label="Mật khẩu mới"
             />
             <Input
               size="lg"
               type="password"
               name="confirmnewpassword"
               variant="underlined"
-              label="Confirm new password"
+              label="Nhập lại mật khẩu mới"
             />
             <div className="flex justify-center">
               <Button
@@ -109,23 +101,28 @@ export default function PasswordRecoveryForm() {
         </form>
       </div>
     ) : (
-      <div>
-        <div className="flex flex-col items-center text-center h-screen">
-          <div className=" text-2xl ">Token không hợp lệ hoặc hết hạn</div>
-          <Button
-            size="lg"
-            className="my-4 w-[350px]"
-            href="request"
-            as={Link}
-            type="button"
-            variant="shadow"
-            color="success">
-            {"Request token mới"}
-          </Button>
+      <div className="h-screen flex flex-col items-center">
+        <div className="my-auto">
+          <div className="text-2xl">Token không hợp lệ hoặc hết hạn</div>
+          <div className="w-fit flex ml-auto mr-auto mt-4">
+            <Button
+              size="lg"
+              href="request"
+              as={Link}
+              type="button"
+              variant="shadow"
+              color="success">
+              Yêu cầu token mới
+            </Button>
+          </div>
         </div>
       </div>
     )
   ) : (
-    <div className="text-center text-2xl h-screen">Checking token...</div>
+    <div className="h-screen flex flex-col items-center">
+      <div className="my-auto">
+        <div className="text-center text-2xl">Đang kiểm tra token, vui lòng đợi...</div>
+      </div>
+    </div>
   );
 }

@@ -6,4 +6,7 @@ module.exports = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
+  images: {
+    domains: ["res.cloudinary.com"], // Add any other domains you use for images here
+  },
 };

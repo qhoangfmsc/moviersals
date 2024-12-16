@@ -65,7 +65,7 @@ export default function WatchPage({ params }: { params: { movieid: string; episo
 
   const fetchMovieInfo = async (userid: string) => {
     const response = await getMovieDetailById(params.movieid, userid);
-    if (response.status == "success") {
+    if (response?.status == "success") {
       const currentEpisode = response.content.list.find((episode) => episode.episodenumber == params.episodenumber);
       const videoid = currentEpisode?.episodepath?.match(/\/upload\/v\d+\/(.+)/)[1].split(".")[0];
       const updatedContent = {
@@ -85,7 +85,7 @@ export default function WatchPage({ params }: { params: { movieid: string; episo
 
   const fetchMovieComment = async (userid: string) => {
     const response = await getMovieComment(params.movieid, userid, currentPage);
-    if (response.status == "success") {
+    if (response?.status == "success") {
       let myComment = emptyComment;
       if (response.content?.list != null && response.content?.list[0].userid == userid) {
         // Reponse always put current userid in first index if exist

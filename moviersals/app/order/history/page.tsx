@@ -31,7 +31,6 @@ export default function OrderHistoryPage() {
     { name: "Ngày Tạo", uid: "createddate" }, // Created Date
     { name: "Ngày Thanh Toán", uid: "paymentdate" }, // Payment Date
     { name: "Trạng Thái", uid: "status" }, // Status
-    { name: "Hành Động", uid: "type" }, // Status
     { name: "Liên Kết Thanh Toán", uid: "paymenturl" }, // Payment URL
   ];
 
@@ -65,9 +64,6 @@ export default function OrderHistoryPage() {
                       {new Date(order.paymentdate).toLocaleDateString() + "  " + new Date(order.paymentdate).toLocaleTimeString()}
                     </TableCell>
                     <TableCell>{order.status == "PAID" ? "Đã thanh toán" : "Chưa thanh toán"}</TableCell>
-                    <TableCell className="text-yellow-500">
-                      {order.type == "UPGRADE" ? "Nâng câp" : order.type == "EXTEND" ? "Gia hạn" : "Xuống cấp"}
-                    </TableCell>
                     <TableCell>
                       {order.paymenturl ? (
                         <a

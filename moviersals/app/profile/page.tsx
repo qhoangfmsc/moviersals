@@ -58,22 +58,21 @@ export default function TemplatePage() {
   }
 
   async function handleRequestEmailVerification() {
-    console.log("here");
+    setIsRequestClick(true);
+    showResponseToast({ result: "success", content: "Đã gửi token tới email của quý khách, vui lòng chờ trong chốc lát" });
     const body = { email: emailRef.current.value };
     const result = await RequestEmailVerification(body.email);
-    showResponseToast(result);
-    if (result.status == "success") {
-      setIsRequestClick(true);
-    }
   }
 
   async function handleConfirmEmailVerification() {
-    console.log("here");
+    if (emailRef.current.value === "" || emailtokenRef.current.value === "") return;
     const body = { email: emailRef.current.value, emailtoken: emailtokenRef.current.value };
     const result = await ConfirmEmailVerification(body.email, body.emailtoken);
     showResponseToast(result);
     if (result.status == "success") {
-      window.location.reload();
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
     }
   }
 

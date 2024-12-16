@@ -31,7 +31,7 @@ export default function RevenueChartCard({ chartData }: { chartData: any }) {
 
   async function getDateTimeRevenueData(dataObject: Object) {
     const response = await getDateRangeRevenue(dataObject);
-    if (response.status == "success") setData(response.content.list);
+    if (response?.status == "success") setData(response.content.list);
   }
 
   useEffect(() => {

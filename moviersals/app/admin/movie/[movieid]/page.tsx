@@ -78,7 +78,7 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
     };
     const response = await deleteEpisode(request);
     showResponseToast(response);
-    if (response.status == "success") {
+    if (response?.status == "success") {
       setIsRefetch(!isRefetch);
     }
   };
@@ -129,7 +129,7 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
     handler: async (request: { [key: string]: any }) => {
       const response = await editMovie(request);
       showResponseToast(response);
-      if (response.status == "success") {
+      if (response?.status == "success") {
         setIsRefetch(!isRefetch);
       }
     },
@@ -162,7 +162,9 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
                 <AdminEpisodeCard
                   key={item.episodeid}
                   cardData={item}
-                  onCardClick={(item) => { handleViewClick(item) }}
+                  onCardClick={(item) => {
+                    handleViewClick(item);
+                  }}
                 />
               ))
             ) : (
@@ -170,7 +172,9 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
             )}
             <AdminEpisodeCard
               key={"null"}
-              onCardClick={() => { handleCreateClick() }}
+              onCardClick={() => {
+                handleCreateClick();
+              }}
             />
           </div>
         </div>
@@ -198,8 +202,7 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
         <Modal
           isOpen={isModalViewOpen}
           onOpenChange={onOpenChangeModalView}
-          size="5xl"
-        >
+          size="5xl">
           <ModalContent>
             <ModalHeader className="flex flex-col gap-1">Chi tiết tập phim</ModalHeader>
             <ModalBody>
@@ -213,7 +216,9 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
                   />
                 </div>
               )}
-              <h1 className="text-xl">Tập {dataView.episodenumber}: {dataView.name}</h1>
+              <h1 className="text-xl">
+                Tập {dataView.episodenumber}: {dataView.name}
+              </h1>
               <h1 className={title()}>{data?.movieDetail?.name}</h1>
               <h1 className="text-sm">
                 Nhà sản xuất: <span>{data?.movieDetail?.publisher}</span>
@@ -223,25 +228,36 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
                 <h1 className="text-sm">{data?.movieDetail?.publishyear}</h1>
                 <Divider orientation="vertical" />
                 {Array.isArray(data?.movieDetail?.categoriesvi)
-                  ? data?.movieDetail?.categoriesvi.map((cat, index) => (
-                    cat && <div key={index}>
-                      <div className="text-sm">{cat}</div>
-                    </div>
-                  ))
-                  : JSON.parse(data?.movieDetail?.categoriesvi || "[]").map((cat: string, index: number) => (
-                    cat && <div key={index}>
-                      <div className="text-sm">{cat}</div>
-                    </div>
-                  ))}
+                  ? data?.movieDetail?.categoriesvi.map(
+                      (cat, index) =>
+                        cat && (
+                          <div key={index}>
+                            <div className="text-sm">{cat}</div>
+                          </div>
+                        )
+                    )
+                  : JSON.parse(data?.movieDetail?.categoriesvi || "[]").map(
+                      (cat: string, index: number) =>
+                        cat && (
+                          <div key={index}>
+                            <div className="text-sm">{cat}</div>
+                          </div>
+                        )
+                    )}
                 <Divider orientation="vertical" />
               </div>
               <p className="my-8 text-sm leading-6 text-gray-400">{data?.movieDetail?.description}</p>
             </ModalBody>
             <ModalFooter>
-              <Button color="default" variant="light" onPress={onCloseModalView}>
+              <Button
+                color="default"
+                variant="light"
+                onPress={onCloseModalView}>
                 Đóng
               </Button>
-              <Button color="danger" onPress={handleDeleteEpisode}>
+              <Button
+                color="danger"
+                onPress={handleDeleteEpisode}>
                 Xoá tập hiện tại
               </Button>
             </ModalFooter>

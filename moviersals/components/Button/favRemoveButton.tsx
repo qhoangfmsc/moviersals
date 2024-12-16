@@ -36,7 +36,7 @@ export default function FavRemoveButton({ data, onClick, showText = true }: FavA
         userid: userinfo.id,
       };
       const response = await removeFavouriteEpisode(request);
-      if (response.status == "success") {
+      if (response?.status == "success") {
         onClick();
       }
       showResponseToast(response);

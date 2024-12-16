@@ -35,7 +35,7 @@ export default function FavAddButton({ data, onClick, showText = true }: FavAddB
         userid: userinfo.id,
       };
       const response = await addFavouriteEpisode(request);
-      if (response.status == "success") {
+      if (response?.status == "success") {
         onClick();
       }
       showResponseToast(response);

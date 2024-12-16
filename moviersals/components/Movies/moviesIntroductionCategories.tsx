@@ -74,9 +74,10 @@ export default function MoviesIntroductionCategories({ dataVideos }: MoviesCateg
                           <Image
                             alt={item.name}
                             className="object-cover"
-                            height={150}
+                            height={220}
                             src={item.thumbnail}
                             width={400}
+                            layout="intrinsic"
                           />
                           <CardFooter className="justify-between">
                             <div className="text-white/80">
@@ -89,7 +90,7 @@ export default function MoviesIntroductionCategories({ dataVideos }: MoviesCateg
                                       {index !==
                                         (Array.isArray(item.categoriesvi) ? item.categoriesvi : JSON.parse(item.categoriesvi || "[]"))
                                           .length -
-                                        1 && ", "}
+                                          1 && ", "}
                                     </span>
                                   )
                                 )}

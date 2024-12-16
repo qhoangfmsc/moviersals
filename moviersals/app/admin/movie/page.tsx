@@ -99,7 +99,7 @@ export default function MovieAdminPage() {
     handler: async (request: { [key: string]: any }) => {
       const response = await uploadMovie(request);
       showResponseToast(response);
-      if (response.status == "success") {
+      if (response?.status == "success") {
         setIsRefetch(!isRefetch);
       }
     },

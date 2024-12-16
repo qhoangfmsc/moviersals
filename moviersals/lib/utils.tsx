@@ -1,3 +1,4 @@
+import moment from "moment";
 import { toast } from "react-toastify";
 
 export function calculateTimeDifference(targetDate: string): {
@@ -106,13 +107,24 @@ const toastTheme = "dark";
 const toastDuration = 2000;
 
 export function showResponseToast(response: Record<string, any>) {
-  if (response.result == "error") {
-    toast.error(response.content, { autoClose: toastDuration, theme: toastTheme });
+  if (response?.result == "success") {
+    toast.success(response.content, { autoClose: toastDuration, theme: toastTheme, pauseOnHover: false });
   } else {
-    toast.success(response.content, { autoClose: toastDuration, theme: toastTheme });
+    toast.error(response.content, { autoClose: toastDuration, theme: toastTheme, pauseOnHover: false });
   }
 }
 
 export function getObjectById(list: Record<string, any>[], id: string) {
   return list.find((item) => item.id === id);
+}
+
+export function calculateDaysTo(targetTime) {
+  const now = moment();
+  const target = moment(targetTime);
+
+  if (!target.isValid()) {
+    throw new Error("Invalid target time format.");
+  }
+
+  return target.diff(now, "days");
 }

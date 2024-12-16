@@ -8,10 +8,8 @@ import SubcriptionPlanCard from "@/components/Card/subcriptionCard";
 import Transition from "@/components/MotionFramer/transition";
 import { Button } from "@nextui-org/button";
 import { LineMdArrowSmallLeft } from "@/components/icons";
-import { Card } from "@nextui-org/card";
-import TestInfoCard from "@/components/Card/testInfoCard";
 import getUserSubcription from "../api/subcriptionplan/getUserSubcription";
-import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure, user } from "@nextui-org/react";
+import getUserSubcriptionPrice from "../api/subcriptionplan/getUserSubcriptionPrice";
 
 interface selectedSubcriptionProps {
   subcriptionid: string;
@@ -21,7 +19,9 @@ interface selectedSubcriptionProps {
   connection: string;
   quality: string;
   baseprice: string;
+  priority: string;
   isads: boolean;
+  newPrice?: string;
 }
 
 export default function PaymentMethodsComponent() {
@@ -29,19 +29,18 @@ export default function PaymentMethodsComponent() {
   const [selectedSubcription, setSelectedSubcription] = useState<selectedSubcriptionProps>(null);
   const [userSubcription, setUserSubcription] = useState<any>(null);
   const [sectionState, setSectionState] = useState(1);
-  const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
 
   useEffect(() => {
     async function getAllSubcriptionPlanData() {
       const response = await getAllSubcriptionPlan();
-      if (response.status == "success") {
+      if (response?.status == "success") {
         setSubcriptionListData(response.content.list);
       } else showResponseToast(response);
     }
 
     async function getUserSubcriptionData() {
       const response = await getUserSubcription();
-      if (response.status == "success") {
+      if (response?.status == "success") {
         setUserSubcription(response.content);
       }
     }
@@ -49,17 +48,10 @@ export default function PaymentMethodsComponent() {
     getAllSubcriptionPlanData();
   }, []);
 
-  const handleReceivePlanInfo = (data) => {
-    setSelectedSubcription(data);
-    if (data.priority < userSubcription?.priority) {
-      onOpen();
-    } else {
-      setSectionState(2);
-    }
-  };
-
-  const handleConfirmWarning = () => {
-    onClose();
+  const handleReceivePlanInfo = async (data) => {
+    const response = await getUserSubcriptionPrice(data.subcriptionid);
+    console.log(response);
+    setSelectedSubcription({ ...data, newPrice: response.content });
     setSectionState(2);
   };
 
@@ -76,6 +68,7 @@ export default function PaymentMethodsComponent() {
                 <div key={index}>
                   <SubcriptionPlanCard
                     data={item}
+                    userData={userSubcription}
                     onCardClick={handleReceivePlanInfo}
                     showButton={item.price == "0" ? false : true}
                   />
@@ -83,37 +76,6 @@ export default function PaymentMethodsComponent() {
               ))}
             </div>
           </div>
-          <Modal
-            isOpen={isOpen}
-            onOpenChange={onOpenChange}>
-            <ModalContent>
-              {(onClose) => (
-                <>
-                  <ModalHeader className="flex flex-col gap-1">Cảnh báo</ModalHeader>
-                  <ModalBody>
-                    <p>
-                      Quý khách đang chọn gói thành viên thấp hơn gói đang sử dụng. Nếu đồng ý, quý khách sẽ mất phúc lợi hiện tại nhưng vẫn
-                      đảm bảo số ngày sử dụng
-                    </p>
-                  </ModalBody>
-                  <ModalFooter>
-                    <Button
-                      color="danger"
-                      variant="light"
-                      onPress={handleConfirmWarning}>
-                      Đồng ý
-                    </Button>
-                    <Button
-                      color="default"
-                      variant="light"
-                      onPress={onClose}>
-                      Chọn lại
-                    </Button>
-                  </ModalFooter>
-                </>
-              )}
-            </ModalContent>
-          </Modal>
         </Transition>
       )}
       {sectionState == 2 && (
@@ -126,16 +88,13 @@ export default function PaymentMethodsComponent() {
             onClick={() => setSectionState(1)}>
             Chọn lại gói
           </Button>
-          <div
-            className="mb-24"
-            style={{
-              display: selectedSubcription ? "block" : "none",
-            }}>
+          <div className="mb-24">
             <div className="mb-6 flex flex-col justify-center items-center">
               <h1 className="text-2xl ">Xác nhận hoá đơn</h1>
               <div className="flex flex-row mt-8">
-                <TestInfoCard />
+                {/* <TestInfoCard /> */}
                 <PaymentBoard
+                  userData={userSubcription}
                   paymentData={selectedSubcription}
                   element={
                     <SubcriptionPlanCard

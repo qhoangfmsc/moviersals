@@ -85,7 +85,7 @@ export default function MovieAdminPage() {
       // CALL API
       const response = await register(username, password, displayname, email, phonenumber);
       showResponseToast(response);
-      if (response.status == "success") {
+      if (response?.status == "success") {
         setIsRefetch(!isRefetch);
       }
     },
@@ -100,7 +100,7 @@ export default function MovieAdminPage() {
     };
     const response = await updateState(request);
     showResponseToast(response);
-    if (response.status == "success") {
+    if (response?.status == "success") {
       setIsRefetch(!isRefetch);
       onClose();
     }

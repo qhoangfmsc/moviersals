@@ -1,5 +1,6 @@
 "use client";
 
+import useTags from "@/hooks/useTags";
 import { convertArrayToLowercaseArray, convertRequestToFormData, preexecuteRequest } from "@/lib/utils";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
@@ -13,11 +14,11 @@ export interface AdminFormCofig {
     colsub: string;
     coltype: "inputtext" | "inputpassword" | "inputnumber" | "inputfile" | "radio" | "checkbox";
     colvalues:
-    | {
-      key: any;
-      value: any;
-    }[]
-    | null;
+      | {
+          key: any;
+          value: any;
+        }[]
+      | null;
   }[];
   buttonText: string;
   handler: (request: Record<string, any>) => void;
@@ -27,6 +28,11 @@ export default function AdminForm({ adminFormCofig, rerenderData }: { adminFormC
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [checkboxState, setCheckboxState] = useState<Record<string, string[]>>({});
   const [fileState, setFileState] = useState<Record<string, File | null>>({});
+  const MAX_TAGS = 5;
+
+  //Retrieve all the returned items from the hook
+
+  const { tags, handleAddTag, handleRemoveTag } = useTags(MAX_TAGS); // pass the maximum tags
 
   useEffect(() => {
     const initialCheckboxState: Record<string, string[]> = {};
