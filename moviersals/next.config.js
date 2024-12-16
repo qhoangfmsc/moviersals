@@ -7,6 +7,6 @@ module.exports = {
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: ["res.cloudinary.com"], // Add any other domains you use for images here
+    domains: ["res.cloudinary.com", "media-cache.cinematerial.com"], // Add any other domains you use for images here
   },
 };
