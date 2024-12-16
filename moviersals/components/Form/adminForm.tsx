@@ -1,6 +1,5 @@
 "use client";
 
-import useTags from "@/hooks/useTags";
 import { convertArrayToLowercaseArray, convertRequestToFormData, preexecuteRequest } from "@/lib/utils";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
@@ -31,8 +30,6 @@ export default function AdminForm({ adminFormCofig, rerenderData }: { adminFormC
   const MAX_TAGS = 5;
 
   //Retrieve all the returned items from the hook
-
-  const { tags, handleAddTag, handleRemoveTag } = useTags(MAX_TAGS); // pass the maximum tags
 
   useEffect(() => {
     const initialCheckboxState: Record<string, string[]> = {};

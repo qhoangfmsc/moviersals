@@ -1,4 +1,5 @@
 import { Button, Card, CardFooter, Link } from "@nextui-org/react";
+import Image from "next/image";
 
 interface CardEpisodeProps {
   cardData: Record<string, any>;
@@ -28,9 +29,8 @@ export default function ReviewMovieCard({ cardData, onCardClick }: CardEpisodePr
                 <span key={index}>
                   {cat}
                   {index !==
-                    (Array.isArray(cardData.categoriesvi) ? cardData.categoriesvi : JSON.parse(cardData.categoriesvi || "[]"))
-                      .length -
-                    1 && ", "}
+                    (Array.isArray(cardData.categoriesvi) ? cardData.categoriesvi : JSON.parse(cardData.categoriesvi || "[]")).length - 1 &&
+                    ", "}
                 </span>
               )
             )}
