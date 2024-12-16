@@ -851,3 +851,21 @@ export function TablerCalendar(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+export function IconComponentBoolean(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      fill="none"
+      viewBox="0 0 15 15"
+      height="24"
+      width="24"
+      {...props}>
+      <path
+        fill="currentColor"
+        fillRule="evenodd"
+        d="M7.854 1.49a.5.5 0 00-.707 0L1.49 7.146a.5.5 0 000 .708l5.657 5.656a.5.5 0 00.707 0l5.657-5.656a.5.5 0 000-.708L7.854 1.49zM7.5 2.55L2.55 7.5l4.95 4.95v-9.9z"
+        clipRule="evenodd"
+      />
+    </svg>
+  );
+}

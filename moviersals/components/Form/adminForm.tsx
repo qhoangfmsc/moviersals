@@ -18,6 +18,7 @@ export interface AdminFormCofig {
           value: any;
         }[]
       | null;
+    isDisabled?: boolean;
   }[];
   buttonText: string;
   handler: (request: Record<string, any>) => void;
@@ -27,9 +28,6 @@ export default function AdminForm({ adminFormCofig, rerenderData }: { adminFormC
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [checkboxState, setCheckboxState] = useState<Record<string, string[]>>({});
   const [fileState, setFileState] = useState<Record<string, File | null>>({});
-  const MAX_TAGS = 5;
-
-  //Retrieve all the returned items from the hook
 
   useEffect(() => {
     const initialCheckboxState: Record<string, string[]> = {};
@@ -47,12 +45,10 @@ export default function AdminForm({ adminFormCofig, rerenderData }: { adminFormC
     setFileState(initialFileState);
   }, [adminFormCofig.colList]);
 
-  const handleCheckboxChange = (colname: string, value: string) => {
-    setCheckboxState((prevState) => {
-      const currentValues = prevState[colname];
-      const newValues = currentValues.includes(value) ? currentValues.filter((v) => v !== value) : [...currentValues, value];
-      return { ...prevState, [colname]: newValues };
-    });
+  useEffect(() => {}, [checkboxState]);
+
+  const handleCheckboxChange = (colname: string, value: string[]) => {
+    setCheckboxState({ [colname]: value });
   };
 
   const handleFileChange = (colname: string, file: File | null) => {
@@ -76,7 +72,6 @@ export default function AdminForm({ adminFormCofig, rerenderData }: { adminFormC
           request[col?.colname] = formData.get(col.colname);
         }
       });
-
       const payloadFormData = convertRequestToFormData(preexecuteRequest(request));
       adminFormCofig.handler(payloadFormData);
     } catch (error: unknown) {
@@ -100,6 +95,7 @@ export default function AdminForm({ adminFormCofig, rerenderData }: { adminFormC
               case "inputtext":
                 return (
                   <Input
+                    isReadOnly={col.isDisabled ? col.isDisabled : false}
                     key={index}
                     className="w-full"
                     type="text"
@@ -182,12 +178,14 @@ export default function AdminForm({ adminFormCofig, rerenderData }: { adminFormC
                     orientation="horizontal"
                     name={col.colname}
                     className="mt-2"
+                    onChange={(value) => handleCheckboxChange(col.colname, value)}
                     defaultValue={setupDefaultValue}>
                     {col.colvalues?.map((object) => (
                       <Checkbox
                         key={object.key}
                         value={object.key}
-                        onChange={() => handleCheckboxChange(col.colname, object.key)}>
+                        // onChange={() => handleCheckboxChange(col.colname, object.key)}
+                      >
                         <span className="text-sm">{object.value}</span>
                       </Checkbox>
                     ))}
@@ -295,12 +293,14 @@ export default function AdminForm({ adminFormCofig, rerenderData }: { adminFormC
                     orientation="horizontal"
                     name={col.colname}
                     className="mt-2"
+                    onChange={(value) => handleCheckboxChange(col.colname, value)}
                     defaultValue={setupDefaultValue}>
                     {col.colvalues?.map((object) => (
                       <Checkbox
                         key={object.key}
                         value={object.key}
-                        onChange={() => handleCheckboxChange(col.colname, object.key)}>
+                        // onChange={() => handleCheckboxChange(col.colname, object.key)}
+                      >
                         <span className="text-sm">{object.value}</span>
                       </Checkbox>
                     ))}

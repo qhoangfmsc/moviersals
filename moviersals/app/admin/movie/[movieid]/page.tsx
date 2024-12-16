@@ -55,7 +55,7 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
 
     const response = await getMovieDetailById(params.movieid, null);
     const content = response.content;
-    console.log(content);
+    // console.log(content);
     setData(content);
   };
 
@@ -86,6 +86,7 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
   const adminFormCofig: AdminFormCofig = {
     label: "Chỉnh sửa",
     colList: [
+      { colname: "movieid", colsub: "ID phim", coltype: "inputtext", colvalues: null, isDisabled: true },
       { colname: "name", colsub: "Tên phim", coltype: "inputtext", colvalues: null },
       { colname: "description", colsub: "Mô tả", coltype: "inputtext", colvalues: null },
       { colname: "publisher", colsub: "Nhà sản xuất", coltype: "inputtext", colvalues: null },
@@ -171,12 +172,14 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
             ) : (
               <></>
             )}
-            <AdminEpisodeCard
-              key={"null"}
-              onCardClick={() => {
-                handleCreateClick();
-              }}
-            />
+            {(data?.movieDetail?.type === "tseries" || (data?.movieDetail?.type === "movie" && data?.list?.length < 1)) && (
+              <AdminEpisodeCard
+                key={"null"}
+                onCardClick={() => {
+                  handleCreateClick();
+                }}
+              />
+            )}
           </div>
         </div>
         <div className="lg:w-1/5 mb-4">

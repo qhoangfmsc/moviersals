@@ -4,18 +4,24 @@ import { Button, Checkbox, CheckboxGroup, Input, Pagination, Select, SelectItem 
 import { yearArray } from "./yearMockup";
 import getFilterMovie from "../api/movies/getFilterMovie";
 import getAllCategories from "../api/categories/getAllCategories";
-import { TablerCalendar } from "@/components/icons";
+import { IconComponentBoolean, TablerCalendar } from "@/components/icons";
 import ReviewMovieList from "@/components/Movies/reviewMovieList";
 
 interface Filter {
   moviename: string | null;
   year: string | null;
+  ispremium: boolean | null;
   categories: string[];
 }
 
+const isPremiumOptions = [
+  { id: true, name: "Trả phí" },
+  { id: false, name: "Miễn phí" },
+];
+
 export default function MovieListPage() {
   const [tags, setTags] = useState<any>(null);
-  const [filter, setFilter] = useState<Filter>({ moviename: null, year: null, categories: [] });
+  const [filter, setFilter] = useState<Filter>({ moviename: null, year: null, ispremium: null, categories: [] });
   const [page, setPage] = useState<any>(1);
   const [data, setData] = useState<any>(null);
 
@@ -32,7 +38,13 @@ export default function MovieListPage() {
   }, [page]);
 
   async function fetchFilterMovie() {
-    const request = { year: filter?.year, moviename: filter?.moviename, categories: JSON.stringify(filter?.categories), page: page };
+    const request = {
+      year: filter?.year,
+      moviename: filter?.moviename,
+      ispremium: filter?.ispremium,
+      categories: JSON.stringify(filter?.categories),
+      page: page,
+    };
     const response = await getFilterMovie(request);
     if (response?.status == "success") {
       setData(response.content);
@@ -44,8 +56,8 @@ export default function MovieListPage() {
       <div className="flex flex-col gap-2 rounded p-6 w-full">
         <h1 className="text-4xl mb-2">Tìm kiếm phim</h1>
         <div className="flex flex-row gap-10 p-4 w-full">
-          <div className="basis-1/5 w-full">
-            <h1 className="text-md mb-2 ml-2 text-gray-500">Nhập tên phim</h1>
+          <div className="basis-1/6 w-full">
+            <h1 className="text-sm mb-2 ml-2 text-gray-500">Nhập tên phim</h1>
             <Input
               name="moviename"
               placeholder="Nhập tên phim ở đây"
@@ -54,8 +66,8 @@ export default function MovieListPage() {
               }}
             />
           </div>
-          <div className="basis-1/5 w-full">
-            <h1 className="text-md mb-2 ml-2 text-gray-500">Chọn năm sản xuất</h1>
+          <div className="basis-1/6 w-full">
+            <h1 className="text-sm mb-2 ml-2 text-gray-500">Chọn năm sản xuất</h1>
             <Select
               items={yearArray}
               startContent={<TablerCalendar />}
@@ -65,8 +77,20 @@ export default function MovieListPage() {
               {(item) => <SelectItem>{item.name}</SelectItem>}
             </Select>
           </div>
-          <div>
-            <h1 className="text-md mb-2 text-gray-500">Chọn thể loại</h1>
+          <div className="basis-1/6 w-full">
+            <h1 className="text-sm mb-2 ml-2 text-gray-500">Chọn loại phim</h1>
+            <Select
+              items={isPremiumOptions}
+              startContent={<IconComponentBoolean />}
+              onChange={(e) => {
+                console.log(e.target.value === "true");
+                setFilter((prevFilter) => ({ ...prevFilter, ispremium: e.target.value === "true" }));
+              }}>
+              {(item) => <SelectItem>{item.name}</SelectItem>}
+            </Select>
+          </div>
+          <div className="basis-4/6 w-full">
+            <h1 className="text-sm mb-2 text-gray-500">Chọn thể loại</h1>
             <CheckboxGroup
               className="gap-2"
               color="secondary"
@@ -83,7 +107,7 @@ export default function MovieListPage() {
               ))}
             </CheckboxGroup>
           </div>
-          <div className="flex mt-6 basis-1/5">
+          <div className="flex mt-6 basis-1/6">
             <Button
               className="w-full"
               size="lg"

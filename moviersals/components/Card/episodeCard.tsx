@@ -10,7 +10,7 @@ export default function AdminEpisodeCard({ cardData, allData, onCardClick }: Car
   console.log("test", allData);
   return (
     <Card
-      isPressable={cardData ? false : true}
+      isPressable={true}
       radius="lg"
       className="border-none w-fit">
       <Image
@@ -23,9 +23,9 @@ export default function AdminEpisodeCard({ cardData, allData, onCardClick }: Car
         width={cardData ? 280 : 280}
       />
       {cardData ? (
-        <CardFooter className="flex flex-col items-start"
-          onClick={() => onCardClick(cardData)}
-        >
+        <CardFooter
+          className="flex flex-col items-start"
+          onClick={() => onCardClick(cardData)}>
           <p className="text-1xl text-white/80 mb-2">{"Tập " + cardData?.episodenumber}</p>
           <p className="text-tiny text-white/80 mb-2">{cardData?.name}</p>
           <p className="text-tiny text-white/80 mb-2">{"Lượt xem " + cardData?.view}</p>
