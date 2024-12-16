@@ -1,6 +1,5 @@
 import getAllCategories from "@/app/api/categories/getAllCategories";
-import { Button, Card, CardFooter, Link, Tab, Tabs } from "@nextui-org/react";
-import Image from "next/image";
+import { Button, Card, CardFooter, Image, Link, Tab, Tabs } from "@nextui-org/react";
 import { Key, useEffect, useState } from "react";
 
 // Video interface with dynamic keys
@@ -77,7 +76,6 @@ export default function MoviesIntroductionCategories({ dataVideos }: MoviesCateg
                             height={220}
                             src={item.thumbnail}
                             width={400}
-                            layout="intrinsic"
                           />
                           <CardFooter className="justify-between">
                             <div className="text-white/80">

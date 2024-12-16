@@ -1,6 +1,7 @@
 import { Card, Link, Tooltip, Badge } from "@nextui-org/react";
 import moment from "moment";
 import FavRemoveButton from "../Button/favRemoveButton";
+import Image from "next/image";
 
 interface CardEpisodeProps {
   movieid: string;

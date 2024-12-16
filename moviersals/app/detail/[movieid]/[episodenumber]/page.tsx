@@ -182,7 +182,7 @@ export default function WatchPage({ params }: { params: { movieid: string; episo
             <EpisodeListCarousel movieData={data} />
           </div>
         )}
-        <div className="mt-12 w-full">
+        <div className="mt-20 w-full">
           <h1 className="text-2xl my-4">Có thể bạn cũng thích</h1>
           <MovieSuggestion />
         </div>

@@ -4,11 +4,10 @@ import getMovieDetailById from "@/app/api/movies/getMovieById";
 import { LineMdArrowSmallLeft, LineMdPlayFilled, MdiEyeOutline, SvgSpinnersClock } from "@/components/icons";
 import { title } from "@/components/primitives";
 import { toast } from "react-toastify";
-import { Button } from "@nextui-org/react";
+import { Button, Image } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Transition from "@/components/MotionFramer/transition";
-import Image from "next/image";
 
 export default function DetailPage({ params }: { params: { movieid: string } }) {
   const [data, setData] = useState<any>({});

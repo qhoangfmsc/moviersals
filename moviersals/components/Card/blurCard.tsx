@@ -1,5 +1,4 @@
-import { Card, CardFooter, Button, Link } from "@nextui-org/react";
-import Image from "next/image";
+import { Card, CardFooter, Button, Link, Image } from "@nextui-org/react";
 
 export default function BlurCard({
     cardData

@@ -162,6 +162,7 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
                 <AdminEpisodeCard
                   key={item.episodeid}
                   cardData={item}
+                  allData={data}
                   onCardClick={(item) => {
                     handleViewClick(item);
                   }}
