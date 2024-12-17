@@ -42,7 +42,7 @@ export const siteConfig = {
       href: "/profile",
     },
     {
-      label: "Phim của tôi",
+      label: "Danh sách yêu thích",
       color: undefined,
       href: "/favourite",
     },

@@ -16,7 +16,7 @@ export default function VNPPaymentWarning() {
         <a
           href="/order/history"
           className="text-blue-500">
-          &nbsp;Lịch sử mua hàng&nbsp;
+          &nbsp;Lịch sử thanh toán&nbsp;
         </a>
         và ấn vào đường dẫn của đơn hàng VNPAY được tạo gần đây nhất.
       </h1>

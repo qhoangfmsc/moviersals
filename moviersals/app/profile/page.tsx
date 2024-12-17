@@ -36,19 +36,23 @@ export default function TemplatePage() {
     formData.forEach((value, key) => {
       request[key] = value;
     });
-    request["thumbnail"] = fileState;
+    if (fileState) request["thumbnail"] = fileState;
+    else request["thumbnail"] = null;
 
     // PROCESS API
     const payloadFormData = convertRequestToFormData(preexecuteRequest(request));
     const response = await editProfile(payloadFormData);
-
+    if (response.status == "success") {
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
+    }
     // PROCESS NOTIFY
     showResponseToast(response);
   }
 
   function handleFileChange(file: File | undefined) {
     setFileState(file);
-
     if (file) {
       if (file) {
         const url = URL.createObjectURL(file);
@@ -61,7 +65,7 @@ export default function TemplatePage() {
     setIsRequestClick(true);
     showResponseToast({ result: "success", content: "Đã gửi token tới email của quý khách, vui lòng chờ trong chốc lát" });
     const body = { email: emailRef.current.value };
-    const result = await RequestEmailVerification(body.email);
+    await RequestEmailVerification(body.email);
   }
 
   async function handleConfirmEmailVerification() {

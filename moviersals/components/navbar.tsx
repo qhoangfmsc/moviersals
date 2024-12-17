@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  Navbar as NextUINavbar,
-  NavbarContent,
-  NavbarMenu,
-  NavbarBrand,
-  NavbarItem,
-  NavbarMenuItem,
-} from "@nextui-org/navbar";
+import { Navbar as NextUINavbar, NavbarContent, NavbarMenu, NavbarBrand, NavbarItem, NavbarMenuItem } from "@nextui-org/navbar";
 import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
 import { siteConfig } from "@/config/site";
@@ -23,6 +16,7 @@ import Image from "next/image";
 export const Navbar = () => {
   const router = useRouter();
   const [authentication, setAuthentication] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -35,6 +29,7 @@ export const Navbar = () => {
 
   const fetchAuth = async () => {
     const auth = await checkAuthen();
+    setIsLoading(false);
     if (JSON.stringify(authentication) !== JSON.stringify(auth)) {
       setAuthentication(auth);
       if (auth == null) {
@@ -101,131 +96,135 @@ export const Navbar = () => {
             />
           </Tooltip>
         </NavbarItem>
-        {authentication && authentication?.role != "admin" && (
-          <NavbarItem className="hidden lg:flex">
-            <Tooltip content="Mua gói thành viên">
-              <Button
-                as={Link}
-                href="/subscription"
-                color={pathname == "/subscription" ? "success" : "default"}
-                variant="light"
-                startContent={<IcRoundShop />}
-              />
-            </Tooltip>
-          </NavbarItem>
-        )}
-        <NavbarItem className="hidden lg:flex">
-          {authentication ? (
-            <Dropdown>
-              <DropdownTrigger>
-                <Button
-                  className="h-12"
-                  variant="light">
-                  {authentication.ispremium ? (
-                    <Badge
-                      className="text-warning"
-                      content={<MingcuteVip2Fill />}
-                      color="danger"
-                      shape="circle"
-                      placement="top-right"
-                      size="sm">
-                      <Avatar
-                        isBordered
-                        color="default"
-                        src={authentication.thumbnail ? authentication.thumbnail : "/image/user.webp"}
-                      />
-                    </Badge>
-                  ) : (
-                    <Avatar
-                      isBordered
-                      color="default"
-                      src={authentication.thumbnail ? authentication.thumbnail : "/image/user.webp"}
-                    />
-                  )}
-                  <div>{authentication.displayname}</div>
-                  <ArrowDown />
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu aria-label="My account">
-                <DropdownItem
-                  className="text-default-foreground"
-                  key="profile"
-                  as={Link}
-                  href="/profile">
-                  Thông tin của tôi
-                </DropdownItem>
-                {authentication?.role == "admin" && (
-                  <DropdownItem
-                    className="text-default-foreground"
-                    key="order-history"
+        {!isLoading && (
+          <>
+            {authentication && authentication?.role != "admin" && (
+              <NavbarItem className="hidden lg:flex">
+                <Tooltip content="Mua gói thành viên">
+                  <Button
                     as={Link}
-                    showDivider
-                    href="/admin">
-                    Quản lý Moviersals
-                  </DropdownItem>
-                )}
-                {authentication?.role == "customer" && (
-                  <DropdownItem
-                    className="text-default-foreground"
-                    key="order-history"
-                    as={Link}
-                    showDivider
-                    href="/order/history">
-                    Lịch sử mua hàng
-                  </DropdownItem>
-                )}
-                {authentication?.role == "customer" && (
-                  <DropdownItem
-                    className="text-default-foreground"
-                    key="favourite"
-                    as={Link}
-                    showDivider
-                    href="/favourite">
-                    Phim của tôi
-                  </DropdownItem>
-                )}
-                <DropdownItem
-                  key="logout"
-                  className="text-danger"
-                  color="danger"
-                  onClick={logoutHandle}>
-                  Đăng xuất
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          ) : (
-            <Dropdown>
-              <DropdownTrigger>
-                <Button variant="light">
-                  <User
-                    name="Moviegoer"
-                    avatarProps={{
-                      src: "/image/user.webp",
-                    }}
+                    href="/subscription"
+                    color={pathname == "/subscription" ? "success" : "default"}
+                    variant="light"
+                    startContent={<IcRoundShop />}
                   />
-                  <ArrowDown />
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu aria-label="My account">
-                <DropdownItem
-                  key="login"
-                  as={Link}
-                  className="text-success"
-                  color="success"
-                  href="/login">
-                  Đăng nhập
-                </DropdownItem>
-                <DropdownItem
-                  className="text-default-foreground"
-                  key="register"
-                  as={Link}
-                  href="/register">
-                  Đăng ký
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          )}
-        </NavbarItem>
+                </Tooltip>
+              </NavbarItem>
+            )}
+            <NavbarItem className="hidden lg:flex">
+              {authentication ? (
+                <Dropdown>
+                  <DropdownTrigger>
+                    <Button
+                      className="h-12"
+                      variant="light">
+                      {authentication.ispremium ? (
+                        <Badge
+                          className="text-warning"
+                          content={<MingcuteVip2Fill />}
+                          color="danger"
+                          shape="circle"
+                          placement="top-right"
+                          size="sm">
+                          <Avatar
+                            isBordered
+                            color="default"
+                            src={authentication.thumbnail ? authentication.thumbnail : "/image/user.webp"}
+                          />
+                        </Badge>
+                      ) : (
+                        <Avatar
+                          isBordered
+                          color="default"
+                          src={authentication.thumbnail ? authentication.thumbnail : "/image/user.webp"}
+                        />
+                      )}
+                      <div>{authentication.displayname}</div>
+                      <ArrowDown />
+                    </Button>
+                  </DropdownTrigger>
+                  <DropdownMenu aria-label="My account">
+                    <DropdownItem
+                      className="text-default-foreground"
+                      key="profile"
+                      as={Link}
+                      href="/profile">
+                      Thông tin của tôi
+                    </DropdownItem>
+                    {authentication?.role == "admin" && (
+                      <DropdownItem
+                        className="text-default-foreground"
+                        key="order-history"
+                        as={Link}
+                        showDivider
+                        href="/admin">
+                        Quản lý Moviersals
+                      </DropdownItem>
+                    )}
+                    {authentication?.role == "customer" && (
+                      <DropdownItem
+                        className="text-default-foreground"
+                        key="order-history"
+                        as={Link}
+                        showDivider
+                        href="/order/history">
+                        Lịch sử thanh toán
+                      </DropdownItem>
+                    )}
+                    {authentication?.role == "customer" && (
+                      <DropdownItem
+                        className="text-default-foreground"
+                        key="favourite"
+                        as={Link}
+                        showDivider
+                        href="/favourite">
+                        Danh sách yêu thích
+                      </DropdownItem>
+                    )}
+                    <DropdownItem
+                      key="logout"
+                      className="text-danger"
+                      color="danger"
+                      onClick={logoutHandle}>
+                      Đăng xuất
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+              ) : (
+                <Dropdown>
+                  <DropdownTrigger>
+                    <Button variant="light">
+                      <User
+                        name="Moviegoer"
+                        avatarProps={{
+                          src: "/image/user.webp",
+                        }}
+                      />
+                      <ArrowDown />
+                    </Button>
+                  </DropdownTrigger>
+                  <DropdownMenu aria-label="My account">
+                    <DropdownItem
+                      key="login"
+                      as={Link}
+                      className="text-success"
+                      color="success"
+                      href="/login">
+                      Đăng nhập
+                    </DropdownItem>
+                    <DropdownItem
+                      className="text-default-foreground"
+                      key="register"
+                      as={Link}
+                      href="/register">
+                      Đăng ký
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+              )}
+            </NavbarItem>
+          </>
+        )}
       </NavbarContent>
       <NavbarMenu>
         <div className="mx-4 mt-2 flex flex-col gap-2">

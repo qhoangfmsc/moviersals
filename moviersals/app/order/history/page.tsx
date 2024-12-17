@@ -31,7 +31,7 @@ export default function OrderHistoryPage() {
     { name: "Ngày Tạo", uid: "createddate" }, // Created Date
     { name: "Ngày Thanh Toán", uid: "paymentdate" }, // Payment Date
     { name: "Trạng Thái", uid: "status" }, // Status
-    { name: "Liên Kết Thanh Toán", uid: "paymenturl" }, // Payment URL
+    { name: "Tiếp tục thanh toán (VNPAY)", uid: "paymenturl" }, // Payment URL
   ];
 
   return (
@@ -65,13 +65,13 @@ export default function OrderHistoryPage() {
                     </TableCell>
                     <TableCell>{order.status == "PAID" ? "Đã thanh toán" : "Chưa thanh toán"}</TableCell>
                     <TableCell>
-                      {order.paymenturl ? (
+                      {order.status != "PAID" && order.paymenturl ? (
                         <a
                           className="text-blue-500 hover:underline"
                           href={order.paymenturl}
                           target="_blank"
                           rel="noopener noreferrer">
-                          Xem liên kết
+                          Liên kết
                         </a>
                       ) : (
                         <></>
