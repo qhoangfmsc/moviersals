@@ -100,7 +100,7 @@ export default function TemplatePage() {
                 top: "1.5rem",
                 right: "-6.75rem",
               }}>
-              Member
+              V I P
             </div>
           ) : (
             <></>

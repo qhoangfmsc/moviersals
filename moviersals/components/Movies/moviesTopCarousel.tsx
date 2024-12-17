@@ -6,6 +6,7 @@ import React from "react";
 import { DotButton, useDotButton } from "../EmblaCarousel/controls/EmblaCarouselDotButtons";
 import { NextButton, PrevButton, usePrevNextButtons } from "../EmblaCarousel/controls/EmblaCarouselArrowButtons";
 import { Button, Card, CardFooter, Image, Link } from "@nextui-org/react";
+import { IconStar } from "../icons";
 
 interface Video {
   id: number;
@@ -67,10 +68,27 @@ export default function MoviesTopCarousel({ title, dataVideos }: Readonly<MovieT
                       {item.id}
                     </span>
                   </div>
+
                   <Card
                     isFooterBlurred
                     radius="lg"
-                    className="border-none m-2 lg:mx-8">
+                    className="relative border-none m-2 lg:mx-8">
+                    {item.ispremium && (
+                      <div
+                        className="absolute 
+                        w-full text-2xl shadow-2xl 
+                        bg-gradient-to-r from-danger-600
+                        text-amber-100 font-bold
+                        rotate-45 z-20
+                        border-2 border-white
+                        text-center"
+                        style={{
+                          top: "3.5rem",
+                          right: "-10.75rem",
+                        }}>
+                        Yêu cầu trả phí
+                      </div>
+                    )}
                     <Image
                       alt={item.name}
                       className="object-cover"
@@ -80,6 +98,14 @@ export default function MoviesTopCarousel({ title, dataVideos }: Readonly<MovieT
                     />
                     <CardFooter className="justify-between">
                       <div className="text-white/80">
+                        <div className="flex flex-row justify-start items-center">
+                          <IconStar
+                            fill={"#fbbf24"}
+                            width={26}
+                            height={26}
+                          />
+                          <div className="ml-[2px] text-xl text-amber-400">{Math.round(item.avgrating * 10) / 10 || 0.0}</div>
+                        </div>
                         <div>{item.name}</div>
                         <div className="text-tiny">
                           {(Array.isArray(item.categoriesvi) ? item.categoriesvi : JSON.parse(item.categoriesvi || "[]")).map(
@@ -88,7 +114,7 @@ export default function MoviesTopCarousel({ title, dataVideos }: Readonly<MovieT
                                 {cat}
                                 {index !==
                                   (Array.isArray(item.categoriesvi) ? item.categoriesvi : JSON.parse(item.categoriesvi || "[]")).length -
-                                    1 && ", "}
+                                  1 && ", "}
                               </span>
                             )
                           )}
@@ -133,7 +159,7 @@ export default function MoviesTopCarousel({ title, dataVideos }: Readonly<MovieT
             ))}
           </div>
         </div>
-      </section>
-    </div>
+      </section >
+    </div >
   );
 }

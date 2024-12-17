@@ -31,12 +31,12 @@ export default function ReviewMovieCard({ cardData, onCardClick }: CardEpisodePr
                 width={14}
                 height={14}
               />
-              <div className="ml-[2px] text-sm text-amber-400">{cardData.avgrating || 0.0}</div>
+              <div className="ml-[2px] text-sm text-amber-400">{Math.round(cardData.avgrating * 10) / 10 || 0.0}</div>
             </div>
             <Chip
               size="sm"
               radius="sm"
-              color={cardData.ispremium ? "success" : "primary"}
+              color={cardData.ispremium ? "danger" : "primary"}
               variant="dot">
               {cardData.ispremium ? "Trả phí" : "Miễn phí"}
             </Chip>

@@ -10,13 +10,14 @@ import MovieComments from "@/components/Movies/moviesComments";
 import MovieMyComment from "@/components/Movies/moviesMyComments";
 import MovieSuggestion from "@/components/Movies/moviesSuggestion";
 import { showResponseToast } from "@/lib/utils";
-import { Button, Pagination } from "@nextui-org/react";
+import { Button, Divider, Pagination } from "@nextui-org/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import CloudinaryVideoPlayer from "@/components/Video/videoplayer";
 import "next-cloudinary/dist/cld-video-player.css";
 import { usePathname, useRouter } from "next/navigation";
 import Script from "next/script";
+import { title } from "@/components/primitives";
 
 interface Comment {
   id: number;
@@ -74,7 +75,6 @@ export default function WatchPage({ params }: { params: { movieid: string; episo
         current: currentEpisode,
         videoid,
       };
-      console.log("path: ", videoid);
       setData((prevData) => ({
         ...prevData,
         ...updatedContent,
@@ -178,6 +178,43 @@ export default function WatchPage({ params }: { params: { movieid: string; episo
               lượt xem
             </div>
           </div>
+        </div>
+        <div className="my-4">
+          {
+            data?.movieDetail?.type != "movie" && (
+              <h1 className="text-xl mb-4">
+                Tập {params?.episodenumber}: {data?.current?.name}
+              </h1>
+            )
+          }
+          <h1 className={title()}>{data?.movieDetail?.name}</h1>
+          <h1 className="text-sm text-gray-400 mt-2">
+            Nhà sản xuất: <span>{data?.movieDetail?.publisher}</span>
+          </h1>
+          <div className="flex flex-wrap h-5 font-black mt-8 space-x-8">
+            <Divider orientation="vertical" />
+            <h1 className="text-sm">{data?.movieDetail?.publishyear}</h1>
+            <Divider orientation="vertical" />
+            {Array.isArray(data?.movieDetail?.categoriesvi)
+              ? data?.movieDetail?.categoriesvi.map(
+                (cat, index) =>
+                  cat && (
+                    <div key={index}>
+                      <div className="text-sm">{cat}</div>
+                    </div>
+                  )
+              )
+              : JSON.parse(data?.movieDetail?.categoriesvi || "[]").map(
+                (cat: string, index: number) =>
+                  cat && (
+                    <div key={index}>
+                      <div className="text-sm">{cat}</div>
+                    </div>
+                  )
+              )}
+            <Divider orientation="vertical" />
+          </div>
+          <p className="my-4 text-gray-400">{data?.movieDetail?.description}</p>
         </div>
         {data?.movieDetail?.type == "movie" ? (
           <></>

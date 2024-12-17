@@ -1,10 +1,10 @@
 "use client";
 
 import getMovieDetailById from "@/app/api/movies/getMovieById";
-import { LineMdArrowSmallLeft, LineMdPlayFilled, MdiEyeOutline, SvgSpinnersClock } from "@/components/icons";
+import { IconStar, LineMdArrowSmallLeft, LineMdPlayFilled, MdiEyeOutline, SvgSpinnersClock } from "@/components/icons";
 import { title } from "@/components/primitives";
 import { toast } from "react-toastify";
-import { Button, Image } from "@nextui-org/react";
+import { Button, Chip, Image } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Transition from "@/components/MotionFramer/transition";
@@ -60,7 +60,14 @@ export default function DetailPage({ params }: { params: { movieid: string } }) 
                 Quay lại
               </Button>
             </div>
-            <div>
+            <Chip
+              size="md"
+              radius="sm"
+              color={data?.movieDetail?.ispremium ? "danger" : "primary"}
+              variant="dot">
+              {data?.movieDetail?.ispremium ? "Trả phí" : "Miễn phí"}
+            </Chip>
+            <div className="my-2">
               <h1 className={title()}>{data?.movieDetail?.name}</h1>
               <h1 className="text-sm text-gray-400 mt-2">
                 Nhà sản xuất: <span>{data?.movieDetail?.publisher}</span>

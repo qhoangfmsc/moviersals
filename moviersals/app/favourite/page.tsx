@@ -25,6 +25,7 @@ export default function UserFavouritePage() {
   useEffect(() => {
     const fetchUserFavList = async () => {
       const response = await getUserFavouriteList(currentPage);
+      console.log(response.content);
       setUserFavList(response.content);
     };
 
