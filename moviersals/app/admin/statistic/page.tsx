@@ -56,7 +56,7 @@ export default function ChartPage() {
             />
           </div>
           <div className="h-full w-full">
-            <PopularMovieChartCard chartData={data?.list[0]?.top5_views} />
+            <PopularMovieChartCard chartData={data?.list[0]?.top_views} />
           </div>
         </div>
       </div>
