@@ -53,7 +53,7 @@ export default function PasswordRecoveryForm() {
         }
       } else {
         setIsLoading(false);
-        setErrorAccount("Password không khớp nhau!");
+        setErrorAccount("Mật khẩu không khớp nhau!");
       }
     } catch (error: unknown) {
       if (error instanceof Error) {
