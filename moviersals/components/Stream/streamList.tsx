@@ -1,10 +1,9 @@
 "use client";
 
-import { Button, Card, Tooltip } from "@nextui-org/react";
+import { Button, Card, Image, Tooltip } from "@nextui-org/react";
 import React from "react";
 import { MdiEyeOutline } from "../icons";
 import { calculateTimeDifference } from "@/lib/utils";
-import Image from "next/image";
 
 const streamList = [
   {
@@ -55,8 +54,6 @@ export default function StreamList(): JSX.Element {
             key={item.id}>
             <div className="lg:flex flex-row p-2 lg:p-6 lg:gap-6">
               <Image
-                priority
-                unoptimized
                 src={item.thumbnail ?? "/image/streaming-thumbnail.gif"}
                 alt="background"
                 width={450}
