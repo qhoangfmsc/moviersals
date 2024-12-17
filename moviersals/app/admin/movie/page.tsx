@@ -1,5 +1,6 @@
 "use client";
 
+import getAllCategories from "@/app/api/categories/getAllCategories";
 import getAllMovie from "@/app/api/movies/getAllMovie";
 import uploadMovie from "@/app/api/movies/uploadMovie";
 import AdminForm, { AdminFormCofig } from "@/components/Form/adminForm";
@@ -15,11 +16,13 @@ import { useEffect, useState } from "react";
 export default function MovieAdminPage() {
   const router = useRouter();
   const [data, setData] = useState(null);
+  const [categories, setCategories] = useState(null);
   const pathname = usePathname();
   const [page, setPage] = useState(1);
   const [isRefetch, setIsRefetch] = useState(false);
 
   useEffect(() => {
+    fetchCategories();
     fetchData();
   }, [pathname, isRefetch, page]);
 
@@ -28,6 +31,21 @@ export default function MovieAdminPage() {
     const content = response.content;
     setData(content);
   };
+
+  const fetchCategories = async () => {
+    const response = await getAllCategories(null);
+    const content = response.content;
+
+    const list = content.list.map(item => ({
+      key: item.name.toLowerCase(),
+      value: capitalizeFirstLetter(item.namevi)
+    }));
+    setCategories(list);
+  };
+
+  function capitalizeFirstLetter(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  }
 
   const tableData = {
     headerData: [
@@ -65,16 +83,7 @@ export default function MovieAdminPage() {
         colname: "categories",
         colsub: "Thể loại",
         coltype: "checkbox",
-        colvalues: [
-          { key: "action", value: "Hành động" },
-          { key: "science fiction", value: "Khoa học viễn tưởng" },
-          { key: "adventure", value: "Phiêu lưu" },
-          { key: "comedy", value: "Hài hước" },
-          { key: "documentary", value: "Tài liệu" },
-          { key: "drama", value: "Kịch tính" },
-          { key: "romance", value: "Lãng mạn" },
-          { key: "horror", value: "Kinh dị" },
-        ],
+        colvalues: categories,
       },
       {
         colname: "type",
