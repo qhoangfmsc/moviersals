@@ -1,8 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { CldVideoPlayer } from "next-cloudinary";
 import "next-cloudinary/dist/cld-video-player.css";
 import increaseViewEpisode from "@/app/api/episode/increaseViewEpisode";
-import Script from "next/script";
 
 export interface CloudinaryVideoPlayerUI {
   movieid: string;
@@ -46,56 +45,54 @@ const CloudinaryVideoPlayer = ({ movieid, episodenumber, publicid, userinfo }: C
 
   return (
     <div className="flex items-center justify-center">
-      <Script src="https://imasdk.googleapis.com/js/sdkloader/ima3.js" />
-      {userinfo != null
-        ? (
-          < div className="w-[60%]">
-            {
-              userinfo.ispremium ? (
-                // PREMIUM VIDEO
-                <CldVideoPlayer
-                  width={1280}
-                  height={720}
-                  playedEventPercents={[10, 30, 50, 70, 100]}
-                  src={publicid}
-                  transformation={{
-                    streaming_profile: "full_hd",
-                  }}
-                  onPlay={initializePlayer}
-                  onEnded={cleanupPlayer}
-                  sourceTypes={["hls"]}
-                />
-              ) : (
-                // USUAL VIDEO
-                <CldVideoPlayer
-                  {...{
-                    ads: {
-                      adTagUrl: adTagUrl,
-                      showCountdown: true,
-                      adLabel: "Advertisement",
-                      prerollTimeout: 5000,
-                      locale: "vi",
-                    },
-                  }}
-                  width={1280}
-                  height={720}
-                  playedEventPercents={[10, 30, 50, 70, 100]}
-                  src={publicid}
-                  transformation={{
-                    streaming_profile: "hd",
-                  }}
-                  onPlay={initializePlayer}
-                  onEnded={cleanupPlayer}
-                  sourceTypes={["hls"]}
-                />
-              )
-            }
-          </div>
-        ) : (
-          <div className="flex items-center justify-center text-2xl font-semibold">Hãy đăng nhập để xem phim nhé</div>
-        )
-      }
-    </div >
+      {userinfo != null ? (
+        <div className="w-[60%]">
+          {userinfo.ispremium ? (
+            // PREMIUM VIDEO
+            <CldVideoPlayer
+              key={`${movieid}-${episodenumber}`}
+              width={1280}
+              height={720}
+              playedEventPercents={[10, 30, 50, 70, 100]}
+              src={publicid}
+              transformation={{
+                streaming_profile: "full_hd",
+              }}
+              onPlay={initializePlayer}
+              onEnded={cleanupPlayer}
+              sourceTypes={["hls"]}
+            />
+          ) : (
+            // USUAL VIDEO
+            <CldVideoPlayer
+              key={`${movieid}-${episodenumber}`}
+              {...{
+                ads: {
+                  adTagUrl: adTagUrl,
+                  showCountdown: true,
+                  adLabel: "Quảng cáo",
+                  prerollTimeout: 8000,
+                  postrollTimeout: 8000,
+                  locale: "vi",
+                },
+              }}
+              width={1280}
+              height={720}
+              playedEventPercents={[10, 30, 50, 70, 100]}
+              src={publicid}
+              transformation={{
+                streaming_profile: "hd",
+              }}
+              onPlay={initializePlayer}
+              onEnded={cleanupPlayer}
+              sourceTypes={["hls"]}
+            />
+          )}
+        </div>
+      ) : (
+        <div className="flex items-center justify-center text-2xl font-semibold">Hãy đăng nhập để xem phim nhé</div>
+      )}
+    </div>
   );
 };
 

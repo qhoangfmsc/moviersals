@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import CloudinaryVideoPlayer from "@/components/Video/videoplayer";
 import "next-cloudinary/dist/cld-video-player.css";
 import { usePathname, useRouter } from "next/navigation";
+import Script from "next/script";
 
 interface Comment {
   id: number;
@@ -109,6 +110,10 @@ export default function WatchPage({ params }: { params: { movieid: string; episo
 
   return (
     <Transition>
+      <Script
+        async
+        src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"
+      />
       <div className="px-8 mt-12">
         {userinfo != null ? (
           data && data?.movieDetail?.ispremium == true && userinfo?.ispremium != true ? (
