@@ -72,6 +72,7 @@ export default function AdminForm({ adminFormCofig, rerenderData }: { adminFormC
           request[col?.colname] = formData.get(col.colname);
         }
       });
+      console.log("here:", fileState);
       const payloadFormData = convertRequestToFormData(preexecuteRequest(request));
       adminFormCofig.handler(payloadFormData);
     } catch (error: unknown) {
@@ -138,7 +139,10 @@ export default function AdminForm({ adminFormCofig, rerenderData }: { adminFormC
                       className="w-full pt-2"
                       type="file"
                       name={col.colname}
-                      onChange={(e) => handleFileChange(col.colname, e.target.files?.[0] || null)}
+                      onChange={(e) => {
+                        console.log(e.target.files);
+                        handleFileChange(col.colname, e.target.files?.[0] || null);
+                      }}
                     />
                   </div>
                 );
@@ -254,7 +258,11 @@ export default function AdminForm({ adminFormCofig, rerenderData }: { adminFormC
                       className="w-full pt-2"
                       type="file"
                       name={col.colname}
-                      onChange={(e) => handleFileChange(col.colname, e.target.files?.[0] || null)}
+                      onChange={(e) => {
+                        console.log(e.target.files?.[0]);
+                        console.log(checkboxState);
+                        handleFileChange(col.colname, e.target.files?.[0] || null);
+                      }}
                     />
                   </div>
                 );

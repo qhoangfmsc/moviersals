@@ -72,6 +72,7 @@ export default function DetailPage({ params }: { params: { movieid: string } }) 
               <h1 className="text-sm text-gray-400 mt-2">
                 Nhà sản xuất: <span>{data?.movieDetail?.publisher}</span>
               </h1>
+
               <div className="flex text-tiny text-gray-400 mt-8">
                 <div className="self-center">
                   <MdiEyeOutline />
@@ -91,13 +92,19 @@ export default function DetailPage({ params }: { params: { movieid: string } }) 
                           ? data?.movieDetail?.categoriesvi
                           : JSON.parse(data?.movieDetail?.categoriesvi || "[]")
                         ).length -
-                        1 && ", "}
+                          1 && ", "}
                     </span>
                   ))}
                 </h1>
                 <h1 className="text-sm">{data?.movieDetail?.publishyear}</h1>
               </div>
               <p className="my-4 text-gray-400">{data?.movieDetail?.description}</p>
+              <IconStar
+                fill={"#fbbf24"}
+                width={14}
+                height={14}
+              />
+              <div className="ml-[2px] text-sm text-amber-400">{Math.round(data?.movieDetail?.avgrating * 10) / 10 || 0.0}</div>
               <div className="mt-12">
                 {data?.list?.length > 0 ? (
                   data?.movieDetail?.type == "movie" ? (
