@@ -104,13 +104,13 @@ export function isHostnameLocal() {
 }
 
 const toastTheme = "dark";
-const toastDuration = 2000;
+const toastDuration = 1500;
 
 export function showResponseToast(response: Record<string, any>) {
   if (response?.result == "success") {
-    toast.success(response.content, { autoClose: toastDuration, theme: toastTheme, pauseOnHover: false });
+    toast.success(response.content, { autoClose: toastDuration, theme: toastTheme, pauseOnHover: false, pauseOnFocusLoss: false });
   } else {
-    toast.error(response.content, { autoClose: toastDuration, theme: toastTheme, pauseOnHover: false });
+    toast.error(response.content, { autoClose: toastDuration, theme: toastTheme, pauseOnHover: false, pauseOnFocusLoss: false });
   }
 }
 

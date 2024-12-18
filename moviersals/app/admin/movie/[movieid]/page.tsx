@@ -24,6 +24,7 @@ import Transition from "@/components/MotionFramer/transition";
 import { showResponseToast } from "@/lib/utils";
 import CloudinaryVideoPlayer from "@/components/Video/videoplayer";
 import deleteEpisode from "@/app/api/episode/deleteEpisode";
+import getAllCategories from "@/app/api/categories/getAllCategories";
 
 export default function episodeEpisodesListForm({ params }: { params: { movieid: string } }) {
   const {
@@ -44,8 +45,10 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
   const [dataView, setDataView] = useState<any>({});
   const [isRefetch, setIsRefetch] = useState(false);
   const [userinfo, setUserInfo] = useState<any>(null);
+  const [categories, setCategories] = useState(null);
 
   useEffect(() => {
+    fetchCategories();
     fetchData();
   }, [isRefetch]);
 
@@ -58,6 +61,21 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
     // console.log(content);
     setData(content);
   };
+
+  const fetchCategories = async () => {
+    const response = await getAllCategories(null);
+    const content = response.content;
+
+    const list = content.list.map((item) => ({
+      key: item.name.toLowerCase(),
+      value: capitalizeFirstLetter(item.namevi),
+    }));
+    setCategories(list);
+  };
+
+  function capitalizeFirstLetter(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  }
 
   const handleCreateClick = () => {
     onOpenModalCreate();
@@ -96,16 +114,7 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
         colname: "categories",
         colsub: "Thể loại",
         coltype: "checkbox",
-        colvalues: [
-          { key: "action", value: "Hành động" },
-          { key: "science fiction", value: "Khoa học viễn tưởng" },
-          { key: "adventure", value: "Phiêu lưu" },
-          { key: "comedy", value: "Hài hước" },
-          { key: "documentary", value: "Tài liệu" },
-          { key: "drama", value: "Kịch tính" },
-          { key: "romance", value: "Lãng mạn" },
-          { key: "horror", value: "Kinh dị" },
-        ],
+        colvalues: categories,
       },
       {
         colname: "type",
