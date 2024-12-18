@@ -155,7 +155,7 @@ export default function TemplatePage() {
                   type="text"
                   variant="underlined"
                   label="Thời gian hết hạn"
-                  value={userInfo?.usingend ? moment(userInfo?.usingend).format("DD/MM/YYYY") : ""}
+                  value={userInfo?.usingend ? moment(userInfo?.usingend).format("DD/MM/YYYY HH:mm:ss") : ""}
                 />
               </div>
               <div className="flex justify-between">
