@@ -7,6 +7,17 @@ module.exports = {
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: ["res.cloudinary.com", "media-cache.cinematerial.com"], // Add any other domains you use for images here
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "media-cache.cinematerial.com",
+        pathname: "/**",
+      },
+    ],
   },
 };
