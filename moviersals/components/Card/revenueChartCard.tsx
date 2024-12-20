@@ -47,20 +47,32 @@ export default function RevenueChartCard({ chartData }: { chartData: any }) {
   };
 
   const formatter = useDateFormatter({
+    timeZone: "Asia/Ho_Chi_Minh",
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
   });
 
   const handleDateChange = (key: "startdate" | "enddate", value: DateValue) => {
-    if (!value) return;
-    const formattedDate = formatter.format(value.toDate("Asia/Ho_Chi_Minh"));
-    const [month, day, year] = formattedDate.split("/");
-    const finalFormattedDate = `${year}-${month}-${day}`;
-    setRevenueDateTime((prev) => ({
-      ...prev,
-      [key]: finalFormattedDate,
-    }));
+    if (!value) {
+      const endDate = new Date();
+      const formattedDate = formatter.format(endDate);
+      const [month, day, year] = formattedDate.split("/");
+      const finalFormattedDate = `${year}-${month}-${day}`;
+
+      setRevenueDateTime(() => ({
+        startdate: "1980-01-01",
+        enddate: finalFormattedDate,
+      }));
+    } else {
+      const formattedDate = formatter.format(value.toDate("Asia/Ho_Chi_Minh"));
+      const [month, day, year] = formattedDate.split("/");
+      const finalFormattedDate = `${year}-${month}-${day}`;
+      setRevenueDateTime((prev) => ({
+        ...prev,
+        [key]: finalFormattedDate,
+      }));
+    }
   };
 
   function handleRevenueDateClick() {
@@ -86,11 +98,12 @@ export default function RevenueChartCard({ chartData }: { chartData: any }) {
         <Button
           className="basis-1/3 h-14"
           color="primary"
-          onClick={handleRevenueDateClick}>
+          onClick={handleRevenueDateClick}
+        >
           Xem theo bộ lọc
         </Button>
       </div>
-      <div className="flex flex-row justify-center mt-2">
+      <div className="flex flex-row justify-center mt-7">
         <CustomLineChart chartProps={chartProps} />
       </div>
     </Card>

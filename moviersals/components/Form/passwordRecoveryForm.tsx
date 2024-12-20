@@ -6,6 +6,7 @@ import { showResponseToast } from "@/lib/utils";
 import { Button, Card, Input, Link } from "@nextui-org/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
+import { title } from "../primitives";
 
 export default function PasswordRecoveryForm() {
   const urlParams = useSearchParams();
@@ -40,7 +41,10 @@ export default function PasswordRecoveryForm() {
       const confirmnewpassword = formData.get("confirmnewpassword")?.toString();
 
       if (newpassword == confirmnewpassword) {
-        const response = await ConfirmPasswordRecovery(newpassword, passwordToken);
+        const response = await ConfirmPasswordRecovery(
+          newpassword,
+          passwordToken
+        );
         if (response.result == "success") {
           setIsLoading(false);
           showResponseToast(response);
@@ -66,10 +70,11 @@ export default function PasswordRecoveryForm() {
   return isTokenValid != null ? (
     isTokenValid ? (
       <div className="my-2">
-        <form
-          className="flex flex-col items-center"
-          onSubmit={onSubmit}>
-          <Card className="p-4 lg:w-[500px] bg-transparent shadow-none">
+        <form className="flex flex-col items-center" onSubmit={onSubmit}>
+          <Card className="p-4 lg:w-[500px] bg-transparent shadow-none gap-3">
+            <h1 className="text-3xl w-full text-center">
+              Đặt lại mật khẩu
+            </h1>
             {errorUser && <div style={{ color: "red" }}>{errorUser}</div>}
             {errorAccount && <div style={{ color: "red" }}>{errorAccount}</div>}
             <Input
@@ -93,7 +98,8 @@ export default function PasswordRecoveryForm() {
                 type="submit"
                 disabled={isLoading}
                 variant="shadow"
-                color="success">
+                color="success"
+              >
                 {isLoading ? "Loading..." : "Đổi mật khẩu"}
               </Button>
             </div>
@@ -103,7 +109,7 @@ export default function PasswordRecoveryForm() {
     ) : (
       <div className="h-screen flex flex-col items-center">
         <div className="my-auto">
-          <div className="text-2xl">Token không hợp lệ hoặc hết hạn</div>
+          <div className="text-2xl">Mã token không hợp lệ hoặc hết hạn</div>
           <div className="w-fit flex ml-auto mr-auto mt-4">
             <Button
               size="lg"
@@ -111,7 +117,8 @@ export default function PasswordRecoveryForm() {
               as={Link}
               type="button"
               variant="shadow"
-              color="success">
+              color="success"
+            >
               Yêu cầu token mới
             </Button>
           </div>
@@ -121,7 +128,9 @@ export default function PasswordRecoveryForm() {
   ) : (
     <div className="h-screen flex flex-col items-center">
       <div className="my-auto">
-        <div className="text-center text-2xl">Đang kiểm tra token, vui lòng đợi...</div>
+        <div className="text-center text-2xl">
+          Đang kiểm tra token, vui lòng đợi...
+        </div>
       </div>
     </div>
   );

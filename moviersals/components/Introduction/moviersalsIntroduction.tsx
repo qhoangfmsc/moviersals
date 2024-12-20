@@ -48,7 +48,7 @@ export default function MoviersalsIntroduction() {
             <p>Có nhiều thể loại từ Esports đến Phim bộ, có thể thoải mái khám phá các bộ phim yêu thích❤️❤️</p>
           </CardFooter>
         </Card>
-        <Card className="relative hidden lg:flex m-2 lg:left-3/4 lg:top-5 text-left max-w-[340px] lg:max-w-[370px]">
+        <Card className="relative hidden lg:flex m-2 lg:left-3/4 lg:top-5 text-left max-w-[340px] lg:max-w-[300px]">
           <CardHeader className="justify-between">
             <div className="flex gap-5">
               <Avatar

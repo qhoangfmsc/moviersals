@@ -42,7 +42,7 @@ export default function ValorantIntroduction(): JSX.Element {
       <div
         className="hidden lg:flex absolute left-20 justify-between w-11/12 z-10"
         style={{
-          fontSize: "3rem",
+          fontSize: "2.5rem",
           top: "50%",
           transform: "translateY(-50%)",
         }}>

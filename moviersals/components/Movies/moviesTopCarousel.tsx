@@ -76,15 +76,15 @@ export default function MoviesTopCarousel({ title, dataVideos }: Readonly<MovieT
                     {item.ispremium && (
                       <div
                         className="absolute 
-                        w-full text-2xl shadow-2xl 
+                        w-[200px] text-xl shadow-2xl 
                         bg-gradient-to-r from-danger-600
-                        text-amber-100 font-bold
-                        rotate-45 z-20
+                        text-amber-100 font-bold 
+                        z-20 rounded
                         border-2 border-white
                         text-center"
                         style={{
-                          top: "3.5rem",
-                          right: "-10.75rem",
+                          top: "0.5rem",
+                          left: "calc(100% - 200px)",
                         }}>
                         Yêu cầu trả phí
                       </div>
@@ -93,7 +93,7 @@ export default function MoviesTopCarousel({ title, dataVideos }: Readonly<MovieT
                       alt={item.name}
                       className="object-cover"
                       src={item.thumbnail}
-                      height={600}
+                      height={500}
                       width={2000}
                     />
                     <CardFooter className="justify-between">

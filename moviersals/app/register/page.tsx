@@ -15,7 +15,7 @@ export default function LoginPage() {
       </div>
       <div className="my-2">
         <RegisterFlipCard />
-        {/* <RegisterForm /> */}
+        <RegisterForm />
       </div>
     </Transition>
   );

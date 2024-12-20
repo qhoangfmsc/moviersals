@@ -101,10 +101,10 @@ export default function TemplatePage() {
               rotate-45 
               border-2 border-white"
               style={{
-                top: "1.5rem",
-                right: "-6.75rem",
+                top: "2rem",
+                right: "-6.5rem",
               }}>
-              V I P
+              PREMIUM
             </div>
           ) : (
             <></>

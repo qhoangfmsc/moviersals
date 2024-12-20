@@ -1,7 +1,6 @@
-import { Card, Link, Tooltip, Badge } from "@nextui-org/react";
+import { Card, Link, Tooltip, Badge, Image } from "@nextui-org/react";
 import moment from "moment";
 import FavRemoveButton from "../Button/favRemoveButton";
-import Image from "next/image";
 
 interface CardEpisodeProps {
   movieid: string;
@@ -23,7 +22,7 @@ interface FavCardProps {
 
 export default function FavouriteCard({ cardData, onClickRemove }: FavCardProps) {
   return (
-    <div className="flex ">
+    <div className="flex h-full">
       <Badge
         size="sm"
         content={
@@ -40,7 +39,7 @@ export default function FavouriteCard({ cardData, onClickRemove }: FavCardProps)
           as={Link}
           href={`/detail/${cardData?.movieid}/${cardData?.episodenumber}`}
           radius="lg"
-          className="border-none">
+          className="border-none h-full">
           <div className="flex flex-col w-fit">
             <Image
               alt="Woman listing to music"

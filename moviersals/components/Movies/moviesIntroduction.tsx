@@ -23,13 +23,13 @@ export default function MoviesIntroduction() {
     <div className="w-full my-14 p-6 lg:p-16">
       <div className="hidden lg:block">
         <MoviesTopCarousel
-          title="10 bộ phim thịnh hành nhất hiện nay"
+          title="10 bộ phim thịnh hành nhất Moviersals"
           dataVideos={dataVideos?.list}
         />
       </div>
       <div className="block lg:hidden overflow-hidden">
         <MoviesTop
-          title="10 bộ phim thịnh hành nhất hiện nay"
+          title="10 bộ phim thịnh hành nhất Moviersals"
           dataVideos={dataVideos?.list}
         />
       </div>

@@ -40,21 +40,21 @@ export default function VNPayInvoice() {
 
   // Prepare the data for the table
   const tableData = [
-    { field: "Moviersal Order ID", value: vnp_TxnRef || "-", className: "text-lg font-semibold" },
-    { field: "Transaction ID", value: vnp_BankTranNo || "-", className: "text-md" },
-    { field: "Amount", value: vnp_Amount ? `${parseInt(vnp_Amount) / 100} VND` : "-", className: "text-md font-semibold text-green-600" },
-    { field: "Bank Code", value: vnp_BankCode || "-", className: "text-sm text-gray-500" },
-    { field: "Card Type", value: vnp_CardType || "-", className: "text-sm" },
-    { field: "Payment Date", value: formatDate(vnp_PayDate) || "-", className: "text-sm" },
-    { field: "Description", value: vnp_OrderInfo || "-", className: "text-sm" },
-    { field: "Status", value: vnp_TransactionStatus == "00" ? "Success" : "Failed" || "-", className: "text-sm" },
+    { field: "Mã gói thành viên", value: vnp_TxnRef || "-", className: "text-lg font-semibold" },
+    { field: "Mã giao dịch", value: vnp_BankTranNo || "-", className: "text-md" },
+    { field: "Tổng số tiền", value: vnp_Amount ? `${Number(parseInt(vnp_Amount) / 100).toLocaleString()} VNĐ` : "-", className: "text-md font-semibold text-green-600" },
+    { field: "Mã ngân hàng", value: vnp_BankCode || "-", className: "text-sm text-gray-500" },
+    { field: "Loại thẻ", value: vnp_CardType || "-", className: "text-sm" },
+    { field: "Ngày thanh toán", value: formatDate(vnp_PayDate) || "-", className: "text-sm" },
+    { field: "Nội dung", value: vnp_OrderInfo || "-", className: "text-sm" },
+    { field: "Trạng thái", value: vnp_TransactionStatus == "00" ? "Thanh toán thành công" : "Thanh toán thất bại" || "-", className: (vnp_TransactionStatus == "00") ? "text-sm text-success" : "text-sm text-danger" },
   ];
 
   return (
     <Transition>
       <div className="flex justify-center mb-10">
         <Card className="w-[800px] items-center p-8">
-          <h1 className="text-2xl py-4 color-blue">VNPay Transaction Details</h1>
+          <h1 className="text-2xl py-4 color-blue">Chi tiết đơn hàng đã thanh toán VNPay</h1>
           <Table
             hideHeader
             removeWrapper
@@ -74,9 +74,9 @@ export default function VNPayInvoice() {
           </Table>
           <Button
             as={Link}
-            href="/"
+            href="/order/history"
             variant="flat">
-            Back to Home
+            Xem lịch sử thanh toán
           </Button>
         </Card>
       </div>
