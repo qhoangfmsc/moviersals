@@ -38,28 +38,36 @@ export const staticPageData = [
     body: (
       <div>
         <div>
-          <strong>Chào mừng bạn đến với Moviersals!</strong> Chúng tôi cam kết bảo vệ quyền sở hữu trí tuệ và đảm bảo rằng các nội dung được cung cấp trên trang web đều tuân thủ pháp luật hiện hành.
+          <strong>Chào mừng bạn đến với Moviersals!</strong> Chúng tôi cam kết bảo vệ quyền sở hữu trí tuệ và đảm bảo rằng các nội dung được
+          cung cấp trên trang web đều tuân thủ pháp luật hiện hành.
         </div>
         <br />
         <div>
           <strong>1. Quyền Sở Hữu Nội Dung</strong>
         </div>
         <div>
-          Tất cả các nội dung, bao gồm nhưng không giới hạn ở phim, chương trình truyền hình, video, hình ảnh, âm thanh, đồ họa, và các tài liệu khác trên Moviersals, đều thuộc quyền sở hữu của chúng tôi hoặc được cấp phép từ các chủ sở hữu hợp pháp. Việc sao chép, phân phối, chỉnh sửa, hoặc sử dụng các nội dung này mà không có sự cho phép rõ ràng từ Moviersals hoặc các chủ sở hữu bản quyền là hành vi vi phạm pháp luật.
+          Tất cả các nội dung, bao gồm nhưng không giới hạn ở phim, chương trình truyền hình, video, hình ảnh, âm thanh, đồ họa, và các tài
+          liệu khác trên Moviersals, đều thuộc quyền sở hữu của chúng tôi hoặc được cấp phép từ các chủ sở hữu hợp pháp. Việc sao chép, phân
+          phối, chỉnh sửa, hoặc sử dụng các nội dung này mà không có sự cho phép rõ ràng từ Moviersals hoặc các chủ sở hữu bản quyền là hành
+          vi vi phạm pháp luật.
         </div>
         <br />
         <div>
           <strong>2. Sử Dụng Cá Nhân</strong>
         </div>
         <div>
-          Người dùng chỉ được phép truy cập và sử dụng các nội dung trên trang web cho mục đích cá nhân và phi thương mại. Mọi hành vi sử dụng nội dung vượt quá phạm vi này đều phải được sự đồng ý bằng văn bản từ Moviersals.
+          Người dùng chỉ được phép truy cập và sử dụng các nội dung trên trang web cho mục đích cá nhân và phi thương mại. Mọi hành vi sử
+          dụng nội dung vượt quá phạm vi này đều phải được sự đồng ý bằng văn bản từ Moviersals.
         </div>
         <br />
         <div>
           <strong>3. Khiếu Nại Về Bản Quyền</strong>
         </div>
         <div>
-          <div>Nếu bạn tin rằng nội dung trên Moviersals vi phạm quyền sở hữu trí tuệ của mình, vui lòng thông báo cho chúng tôi bằng cách gửi email đến <a href="mailto:moviersals@gmail.com">moviersals@gmail.com</a>. Trong thông báo, vui lòng cung cấp các thông tin sau:</div>
+          <div>
+            Nếu bạn tin rằng nội dung trên Moviersals vi phạm quyền sở hữu trí tuệ của mình, vui lòng thông báo cho chúng tôi bằng cách gửi
+            email đến <a href="mailto:moviersals@gmail.com">moviersals@gmail.com</a>. Trong thông báo, vui lòng cung cấp các thông tin sau:
+          </div>
           <div>• Mô tả chi tiết về nội dung bị vi phạm bản quyền.</div>
           <div>• Tài liệu chứng minh bạn là chủ sở hữu hoặc đại diện hợp pháp của nội dung đó.</div>
           <div>• Thông tin liên hệ của bạn (họ tên, số điện thoại, địa chỉ email).</div>
@@ -80,21 +88,24 @@ export const staticPageData = [
           <strong>5. Các Quy Định Liên Quan</strong>
         </div>
         <div>
-          Moviersals tôn trọng và tuân thủ các quy định pháp luật về bản quyền tại Việt Nam và các quốc gia khác. Chúng tôi không chịu trách nhiệm đối với các nội dung do người dùng tải lên nếu người dùng không tuân thủ quy định về bản quyền.
+          Moviersals tôn trọng và tuân thủ các quy định pháp luật về bản quyền tại Việt Nam và các quốc gia khác. Chúng tôi không chịu trách
+          nhiệm đối với các nội dung do người dùng tải lên nếu người dùng không tuân thủ quy định về bản quyền.
         </div>
         <br />
         <div>
           <strong>6. Thay Đổi Chính Sách Bản Quyền</strong>
         </div>
         <div>
-          Chính sách này có thể được cập nhật để phù hợp với các thay đổi về luật pháp hoặc hoạt động của trang web. Người dùng được khuyến khích kiểm tra định kỳ để cập nhật thông tin mới nhất.
+          Chính sách này có thể được cập nhật để phù hợp với các thay đổi về luật pháp hoặc hoạt động của trang web. Người dùng được khuyến
+          khích kiểm tra định kỳ để cập nhật thông tin mới nhất.
         </div>
         <br />
         <div>
           <strong>7. Liên Hệ</strong>
         </div>
         <div>
-          Nếu bạn có bất kỳ câu hỏi nào liên quan đến chính sách bản quyền, vui lòng liên hệ với chúng tôi qua email: <a href="mailto:moviersals@gmail.com">moviersals@gmail.com</a>.
+          Nếu bạn có bất kỳ câu hỏi nào liên quan đến chính sách bản quyền, vui lòng liên hệ với chúng tôi qua email:{" "}
+          <a href="mailto:moviersals@gmail.com">moviersals@gmail.com</a>.
         </div>
       </div>
     ),
@@ -284,6 +295,51 @@ export const staticPageData = [
         </div>
         <br />
         <div>Nếu có sự cố trong và sau quá trình thanh toán, vui lòng liên hệ với chúng tôi thông qua Email: moviersals@gmail.com</div>
+      </div>
+    ),
+  },
+  {
+    id: "chinhsachgoithanhvien",
+    title: "CHÍNH SÁCH GÓI THÀNH VIÊN",
+    body: (
+      <div>
+        <div>Sau đây là thông tin về gói thành viên của chúng tôi:</div>
+        <br />
+        <div>
+          <strong>1. Thời hạn sử dụng</strong>
+        </div>
+        <div>
+          Sau khi mua gói, thời hạn sử dụng sẽ bắt đầu tính và kéo dài 30 ngày. Khi hết thời hạn sử dụng, tài khoản quý khách sẽ tự động
+          chuyển về gói mặc định là "FREE".
+        </div>
+        <br />
+        <div>
+          <strong>2. Nâng cấp gói</strong>
+        </div>
+        <div>
+          Website chúng tôi cho phép quý khách nâng cấp gói cao hơn. Tùy vào ngày sử dụng còn lại của gói hiện tại, quý khách sẽ được giảm
+          giá mức tương ứng với số ngày đó cộng thêm phí nâng cấp.
+        </div>
+        <br />
+        <div>
+          <strong>3. Phí nâng cấp</strong>
+        </div>
+        <div>
+          <div>
+            Khi nâng cấp gói sẽ phát sinh thêm phí nâng cấp kèm theo, phí này được giữ ở mức cố định là 10000 VND cho mỗi lần nâng cấp.
+          </div>
+        </div>
+        <br />
+        <div>
+          <strong>4. Giảm cấp gói</strong>
+        </div>
+        <div>
+          <div>
+            Website chúng tôi không cho phép quý khách giảm cấp gói. Thay vào đó, quý khách có thể đợi cho đến khi hết thời hạn sử dụng và
+            mua một gói mới hoàn toàn.
+          </div>
+        </div>
+        <br />
       </div>
     ),
   },
