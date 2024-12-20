@@ -7,9 +7,11 @@ import { showResponseToast } from "@/lib/utils";
 import SubcriptionPlanCard from "@/components/Card/subcriptionCard";
 import Transition from "@/components/MotionFramer/transition";
 import { Button } from "@nextui-org/button";
-import { LineMdArrowSmallLeft } from "@/components/icons";
+import { IconQuestionCircle, LineMdArrowSmallLeft } from "@/components/icons";
 import getUserSubcription from "../api/subcriptionplan/getUserSubcription";
 import getUserSubcriptionPrice from "../api/subcriptionplan/getUserSubcriptionPrice";
+import { Tooltip } from "@nextui-org/react";
+import Link from "next/link";
 
 interface selectedSubcriptionProps {
   subcriptionid: string;
@@ -60,8 +62,24 @@ export default function PaymentMethodsComponent() {
       {sectionState == 1 && (
         <Transition>
           <div>
-            <div className="mb-6 mt-6 flex justify-center">
+            <div className="mb-6 mt-6 flex flex-row gap-2 justify-center items-center">
               <h1 className="text-2xl">Chọn gói sử dụng</h1>
+              <Tooltip
+                color="primary"
+                content="Quý khách vui lòng đọc chính sách trước khi thanh toán gói thành viên. Ấn vào đây để xem chi tiết">
+                <Button
+                  isIconOnly
+                  as={Link}
+                  href="/staticpage"
+                  startContent={
+                    <IconQuestionCircle
+                      width={24}
+                      height={24}
+                    />
+                  }
+                  variant="light"
+                />
+              </Tooltip>
             </div>
             <div className="mt-12 mb-12 flex flex-row flex-wrap gap-12 justify-center">
               {subcriptionListData?.map((item, index) => (

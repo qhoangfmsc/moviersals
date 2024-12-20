@@ -15,8 +15,9 @@ interface Filter {
 }
 
 const isPremiumOptions = [
-  { id: true, name: "Trả phí" },
-  { id: false, name: "Miễn phí" },
+  { key: "", id: null, name: "-" },
+  { key: "true", id: true, name: "Trả phí" },
+  { key: "false", id: false, name: "Miễn phí" },
 ];
 
 export default function MovieListPage() {
@@ -70,23 +71,24 @@ export default function MovieListPage() {
             <h1 className="text-sm mb-2 ml-2 text-gray-500">Chọn năm sản xuất</h1>
             <Select
               items={yearArray}
+              defaultSelectedKeys={[""]}
               startContent={<TablerCalendar />}
               onChange={(e) => {
                 setFilter((prevFilter) => ({ ...prevFilter, year: e.target.value }));
               }}>
-              {(item) => <SelectItem>{item.name}</SelectItem>}
+              {(item) => <SelectItem key={item.key}>{item.name}</SelectItem>}
             </Select>
           </div>
           <div className="basis-1/6 w-full">
             <h1 className="text-sm mb-2 ml-2 text-gray-500">Chọn loại phim</h1>
             <Select
               items={isPremiumOptions}
+              defaultSelectedKeys={[""]}
               startContent={<IconComponentBoolean />}
               onChange={(e) => {
-                console.log(e.target.value === "true");
                 setFilter((prevFilter) => ({ ...prevFilter, ispremium: e.target.value === "true" }));
               }}>
-              {(item) => <SelectItem>{item.name}</SelectItem>}
+              {(item) => <SelectItem key={item.key}>{item.name}</SelectItem>}
             </Select>
           </div>
           <div className="basis-4/6 w-full">
