@@ -97,7 +97,7 @@ export default function AddNewEpisodeAdminForm({ movieid, handleClose }: { movie
           type="text"
           name="episodepath"
           variant="underlined"
-          // value={uploadedVideoUrl}
+          value={uploadedVideoUrl}
           onChange={(e) => setUploadedVideoUrl(e.target.value)}
           label="Đường dẫn tập phim"
         />
