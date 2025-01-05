@@ -42,12 +42,20 @@ export default function VNPayInvoice() {
   const tableData = [
     { field: "Mã gói thành viên", value: vnp_TxnRef || "-", className: "text-lg font-semibold" },
     { field: "Mã giao dịch", value: vnp_BankTranNo || "-", className: "text-md" },
-    { field: "Tổng số tiền", value: vnp_Amount ? `${Number(parseInt(vnp_Amount) / 100).toLocaleString()} VNĐ` : "-", className: "text-md font-semibold text-green-600" },
-    { field: "Mã ngân hàng", value: vnp_BankCode || "-", className: "text-sm text-gray-500" },
+    {
+      field: "Tổng số tiền",
+      value: vnp_Amount ? `${Number(parseInt(vnp_Amount) / 100).toLocaleString()} VNĐ` : "-",
+      className: "text-md font-semibold text-green-600",
+    },
+    { field: "Mã ngân hàng", value: vnp_BankCode || "-", className: "text-sm  dark:text-gray-500" },
     { field: "Loại thẻ", value: vnp_CardType || "-", className: "text-sm" },
     { field: "Ngày thanh toán", value: formatDate(vnp_PayDate) || "-", className: "text-sm" },
     { field: "Nội dung", value: vnp_OrderInfo || "-", className: "text-sm" },
-    { field: "Trạng thái", value: vnp_TransactionStatus == "00" ? "Thanh toán thành công" : "Thanh toán thất bại" || "-", className: (vnp_TransactionStatus == "00") ? "text-sm text-success" : "text-sm text-danger" },
+    {
+      field: "Trạng thái",
+      value: vnp_TransactionStatus == "00" ? "Thanh toán thành công" : "Thanh toán thất bại" || "-",
+      className: vnp_TransactionStatus == "00" ? "text-sm text-success" : "text-sm text-danger",
+    },
   ];
 
   return (

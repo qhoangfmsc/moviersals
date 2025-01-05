@@ -63,7 +63,7 @@ export default function MostSeenMovieModal(): JSX.Element {
               <div className="flex flex-col p-4">
                 <div className="flex flex-row gap-2 w-full items-center justify-between">
                   <div className="basis-2/6 w-full">
-                    <h1 className="text-sm mb-2 ml-2 text-gray-500">Nhập tên phim</h1>
+                    <h1 className="text-sm mb-2 ml-2  dark:text-gray-500">Nhập tên phim</h1>
                     <Input
                       name="moviename"
                       placeholder="Tên phim"
@@ -73,7 +73,7 @@ export default function MostSeenMovieModal(): JSX.Element {
                     />
                   </div>
                   <div className="basis-2/6 w-full">
-                    <h1 className="text-sm mb-2 ml-2 text-gray-500">Sắp xếp</h1>
+                    <h1 className="text-sm mb-2 ml-2  dark:text-gray-500">Sắp xếp</h1>
                     <Select
                       items={sortOptions}
                       onChange={(e) => {

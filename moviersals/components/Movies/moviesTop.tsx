@@ -75,7 +75,7 @@ export default function MoviesTop({ title, dataVideos }: Readonly<MovieTopUIProp
                       width={500}
                     />
                     <CardFooter className="justify-between">
-                      <div className="text-white/80">
+                      <div className=" dark:text-white/80">
                         <div className="font-black">{item.name}</div>
                         <div className="text-tiny">
                           {(Array.isArray(item.categoriesvi) ? item.categoriesvi : JSON.parse(item.categoriesvi || "[]")).map(
@@ -91,7 +91,7 @@ export default function MoviesTop({ title, dataVideos }: Readonly<MovieTopUIProp
                         </div>
                       </div>
                       <Button
-                        className="text-tiny text-white bg-black/50"
+                        className="text-tiny  dark:text-white bg-black/50"
                         variant="flat"
                         color="default"
                         radius="lg"

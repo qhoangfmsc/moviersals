@@ -21,10 +21,10 @@ export default function ReviewMovieCard({ cardData, onCardClick }: CardEpisodePr
         width={380}
       />
       <CardFooter className="justify-between">
-        <div className="text-white/80">
+        <div className=" dark:text-white/80">
           <div className="text-lg font-black">{cardData.name}</div>
           <div className="flex flex-row gap-4 my-1 items-center">
-            <div className="text-sm text-white/50">{cardData.publishyear}</div>
+            <div className="text-sm  dark:text-white/50">{cardData.publishyear}</div>
             <div className="flex flex-row justify-start items-center">
               <IconStar
                 fill={"#fbbf24"}
@@ -55,7 +55,7 @@ export default function ReviewMovieCard({ cardData, onCardClick }: CardEpisodePr
           </div>
         </div>
         <Button
-          className="text-tiny text-white bg-black/50"
+          className="text-tiny  dark:text-white bg-black/50"
           variant="flat"
           color="default"
           radius="lg"

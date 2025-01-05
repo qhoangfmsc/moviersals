@@ -70,7 +70,7 @@ export default function LoginForm() {
         label="Mật khẩu"
       />
       <p className="mt-4 w-[350px] text-right">
-        <span className="text-gray-100 font-bold">
+        <span className=" dark:text-gray-100 font-bold">
           <Link href="/passwordrecovery/request">&nbsp;Quên mật khẩu?</Link>
         </span>
       </p>
@@ -91,7 +91,7 @@ export default function LoginForm() {
       /> */}
       <p className="mt-8">
         Chưa có tài khoản? -
-        <span className="text-gray-100">
+        <span className=" dark:text-gray-100">
           <Link href="/register">&nbsp;Đăng ký ngay</Link>
         </span>
       </p>

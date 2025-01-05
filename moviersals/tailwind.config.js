@@ -28,6 +28,11 @@ module.exports = {
             // focus: "#BEF264",
           },
         },
+        light: {
+          colors: {
+            background: "#efefef",
+          },
+        },
       },
     }),
   ],

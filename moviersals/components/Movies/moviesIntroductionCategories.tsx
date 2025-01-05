@@ -79,7 +79,7 @@ export default function MoviesIntroductionCategories({ dataVideos }: MoviesCateg
                             width={450}
                           />
                           <CardFooter className="justify-between">
-                            <div className="text-white/80">
+                            <div className=" dark:text-white/80">
                               <div className="flex flex-row gap-4 my-1 items-center">
                                 <div className="font-black">{item.name}</div>
                                 <div className="flex flex-row justify-start items-center">
@@ -106,14 +106,14 @@ export default function MoviesIntroductionCategories({ dataVideos }: MoviesCateg
                                       {index !==
                                         (Array.isArray(item.categoriesvi) ? item.categoriesvi : JSON.parse(item.categoriesvi || "[]"))
                                           .length -
-                                        1 && ", "}
+                                          1 && ", "}
                                     </span>
                                   )
                                 )}
                               </div>
                             </div>
                             <Button
-                              className="text-tiny text-white bg-black/50"
+                              className="text-tiny  dark:text-white bg-black/50"
                               variant="flat"
                               color="default"
                               radius="lg"

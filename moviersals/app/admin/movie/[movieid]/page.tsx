@@ -259,7 +259,7 @@ export default function episodeEpisodesListForm({ params }: { params: { movieid:
                     )}
                 <Divider orientation="vertical" />
               </div>
-              <p className="my-8 text-sm leading-6 text-gray-400">{data?.movieDetail?.description}</p>
+              <p className="my-8 text-sm leading-6  dark:text-gray-400">{data?.movieDetail?.description}</p>
             </ModalBody>
             <ModalFooter>
               <Button

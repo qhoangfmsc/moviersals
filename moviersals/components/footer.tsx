@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 export const Footer = () => {
   return (
     <footer
-      className="w-full flex flex-col items-center justify-center p-4 border-t-1 z-20 bg-black"
+      className="w-full flex flex-col items-center justify-center p-4 border-t-1 z-20 bg-transparent"
       style={{
         borderTopLeftRadius: "50px",
         borderTopRightRadius: "50px",
@@ -60,7 +60,9 @@ export const Footer = () => {
                 height={1}
                 alt="chplay"
                 src="/image/downloadChplay.webp"
-                onClick={() => { toast("Ứng dụng trên CH Play đang trong quá trình thử nghiệm. Cảm ơn quý khách đã quan tâm!") }}
+                onClick={() => {
+                  toast("Ứng dụng trên CH Play đang trong quá trình thử nghiệm. Cảm ơn quý khách đã quan tâm!");
+                }}
               />
             </div>
             <div className="cursor-pointer">
@@ -69,7 +71,9 @@ export const Footer = () => {
                 height={1}
                 alt="ios"
                 src="/image/downloadIos.webp"
-                onClick={() => { toast("Ứng dụng trên App Store đang trong quá trình thử nghiệm. Cảm ơn quý khách đã quan tâm!") }}
+                onClick={() => {
+                  toast("Ứng dụng trên App Store đang trong quá trình thử nghiệm. Cảm ơn quý khách đã quan tâm!");
+                }}
               />
             </div>
           </div>

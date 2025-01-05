@@ -58,7 +58,7 @@ export default function MovieListPage() {
         <h1 className="text-4xl mb-2">Tìm kiếm phim</h1>
         <div className="flex flex-row gap-10 p-4 w-full">
           <div className="basis-1/6 w-full">
-            <h1 className="text-sm mb-2 ml-2 text-gray-500">Nhập tên phim</h1>
+            <h1 className="text-sm mb-2 ml-2  dark:text-gray-500">Nhập tên phim</h1>
             <Input
               name="moviename"
               placeholder="Nhập tên phim ở đây"
@@ -68,7 +68,7 @@ export default function MovieListPage() {
             />
           </div>
           <div className="basis-1/6 w-full">
-            <h1 className="text-sm mb-2 ml-2 text-gray-500">Chọn năm sản xuất</h1>
+            <h1 className="text-sm mb-2 ml-2  dark:text-gray-500">Chọn năm sản xuất</h1>
             <Select
               items={yearArray}
               defaultSelectedKeys={[""]}
@@ -80,7 +80,7 @@ export default function MovieListPage() {
             </Select>
           </div>
           <div className="basis-1/6 w-full">
-            <h1 className="text-sm mb-2 ml-2 text-gray-500">Chọn loại phim</h1>
+            <h1 className="text-sm mb-2 ml-2  dark:text-gray-500">Chọn loại phim</h1>
             <Select
               items={isPremiumOptions}
               defaultSelectedKeys={[""]}
@@ -92,7 +92,7 @@ export default function MovieListPage() {
             </Select>
           </div>
           <div className="basis-4/6 w-full">
-            <h1 className="text-sm mb-2 text-gray-500">Chọn thể loại</h1>
+            <h1 className="text-sm mb-2  dark:text-gray-500">Chọn thể loại</h1>
             <CheckboxGroup
               className="gap-2"
               color="secondary"

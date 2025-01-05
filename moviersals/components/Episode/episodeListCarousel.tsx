@@ -34,13 +34,13 @@ export default function EpisodeListCarousel({ movieData }: { movieData: Record<s
                   width={2000}
                 />
                 <CardFooter className="justify-between">
-                  <div className="text-white/80 text-sm">
+                  <div className=" dark:text-white/80 text-sm">
                     <div>
                       Tập {item.episodenumber}: {item.name}
                     </div>
                   </div>
                   <Button
-                    className="text-tiny text-white bg-black/50"
+                    className="text-tiny  dark:text-white bg-black/50"
                     variant="flat"
                     color="default"
                     radius="lg"
