@@ -20,10 +20,10 @@ import moment from "moment";
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   moment.locale("vi");
 
-  // useEffect(() => {
-  //   // FPS Checker
-  //   createFpsChecker();
-  // }, []);
+  useEffect(() => {
+    // FPS Checker
+    createFpsChecker();
+  }, []);
 
   return (
     <html
@@ -46,7 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={clsx("min-h-screen font-sans antialiased body-customize", fontSans.variable)}>
         <ToastContainer />
-        <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
+        <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div className="relative flex flex-col h-screen">
             <Navbar />
             {/* MAIN PAGE */}

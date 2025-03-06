@@ -38,7 +38,7 @@ export default function MovieComments({ commentList }: { commentList: Comment[] 
                   closeDelay={1}
                   placement="bottom-end"
                   color="primary">
-                  <p className="text-tiny  dark:text-gray-500">{moment(item?.createddate).fromNow()}</p>
+                  <p className="text-tiny text-gray-500">{moment(item?.createddate).fromNow()}</p>
                 </Tooltip>
               </div>
               <div className="flex flex-1 justify-end mr-11">
@@ -53,7 +53,7 @@ export default function MovieComments({ commentList }: { commentList: Comment[] 
               </div>
             </div>
 
-            <Card className="text-sm p-3 w-fit  dark:text-gray-400">{item?.content}</Card>
+            <Card className="text-sm p-3 w-fit text-gray-400">{item?.content}</Card>
           </div>
           <Divider orientation="horizontal" />
         </div>

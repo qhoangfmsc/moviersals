@@ -43,10 +43,8 @@ export default function UserFavouritePage() {
     <div className="p-[20px] h-screen w-full">
       <h2 className="text-2xl font-bold mb-4 mt-4">Danh sách yêu thích</h2>
       <div>
-        {userFavList?.list?.length === 0 || userFavList?.list == null ? (
-          <div className="text-xl font-semibold h-[200px] flex justify-center items-center  dark:text-gray-700">
-            Chưa có phim trong danh sách yêu thích
-          </div>
+        {(userFavList?.list?.length === 0 || userFavList?.list == null) ? (
+          <div className="text-xl font-semibold h-[200px] flex justify-center items-center text-gray-700">Chưa có phim trong danh sách yêu thích</div>
         ) : (
           <div className="flex flex-col justify-center items-center">
             <div className="flex flex-row flex-wrap gap-8 mx-10 my-10">

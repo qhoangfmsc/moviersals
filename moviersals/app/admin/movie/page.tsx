@@ -36,9 +36,9 @@ export default function MovieAdminPage() {
     const response = await getAllCategories(null);
     const content = response.content;
 
-    const list = content.list.map((item) => ({
+    const list = content.list.map(item => ({
       key: item.name.toLowerCase(),
-      value: capitalizeFirstLetter(item.namevi),
+      value: capitalizeFirstLetter(item.namevi)
     }));
     setCategories(list);
   };
@@ -128,7 +128,7 @@ export default function MovieAdminPage() {
           <BreadcrumbItem href="/admin/movie">Phim ảnh</BreadcrumbItem>
         </Breadcrumbs>
         <Button
-          className=" dark:text-white"
+          className="text-white"
           endContent={<BxsCategory />}
           color="success"
           onClick={() => router.push("/admin/categories")}>

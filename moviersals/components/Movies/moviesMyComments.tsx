@@ -179,7 +179,7 @@ export default function MovieMyComment({ userinfo, movieid, mycomment }: { useri
                   closeDelay={1}
                   placement="bottom-end"
                   color="primary">
-                  <p className="text-tiny  dark:text-gray-500">{moment(comment?.createddate).fromNow()}</p>
+                  <p className="text-tiny text-gray-500">{moment(comment?.createddate).fromNow()}</p>
                 </Tooltip>
               </div>
               <div className="flex flex-1 justify-end">
@@ -205,7 +205,7 @@ export default function MovieMyComment({ userinfo, movieid, mycomment }: { useri
               </div>
             </div>
 
-            <Card className="text-sm p-3 w-fit  dark:text-gray-400">{comment?.content}</Card>
+            <Card className="text-sm p-3 w-fit text-gray-400">{comment?.content}</Card>
           </div>
           <Divider orientation="horizontal" />
         </div>

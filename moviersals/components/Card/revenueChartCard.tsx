@@ -81,7 +81,7 @@ export default function RevenueChartCard({ chartData }: { chartData: any }) {
 
   return (
     <Card className="border border-[#ffffff0f] bg-[#ffffff0f] rounded-md w-full h-full p-6">
-      <h1 className=" mb-8 font-md  dark:text-gray-400 ml-4">Doanh thu theo ngày</h1>
+      <h1 className=" mb-8 font-md text-gray-400 ml-4">Doanh thu theo ngày</h1>
       <div className="flex flex-row gap-4 p-4 justify-center mt-1 mb-16">
         <DatePicker
           variant="bordered"
@@ -98,7 +98,8 @@ export default function RevenueChartCard({ chartData }: { chartData: any }) {
         <Button
           className="basis-1/3 h-14"
           color="primary"
-          onClick={handleRevenueDateClick}>
+          onClick={handleRevenueDateClick}
+        >
           Xem theo bộ lọc
         </Button>
       </div>

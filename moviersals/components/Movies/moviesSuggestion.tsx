@@ -46,7 +46,7 @@ export default function MovieSuggestion() {
                   width={2000}
                 />
                 <CardFooter className="justify-between h-full">
-                  <div className=" dark:text-white/80 w-4/5">
+                  <div className="text-white/80 w-4/5">
                     <div className="font-black">{item.name}</div>
                     <div className="text-sm">
                       {(Array.isArray(item?.categoriesvi) ? item.categoriesvi : JSON.parse(item.categoriesvi || "[]"))?.map(
@@ -60,10 +60,10 @@ export default function MovieSuggestion() {
                         )
                       )}
                     </div>
-                    <div className="text-tiny  dark:text-gray-500 webkit-line-2 mt-2">{item.description}</div>
+                    <div className="text-tiny text-gray-500 webkit-line-2 mt-2">{item.description}</div>
                   </div>
                   <Button
-                    className="text-tiny  dark:text-white bg-black/50"
+                    className="text-tiny text-white bg-black/50"
                     variant="flat"
                     color="default"
                     radius="lg"

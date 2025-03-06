@@ -15,7 +15,7 @@ export function PopularMovieChartCard({ chartData }: { chartData: any }) {
   return (
     <Card className="border border-[#ffffff0f] bg-[#ffffff0f] rounded-md w-full h-full p-6">
       <div className="flex flex-row justify-between">
-        <h1 className=" mb-8 font-md  dark:text-gray-400 ml-4">{"Lượt xem nhiều nhất/phim"}</h1>
+        <h1 className=" mb-8 font-md text-gray-400 ml-4">{"Lượt xem nhiều nhất/phim"}</h1>
         <MostSeenMovieModal />
       </div>
       <div className="flex flex-row justify-center mt-2">

@@ -32,7 +32,8 @@ const streamList = [
     name: "Death's Game",
     creator: "Moviersals",
     views: 2032,
-    description: "Death’s game là một trong những bộ phim Hàn Quốc thu hút nhiều người xem vào cuối năm 2023 nay.",
+    description:
+      "Death’s game là một trong những bộ phim Hàn Quốc thu hút nhiều người xem vào cuối năm 2023 nay.",
     createddate: "2023/09/13 12:30:30",
     isstreaming: false,
     thumbnail: "/image/deathgame-thumbnail.jpg",
@@ -79,14 +80,14 @@ export default function StreamList(): JSX.Element {
                 )}
                 <div className="my-4">
                   <h1 className="text-xl lg:text-3xl font-black">{item.name}</h1>
-                  <h1 className="text-sm  dark:text-gray-400">@{item.creator}</h1>
-                  <div className="flex text-tiny  dark:text-gray-300 font-black">
+                  <h1 className="text-sm text-gray-400">@{item.creator}</h1>
+                  <div className="flex text-tiny text-gray-300 font-black">
                     <div className="self-center">
                       <MdiEyeOutline />
                     </div>
                     <div className="self-center">&nbsp; {item.views} lượt xem</div>
                   </div>
-                  <p className="my-4 text-tiny  dark:text-gray-400 hidden lg:block">{item.description}</p>
+                  <p className="my-4 text-tiny text-gray-400 hidden lg:block">{item.description}</p>
                 </div>
               </div>
             </div>

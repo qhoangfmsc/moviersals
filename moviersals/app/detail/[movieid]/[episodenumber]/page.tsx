@@ -45,7 +45,11 @@ const emptyComment: Comment = {
   thumbnail: null,
 };
 
-export default function WatchPage({ params }: { params: { movieid: string; episodenumber: string } }) {
+export default function WatchPage({
+  params,
+}: {
+  params: { movieid: string; episodenumber: string };
+}) {
   const [data, setData] = useState<any>(null);
   const [userinfo, setUserInfo] = useState<any>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -68,8 +72,12 @@ export default function WatchPage({ params }: { params: { movieid: string; episo
   const fetchMovieInfo = async (userid: string) => {
     const response = await getMovieDetailById(params.movieid, userid);
     if (response?.status == "success") {
-      const currentEpisode = response.content.list.find((episode) => episode.episodenumber == params.episodenumber);
-      const videoid = currentEpisode?.episodepath?.match(/\/upload\/v\d+\/(.+)/)[1].split(".")[0];
+      const currentEpisode = response.content.list.find(
+        (episode) => episode.episodenumber == params.episodenumber
+      );
+      const videoid = currentEpisode?.episodepath
+        ?.match(/\/upload\/v\d+\/(.+)/)[1]
+        .split(".")[0];
       const updatedContent = {
         ...response.content,
         current: currentEpisode,
@@ -88,7 +96,10 @@ export default function WatchPage({ params }: { params: { movieid: string; episo
     const response = await getMovieComment(params.movieid, userid, currentPage);
     if (response?.status == "success") {
       let myComment = emptyComment;
-      if (response.content?.list != null && response.content?.list[0].userid == userid) {
+      if (
+        response.content?.list != null &&
+        response.content?.list[0].userid == userid
+      ) {
         // Reponse always put current userid in first index if exist
         myComment = response.content.list[0];
         response.content.list.shift();
@@ -110,23 +121,24 @@ export default function WatchPage({ params }: { params: { movieid: string; episo
 
   return (
     <Transition>
-      <Script
-        async
-        src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"
-      />
+      <Script async src="https://imasdk.googleapis.com/js/sdkloader/ima3.js" />
       <div className="px-8 mt-12">
         {userinfo != null ? (
-          data && data?.movieDetail?.ispremium == true && userinfo?.ispremium != true ? (
+          data &&
+          data?.movieDetail?.ispremium == true &&
+          userinfo?.ispremium != true ? (
             <div className="h-[540px] w-[100%] flex items-center justify-center align-middle border rounded-lg border-[#262626]">
               <div className="flex w-fit h-fit flex-col items-center justify-center gap-4 ">
                 <h1 className="text-2xl text-center">
-                  Phim này chỉ dành cho gói người đăng ký <br /> Hãy đăng ký ngay để trải nghiệm
+                  Phim này chỉ dành cho gói người đăng ký <br /> Hãy đăng ký
+                  ngay để trải nghiệm
                 </h1>
                 <Button
                   size="lg"
                   color="primary"
                   as={Link}
-                  href="/subscription">
+                  href="/subscription"
+                >
                   Mua ngay
                 </Button>
               </div>
@@ -146,11 +158,10 @@ export default function WatchPage({ params }: { params: { movieid: string; episo
         ) : (
           <div className="h-[540px] w-[100%] flex items-center justify-center align-middle border rounded-lg border-[#262626]">
             <div className="flex w-fit h-fit flex-col items-center justify-center gap-4 ">
-              <h1 className="text-2xl text-center">Hãy đăng nhập để trải nghiệm</h1>
-              <Button
-                size="lg"
-                color="primary"
-                onClick={handleDirectLogin}>
+              <h1 className="text-2xl text-center">
+                Hãy đăng nhập để trải nghiệm
+              </h1>
+              <Button size="lg" color="primary" onClick={handleDirectLogin}>
                 Đi đến đăng nhập
               </Button>
             </div>
@@ -174,7 +185,9 @@ export default function WatchPage({ params }: { params: { movieid: string; episo
             </div>
             <div className="self-center">
               &nbsp;{" "}
-              {data?.list[Number(params.episodenumber) - 1]?.view >= 0 ? data?.list[Number(params.episodenumber) - 1]?.view : "Chưa có"}{" "}
+              {data?.list[Number(params.episodenumber) - 1]?.view >= 0
+                ? data?.list[Number(params.episodenumber) - 1]?.view
+                : "Chưa có"}{" "}
               lượt xem
             </div>
           </div>
@@ -186,7 +199,7 @@ export default function WatchPage({ params }: { params: { movieid: string; episo
             </h1>
           )}
           <h1 className={title()}>{data?.movieDetail?.name}</h1>
-          <h1 className="text-sm  dark:text-gray-400 mt-2">
+          <h1 className="text-sm text-gray-400 mt-2">
             Nhà sản xuất: <span>{data?.movieDetail?.publisher}</span>
           </h1>
           <div className="flex flex-wrap lg:h-5 font-black mt-8 space-x-8">
@@ -212,7 +225,7 @@ export default function WatchPage({ params }: { params: { movieid: string; episo
                 )}
             <Divider orientation="vertical" />
           </div>
-          <p className="my-4  dark:text-gray-400">{data?.movieDetail?.description}</p>
+          <p className="my-4 text-gray-400">{data?.movieDetail?.description}</p>
         </div>
         {data?.movieDetail?.type == "movie" ? (
           <></>

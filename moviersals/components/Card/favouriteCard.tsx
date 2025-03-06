@@ -49,14 +49,14 @@ export default function FavouriteCard({ cardData, onClickRemove }: FavCardProps)
               width={240}
             />
             <div className="flex flex-col p-4 w-full gap-2">
-              <p className="text-md font-semibold  dark:text-white/80 mb-2">{cardData?.moviename}</p>
+              <p className="text-md font-semibold text-white/80 mb-2">{cardData?.moviename}</p>
               <div className="flex justify-between">
-                <p className="text-tiny  dark:text-white/60">{cardData?.type != "movie" ? "Tập " + cardData?.episodenumber : `  `}</p>
+                <p className="text-tiny text-white/60">{cardData?.type != "movie" ? "Tập " + cardData?.episodenumber : `  `}</p>
                 <Tooltip
                   content={moment(cardData?.createddate).format("DD/MM/YYYY HH:mm:ss A")}
                   placement="bottom-end"
                   color="primary">
-                  <p className="text-tiny  dark:text-white/70">{moment(cardData?.createddate).fromNow()}</p>
+                  <p className="text-tiny text-white/70">{moment(cardData?.createddate).fromNow()}</p>
                 </Tooltip>
               </div>
             </div>
